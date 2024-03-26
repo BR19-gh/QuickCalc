@@ -1,0 +1,41 @@
+{
+  "translation": {
+    "screens": {
+      "Welcome": {
+        "title": null,
+        "text": {
+          "introText": "مرحبا بكم في",
+          "introParagraph": "أدوات بسيطة لحساباتك اليومية",
+          "btnText1": "إبدأ",
+          "btnText2": "جولة توجيهية"
+        }
+      },
+      "Navi": {
+        "title": null,
+        "text": {
+          "home": "الرئيسية",
+          "settings": "الاعدادات",
+          "selectToHide": "اختر للإخفاء",
+          "edit": "تعديل",
+          "done": "تم"
+        }
+      },
+      "Home": {
+        "title": "الرئيسية",
+        "text": {
+          "tools": "الأدوات",
+          "noTools": "لا توجد أدوات",
+          "hiddenTools": "الأدوات المخفية",
+          "noHiddenTools": "لا توجد أدوات مخفية",
+          "unableToMove": "النقل غير ممكن",
+          "youCannotMoveToolsWhileEditing": "لا يمكنك النقل اثناء التعديل",
+          "gotIt": "فهمت"
+        }
+      },
+      "Settings": {
+        "title": "الاعدادات",
+        "text": {}
+      }
+    }
+  }
+}

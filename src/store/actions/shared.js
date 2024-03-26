@@ -1,10 +1,11 @@
-import { _getColors, _getTools } from "../../../_DATA";
+import { _getColors } from "../../../_DATA";
 import { receiveTools } from "./tools";
+import { getToolsInitial } from "../../../_DATA";
 import { receiveColors } from "./colors";
 
 export function handleInitialData() {
   return (dispatch) => {
-    _getTools().then((tools) => {
+    getToolsInitial().then((tools) => {
       _getColors()
         .then((colors) => {
           dispatch(receiveTools(tools));

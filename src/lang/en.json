@@ -1,0 +1,41 @@
+{
+  "translation": {
+    "screens": {
+      "Welcome": {
+        "title": null,
+        "text": {
+          "introText": "Welcome to",
+          "introParagraph": "Simple tools for your \n daily calcuations",
+          "btnText1": "Get Started",
+          "btnText2": "Walk Through"
+        }
+      },
+      "Navi": {
+        "title": null,
+        "text": {
+          "home": "Home",
+          "settings": "Settings",
+          "selectToHide": "Select To Hide",
+          "edit": "Edit",
+          "done": "Done"
+        }
+      },
+      "Home": {
+        "title": "Home",
+        "text": {
+          "tools": "Tools",
+          "noTools": "No tools",
+          "hiddenTools": "Hidden Tools",
+          "noHiddenTools": "No hidden tools",
+          "unableToMove": "Unable To Move",
+          "youCannotMoveToolsWhileEditing": "You cannot move tools while editing",
+          "gotIt": "Got it"
+        }
+      },
+      "Settings": {
+        "title": "Settings",
+        "text": {}
+      }
+    }
+  }
+}

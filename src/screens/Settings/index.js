@@ -1,61 +1,90 @@
 import { StatusBar } from "expo-status-bar";
-import { Text, View, TouchableOpacity, FlatList } from "react-native";
-import { useNavigation } from "@react-navigation/native";
+import React, { useState } from "react";
+import {
+  Text,
+  View,
+  ScrollView,
+  SafeAreaView,
+  Alert,
+  TouchableOpacity,
+  StyleSheet,
+} from "react-native";
+import {
+  SettingsProvider,
+  SettingsGroup,
+  SettingsInfoDisplay,
+  SettingsToggle,
+  SettingsButton,
+} from "react-native-settings-ui";
 import styles from "./styles";
-const REGIONS = [
-  {
-    id: 1,
-    name: "North West",
-  },
-  {
-    id: 2,
-    name: "Mid West",
-  },
-  {
-    id: 3,
-    name: "South West",
-  },
-  {
-    id: 4,
-    name: "South East",
-  },
-  {
-    id: 5,
-    name: "North East",
-  },
-];
-export default function ListOfRegions() {
-  const navigation = useNavigation();
+import { connect } from "react-redux";
+import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 
+function Settings(props) {
   return (
-    <View className={styles.container}>
-      <TouchableOpacity
-        className={styles.button}
-        onPress={() => {
-          navigation.navigate("New Customer", { region: props.item.name });
-        }}
-      >
-        <Text className={styles.btnText}>Create Customer</Text>
-      </TouchableOpacity>
-      <Text className={styles.title}>List of Regions</Text>
-      <FlatList
-        data={REGIONS || []}
-        renderItem={(props) => (
-          <TouchableOpacity
-            className={styles.button}
-            onPress={() => {
-              navigation.navigate("List by Region", {
-                region: props.item.name,
-              });
-            }}
-          >
-            <Text className={styles.btnText}>{props.item.name}</Text>
-          </TouchableOpacity>
-        )}
-        keyExtractor={(item) => item.id}
-      />
+    <SafeAreaView className={styles.container}>
+      <ScrollView>
+        <View className="ml-4 mr-4">
+          <SettingsProvider theme="light">
+            <SettingsGroup title="General" footerText="Hello, this is toggle">
+              <SettingsToggle
+                title="Default color"
+                value={true}
+                onValueChange={() => console.log("toggle clicked")}
+              />
 
+              <SettingsInfoDisplay
+                title="switch 1 state (boolEnable)"
+                status={true}
+                type="boolEnable"
+              />
+              <SettingsButton
+                title="Press me"
+                type="newpage"
+                onPress={() => Alert.alert("", "Something happened...")}
+              />
+            </SettingsGroup>
+            <SettingsGroup
+              title="My app settings"
+              footerText="Hello, this is toggle"
+            >
+              <SettingsToggle
+                title="Default color"
+                value={true}
+                onValueChange={() => console.log("toggle clicked")}
+              />
+              <SettingsInfoDisplay
+                title="switch 1 state (boolEnable)"
+                status={true}
+                type="boolEnable"
+              />
+
+              <SettingsButton
+                title="Press me"
+                onPress={() => Alert.alert("", "Something happened...")}
+              />
+            </SettingsGroup>
+          </SettingsProvider>
+        </View>
+      </ScrollView>
       <StatusBar style="auto" />
-    </View>
+    </SafeAreaView>
   );
 }
+
+const styles2 = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: "flex-start",
+    alignItems: "center",
+  },
+  rectangle: {
+    width: 200,
+    height: 200,
+  },
+  spacer: {
+    height: 16,
+  },
+});
+
+export default Settings;
