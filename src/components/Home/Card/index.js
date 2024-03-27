@@ -7,6 +7,7 @@ import { LinearGradient } from "expo-linear-gradient";
 const Card = ({
   tool,
   changeVis,
+  handleFavorite,
   isEditing,
   navigation,
   drag,
@@ -15,14 +16,25 @@ const Card = ({
   text,
   lang,
   theme,
+  isShowedFavorite,
+  isEditingFavorite,
 }) => (
   <LinearGradient
     key={tool.id}
     colors={[...tool.colors]}
     style={{
       marginStart: "4%",
-      opacity: isEditing ? (tool.isHidden ? 0.2 : 0.7) : 1,
-      borderWidth: isEditing ? 3.5 : 0,
+      opacity: isEditingFavorite
+        ? !tool.isFavorite
+          ? 0.2
+          : 0.7
+        : isEditing
+        ? tool.isHidden
+          ? 0.2
+          : 0.7
+        : 1,
+
+      borderWidth: isEditingFavorite || isEditing ? 3.5 : 0,
       borderColor: theme === "dark" ? "gray" : "black",
       width: "92%",
     }}
@@ -34,17 +46,29 @@ const Card = ({
       onPress={() => {
         if (isEditing) {
           changeVis(tool.id);
+        } else if (isEditingFavorite) {
+          handleFavorite(tool.id);
         } else {
           navigation.navigate(tool.link);
         }
       }}
       onLongPress={() =>
-        tool.isHidden
-          ? null
-          : isEditing
+        isEditing
           ? Alert.alert(
               t(text("unableToMove")),
               t(text("youCannotMoveToolsWhileEditing")),
+              [
+                {
+                  text: t(text("gotIt")),
+                  onPress: () => null,
+                  style: "Ok",
+                },
+              ]
+            )
+          : isShowedFavorite || isEditingFavorite
+          ? Alert.alert(
+              t(text("unableToMove")),
+              t(text("youCannotMoveToolsInFavorite")),
               [
                 {
                   text: t(text("gotIt")),

@@ -7,8 +7,9 @@ import { useState, useEffect, useRef } from "react";
 import Ioicons from "react-native-vector-icons/Ionicons";
 
 import Home from "../screens/Home";
-import HeaderRight from "../components/Home/HeaderRight";
+import HeaderRightHome from "../components/Home/HeaderRightHome";
 import HeaderLeft from "../components/Home/HeaderLeft";
+import HeaderLeftHome from "../components/Home/HeaderLeftHome";
 import Settings from "../screens/Settings";
 import DiscountCal from "../screens/Home/DiscountCal";
 import UnitsCon from "../screens/Home/UnitsCon";
@@ -24,9 +25,12 @@ import { useColorScheme } from "react-native";
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 
-const HomeNavi = ({ isEditing, setIsEditing, theme }) => {
+const HomeNavi = ({ isEditing, setIsEditing }) => {
   const { t } = useTranslation();
   const text = (text) => "screens.Navi.text." + text;
+
+  const [isShowedFavorite, setIsShowedFavorite] = useState(false);
+  const [isEditingFavorite, seIsEditingFavorite] = useState(false);
 
   return (
     <Stack.Navigator
@@ -43,14 +47,38 @@ const HomeNavi = ({ isEditing, setIsEditing, theme }) => {
       <Stack.Screen
         options={{
           headerRight: () => (
-            <HeaderRight isEditing={isEditing} setIsEditing={setIsEditing} />
+            <HeaderRightHome
+              seIsEditingFavorite={seIsEditingFavorite}
+              isEditingFavorite={isEditingFavorite}
+              isShowedFavorite={isShowedFavorite}
+              isEditing={isEditing}
+              setIsEditing={setIsEditing}
+            />
           ),
-
-          title: isEditing ? t(text("selectToHide")) : t(text("home")),
+          headerLeft: () => (
+            <HeaderLeftHome
+              setIsEditing={setIsEditing}
+              seIsEditingFavorite={seIsEditingFavorite}
+              isShowedFavorite={isShowedFavorite}
+              setIsShowedFavorite={setIsShowedFavorite}
+            />
+          ),
+          title: isShowedFavorite
+            ? isEditingFavorite
+              ? t(text("selectToFavor"))
+              : t(text("favorite"))
+            : isEditing
+            ? t(text("selectToHide"))
+            : t(text("home")),
         }}
         name="HomeNavi"
         children={() => (
-          <Home setIsEditing={setIsEditing} isEditing={isEditing} />
+          <Home
+            isEditingFavorite={isEditingFavorite}
+            isShowedFavorite={isShowedFavorite}
+            setIsEditing={setIsEditing}
+            isEditing={isEditing}
+          />
         )}
       />
       <Stack.Screen

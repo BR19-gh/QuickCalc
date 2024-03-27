@@ -1,11 +1,12 @@
 import { Text, View, SafeAreaView } from "react-native";
 import Card from "../../components/Home/Card";
 import { useNavigation } from "@react-navigation/native";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { handleInitialData } from "../../store/actions/shared";
 import {
   handleEditVisTools,
   handleReorderTools,
+  handleFavoriteTools,
 } from "../../store/actions/tools";
 import styles from "./styles";
 import { connect } from "react-redux";
@@ -36,8 +37,6 @@ if (match) {
   lang = "en";
 }
 
-console.log(lang);
-
 function Home(props) {
   const theme = useColorScheme();
 
@@ -49,6 +48,23 @@ function Home(props) {
   const text = (text) => "screens.Home.text." + text;
 
   const navigation = useNavigation();
+
+  const handleFavorite = (id) => {
+    let newData = [...Object.values(props.tools)];
+    const oldData = [...Object.values(props.tools)];
+
+    newData.forEach((item) => {
+      if (item.id === id) {
+        item.isFavorite = !item.isFavorite;
+        if (item.isFavorite === true) {
+          item.isHidden = false;
+        }
+      }
+    });
+
+    props.dispatch(handleFavoriteTools(newData, oldData));
+    props.dispatch(handleInitialData());
+  };
 
   const handleReorder = (data) => {
     const oldData = [...Object.values(props.tools)];
@@ -63,6 +79,9 @@ function Home(props) {
     newData.forEach((item, index) => {
       if (item.id === id) {
         item.isHidden = !item.isHidden;
+        if (item.isHidden === true) {
+          item.isFavorite = false;
+        }
         changedIndex = index;
       }
     });
@@ -79,18 +98,31 @@ function Home(props) {
       props.dispatch(handleEditVisTools(newData, oldData));
     }
   };
-
   return (
     <SafeAreaView>
       <NestableScrollContainer className="h-full">
         <Text className={styles.title + (theme === "dark" && " text-white")}>
-          {t(text("tools"))}
+          {props.isShowedFavorite ? t(text("favoredTools")) : t(text("tools"))}
         </Text>
 
         {
           //shown tools
-          Object.values(props.tools).filter((tool) => tool.isHidden === false)
-            .length === 0 ? (
+          props.isShowedFavorite ? (
+            Object.values(props.tools).filter(
+              (tool) => tool.isFavorite === true
+            ).length === 0 ? (
+              <Text
+                className={
+                  "text-xl m-4 mt-0 text-left" +
+                  (theme === "dark" && " text-white")
+                }
+              >
+                {t(text("noFavoredTools"))}
+              </Text>
+            ) : null
+          ) : Object.values(props.tools).filter(
+              (tool) => tool.isHidden === false
+            ).length === 0 ? (
             <Text
               className={
                 "text-xl m-4 mt-0 text-left" +
@@ -103,21 +135,35 @@ function Home(props) {
         }
 
         <NestableDraggableFlatList
-          data={Object.values(props.tools).filter(
-            (tool) => tool.isHidden === false
-          )}
+          data={
+            props.isShowedFavorite
+              ? Object.values(props.tools).filter(
+                  (tool) => tool.isFavorite === true
+                )
+              : Object.values(props.tools).filter(
+                  (tool) => tool.isHidden === false
+                )
+          }
           onDragEnd={({ data }) => {
-            handleReorder([
-              ...data,
-              ...Object.values(props.tools).filter(
-                (tool) => tool.isHidden === true
-              ),
-            ]);
+            props.isShowedFavorite
+              ? null
+              : handleReorder([
+                  ...data,
+                  ...Object.values(props.tools).filter(
+                    (tool) => tool.isHidden === true
+                  ),
+                ]);
           }}
-          className={"mb-4" + (props.isEditing ? "" : " h-full")}
+          className={
+            "mb-4" +
+            (props.isEditing || props.isEditingFavorite ? "" : " h-full")
+          }
           renderItem={({ item: tool, drag, isActive }) => (
             <ScaleDecorator>
               <Card
+                isEditingFavorite={props.isEditingFavorite}
+                handleFavorite={handleFavorite}
+                isShowedFavorite={props.isShowedFavorite}
                 theme={theme}
                 lang={lang}
                 tool={tool}
@@ -136,8 +182,8 @@ function Home(props) {
         />
 
         {
-          //hidden tools
-          props.isEditing && (
+          //not shown tools
+          (props.isEditing || props.isEditingFavorite) && (
             <View
               className={
                 "bg-slate-300 pb-4" + (theme === "dark" && " bg-slate-950")
@@ -149,15 +195,25 @@ function Home(props) {
                   (theme === "dark" ? "  text-gray-400" : "  text-gray-600")
                 }
               >
-                {t(text("hiddenTools"))}
+                {props.isShowedFavorite
+                  ? t(text("unfavoredTools"))
+                  : t(text("hiddenTools"))}
               </Text>
-              {Object.values(props.tools).filter(
-                (tool) => tool.isHidden === true
+              {Object.values(props.tools).filter((tool) =>
+                props.isShowedFavorite
+                  ? tool.isFavorite === false && tool.isHidden === false
+                  : tool.isHidden === true
               ).length !== 0 ? (
                 Object.values(props.tools)
-                  .filter((tool) => tool.isHidden === true)
+                  .filter((tool) =>
+                    props.isShowedFavorite
+                      ? tool.isFavorite === false && tool.isHidden === false
+                      : tool.isHidden === true
+                  )
                   .map((tool) => (
                     <Card
+                      isEditingFavorite={props.isEditingFavorite}
+                      handleFavorite={handleFavorite}
                       theme={theme}
                       lang={lang}
                       tool={tool}
@@ -173,10 +229,12 @@ function Home(props) {
                 <Text
                   className={
                     "text-xl m-4 mt-0 text-gray-600 text-left" +
-                    (theme === "dark" && " text-white")
+                    (theme === "dark" && " text-gray-400")
                   }
                 >
-                  {t(text("noHiddenTools"))}
+                  {props.isShowedFavorite
+                    ? t(text("noUnfavoredTools"))
+                    : t(text("noHiddenTools"))}
                 </Text>
               )}
             </View>

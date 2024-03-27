@@ -14,21 +14,29 @@
         "title": null,
         "text": {
           "home": "Home",
+          "favorite": "Favorite",
           "settings": "Settings",
           "selectToHide": "Select To Hide",
+          "selectToFavor": "Select Favorite",
           "edit": "Edit",
-          "done": "Done"
+          "done": "Done",
+          "editFavorite": "Edit Favorite"
         }
       },
       "Home": {
         "title": "Home",
         "text": {
           "tools": "Tools",
+          "favoredTools": "Favored Tools",
           "noTools": "No tools",
           "hiddenTools": "Hidden Tools",
+          "unfavoredTools": "unfavored Tools",
+          "noFavoredTools": "No Favored tools",
           "noHiddenTools": "No hidden tools",
+          "noUnfavoredTools": "No unfavored tools",
           "unableToMove": "Unable To Move",
-          "youCannotMoveToolsWhileEditing": "You cannot move tools while editing",
+          "youCannotMoveToolsWhileEditing": "You cannot move tools while editing.",
+          "youCannotMoveToolsInFavorite": "You cannot move items on the favorite page. Move the tools on the home page, and your move will be reflected here.",
           "gotIt": "Got it"
         }
       },

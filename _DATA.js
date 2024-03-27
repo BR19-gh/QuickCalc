@@ -5,6 +5,8 @@ clearAsyncStorage = async () => {
   AsyncStorage.clear();
 };
 
+//clearAsyncStorage();
+
 const TOOLS = [
   {
     id: 1,
@@ -51,7 +53,7 @@ const TOOLS = [
     icon: "scale",
     colors: ["#c43e3e", "#a43131", "#722a2a"],
     link: "UnitsCon",
-    isFavorite: false,
+    isFavorite: true,
     isHidden: false,
   },
   {
@@ -67,7 +69,7 @@ const TOOLS = [
     icon: "cash",
     colors: ["#c7542f", "#983b25", "#6c2e22"],
     link: "TipCal",
-    isFavorite: false,
+    isFavorite: true,
     isHidden: false,
   },
   // {

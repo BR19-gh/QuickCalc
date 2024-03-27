@@ -14,21 +14,29 @@
         "title": null,
         "text": {
           "home": "الرئيسية",
+          "favorite": "المفضلة",
           "settings": "الاعدادات",
           "selectToHide": "اختر للإخفاء",
+          "selectToFavor": "اختر للتفضيل",
           "edit": "تعديل",
-          "done": "تم"
+          "done": "تم",
+          "editFavorite": "تعديل المفضلة"
         }
       },
       "Home": {
         "title": "الرئيسية",
         "text": {
           "tools": "الأدوات",
+          "favoredTools": "الأدوات المفضلة",
           "noTools": "لا توجد أدوات",
           "hiddenTools": "الأدوات المخفية",
+          "unfavoredTools": "الأدوات غير المفضلة",
           "noHiddenTools": "لا توجد أدوات مخفية",
+          "noFavoredTools": "لا توجد أدوات مفضلة",
+          "noUnfavoredTools": "لا توجد أدوات غير مفضلة",
           "unableToMove": "النقل غير ممكن",
           "youCannotMoveToolsWhileEditing": "لا يمكنك النقل اثناء التعديل",
+          "youCannotMoveToolsInFavorite": "لا يمكنك النقل في صفحة المفضلة، انقل الادوات في الصفحة الرئيسية وسينعكس نقلك هنا",
           "gotIt": "فهمت"
         }
       },
