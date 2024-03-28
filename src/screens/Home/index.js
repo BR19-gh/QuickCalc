@@ -1,7 +1,8 @@
 import { Text, View, SafeAreaView } from "react-native";
 import Card from "../../components/Home/Card";
+import SwipeableRow from "../../components/Home/Swipeable";
 import { useNavigation } from "@react-navigation/native";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { handleInitialData } from "../../store/actions/shared";
 import {
   handleEditVisTools,
@@ -98,6 +99,7 @@ function Home(props) {
       props.dispatch(handleEditVisTools(newData, oldData));
     }
   };
+
   return (
     <SafeAreaView>
       <NestableScrollContainer className="h-full">
@@ -158,26 +160,39 @@ function Home(props) {
             "mb-4" +
             (props.isEditing || props.isEditingFavorite ? "" : " h-full")
           }
-          renderItem={({ item: tool, drag, isActive }) => (
-            <ScaleDecorator>
-              <Card
-                isEditingFavorite={props.isEditingFavorite}
-                handleFavorite={handleFavorite}
-                isShowedFavorite={props.isShowedFavorite}
-                theme={theme}
-                lang={lang}
-                tool={tool}
-                key={tool.id}
-                changeVis={changeVis}
-                navigation={navigation}
-                isEditing={props.isEditing}
-                drag={drag}
-                isActive={isActive}
-                t={t}
-                text={text}
-              />
-            </ScaleDecorator>
-          )}
+          renderItem={({ item: tool, getIndex, drag, isActive }) => {
+            return (
+              <ScaleDecorator>
+                <SwipeableRow
+                  index={getIndex()}
+                  isShowedFavorite={props.isShowedFavorite}
+                  isEditingFavorite={props.isEditingFavorite}
+                  isEditing={props.isEditing}
+                  handleFavorite={handleFavorite}
+                  changeVis={changeVis}
+                  tool={tool}
+                  t={t}
+                >
+                  <Card
+                    isEditingFavorite={props.isEditingFavorite}
+                    handleFavorite={handleFavorite}
+                    isShowedFavorite={props.isShowedFavorite}
+                    theme={theme}
+                    lang={lang}
+                    tool={tool}
+                    key={tool.id}
+                    changeVis={changeVis}
+                    navigation={navigation}
+                    isEditing={props.isEditing}
+                    drag={drag}
+                    isActive={isActive}
+                    t={t}
+                    text={text}
+                  />
+                </SwipeableRow>
+              </ScaleDecorator>
+            );
+          }}
           keyExtractor={(tool) => tool.id.toString()}
         />
 

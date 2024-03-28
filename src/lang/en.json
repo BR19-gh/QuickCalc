@@ -20,7 +20,9 @@
           "selectToFavor": "Select Favorite",
           "edit": "Edit",
           "done": "Done",
-          "editFavorite": "Edit Favorite"
+          "editFavorite": "Edit Favorite",
+          "refreshing": "Refreshing...",
+          "refreshComplated": "Refresh complated!"
         }
       },
       "Home": {
@@ -28,6 +30,9 @@
         "text": {
           "tools": "Tools",
           "favoredTools": "Favored Tools",
+          "hide": "Hide",
+          "favorite": "Favorite",
+          "unfavorite": "unfavorite",
           "noTools": "No tools",
           "hiddenTools": "Hidden Tools",
           "unfavoredTools": "unfavored Tools",
@@ -37,7 +42,12 @@
           "unableToMove": "Unable To Move",
           "youCannotMoveToolsWhileEditing": "You cannot move tools while editing.",
           "youCannotMoveToolsInFavorite": "You cannot move items on the favorite page. Move the tools on the home page, and your move will be reflected here.",
-          "gotIt": "Got it"
+          "gotIt": "Got it",
+          "toolHasBeenHidden": "Tool has been hidden",
+          "toolHasbeenFavored": "Tool has been added to Favorite",
+          "errorFavoriting": "There was an error while favoriting. Please contact the developer for help",
+          "toolHasbeenUnFavored": "Tool has been removed from Favorite",
+          "errorHiding": "There was an error while hiding. Please contact the developer for help"
         }
       },
       "Settings": {

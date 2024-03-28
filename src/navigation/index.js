@@ -1,141 +1,18 @@
 import { NavigationContainer } from "@react-navigation/native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { useNavigation } from "@react-navigation/native";
-import { useState, useEffect, useRef } from "react";
+import { useState } from "react";
 
 import Ioicons from "react-native-vector-icons/Ionicons";
 
-import Home from "../screens/Home";
-import HeaderRightHome from "../components/Home/HeaderRightHome";
-import HeaderLeft from "../components/Home/HeaderLeft";
-import HeaderLeftHome from "../components/Home/HeaderLeftHome";
-import Settings from "../screens/Settings";
-import DiscountCal from "../screens/Home/DiscountCal";
-import UnitsCon from "../screens/Home/UnitsCon";
-import TipCal from "../screens/Home/TipCal";
-import CurrencyCon from "../screens/Home/CurrencyCon";
+import HomeNavi from "../navigation/HomeNavi";
+import SettingsNavi from "../navigation/SettingsNavi";
 
 import { useTranslation } from "react-i18next";
-import { NativeModules } from "react-native";
 
 import { DarkTheme, DefaultTheme } from "@react-navigation/native";
 import { useColorScheme } from "react-native";
 
-const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
-
-const HomeNavi = ({ isEditing, setIsEditing }) => {
-  const { t } = useTranslation();
-  const text = (text) => "screens.Navi.text." + text;
-
-  const [isShowedFavorite, setIsShowedFavorite] = useState(false);
-  const [isEditingFavorite, seIsEditingFavorite] = useState(false);
-
-  return (
-    <Stack.Navigator
-      screenOptions={{
-        headerTransparent: true,
-        headerBlurEffect: "systemChromeMaterial",
-        headerTranslucent: true,
-        headerHideShadow: true,
-        headerTitleStyle: {
-          fontSize: 20,
-        },
-      }}
-    >
-      <Stack.Screen
-        options={{
-          headerRight: () => (
-            <HeaderRightHome
-              seIsEditingFavorite={seIsEditingFavorite}
-              isEditingFavorite={isEditingFavorite}
-              isShowedFavorite={isShowedFavorite}
-              isEditing={isEditing}
-              setIsEditing={setIsEditing}
-            />
-          ),
-          headerLeft: () => (
-            <HeaderLeftHome
-              setIsEditing={setIsEditing}
-              seIsEditingFavorite={seIsEditingFavorite}
-              isShowedFavorite={isShowedFavorite}
-              setIsShowedFavorite={setIsShowedFavorite}
-            />
-          ),
-          title: isShowedFavorite
-            ? isEditingFavorite
-              ? t(text("selectToFavor"))
-              : t(text("favorite"))
-            : isEditing
-            ? t(text("selectToHide"))
-            : t(text("home")),
-        }}
-        name="HomeNavi"
-        children={() => (
-          <Home
-            isEditingFavorite={isEditingFavorite}
-            isShowedFavorite={isShowedFavorite}
-            setIsEditing={setIsEditing}
-            isEditing={isEditing}
-          />
-        )}
-      />
-      <Stack.Screen
-        options={{
-          headerLeft: () => <HeaderLeft />,
-        }}
-        name="DiscountCal"
-        children={() => <DiscountCal />}
-      />
-      <Stack.Screen
-        options={{
-          headerLeft: () => <HeaderLeft />,
-        }}
-        name="UnitsCon"
-        component={UnitsCon}
-      />
-      <Stack.Screen
-        options={{
-          headerLeft: () => <HeaderLeft />,
-        }}
-        name="TipCal"
-        component={TipCal}
-      />
-      <Stack.Screen
-        options={{
-          headerLeft: () => <HeaderLeft />,
-        }}
-        name="CurrencyCon"
-        component={CurrencyCon}
-      />
-    </Stack.Navigator>
-  );
-};
-const SettingsNavi = () => {
-  return (
-    <Stack.Navigator
-      screenOptions={{
-        headerTransparent: true,
-        headerTranslucent: true,
-        headerBlurEffect: "systemChromeMaterial",
-        headerHideShadow: true,
-        headerTitleStyle: {
-          fontSize: 20,
-        },
-      }}
-    >
-      <Stack.Screen
-        options={{
-          // headerRight: () => <HeaderRight handleEdit={handleEdit} />,
-          title: "Settings",
-        }}
-        name="SettingsNavi"
-        component={Settings}
-      />
-    </Stack.Navigator>
-  );
-};
 
 const Navigation = () => {
   const { t } = useTranslation();

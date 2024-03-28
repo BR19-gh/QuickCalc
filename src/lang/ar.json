@@ -20,7 +20,9 @@
           "selectToFavor": "اختر للتفضيل",
           "edit": "تعديل",
           "done": "تم",
-          "editFavorite": "تعديل المفضلة"
+          "editFavorite": "تعديل المفضلة",
+          "refreshing": "جار التحديث...",
+          "refreshComplated": "اكتمل التحديث!"
         }
       },
       "Home": {
@@ -28,6 +30,9 @@
         "text": {
           "tools": "الأدوات",
           "favoredTools": "الأدوات المفضلة",
+          "hide": "إخفاء",
+          "favorite": "تفضيل",
+          "unfavorite": "إلغاء\nالتفضيل",
           "noTools": "لا توجد أدوات",
           "hiddenTools": "الأدوات المخفية",
           "unfavoredTools": "الأدوات غير المفضلة",
@@ -37,7 +42,12 @@
           "unableToMove": "النقل غير ممكن",
           "youCannotMoveToolsWhileEditing": "لا يمكنك النقل اثناء التعديل",
           "youCannotMoveToolsInFavorite": "لا يمكنك النقل في صفحة المفضلة، انقل الادوات في الصفحة الرئيسية وسينعكس نقلك هنا",
-          "gotIt": "فهمت"
+          "gotIt": "فهمت",
+          "toolHasBeenHidden": "تم إخفاء الأداة",
+          "toolHasbeenFavored": "تم تفضيل الأداة",
+          "errorFavoriting": "حدث خطأ أثناء التفضيل، تواصل مع المطور للمساعدة",
+          "toolHasbeenUnFavored": "تم إلغاء تفضيل الأداة",
+          "errorHiding": "حدث خطأ أثناء الاخفاء، تواصل مع المطور للمساعدة"
         }
       },
       "Settings": {

@@ -31,7 +31,12 @@ const Header = ({
   }
 
   return (
-    <View className="flex-row items-center w-20 justify-between">
+    <View
+      className={
+        "flex-row items-center justify-between" +
+        (isEditing ? " w-20" : " w-24")
+      }
+    >
       {isShowedFavorite ? (
         <>
           <MaterialCommunityIcons
@@ -72,7 +77,7 @@ const Header = ({
               {isEditing ? t(text("done")) : t(text("edit"))}
             </Text>
           </TouchableOpacity>
-          <Text>{"   "}</Text>
+
           {isEditing ? (
             <MaterialCommunityIcons
               className="text-3xl text-transparent"
