@@ -9,4 +9,27 @@ styles = {
   icon: "flex-1 w-52 m-2",
 };
 
+export const stylesSettings = {
+  groupContainer: {
+    marginBottom: 24,
+  },
+  groupTitle: {
+    textAlign: "left",
+    fontSize: 16,
+    marginBottom: -11,
+    marginLeft: 8,
+    color: "#666666",
+  },
+  childrenContainer: {
+    borderRadius: 12,
+    overflow: "hidden",
+  },
+  footer: {
+    textAlign: "left",
+    fontSize: 10,
+    color: "#666666",
+    marginLeft: 8,
+  },
+};
+
 export default styles;

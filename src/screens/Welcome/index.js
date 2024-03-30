@@ -4,9 +4,29 @@ import styles from "./styles";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import { useTranslation } from "react-i18next";
 import { useColorScheme } from "react-native";
+import { useEffect } from "react";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 function Welcome(props) {
-  const theme = useColorScheme();
+  const auto = useColorScheme();
+
+  useEffect(() => {
+    const getTheme = async () => {
+      try {
+        const value = await AsyncStorage.getItem("theme");
+        if (value !== null) {
+          props.setTheme(value);
+        } else {
+          props.setTheme(auto);
+        }
+        console.log("Current theme is: ", props.theme);
+      } catch (error) {
+        console.error("Error getting theme from storage", error);
+      }
+    };
+
+    getTheme();
+  }, [auto, props.isThemeChanged]);
 
   const { t } = useTranslation();
   const text = (text) => "screens.Welcome.text." + text;
@@ -14,18 +34,22 @@ function Welcome(props) {
   return (
     <View
       className={
-        "pt-60 items-center flex-1" + (theme === "dark" && " bg-black")
+        "pt-60 items-center flex-1" + (props.theme === "dark" && " bg-black")
       }
     >
-      <Text className={styles.icon + (theme === "dark" && " text-blue-500")}>
+      <Text
+        className={styles.icon + (props.theme === "dark" && " text-blue-500")}
+      >
         myTools
         <MaterialCommunityIcons
           name="tools"
           size={60}
-          color={theme ? "#2d5ba0" : "#294d7f"}
+          color={props.theme ? "#2d5ba0" : "#294d7f"}
         />
       </Text>
-      <Text className={styles.paragraph + (theme === "dark" && " text-white")}>
+      <Text
+        className={styles.paragraph + (props.theme === "dark" && " text-white")}
+      >
         {t(text("introParagraph"))}
       </Text>
       <TouchableOpacity

@@ -21,8 +21,6 @@ import {
 import { useTranslation } from "react-i18next";
 import { NativeModules } from "react-native";
 
-import { useColorScheme } from "react-native";
-
 const deviceLanguage =
   Platform.OS === "ios"
     ? NativeModules.SettingsManager.settings.AppleLocale ||
@@ -39,11 +37,9 @@ if (match) {
 }
 
 function Home(props) {
-  const theme = useColorScheme();
-
   useEffect(() => {
     props.dispatch(handleInitialData());
-  }, [theme]);
+  }, [props.theme]);
 
   const { t } = useTranslation();
   const text = (text) => "screens.Home.text." + text;
@@ -51,17 +47,28 @@ function Home(props) {
   const navigation = useNavigation();
 
   const handleFavorite = (id) => {
-    let newData = [...Object.values(props.tools)];
+    const newData = [...Object.values(props.tools)];
     const oldData = [...Object.values(props.tools)];
+    let changedIndex = -1;
 
-    newData.forEach((item) => {
+    newData.forEach((item, index) => {
       if (item.id === id) {
         item.isFavorite = !item.isFavorite;
         if (item.isFavorite === true) {
           item.isHidden = false;
         }
+        changedIndex = index;
       }
     });
+
+    // if (changedIndex !== -1) {
+    //   const changedItem = newData.splice(changedIndex, 1)[0];
+
+    //   if (changedItem.isHidden) {
+    //     newData.push(changedItem);
+    //   } else {
+    //     newData.unshift(changedItem);
+    //   }}
 
     props.dispatch(handleFavoriteTools(newData, oldData));
     props.dispatch(handleInitialData());
@@ -95,15 +102,17 @@ function Home(props) {
       } else {
         newData.unshift(changedItem);
       }
-
-      props.dispatch(handleEditVisTools(newData, oldData));
     }
+
+    props.dispatch(handleEditVisTools(newData, oldData));
   };
 
   return (
     <SafeAreaView>
       <NestableScrollContainer className="h-full">
-        <Text className={styles.title + (theme === "dark" && " text-white")}>
+        <Text
+          className={styles.title + (props.theme === "dark" && " text-white")}
+        >
           {props.isShowedFavorite ? t(text("favoredTools")) : t(text("tools"))}
         </Text>
 
@@ -115,8 +124,8 @@ function Home(props) {
             ).length === 0 ? (
               <Text
                 className={
-                  "text-xl m-4 mt-0 text-left" +
-                  (theme === "dark" && " text-white")
+                  "text-xl m-4 mt-0 text-left " +
+                  (props.theme === "dark" && " text-white")
                 }
               >
                 {t(text("noFavoredTools"))}
@@ -127,8 +136,8 @@ function Home(props) {
             ).length === 0 ? (
             <Text
               className={
-                "text-xl m-4 mt-0 text-left" +
-                (theme === "dark" && " text-white")
+                "text-xl m-4 mt-0 text-left " +
+                (props.theme === "dark" && " text-white")
               }
             >
               {t(text("noTools"))}
@@ -177,7 +186,7 @@ function Home(props) {
                     isEditingFavorite={props.isEditingFavorite}
                     handleFavorite={handleFavorite}
                     isShowedFavorite={props.isShowedFavorite}
-                    theme={theme}
+                    theme={props.theme}
                     lang={lang}
                     tool={tool}
                     key={tool.id}
@@ -201,13 +210,16 @@ function Home(props) {
           (props.isEditing || props.isEditingFavorite) && (
             <View
               className={
-                "bg-slate-300 pb-4" + (theme === "dark" && " bg-slate-950")
+                "bg-slate-300 pb-4" +
+                (props.theme === "dark" && " bg-slate-950")
               }
             >
               <Text
                 className={
                   styles.title +
-                  (theme === "dark" ? "  text-gray-400" : "  text-gray-600")
+                  (props.theme === "dark"
+                    ? "  text-gray-400"
+                    : "  text-gray-600")
                 }
               >
                 {props.isShowedFavorite
@@ -229,7 +241,7 @@ function Home(props) {
                     <Card
                       isEditingFavorite={props.isEditingFavorite}
                       handleFavorite={handleFavorite}
-                      theme={theme}
+                      theme={props.theme}
                       lang={lang}
                       tool={tool}
                       key={tool.id}
@@ -244,7 +256,7 @@ function Home(props) {
                 <Text
                   className={
                     "text-xl m-4 mt-0 text-gray-600 text-left" +
-                    (theme === "dark" && " text-gray-400")
+                    (props.theme === "dark" && " text-gray-400")
                   }
                 >
                   {props.isShowedFavorite

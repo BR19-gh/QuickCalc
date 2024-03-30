@@ -69,8 +69,8 @@ class SwipeableRow extends Component {
             toast.show(t(text("toolHasBeenHidden")), {
               type: "success",
               placement: "top",
-              duration: 3000,
-              offset: 0,
+              duration: 1000,
+              offset: 20,
               animationType: "zoom-in",
             });
             this.closeRow(this.props.index, true);
@@ -78,8 +78,8 @@ class SwipeableRow extends Component {
             toast.show(t(text("errorHiding")), {
               type: "warning",
               placement: "top",
-              duration: 5000,
-              offset: 0,
+              duration: 4000,
+              offset: 20,
               animationType: "zoom-in",
             });
             this.closeRow(this.props.index, true);
@@ -132,8 +132,8 @@ class SwipeableRow extends Component {
             toast.show(t(text("toolHasbeenFavored")), {
               type: "success",
               placement: "top",
-              duration: 3000,
-              offset: 0,
+              duration: 1000,
+              offset: 20,
               animationType: "zoom-in",
             });
             this.closeRow(this.props.index, true);
@@ -141,8 +141,8 @@ class SwipeableRow extends Component {
             toast.show(t(text("toolHasbeenUnFavored")), {
               type: "success",
               placement: "top",
-              duration: 3000,
-              offset: 0,
+              duration: 1000,
+              offset: 20,
               animationType: "zoom-in",
             });
             this.closeRow(this.props.index, true);
@@ -150,8 +150,8 @@ class SwipeableRow extends Component {
             toast.show(t(text("errorFavoriting")), {
               type: "warning",
               placement: "top",
-              duration: 5000,
-              offset: 0,
+              duration: 4000,
+              offset: 20,
               animationType: "zoom-in",
             });
             this.closeRow(this.props.index, true);
@@ -187,10 +187,10 @@ class SwipeableRow extends Component {
       <Swipeable
         ref={(ref) => (row[this.props.index] = ref)}
         overshootFriction={10}
-        friction={4}
+        friction={3}
         renderRightActions={this.renderRightActions}
         renderLeftActions={this.renderLeftActions}
-        onSwipeableOpen={() => this.closeRow(this.props.index, false)}
+        onSwipeableWillOpen={() => this.closeRow(this.props.index, false)}
       >
         {this.props.children}
       </Swipeable>

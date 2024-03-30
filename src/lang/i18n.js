@@ -17,8 +17,10 @@ let match = str.match(/^([a-z]{2})/i);
 if (match) {
   lang = match[0];
   if (lang == "ar") {
-    if (!I18nManager.isRTL) {
+    if (I18nManager.isRTL) {
       I18nManager.forceRTL(true);
+    } else {
+      I18nManager.forceRTL(false);
     }
   }
 } else {

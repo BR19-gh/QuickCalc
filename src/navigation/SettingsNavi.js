@@ -1,13 +1,21 @@
 import Settings from "../screens/Settings";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { useTranslation } from "react-i18next";
 
 const Stack = createNativeStackNavigator();
 
-const SettingsNavi = () => {
+const SettingsNavi = ({
+  theme,
+  setTheme,
+  isThemeChanged,
+  setIsThemeChanged,
+}) => {
+  const { t } = useTranslation();
+  const text = (text) => "screens.Navi.text." + text;
+
   return (
     <Stack.Navigator
       screenOptions={{
-        headerTransparent: true,
         headerTranslucent: true,
         headerBlurEffect: "systemChromeMaterial",
         headerHideShadow: true,
@@ -19,10 +27,17 @@ const SettingsNavi = () => {
       <Stack.Screen
         options={{
           // headerRight: () => <HeaderRight handleEdit={handleEdit} />,
-          title: "Settings",
+          title: t(text("settings")),
         }}
         name="SettingsNavi"
-        component={Settings}
+        children={() => (
+          <Settings
+            isThemeChanged={isThemeChanged}
+            setIsThemeChanged={setIsThemeChanged}
+            theme={theme}
+            setTheme={setTheme}
+          />
+        )}
       />
     </Stack.Navigator>
   );

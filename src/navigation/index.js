@@ -1,6 +1,6 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import Ioicons from "react-native-vector-icons/Ionicons";
 
@@ -11,10 +11,11 @@ import { useTranslation } from "react-i18next";
 
 import { DarkTheme, DefaultTheme } from "@react-navigation/native";
 import { useColorScheme } from "react-native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const Tab = createBottomTabNavigator();
 
-const Navigation = () => {
+const Navigation = ({ theme, setTheme, isThemeChanged, setIsThemeChanged }) => {
   const { t } = useTranslation();
   const text = (text) => "screens.Navi.text." + text;
 
@@ -35,7 +36,26 @@ const Navigation = () => {
     headerShown: false,
   });
 
-  const theme = useColorScheme();
+  const auto = useColorScheme();
+
+  useEffect(() => {
+    const getTheme = async () => {
+      try {
+        const value = await AsyncStorage.getItem("theme");
+        if (value !== null) {
+          setTheme(value);
+        } else {
+          // If theme is not set in AsyncStorage, set it based on device's color scheme
+          setTheme(auto);
+        }
+        console.log("Current theme is: ", theme);
+      } catch (error) {
+        console.error("Error getting theme from storage", error);
+      }
+    };
+
+    getTheme();
+  }, [auto, isThemeChanged]);
 
   return (
     <NavigationContainer theme={theme === "dark" ? DarkTheme : DefaultTheme}>
@@ -55,7 +75,14 @@ const Navigation = () => {
         />
         <Tab.Screen
           name="Settings"
-          component={SettingsNavi}
+          children={() => (
+            <SettingsNavi
+              isThemeChanged={isThemeChanged}
+              setIsThemeChanged={setIsThemeChanged}
+              setTheme={setTheme}
+              theme={theme}
+            />
+          )}
           options={{
             title: t(text("settings")),
           }}

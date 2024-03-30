@@ -150,7 +150,7 @@ export const storeTools = async (value, actionType) => {
   } catch (e) {
     console.error("Error: storeTools: ", e);
     Alert.alert(
-      "Unable to store Initial tools",
+      "Unable to store tools",
       "Please contact with the developer, you van find developer socials in the Settings tab",
       [
         {

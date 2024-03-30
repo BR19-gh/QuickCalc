@@ -32,7 +32,7 @@
           "favoredTools": "Favored Tools",
           "hide": "Hide",
           "favorite": "Favorite",
-          "unfavorite": "unfavorite",
+          "unfavorite": "Un\nfavorite",
           "noTools": "No tools",
           "hiddenTools": "Hidden Tools",
           "unfavoredTools": "unfavored Tools",
@@ -52,7 +52,20 @@
       },
       "Settings": {
         "title": "Settings",
-        "text": {}
+        "text": {
+          "language": "Language",
+          "theme": "Theme",
+          "general": "General",
+          "contactDeveloper": "Contact Developer",
+          "selectTheme": "Selevt Theme",
+          "auto": "Auto",
+          "dark": "Dark",
+          "light": "Light",
+          "changeLanguageAlertTitle": "Changing the Language",
+          "changeLanguageAlertBody": "You have to change the language in the phone settings. The app will automatically reflect the change here.",
+          "goToSettings": "Go to Settings",
+          "cancel": "Cancel"
+        }
       }
     }
   }

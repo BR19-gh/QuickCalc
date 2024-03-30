@@ -33,10 +33,10 @@ const Header = ({
           setTimeout(() => {
             toast.update(refreshToast, t(text("refreshComplated")), {
               type: "success",
-              duration: 1000,
+              duration: 500,
               placement: "top",
             });
-          }, 1500);
+          }, 1000);
         }}
       >
         <MaterialCommunityIcons

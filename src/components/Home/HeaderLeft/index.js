@@ -1,8 +1,5 @@
-import { Text, View, TouchableOpacity } from "react-native";
+import { Text, View, TouchableOpacity, NativeModules } from "react-native";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
-import { useEffect } from "react";
-// import { useTranslation } from "react-i18next";
-import { NativeModules } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import i18n from "../../../lang/i18n";
 

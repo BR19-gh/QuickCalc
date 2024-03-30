@@ -14,7 +14,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 const Stack = createNativeStackNavigator();
 
-const HomeNavi = ({ isEditing, setIsEditing }) => {
+const HomeNavi = ({ isEditing, setIsEditing, theme }) => {
   const { t } = useTranslation();
   const text = (text) => "screens.Navi.text." + text;
 
@@ -24,9 +24,8 @@ const HomeNavi = ({ isEditing, setIsEditing }) => {
   return (
     <Stack.Navigator
       screenOptions={{
-        headerTransparent: true,
-        headerBlurEffect: "systemChromeMaterial",
         headerTranslucent: true,
+        headerBlurEffect: "systemChromeMaterial",
         headerHideShadow: true,
         headerTitleStyle: {
           fontSize: 20,
@@ -63,6 +62,7 @@ const HomeNavi = ({ isEditing, setIsEditing }) => {
         name="HomeNavi"
         children={() => (
           <Home
+            theme={theme}
             isEditingFavorite={isEditingFavorite}
             isShowedFavorite={isShowedFavorite}
             setIsEditing={setIsEditing}

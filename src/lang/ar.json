@@ -15,7 +15,7 @@
         "text": {
           "home": "الرئيسية",
           "favorite": "المفضلة",
-          "settings": "الاعدادات",
+          "settings": "الإعدادات",
           "selectToHide": "اختر للإخفاء",
           "selectToFavor": "اختر للتفضيل",
           "edit": "تعديل",
@@ -51,8 +51,21 @@
         }
       },
       "Settings": {
-        "title": "الاعدادات",
-        "text": {}
+        "title": "الإعدادات",
+        "text": {
+          "language": "اللغة",
+          "theme": "المظهر",
+          "general": "عام",
+          "contactDeveloper": "تواصل مع المطور",
+          "selectTheme": "اختر المظهر",
+          "auto": "تلقائي",
+          "dark": "داكن",
+          "light": "فاتح",
+          "changeLanguageAlertTitle": "تغيير اللغة",
+          "changeLanguageAlertBody": "يجب تغيير اللغة في إعدادات الجوال، وسينعكس التغيير هنا في التطبيق",
+          "goToSettings": "الذهاب إلى الإعدادات",
+          "cancel": "إلغاء"
+        }
       }
     }
   }

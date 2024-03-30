@@ -1,5 +1,4 @@
 import { StatusBar } from "expo-status-bar";
-import React, { useState } from "react";
 import {
   Text,
   View,
@@ -14,56 +13,273 @@ import {
   SettingsGroup,
   SettingsInfoDisplay,
   SettingsToggle,
-  SettingsButton,
 } from "react-native-settings-ui";
-import styles from "./styles";
-import { connect } from "react-redux";
+import SettingsButton from "../../components/Settings/Button";
+import styles, { stylesSettings } from "./styles";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
+import { useColorScheme } from "react-native";
+import { useEffect, useState, useRef } from "react";
+import { useTranslation } from "react-i18next";
+import Communications from "react-native-communications";
+import SelectDropdown from "react-native-select-dropdown";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+//import DeviceInfo from "react-native-device-info";
+import * as IntentLauncher from "expo-intent-launcher";
+import Linking from "react-native/Libraries/Linking/Linking";
 
-function Settings(props) {
+const openAppPref = (t, text) => {
+  if (Platform.OS === "ios") {
+    Alert.alert(
+      t(text("changeLanguageAlertTitle")),
+      t(text("changeLanguageAlertBody")),
+      [
+        {
+          text: t(text("goToSettings")),
+          onPress: () => Linking.openURL("App-prefs:root=General"),
+          style: "Ok",
+        },
+        {
+          text: t(text("cancel")),
+          onPress: () => null,
+          style: "cancel",
+        },
+      ]
+    );
+  } else {
+    IntentLauncher.startActivityAsync(
+      IntentLauncher.ActivityAction.SECURITY_SETTINGS
+    );
+  }
+};
+
+function Settings({ theme, isThemeChanged, setIsThemeChanged }) {
+  const [isAuto, setIsAuto] = useState(false);
+  const auto = useColorScheme();
+  const dropdownRef = useRef(null);
+
+  useEffect(() => {
+    const getTheme = async () => {
+      try {
+        const value = await AsyncStorage.getItem("theme");
+        if (value !== null) {
+          setIsAuto(false);
+        } else {
+          // If theme is not set in AsyncStorage, set it based on device's color scheme
+          setIsAuto(true);
+        }
+      } catch (error) {
+        console.error("Error getting theme from storage", error);
+      }
+    };
+
+    getTheme();
+  }, [auto, isThemeChanged]);
+
+  const { t } = useTranslation();
+  const text = (text) => "screens.Settings.text." + text;
+
+  const isDarkTextColor = () =>
+    theme === "dark" ? "text-white" : "text-black";
+
   return (
     <SafeAreaView className={styles.container}>
       <ScrollView>
         <View className="ml-4 mr-4">
-          <SettingsProvider theme="light">
-            <SettingsGroup title="General" footerText="Hello, this is toggle">
-              <SettingsToggle
-                title="Default color"
-                value={true}
-                onValueChange={() => console.log("toggle clicked")}
-              />
+          <SettingsProvider theme={theme}>
+            <View className="mt-8">
+              <Text style={stylesSettings.groupTitle}>
+                {t(text("general"))}
+              </Text>
+              <SettingsGroup>
+                <TouchableOpacity
+                  onPress={() => dropdownRef.current.openDropdown()}
+                >
+                  <SettingsInfoDisplay
+                    title={t(text("theme"))}
+                    status={
+                      <SelectDropdown
+                        ref={dropdownRef}
+                        data={[
+                          t(text("auto")),
+                          t(text("dark")),
+                          t(text("light")),
+                        ]}
+                        onSelect={(selectedItem, index) => {
+                          if (index === 0) {
+                            const storeTheme = async () => {
+                              try {
+                                await AsyncStorage.removeItem("theme");
+                              } catch (error) {
+                                console.error(
+                                  "Error storing theme to storage",
+                                  error
+                                );
+                              }
+                            };
 
-              <SettingsInfoDisplay
-                title="switch 1 state (boolEnable)"
-                status={true}
-                type="boolEnable"
-              />
-              <SettingsButton
-                title="Press me"
-                type="newpage"
-                onPress={() => Alert.alert("", "Something happened...")}
-              />
-            </SettingsGroup>
-            <SettingsGroup
-              title="My app settings"
-              footerText="Hello, this is toggle"
-            >
-              <SettingsToggle
-                title="Default color"
-                value={true}
-                onValueChange={() => console.log("toggle clicked")}
-              />
-              <SettingsInfoDisplay
-                title="switch 1 state (boolEnable)"
-                status={true}
-                type="boolEnable"
-              />
+                            storeTheme();
+                            setIsThemeChanged(!isThemeChanged);
+                          } else if (index === 1) {
+                            const storeTheme = async () => {
+                              try {
+                                await AsyncStorage.setItem("theme", "dark");
+                              } catch (error) {
+                                console.error(
+                                  "Error storing theme to storage",
+                                  error
+                                );
+                              }
+                            };
 
-              <SettingsButton
-                title="Press me"
-                onPress={() => Alert.alert("", "Something happened...")}
-              />
-            </SettingsGroup>
+                            storeTheme();
+                            setIsThemeChanged(!isThemeChanged);
+                          } else if (index === 2) {
+                            const storeTheme = async () => {
+                              try {
+                                await AsyncStorage.setItem("theme", "light");
+                              } catch (error) {
+                                console.error(
+                                  "Error storing theme to storage",
+                                  error
+                                );
+                              }
+                            };
+
+                            storeTheme();
+                            setIsThemeChanged(!isThemeChanged);
+                          }
+                        }}
+                        renderButton={(selectedItem, isOpened) => {
+                          return (
+                            <View
+                              style={{
+                                width: 70,
+                                height: 30,
+                                backgroundColor:
+                                  theme === "dark" ? "#555555" : "#E9ECEF",
+                                borderRadius: 12,
+                                flexDirection: "row",
+                                justifyContent: "center",
+                                alignItems: "center",
+                              }}
+                            >
+                              <Text
+                                style={{
+                                  color: theme === "dark" ? "#fff" : "#151E26",
+                                  flex: 1,
+                                  fontSize: 18,
+                                  fontWeight: "500",
+                                  textAlign: "center",
+                                }}
+                              >
+                                {isAuto ? t(text("auto")) : t(text(theme))}
+                              </Text>
+                            </View>
+                          );
+                        }}
+                        renderItem={(item, index, isSelected) => {
+                          return (
+                            <View
+                              style={{
+                                ...{
+                                  width: "100%",
+                                  flexDirection: "row",
+                                  paddingHorizontal: 12,
+                                  justifyContent: "center",
+                                  alignItems: "center",
+                                  paddingVertical: 8,
+                                },
+                                ...(isSelected && {
+                                  backgroundColor:
+                                    theme === "dark" ? "#333333" : "#D2D9DF",
+                                }),
+                              }}
+                            >
+                              <Text
+                                style={{
+                                  flex: 1,
+                                  fontSize: 18,
+                                  fontWeight: "500",
+                                  color: theme === "dark" ? "#fff" : "#151E26",
+                                }}
+                              >
+                                {item}
+                              </Text>
+                            </View>
+                          );
+                        }}
+                        showsVerticalScrollIndicator={false}
+                        dropdownStyle={{
+                          backgroundColor:
+                            theme === "dark" ? "#555555" : "#E9ECEF",
+                          borderRadius: 8,
+                        }}
+                      />
+                    }
+                    type="custom"
+                  />
+                </TouchableOpacity>
+                <SettingsButton
+                  title={t(text("language"))}
+                  type="newpage"
+                  onPress={() => openAppPref(t, text)}
+                />
+              </SettingsGroup>
+            </View>
+            <View>
+              <Text style={stylesSettings.groupTitle}>
+                {t(text("contactDeveloper"))}
+              </Text>
+              <SettingsGroup>
+                <SettingsButton
+                  title={
+                    <View className="flex-row-reverse justify-end items-center">
+                      <Text className={isDarkTextColor()}>
+                        Ibrahim-abdalaziz@hotmail.com
+                      </Text>
+                      <Text> </Text>
+                      <MaterialCommunityIcons
+                        name={"email"}
+                        size={24}
+                        color="gray"
+                      />
+                    </View>
+                  }
+                  type="default"
+                  onPress={() =>
+                    Communications.email(
+                      "Ibrahim-abdalaziz@hotmail.com",
+                      null,
+                      null,
+                      "My Feedback",
+                      "((write your feedback here...))"
+                      // `Model: ${DeviceInfo.getModel()}\n
+                      // Brand: ${DeviceInfo.getBrand()}\n
+                      // OS: ${DeviceInfo.getSystemName()} ${DeviceInfo.getSystemVersion()}\n
+                      // App Version: 1.0.0\n
+                      // ----------------------------------------\n
+                      // ((Your feedback))
+                      // `
+                    )
+                  }
+                />
+                <SettingsButton
+                  title={
+                    <View className="flex-row-reverse justify-end items-center">
+                      <Text className={isDarkTextColor()}>BR19.me</Text>
+                      <Text> </Text>
+                      <MaterialCommunityIcons
+                        name={"web"}
+                        size={24}
+                        color="gray"
+                      />
+                    </View>
+                  }
+                  type="default"
+                  onPress={() => Communications.web("https://br19.me")}
+                />
+              </SettingsGroup>
+            </View>
           </SettingsProvider>
         </View>
       </ScrollView>
@@ -71,20 +287,5 @@ function Settings(props) {
     </SafeAreaView>
   );
 }
-
-const styles2 = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: "flex-start",
-    alignItems: "center",
-  },
-  rectangle: {
-    width: 200,
-    height: 200,
-  },
-  spacer: {
-    height: 16,
-  },
-});
 
 export default Settings;

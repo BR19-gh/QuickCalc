@@ -12,15 +12,27 @@ import { ToastProvider } from "react-native-toast-notifications";
 const App = () => {
   const store = createStore(reducer, middleware);
   const [getStartedBtnPressed, setGetStartedBtnPressed] = useState(false);
-
+  const [theme, setTheme] = useState(null);
+  const [isThemeChanged, setIsThemeChanged] = useState(false);
   return (
     <ToastProvider>
       <GestureHandlerRootView style={{ flex: 1 }}>
         <Provider store={store}>
           {getStartedBtnPressed ? (
-            <Navigation />
+            <Navigation
+              theme={theme}
+              setTheme={setTheme}
+              isThemeChanged={isThemeChanged}
+              setIsThemeChanged={setIsThemeChanged}
+            />
           ) : (
-            <Welcome setGetStartedBtnPressed={setGetStartedBtnPressed} />
+            <Welcome
+              isThemeChanged={isThemeChanged}
+              setIsThemeChanged={setIsThemeChanged}
+              theme={theme}
+              setTheme={setTheme}
+              setGetStartedBtnPressed={setGetStartedBtnPressed}
+            />
           )}
         </Provider>
       </GestureHandlerRootView>
