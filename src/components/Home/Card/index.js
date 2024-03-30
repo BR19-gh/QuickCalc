@@ -4,6 +4,23 @@ import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityI
 
 import { LinearGradient } from "expo-linear-gradient";
 
+import { NativeModules } from "react-native";
+
+const deviceLanguage =
+  Platform.OS === "ios"
+    ? NativeModules.SettingsManager.settings.AppleLocale ||
+      NativeModules.SettingsManager.settings.AppleLanguages[0] // iOS 13
+    : NativeModules.I18nManager.localeIdentifier;
+
+let lang;
+let str = deviceLanguage;
+let match = str.match(/^([a-z]{2})/i);
+if (match) {
+  lang = match[0];
+} else {
+  lang = "en";
+}
+
 const Card = ({
   tool,
   changeVis,
@@ -81,7 +98,12 @@ const Card = ({
       }
       disabled={isActive}
     >
-      <View className="flex-row w-full justify-start">
+      <View
+        className={
+          "w-full justify-start" +
+          (lang === "ar" ? " flex-row" : " flex-row-reverse")
+        }
+      >
         <MaterialCommunityIcons
           className={styles.icon}
           name={tool.icon}

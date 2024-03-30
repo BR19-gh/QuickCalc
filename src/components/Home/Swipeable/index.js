@@ -7,6 +7,23 @@ import { Text, View, SafeAreaView, StyleSheet } from "react-native";
 
 import { useToast } from "react-native-toast-notifications";
 
+import { NativeModules } from "react-native";
+
+const deviceLanguage =
+  Platform.OS === "ios"
+    ? NativeModules.SettingsManager.settings.AppleLocale ||
+      NativeModules.SettingsManager.settings.AppleLanguages[0] // iOS 13
+    : NativeModules.I18nManager.localeIdentifier;
+
+let lang;
+let str = deviceLanguage;
+let match = str.match(/^([a-z]{2})/i);
+if (match) {
+  lang = match[0];
+} else {
+  lang = "en";
+}
+
 let row = [];
 let prevOpenedRow;
 
@@ -24,30 +41,7 @@ class SwipeableRow extends Component {
     this.swipeableRowRef = createRef();
   }
 
-  closeRow = (index, isThisRow) => {
-    if (isThisRow) {
-      row[index].close();
-    } else {
-      if (prevOpenedRow && prevOpenedRow !== row[index]) {
-        prevOpenedRow.close();
-      }
-      prevOpenedRow = row[index];
-    }
-  };
-
-  componentDidUpdate(prevProps) {
-    // Check if the relevant props have changed
-    if (
-      prevProps.isShowedFavorite !== this.props.isShowedFavorite ||
-      prevProps.isEditingFavorite !== this.props.isEditingFavorite ||
-      prevProps.isEditing !== this.props.isEditing
-    ) {
-      // Call the function passed down to close all swipeable rows
-      this.closeRow(this.props.index, true);
-    }
-  }
-
-  renderLeftActions = (progress, dragX) => {
+  leftSwipe = (progress, dragX) => {
     if (this.props.isEditingFavorite || this.props.isEditing) {
       return;
     }
@@ -87,7 +81,7 @@ class SwipeableRow extends Component {
         }}
       >
         <Animated.Text
-          className="text-center"
+          className="text-center pt-10"
           style={[
             stylesLeft.actionText,
             {
@@ -97,13 +91,13 @@ class SwipeableRow extends Component {
         >
           <MaterialCommunityIcons name={"eye-off"} size={35} color="white" />
           {"\n"}
-          {this.props.t(text("hide"))}
+          <Text className="w-full"> {this.props.t(text("hide"))}</Text>
         </Animated.Text>
       </RectButton>
     );
   };
 
-  renderRightActions = (progress, dragX) => {
+  rightSwipe = (progress, dragX) => {
     if (this.props.isEditingFavorite || this.props.isEditing) {
       return;
     }
@@ -159,14 +153,12 @@ class SwipeableRow extends Component {
         }}
       >
         <Animated.Text
-          className="text-center"
-          style={[
-            stylesRight.actionText,
-            {
-              transform: [{ translateX: trans }],
-              paddingTop: this.props.tool.isFavorite ? "40%" : "50%",
-            },
-          ]}
+          className={
+            "text-center text-base text-white" +
+            (lang === "ar" ? " pl-5" : " pr-5") +
+            (this.props.tool.isFavorite ? " pt-10" : " pt-12")
+          }
+          style={[]}
         >
           <MaterialCommunityIcons
             name={this.props.tool.isFavorite ? "star-minus" : "star-plus"}
@@ -181,6 +173,33 @@ class SwipeableRow extends Component {
       </RectButton>
     );
   };
+
+  closeRow = (index, isThisRow) => {
+    if (isThisRow) {
+      row[index].close();
+    } else {
+      if (prevOpenedRow && prevOpenedRow !== row[index]) {
+        prevOpenedRow.close();
+      }
+      prevOpenedRow = row[index];
+    }
+  };
+
+  componentDidUpdate(prevProps) {
+    // Check if the relevant props have changed
+    if (
+      prevProps.isShowedFavorite !== this.props.isShowedFavorite ||
+      prevProps.isEditingFavorite !== this.props.isEditingFavorite ||
+      prevProps.isEditing !== this.props.isEditing
+    ) {
+      // Call the function passed down to close all swipeable rows
+      this.closeRow(this.props.index, true);
+    }
+  }
+
+  renderLeftActions = lang === "ar" ? this.leftSwipe : this.rightSwipe;
+
+  renderRightActions = lang === "ar" ? this.rightSwipe : this.leftSwipe;
 
   render() {
     return (
@@ -210,7 +229,7 @@ const stylesLeft = StyleSheet.create({
     flexDirection: "column",
     color: "white",
     fontSize: 15,
-    paddingTop: "50%",
+
     marginStart: "35%",
   },
 });

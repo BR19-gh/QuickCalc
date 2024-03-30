@@ -19,8 +19,10 @@ if (match) {
   if (lang == "ar") {
     if (I18nManager.isRTL) {
       I18nManager.forceRTL(true);
+      I18nManager.allowRTL(true);
     } else {
       I18nManager.forceRTL(false);
+      I18nManager.allowRTL(false);
     }
   }
 } else {
