@@ -17,28 +17,27 @@ let match = str.match(/^([a-z]{2})/i);
 if (match) {
   lang = match[0];
   if (lang == "ar") {
-    if (I18nManager.isRTL) {
-      I18nManager.forceRTL(true);
-      I18nManager.allowRTL(true);
-    } else {
-      I18nManager.forceRTL(false);
-      I18nManager.allowRTL(false);
-    }
+    I18nManager.forceRTL(true);
+    I18nManager.allowRTL(true);
+  } else {
+    I18nManager.forceRTL(false);
+    I18nManager.allowRTL(false);
   }
-} else {
-  Alert.alert(
-    "Your Language is Not Supported",
-    "English will be used instead, contact the developer to add your language to the app, you can find developer socials in the Settings tab.",
-    [
-      {
-        text: "Got it",
-        onPress: () => null,
-        style: "Ok",
-      },
-    ]
-  );
-  console.warn("Locale not found");
 }
+// } else {
+//   Alert.alert(
+//     "Your Language is Not Supported",
+//     "English will be used instead, contact the developer to add your language to the app, you can find developer socials in the Settings tab.",
+//     [
+//       {
+//         text: "Got it",
+//         onPress: () => null,
+//         style: "Ok",
+//       },
+//     ]
+//   );
+//   console.warn("Locale not found");
+// }
 
 const resources = {
   en: en,

@@ -55,7 +55,7 @@ class SwipeableRow extends Component {
 
     return (
       <RectButton
-        className="h-36 mb-1 mt-1"
+        className="h-36 mb-1 mt-1 "
         style={stylesLeft.leftAction}
         onPress={() => {
           this.props.changeVis(this.props.tool.id);
@@ -90,7 +90,6 @@ class SwipeableRow extends Component {
           ]}
         >
           <MaterialCommunityIcons name={"eye-off"} size={35} color="white" />
-          {"\n"}
           <Text className="w-full"> {this.props.t(text("hide"))}</Text>
         </Animated.Text>
       </RectButton>
@@ -154,8 +153,7 @@ class SwipeableRow extends Component {
       >
         <Animated.Text
           className={
-            "text-center text-base text-white" +
-            (lang === "ar" ? " pl-5" : " pr-5") +
+            "text-center text-base text-white pr-5" +
             (this.props.tool.isFavorite ? " pt-10" : " pt-12")
           }
           style={[]}

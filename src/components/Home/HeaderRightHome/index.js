@@ -33,7 +33,12 @@ const Header = ({
   return (
     <View
       className={
-        "flex-row items-center justify-between" +
+        "items-center " +
+        (lang === "ar"
+          ? "flex-row justify-between"
+          : isShowedFavorite
+          ? "flex-row justify-between"
+          : "flex-row-reverse justify-around") +
         (isEditing ? " w-20" : " w-24")
       }
     >
@@ -55,7 +60,7 @@ const Header = ({
                 (isEditingFavorite ? " font-semibold text-lg" : " text-lg")
               }
               style={{
-                paddingStart: 0,
+                paddingEnd: lang === "ar" ? 0 : 8.5,
               }}
             >
               {isEditingFavorite ? t(text("done")) : t(text("edit"))}
@@ -71,7 +76,7 @@ const Header = ({
                 (isEditing ? " font-semibold text-lg" : " text-lg")
               }
               style={{
-                paddingStart: isEditing ? (lang === "ar" ? 55 : 30) : 0,
+                paddingStart: isEditing ? (lang === "ar" ? 55 : 36) : 0,
               }}
             >
               {isEditing ? t(text("done")) : t(text("edit"))}
