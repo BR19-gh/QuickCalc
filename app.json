@@ -11,21 +11,26 @@
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "locales": {
       "en": "./locale/en.json",
       "ar": "./locale/ar.json"
     },
-
     "ios": {
       "supportsTablet": true,
       "infoPlist": {
         "CFBundleAllowMixedLocalizations": true,
-        "CFBundleLocalizations": ["en", "ar"],
-        "CFBundleDevelopmentRegion": "en"
-      }
+        "CFBundleLocalizations": [
+          "en",
+          "ar"
+        ],
+        "CFBundleDevelopmentRegion": "en",
+        "ExpoLocalization_supportsRTL": true
+      },
+      "bundleIdentifier": "me.br19.myTools"
     },
-
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
@@ -35,9 +40,14 @@
     "web": {
       "favicon": "./assets/favicon.png"
     },
-    "plugins": ["expo-localization"],
+    "plugins": [
+      "expo-localization"
+    ],
     "extra": {
-      "supportsRTL": true
+      "supportsRTL": true,
+      "eas": {
+        "projectId": "32bfd484-ec95-4109-9cd6-23789ab08f7d"
+      }
     }
   }
 }

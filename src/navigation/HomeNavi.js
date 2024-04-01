@@ -17,6 +17,7 @@ const Stack = createNativeStackNavigator();
 const HomeNavi = ({ isEditing, setIsEditing, theme }) => {
   const { t } = useTranslation();
   const text = (text) => "screens.Navi.text." + text;
+  const DiscountCaltext = (text) => "screens.Home.DiscountCal." + text;
 
   const [isShowedFavorite, setIsShowedFavorite] = useState(false);
   const [isEditingFavorite, seIsEditingFavorite] = useState(false);
@@ -73,9 +74,10 @@ const HomeNavi = ({ isEditing, setIsEditing, theme }) => {
       <Stack.Screen
         options={{
           headerLeft: () => <HeaderLeft />,
+          title: t(DiscountCaltext("title")),
         }}
         name="DiscountCal"
-        children={() => <DiscountCal />}
+        children={() => <DiscountCal theme={theme} />}
       />
       <Stack.Screen
         options={{

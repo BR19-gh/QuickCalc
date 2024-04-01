@@ -48,6 +48,14 @@
           "errorFavoriting": "حدث خطأ أثناء التفضيل، تواصل مع المطور للمساعدة",
           "toolHasbeenUnFavored": "تم إلغاء تفضيل الأداة",
           "errorHiding": "حدث خطأ أثناء الاخفاء، تواصل مع المطور للمساعدة"
+        },
+        "DiscountCal": {
+          "title": "حاسبة الخصومات",
+          "text": {
+            "discount": "الخصم",
+            "price": "المبلغ",
+            "calculate": "احسب"
+          }
         }
       },
       "Settings": {
@@ -64,7 +72,15 @@
           "changeLanguageAlertTitle": "تغيير اللغة",
           "changeLanguageAlertBody": "يجب تغيير اللغة في إعدادات الجوال، وسينعكس التغيير هنا في التطبيق",
           "goToSettings": "الذهاب إلى الإعدادات",
-          "cancel": "إلغاء"
+          "cancel": "إلغاء",
+          "app": "التطبيق",
+          "version": "الإصدار",
+          "deleteData": "حذف بيانات التطبيق",
+          "areYouSureYoutoDeleteData": "هل انت متأكد من رغبتك بحذف بيانات التطبيق؟",
+          "thisWillDeleteAllData": "هذا الإجراء سيحذف جميع أدواتك المنشئة، ومفضلاتك، وإعداداتك السابقة",
+          "delete": "حذف",
+          "deleting": "جار الحذف...",
+          "deleteCompeleted": "اكتمل الحذف! حدث لترى التغييرات"
         }
       }
     }

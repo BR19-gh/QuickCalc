@@ -48,6 +48,14 @@
           "errorFavoriting": "There was an error while favoriting. Please contact the developer for help",
           "toolHasbeenUnFavored": "Tool has been removed from Favorite",
           "errorHiding": "There was an error while hiding. Please contact the developer for help"
+        },
+        "DiscountCal": {
+          "title": "Discount Calculator",
+          "text": {
+            "discount": "Discount",
+            "price": "Price",
+            "calculate": "Calculate"
+          }
         }
       },
       "Settings": {
@@ -64,7 +72,15 @@
           "changeLanguageAlertTitle": "Changing the Language",
           "changeLanguageAlertBody": "You have to change the language in the phone settings. The app will automatically reflect the change here.",
           "goToSettings": "Go to Settings",
-          "cancel": "Cancel"
+          "cancel": "Cancel",
+          "app": "App",
+          "version": "Version",
+          "deleteData": "Delete App Data",
+          "areYouSureYoutoDeleteData": "Are you sure you want to delete all app data?",
+          "thisWillDeleteAllData": "This will delete all your created tools, favorites and settings.",
+          "delete": "Delete",
+          "deleting": "Deleting...",
+          "deleteCompeleted": "Delete complated! Refresh to see the changes"
         }
       }
     }

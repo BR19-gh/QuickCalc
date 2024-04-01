@@ -1,7 +1,7 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Alert } from "react-native";
 
-clearAsyncStorage = async () => {
+export const clearAsyncStorage = async () => {
   AsyncStorage.clear();
 };
 

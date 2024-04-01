@@ -26,6 +26,10 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 //import DeviceInfo from "react-native-device-info";
 import * as IntentLauncher from "expo-intent-launcher";
 import Linking from "react-native/Libraries/Linking/Linking";
+import { clearAsyncStorage } from "../../../_DATA";
+import { useToast } from "react-native-toast-notifications";
+import { connect } from "react-redux";
+import { handleInitialData } from "../../store/actions/shared";
 
 const openAppPref = (t, text) => {
   if (Platform.OS === "ios") {
@@ -52,11 +56,43 @@ const openAppPref = (t, text) => {
   }
 };
 
-function Settings({ theme, isThemeChanged, setIsThemeChanged }) {
+const deleteData = (t, text, toast, dispatch) => {
+  Alert.alert(
+    t(text("areYouSureYoutoDeleteData")),
+    t(text("thisWillDeleteAllData")),
+    [
+      {
+        text: t(text("delete")),
+        onPress: () => {
+          let refreshToast = toast.show(t(text("deleting")), {
+            placement: "top",
+            type: "danger",
+          });
+          clearAsyncStorage();
+          setTimeout(() => {
+            dispatch(handleInitialData());
+            toast.update(refreshToast, t(text("deleteCompeleted")), {
+              type: "success",
+              duration: 4000,
+              placement: "top",
+            });
+          }, 1000);
+        },
+        style: "destructive",
+      },
+      {
+        text: t(text("cancel")),
+        onPress: () => null,
+        style: "cancel",
+      },
+    ]
+  );
+};
+
+function Settings({ theme, isThemeChanged, setIsThemeChanged, dispatch }) {
   const [isAuto, setIsAuto] = useState(false);
   const auto = useColorScheme();
   const dropdownRef = useRef(null);
-
   useEffect(() => {
     const getTheme = async () => {
       try {
@@ -76,6 +112,7 @@ function Settings({ theme, isThemeChanged, setIsThemeChanged }) {
   }, [auto, isThemeChanged]);
 
   const { t } = useTranslation();
+  const toast = useToast();
   const text = (text) => "screens.Settings.text." + text;
 
   const isDarkTextColor = () =>
@@ -245,7 +282,7 @@ function Settings({ theme, isThemeChanged, setIsThemeChanged }) {
                       />
                     </View>
                   }
-                  type="default"
+                  type="newpage"
                   onPress={() =>
                     Communications.email(
                       "Ibrahim-abdalaziz@hotmail.com",
@@ -275,9 +312,38 @@ function Settings({ theme, isThemeChanged, setIsThemeChanged }) {
                       />
                     </View>
                   }
-                  type="default"
+                  type="newpage"
                   onPress={() => Communications.web("https://br19.me")}
                 />
+              </SettingsGroup>
+            </View>
+            <View>
+              <Text style={stylesSettings.groupTitle}>{t(text("app"))}</Text>
+              <SettingsGroup>
+                <SettingsInfoDisplay
+                  title={t(text("version"))}
+                  status={"1.0.0.0"}
+                  type="custom"
+                />
+                <TouchableOpacity
+                  onPress={() => deleteData(t, text, toast, dispatch)}
+                >
+                  <SettingsInfoDisplay
+                    title={
+                      <Text className={"text-destructive"}>
+                        {t(text("deleteData"))}
+                      </Text>
+                    }
+                    status={
+                      <MaterialCommunityIcons
+                        name={"trash-can-outline"}
+                        size={24}
+                        color="#e63746"
+                      />
+                    }
+                    type="custom"
+                  />
+                </TouchableOpacity>
               </SettingsGroup>
             </View>
           </SettingsProvider>
@@ -288,4 +354,10 @@ function Settings({ theme, isThemeChanged, setIsThemeChanged }) {
   );
 }
 
-export default Settings;
+const mapStateToProps = ({ tools }) => {
+  return {
+    tools,
+  };
+};
+
+export default connect(mapStateToProps)(Settings);
