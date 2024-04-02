@@ -55,11 +55,11 @@ const Card = ({
       borderColor: theme === "dark" ? "gray" : "black",
       width: "92%",
     }}
-    className="h-36 rounded-lg mb-1 mt-1"
+    className="mb-1 mt-1 h-36 rounded-lg"
   >
     <TouchableOpacity
       key={tool.id}
-      className={"flex-row flex-wrap justify-center h-full w-full"}
+      className={"h-full w-full flex-row flex-wrap justify-center"}
       onPress={() => {
         if (isEditing) {
           changeVis(tool.id);
@@ -98,12 +98,7 @@ const Card = ({
       }
       disabled={isActive}
     >
-      <View
-        className={
-          "w-full justify-start" +
-          (lang === "ar" ? " flex-row" : " flex-row-reverse")
-        }
-      >
+      <View className={"w-full justify-start flex-row-reverse"}>
         <MaterialCommunityIcons
           className={styles.icon}
           name={tool.icon}
