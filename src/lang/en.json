@@ -33,12 +33,12 @@
           "hide": "Hide",
           "favorite": "Favorite",
           "unfavorite": "Un\nfavorite",
-          "noTools": "No tools",
+          "noTools": "No tools, refresh to insure",
           "hiddenTools": "Hidden Tools",
           "unfavoredTools": "Unfavored Tools",
-          "noFavoredTools": "No Favored tools",
-          "noHiddenTools": "No hidden tools",
-          "noUnfavoredTools": "No unfavored tools",
+          "noFavoredTools": "No Favored tools, refresh to insure",
+          "noHiddenTools": "No hidden tools, refresh to insure",
+          "noUnfavoredTools": "No unfavored tools, refresh to insure",
           "unableToMove": "Unable To Move",
           "youCannotMoveToolsWhileEditing": "You cannot move tools while editing.",
           "youCannotMoveToolsInFavorite": "You cannot move items on the favorite page. Move the tools on the home page, and your move will be reflected here.",
@@ -54,7 +54,9 @@
           "text": {
             "discount": "Discount",
             "price": "Price",
-            "calculate": "Calculate"
+            "calculate": "Calculate",
+            "priceAfter": "Price After: ",
+            "discountAmount": "Discount Amount: "
           }
         }
       },

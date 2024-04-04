@@ -33,12 +33,12 @@
           "hide": "إخفاء",
           "favorite": "تفضيل",
           "unfavorite": "إلغاء\nالتفضيل",
-          "noTools": "لا توجد أدوات",
+          "noTools": "لا توجد أدوات٫ حدث للتأكد",
           "hiddenTools": "الأدوات المخفية",
           "unfavoredTools": "الأدوات غير المفضلة",
-          "noHiddenTools": "لا توجد أدوات مخفية",
-          "noFavoredTools": "لا توجد أدوات مفضلة",
-          "noUnfavoredTools": "لا توجد أدوات غير مفضلة",
+          "noHiddenTools": "لا توجد أدوات مخفية، حدث للتأكد",
+          "noFavoredTools": "لا توجد أدوات مفضلة، حدث للتأكد",
+          "noUnfavoredTools": "لا توجد أدوات غير مفضلة، حدث للتأكد",
           "unableToMove": "النقل غير ممكن",
           "youCannotMoveToolsWhileEditing": "لا يمكنك النقل اثناء التعديل",
           "youCannotMoveToolsInFavorite": "لا يمكنك النقل في صفحة المفضلة، انقل الادوات في الصفحة الرئيسية وسينعكس نقلك هنا",
@@ -54,7 +54,9 @@
           "text": {
             "discount": "الخصم",
             "price": "المبلغ",
-            "calculate": "احسب"
+            "calculate": "احسب",
+            "priceAfter": "السعر بعد الخصم: ",
+            "discountAmount": "مقدار الخصم: "
           }
         }
       },

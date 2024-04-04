@@ -6,6 +6,8 @@ import { LinearGradient } from "expo-linear-gradient";
 
 import { NativeModules } from "react-native";
 
+import SweetSFSymbol from "sweet-sfsymbols";
+
 const deviceLanguage =
   Platform.OS === "ios"
     ? NativeModules.SettingsManager.settings.AppleLocale ||
@@ -99,7 +101,7 @@ const Card = ({
       disabled={isActive}
     >
       <View className={"w-full justify-start flex-row-reverse"}>
-        <MaterialCommunityIcons
+        {/* <MaterialCommunityIcons
           className={styles.icon}
           name={tool.icon}
           size={24}
@@ -107,11 +109,20 @@ const Card = ({
           style={{
             width: "11%",
           }}
+        /> */}
+        <SweetSFSymbol
+          name={tool.icon}
+          size={24}
+          colors={["white"]}
+          style={{
+            margin: 16,
+          }}
         />
+
         <Text
           className={styles.btnText}
           style={{
-            width: "85%",
+            width: "80%",
           }}
         >
           {lang === "en" ? tool.name.en : tool.name.ar}

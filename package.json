@@ -4,8 +4,8 @@
   "main": "node_modules/expo/AppEntry.js",
   "scripts": {
     "start": "expo start --tunnel -c",
-    "android": "expo start --android",
-    "ios": "expo start --ios",
+    "android": "expo run:android",
+    "ios": "expo run:ios",
     "web": "expo start --web"
   },
   "dependencies": {
@@ -28,6 +28,7 @@
     "expo-linear-gradient": "~12.3.0",
     "expo-localization": "~14.3.0",
     "expo-notifications": "~0.20.1",
+    "expo-splash-screen": "~0.20.5",
     "expo-status-bar": "~1.6.0",
     "expo-system-ui": "~2.4.0",
     "expo-updates": "~0.18.19",
@@ -39,6 +40,7 @@
     "react-i18next": "^14.1.0",
     "react-native": "0.72.10",
     "react-native-communications": "^2.2.1",
+    "react-native-context-menu-view": "^1.15.0",
     "react-native-device-info": "^10.13.1",
     "react-native-draggable-flatlist": "^4.0.1",
     "react-native-draglist": "^3.6.0",

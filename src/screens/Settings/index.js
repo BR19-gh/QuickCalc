@@ -17,6 +17,7 @@ import {
 import SettingsButton from "../../components/Settings/Button";
 import styles, { stylesSettings } from "./styles";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
+import SweetSFSymbol from "sweet-sfsymbols";
 import { useColorScheme } from "react-native";
 import { useEffect, useState, useRef } from "react";
 import { useTranslation } from "react-i18next";
@@ -274,11 +275,11 @@ function Settings({ theme, isThemeChanged, setIsThemeChanged, dispatch }) {
                       <Text className={isDarkTextColor()}>
                         Ibrahim-abdalaziz@hotmail.com
                       </Text>
-                      <Text> </Text>
-                      <MaterialCommunityIcons
-                        name={"email"}
-                        size={24}
-                        color="gray"
+                      <Text>{"   "}</Text>
+                      <SweetSFSymbol
+                        name={"envelope.fill"}
+                        size={20}
+                        colors={["gray"]}
                       />
                     </View>
                   }
@@ -304,11 +305,11 @@ function Settings({ theme, isThemeChanged, setIsThemeChanged, dispatch }) {
                   title={
                     <View className="flex-row-reverse justify-end items-center">
                       <Text className={isDarkTextColor()}>BR19.me</Text>
-                      <Text> </Text>
-                      <MaterialCommunityIcons
-                        name={"web"}
-                        size={24}
-                        color="gray"
+                      <Text>{"   "}</Text>
+                      <SweetSFSymbol
+                        name={"globe"}
+                        size={20}
+                        colors={["gray"]}
                       />
                     </View>
                   }
@@ -335,10 +336,10 @@ function Settings({ theme, isThemeChanged, setIsThemeChanged, dispatch }) {
                       </Text>
                     }
                     status={
-                      <MaterialCommunityIcons
-                        name={"trash-can-outline"}
-                        size={24}
-                        color="#e63746"
+                      <SweetSFSymbol
+                        name={"trash"}
+                        size={20}
+                        colors={["#e63746"]}
                       />
                     }
                     type="custom"

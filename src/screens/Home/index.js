@@ -21,6 +21,8 @@ import {
 import { useTranslation } from "react-i18next";
 import { NativeModules } from "react-native";
 
+import ContextMenu from "react-native-context-menu-view";
+
 const deviceLanguage =
   Platform.OS === "ios"
     ? NativeModules.SettingsManager.settings.AppleLocale ||
@@ -172,33 +174,42 @@ function Home(props) {
           renderItem={({ item: tool, getIndex, drag, isActive }) => {
             return (
               <ScaleDecorator>
-                <SwipeableRow
-                  index={getIndex()}
-                  isShowedFavorite={props.isShowedFavorite}
-                  isEditingFavorite={props.isEditingFavorite}
-                  isEditing={props.isEditing}
-                  handleFavorite={handleFavorite}
-                  changeVis={changeVis}
-                  tool={tool}
-                  t={t}
+                <ContextMenu
+                  actions={[{ title: "Title 1" }, { title: "Title 2" }]}
+                  onPress={(e) => {
+                    console.warn(
+                      `Pressed ${e.nativeEvent.name} at index ${e.nativeEvent.index}`
+                    );
+                  }}
                 >
-                  <Card
-                    isEditingFavorite={props.isEditingFavorite}
-                    handleFavorite={handleFavorite}
+                  <SwipeableRow
+                    index={getIndex()}
                     isShowedFavorite={props.isShowedFavorite}
-                    theme={props.theme}
-                    lang={lang}
-                    tool={tool}
-                    key={tool.id}
-                    changeVis={changeVis}
-                    navigation={navigation}
+                    isEditingFavorite={props.isEditingFavorite}
                     isEditing={props.isEditing}
-                    drag={drag}
-                    isActive={isActive}
+                    handleFavorite={handleFavorite}
+                    changeVis={changeVis}
+                    tool={tool}
                     t={t}
-                    text={text}
-                  />
-                </SwipeableRow>
+                  >
+                    <Card
+                      isEditingFavorite={props.isEditingFavorite}
+                      handleFavorite={handleFavorite}
+                      isShowedFavorite={props.isShowedFavorite}
+                      theme={props.theme}
+                      lang={lang}
+                      tool={tool}
+                      key={tool.id}
+                      changeVis={changeVis}
+                      navigation={navigation}
+                      isEditing={props.isEditing}
+                      drag={drag}
+                      isActive={isActive}
+                      t={t}
+                      text={text}
+                    />
+                  </SwipeableRow>
+                </ContextMenu>
               </ScaleDecorator>
             );
           }}

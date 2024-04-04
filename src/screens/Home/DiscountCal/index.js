@@ -45,9 +45,13 @@ function DiscountCal({ theme }) {
     Keyboard.dismiss();
   };
 
+  const a2e = (s) => s.replace(/[٠-٩]/g, (d) => "٠١٢٣٤٥٦٧٨٩".indexOf(d));
+
   const calculateDiscount = () => {
-    setDiscountAmount(price * (discount / 100));
-    setPriceAfter(price - price * (discount / 100));
+    let priceInEn = a2e(price);
+    let discountInEn = a2e(discount);
+    setDiscountAmount(priceInEn * (discountInEn / 100));
+    setPriceAfter(priceInEn - priceInEn * (discountInEn / 100));
   };
 
   const isDark = (darkOp, lightp) => (theme === "dark" ? darkOp : lightp);
@@ -112,30 +116,38 @@ function DiscountCal({ theme }) {
 
           <TouchableOpacity
             className={
-              "rounded-lg w-48 h-24 mt-10 justify-center" +
+              "rounded-lg w-60 h-20 mt-10 justify-center" +
               isDark(" bg-blue-900 ", " bg-blue-500 ")
             }
             onPress={calculateDiscount}
           >
             <Text className={styles.btnText}>{t(text("calculate"))}</Text>
           </TouchableOpacity>
-          <View className="w-full flex-row flex-wrap justify-start">
-            <Text
-              className={
-                "w-full text-2xl text-left p-2 mt-10" +
-                isDark(" text-white", " text-black")
-              }
-            >
-              {"المبلغ بعد الخصم: " + priceAfter}
-            </Text>
-            <Text
-              className={
-                "w-full text-2xl text-left p-2 mt-3" +
-                isDark(" text-white", " text-black")
-              }
-            >
-              {"مقدار الخصم: " + discountAmount}
-            </Text>
+          <View className="w-full flex-row flex-wrap">
+            <View className="w-full flex-row p-2 mt-5q1  text-left">
+              <Text
+                className={"text-2xl" + isDark(" text-white", " text-black")}
+              >
+                {t(text("priceAfter"))}
+              </Text>
+              <Text
+                className={"text-4xl" + isDark(" text-white", " text-black")}
+              >
+                {priceAfter}
+              </Text>
+            </View>
+            <View className="flex-row p-2 mt-3">
+              <Text
+                className={"text-2xl" + isDark(" text-white", " text-black")}
+              >
+                {t(text("discountAmount"))}
+              </Text>
+              <Text
+                className={"text-4xl" + isDark(" text-white", " text-black")}
+              >
+                {discountAmount}
+              </Text>
+            </View>
           </View>
         </View>
       </ScrollView>

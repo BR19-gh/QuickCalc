@@ -1,5 +1,6 @@
 import { Text, View, TouchableOpacity } from "react-native";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
+import SweetSFSymbol from "sweet-sfsymbols";
 import { useToast } from "react-native-toast-notifications";
 // import { useTranslation } from "react-i18next";
 import { useNavigation } from "@react-navigation/native";
@@ -39,9 +40,11 @@ const Header = ({
           }, 1000);
         }}
       >
-        <MaterialCommunityIcons
-          name={"refresh"}
-          className="text-3xl text-blue-500"
+        <SweetSFSymbol
+          name={"arrow.clockwise"}
+          size={22}
+          colors={["#3B82F6"]}
+          style={{ marginTop: 2 }}
         />
       </TouchableOpacity>
       <TouchableOpacity
@@ -51,9 +54,11 @@ const Header = ({
           setIsEditing(false);
         }}
       >
-        <MaterialCommunityIcons
-          name={isShowedFavorite ? "star" : "star-outline"}
-          className="text-3xl text-blue-500"
+        <SweetSFSymbol
+          name={isShowedFavorite ? "star.fill" : "star"}
+          size={22}
+          colors={["#3B82F6"]}
+          style={{ marginTop: 2 }}
         />
       </TouchableOpacity>
     </>

@@ -2,6 +2,7 @@ import { Animated } from "react-native";
 import { RectButton } from "react-native-gesture-handler";
 import Swipeable from "react-native-gesture-handler/Swipeable";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
+import SweetSFSymbol from "sweet-sfsymbols";
 import React, { Component, createRef } from "react";
 import { Text, View, SafeAreaView, StyleSheet } from "react-native";
 
@@ -90,6 +91,12 @@ class SwipeableRow extends Component {
           ]}
         >
           <MaterialCommunityIcons name={"eye-off"} size={35} color="white" />
+          {/* <SweetSFSymbol
+          name={isShowedFavorite ? "star.fill" : "star"}
+          size={22}
+          colors={["#3B82F6"]}
+          style={{ marginTop: 2 }}
+        /> */}
           <Text className="w-full"> {this.props.t(text("hide"))}</Text>
         </Animated.Text>
       </RectButton>

@@ -1,5 +1,6 @@
 import { Text, View, TouchableOpacity } from "react-native";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
+import SweetSFSymbol from "sweet-sfsymbols";
 import { useEffect } from "react";
 // import { useTranslation } from "react-i18next";
 import { NativeModules } from "react-native";
@@ -44,9 +45,11 @@ const Header = ({
     >
       {isShowedFavorite ? (
         <>
-          <MaterialCommunityIcons
-            className="text-3xl text-transparent"
-            name="star"
+          <SweetSFSymbol
+            name={"plus"}
+            size={22}
+            colors={["transparent"]}
+            style={{ marginBottom: 4 }}
           />
           <TouchableOpacity
             onPress={() => {
@@ -61,6 +64,7 @@ const Header = ({
               }
               style={{
                 paddingEnd: lang === "ar" ? 0 : 8.5,
+                marginBottom: 6,
               }}
             >
               {isEditingFavorite ? t(text("done")) : t(text("edit"))}
@@ -77,6 +81,7 @@ const Header = ({
               }
               style={{
                 paddingStart: isEditing ? (lang === "ar" ? 55 : 36) : 0,
+                marginBottom: 6,
               }}
             >
               {isEditing ? t(text("done")) : t(text("edit"))}
@@ -84,15 +89,23 @@ const Header = ({
           </TouchableOpacity>
 
           {isEditing ? (
-            <MaterialCommunityIcons
-              className="text-3xl text-transparent"
-              name="plus"
+            <SweetSFSymbol
+              name={"plus"}
+              size={22}
+              colors={["transparent"]}
+              style={{ marginBottom: 4 }}
             />
           ) : (
             <TouchableOpacity>
-              <MaterialCommunityIcons
+              {/* <MaterialCommunityIcons
                 className="text-3xl text-blue-500"
                 name="plus"
+              /> */}
+              <SweetSFSymbol
+                name={"plus"}
+                size={22}
+                colors={["#3B82F6"]}
+                style={{ marginBottom: 4 }}
               />
             </TouchableOpacity>
           )}

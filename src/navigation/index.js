@@ -3,6 +3,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { useEffect, useState } from "react";
 
 import Ioicons from "react-native-vector-icons/Ionicons";
+import SweetSFSymbol from "sweet-sfsymbols";
 
 import HomeNavi from "../navigation/HomeNavi";
 import SettingsNavi from "../navigation/SettingsNavi";
@@ -25,13 +26,13 @@ const Navigation = ({ theme, setTheme, isThemeChanged, setIsThemeChanged }) => {
     tabBarIcon: ({ focused, color, size }) => {
       let iconName;
       if (route.name === "Settings") {
-        iconName = focused ? "settings" : "settings-outline";
+        iconName = focused ? "gear" : "gear";
       } else if (route.name === "Home") {
-        iconName = focused ? "home" : "home-outline";
+        iconName = focused ? "house.fill" : "house";
       }
-      return <Ioicons name={iconName} size={size} color={color} />;
+      return <SweetSFSymbol name={iconName} size={size} colors={[color]} />;
     },
-    tabBarActiveTintColor: "rgb(59 130 246)", //bg-blue-500
+    tabBarActiveTintColor: "#3B82F6", //bg-blue-500
     tabBarInactiveTintColor: "gray",
     headerShown: false,
   });
