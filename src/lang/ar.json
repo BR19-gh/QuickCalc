@@ -40,7 +40,7 @@
           "noFavoredTools": "لا توجد أدوات مفضلة، حدث للتأكد",
           "noUnfavoredTools": "لا توجد أدوات غير مفضلة، حدث للتأكد",
           "unableToMove": "النقل غير ممكن",
-          "youCannotMoveToolsWhileEditing": "لا يمكنك النقل اثناء التعديل",
+          "youCannotMoveHidenTools": "لنقل الأدوات المخفية، إضغط ضغطة واحدة على الأداة المراد اظهارها ",
           "youCannotMoveToolsInFavorite": "لا يمكنك النقل في صفحة المفضلة، انقل الادوات في الصفحة الرئيسية وسينعكس نقلك هنا",
           "gotIt": "فهمت",
           "toolHasBeenHidden": "تم إخفاء الأداة",

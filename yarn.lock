@@ -3658,10 +3658,10 @@ expo-haptics@~12.4.0:
   resolved "https://registry.npmjs.org/expo-haptics/-/expo-haptics-12.4.0.tgz"
   integrity sha512-eELhZOO64oJa6AtEUxosatjSENE/tQgF2rVJxDsvRdx8Vgd3uFC+FRoM3nbMVJkxDgAaP3EKOPT1zVM41sNurw==
 
-expo-intent-launcher@^10.11.0:
-  version "10.11.0"
-  resolved "https://registry.npmjs.org/expo-intent-launcher/-/expo-intent-launcher-10.11.0.tgz"
-  integrity sha512-yRwirZa1JdkWvKKF/cPruzawNhscqeA1OSYtB1ECri+8yh1YtWKN1ttbNd/dlYZcpwzYHIMKR/D0PY+9BX5zqg==
+expo-intent-launcher@~10.7.0:
+  version "10.7.0"
+  resolved "https://registry.npmjs.org/expo-intent-launcher/-/expo-intent-launcher-10.7.0.tgz"
+  integrity sha512-vzZQMpfwa+CtiStkppcvV8lcMgVj13Hej6ENcaSFM7ZHluCA3vjjhpoDMP6I/FAF2SwsEscxhkT2CWVP0VNdTw==
 
 expo-json-utils@~0.7.0:
   version "0.7.1"

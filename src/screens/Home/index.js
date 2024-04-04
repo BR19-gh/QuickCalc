@@ -22,6 +22,7 @@ import { useTranslation } from "react-i18next";
 import { NativeModules } from "react-native";
 
 import ContextMenu from "react-native-context-menu-view";
+import { useToast } from "react-native-toast-notifications";
 
 const deviceLanguage =
   Platform.OS === "ios"
@@ -46,6 +47,8 @@ function Home(props) {
   const { t } = useTranslation();
   const text = (text) => "screens.Home.text." + text;
 
+  const toast = useToast();
+
   const navigation = useNavigation();
 
   const handleFavorite = (id) => {
@@ -62,15 +65,6 @@ function Home(props) {
         changedIndex = index;
       }
     });
-
-    // if (changedIndex !== -1) {
-    //   const changedItem = newData.splice(changedIndex, 1)[0];
-
-    //   if (changedItem.isHidden) {
-    //     newData.push(changedItem);
-    //   } else {
-    //     newData.unshift(changedItem);
-    //   }}
 
     props.dispatch(handleFavoriteTools(newData, oldData));
     props.dispatch(handleInitialData());
@@ -107,6 +101,138 @@ function Home(props) {
     }
 
     props.dispatch(handleEditVisTools(newData, oldData));
+  };
+
+  const renderItemContextMenu = ({ tool, getIndex, drag, isActive }) => {
+    return (
+      <ScaleDecorator>
+        <SwipeableRow
+          index={getIndex()}
+          isShowedFavorite={props.isShowedFavorite}
+          isEditingFavorite={props.isEditingFavorite}
+          isEditing={props.isEditing}
+          handleFavorite={handleFavorite}
+          changeVis={changeVis}
+          tool={tool}
+          t={t}
+        >
+          <ContextMenu
+            dropdownMenuMode={false}
+            actions={[
+              {
+                title: tool.isFavorite
+                  ? t(text("unfavorite"))
+                  : t(text("favorite")),
+                systemIcon: tool.isFavorite ? "star.slash.fill" : "star.fill",
+              },
+              { title: t(text("hide")), systemIcon: "eye.slash.fill" },
+            ]}
+            onPress={(e) => {
+              if (
+                e.nativeEvent.name === t(text("favorite")) ||
+                e.nativeEvent.name === t(text("unfavorite"))
+              ) {
+                handleFavorite(tool.id);
+                if (tool.isFavorite) {
+                  toast.show(t(text("toolHasbeenFavored")), {
+                    type: "success",
+                    placement: "top",
+                    duration: 1000,
+                    offset: 20,
+                    animationType: "zoom-in",
+                  });
+                } else if (!tool.isFavorite) {
+                  toast.show(t(text("toolHasbeenUnFavored")), {
+                    type: "success",
+                    placement: "top",
+                    duration: 1000,
+                    offset: 20,
+                    animationType: "zoom-in",
+                  });
+                } else {
+                  toast.show(t(text("errorFavoriting")), {
+                    type: "warning",
+                    placement: "top",
+                    duration: 4000,
+                    offset: 20,
+                    animationType: "zoom-in",
+                  });
+                }
+              } else if (e.nativeEvent.name === t(text("hide"))) {
+                changeVis(tool.id);
+                if (tool.isHidden) {
+                  toast.show(t(text("toolHasBeenHidden")), {
+                    type: "success",
+                    placement: "top",
+                    duration: 1000,
+                    offset: 20,
+                    animationType: "zoom-in",
+                  });
+                } else {
+                  toast.show(t(text("errorHiding")), {
+                    type: "warning",
+                    placement: "top",
+                    duration: 4000,
+                    offset: 20,
+                    animationType: "zoom-in",
+                  });
+                }
+              }
+            }}
+          >
+            <Card
+              isEditingFavorite={props.isEditingFavorite}
+              handleFavorite={handleFavorite}
+              isShowedFavorite={props.isShowedFavorite}
+              theme={props.theme}
+              lang={lang}
+              tool={tool}
+              key={tool.id}
+              changeVis={changeVis}
+              navigation={navigation}
+              isEditing={props.isEditing}
+              drag={drag}
+              isActive={isActive}
+              t={t}
+              text={text}
+            />
+          </ContextMenu>
+        </SwipeableRow>
+      </ScaleDecorator>
+    );
+  };
+  const renderItemDrag = ({ tool, getIndex, drag, isActive }) => {
+    return (
+      <ScaleDecorator>
+        <SwipeableRow
+          index={getIndex()}
+          isShowedFavorite={props.isShowedFavorite}
+          isEditingFavorite={props.isEditingFavorite}
+          isEditing={props.isEditing}
+          handleFavorite={handleFavorite}
+          changeVis={changeVis}
+          tool={tool}
+          t={t}
+        >
+          <Card
+            isEditingFavorite={props.isEditingFavorite}
+            handleFavorite={handleFavorite}
+            isShowedFavorite={props.isShowedFavorite}
+            theme={props.theme}
+            lang={lang}
+            tool={tool}
+            key={tool.id}
+            changeVis={changeVis}
+            navigation={navigation}
+            isEditing={props.isEditing}
+            drag={drag}
+            isActive={isActive}
+            t={t}
+            text={text}
+          />
+        </SwipeableRow>
+      </ScaleDecorator>
+    );
   };
 
   return (
@@ -172,46 +298,11 @@ function Home(props) {
             (props.isEditing || props.isEditingFavorite ? "" : " h-full")
           }
           renderItem={({ item: tool, getIndex, drag, isActive }) => {
-            return (
-              <ScaleDecorator>
-                <ContextMenu
-                  actions={[{ title: "Title 1" }, { title: "Title 2" }]}
-                  onPress={(e) => {
-                    console.warn(
-                      `Pressed ${e.nativeEvent.name} at index ${e.nativeEvent.index}`
-                    );
-                  }}
-                >
-                  <SwipeableRow
-                    index={getIndex()}
-                    isShowedFavorite={props.isShowedFavorite}
-                    isEditingFavorite={props.isEditingFavorite}
-                    isEditing={props.isEditing}
-                    handleFavorite={handleFavorite}
-                    changeVis={changeVis}
-                    tool={tool}
-                    t={t}
-                  >
-                    <Card
-                      isEditingFavorite={props.isEditingFavorite}
-                      handleFavorite={handleFavorite}
-                      isShowedFavorite={props.isShowedFavorite}
-                      theme={props.theme}
-                      lang={lang}
-                      tool={tool}
-                      key={tool.id}
-                      changeVis={changeVis}
-                      navigation={navigation}
-                      isEditing={props.isEditing}
-                      drag={drag}
-                      isActive={isActive}
-                      t={t}
-                      text={text}
-                    />
-                  </SwipeableRow>
-                </ContextMenu>
-              </ScaleDecorator>
-            );
+            if (props.isEditing || props.isEditingFavorite) {
+              return renderItemDrag({ tool, getIndex, drag, isActive });
+            } else {
+              return renderItemContextMenu({ tool, getIndex, drag, isActive });
+            }
           }}
           keyExtractor={(tool) => tool.id.toString()}
         />

@@ -72,10 +72,10 @@ const Card = ({
         }
       }}
       onLongPress={() =>
-        isEditing
+        tool.isHidden
           ? Alert.alert(
               t(text("unableToMove")),
-              t(text("youCannotMoveToolsWhileEditing")),
+              t(text("youCannotMoveHidenTools")),
               [
                 {
                   text: t(text("gotIt")),

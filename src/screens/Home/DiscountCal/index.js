@@ -84,7 +84,7 @@ function DiscountCal({ theme }) {
             onChangeText={(value) => setPrice(value)}
             onFocus={() => setPrice("")}
             placeholderTextColor={isDark("#283987", "#9fc5ff")}
-            placeholder={t(text("discount"))}
+            placeholder={t(text("price"))}
             keyboardType="numeric"
           />
 
@@ -111,7 +111,7 @@ function DiscountCal({ theme }) {
             onFocus={() => setDiscount("")}
             onChangeText={(value) => setDiscount(value)}
             placeholderTextColor={isDark("#283987", "#9fc5ff")}
-            placeholder={t(text("price"))}
+            placeholder={t(text("discount"))}
           />
 
           <TouchableOpacity
@@ -124,7 +124,7 @@ function DiscountCal({ theme }) {
             <Text className={styles.btnText}>{t(text("calculate"))}</Text>
           </TouchableOpacity>
           <View className="w-full flex-row flex-wrap">
-            <View className="w-full flex-row p-2 mt-5q1  text-left">
+            <View className="w-full flex-row p-2 mt-10 text-left">
               <Text
                 className={"text-2xl" + isDark(" text-white", " text-black")}
               >
@@ -136,7 +136,7 @@ function DiscountCal({ theme }) {
                 {priceAfter}
               </Text>
             </View>
-            <View className="flex-row p-2 mt-3">
+            <View className="flex-row p-2">
               <Text
                 className={"text-2xl" + isDark(" text-white", " text-black")}
               >
