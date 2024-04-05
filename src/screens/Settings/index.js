@@ -132,7 +132,10 @@ function Settings({ theme, isThemeChanged, setIsThemeChanged, dispatch }) {
               </Text>
               <SettingsGroup>
                 <TouchableOpacity
-                  onPress={() => dropdownRef.current.openDropdown()}
+                  onPress={() => {
+                    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+                    dropdownRef.current.openDropdown();
+                  }}
                 >
                   <SettingsInfoDisplay
                     title={t(text("theme"))}
@@ -145,6 +148,9 @@ function Settings({ theme, isThemeChanged, setIsThemeChanged, dispatch }) {
                           t(text("light")),
                         ]}
                         onSelect={(selectedItem, index) => {
+                          Haptics.impactAsync(
+                            Haptics.ImpactFeedbackStyle.Heavy
+                          );
                           if (index === 0) {
                             const storeTheme = async () => {
                               try {
