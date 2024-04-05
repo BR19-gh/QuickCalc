@@ -7,6 +7,7 @@ import { useNavigation } from "@react-navigation/native";
 import i18n from "../../../lang/i18n";
 import { handleInitialData } from "../../../store/actions/shared";
 import { connect } from "react-redux";
+import * as Haptics from "expo-haptics";
 
 const Header = ({
   isShowedFavorite,
@@ -27,11 +28,13 @@ const Header = ({
       <TouchableOpacity
         className="items-start w-14"
         onPress={() => {
+          Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
           let refreshToast = toast.show(t(text("refreshing")), {
             placement: "top",
           });
           dispatch(handleInitialData());
           setTimeout(() => {
+            Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
             toast.update(refreshToast, t(text("refreshComplated")), {
               type: "success",
               duration: 500,
@@ -49,6 +52,7 @@ const Header = ({
       </TouchableOpacity>
       <TouchableOpacity
         onPress={() => {
+          Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
           setIsShowedFavorite(!isShowedFavorite);
           seIsEditingFavorite(false);
           setIsEditing(false);

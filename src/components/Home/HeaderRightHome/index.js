@@ -5,6 +5,7 @@ import { useEffect } from "react";
 // import { useTranslation } from "react-i18next";
 import { NativeModules } from "react-native";
 import i18n from "../../../lang/i18n";
+import * as Haptics from "expo-haptics";
 
 const Header = ({
   setIsEditing,
@@ -53,8 +54,8 @@ const Header = ({
           />
           <TouchableOpacity
             onPress={() => {
+              Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
               seIsEditingFavorite(!isEditingFavorite);
-              console.log(!isEditingFavorite);
             }}
           >
             <Text
@@ -73,7 +74,12 @@ const Header = ({
         </>
       ) : (
         <>
-          <TouchableOpacity onPress={() => setIsEditing(!isEditing)}>
+          <TouchableOpacity
+            onPress={() => {
+              Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+              setIsEditing(!isEditing);
+            }}
+          >
             <Text
               className={
                 "text-blue-500" +
@@ -96,11 +102,12 @@ const Header = ({
               style={{ marginBottom: 4 }}
             />
           ) : (
-            <TouchableOpacity>
-              {/* <MaterialCommunityIcons
-                className="text-3xl text-blue-500"
-                name="plus"
-              /> */}
+            <TouchableOpacity
+              onPress={() => {
+                Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+                //TODO: Adding tools functionality
+              }}
+            >
               <SweetSFSymbol
                 name={"plus"}
                 size={22}

@@ -23,6 +23,7 @@ import { NativeModules } from "react-native";
 
 import ContextMenu from "react-native-context-menu-view";
 import { useToast } from "react-native-toast-notifications";
+import * as Haptics from "expo-haptics";
 
 const deviceLanguage =
   Platform.OS === "ios"
@@ -134,6 +135,9 @@ function Home(props) {
               ) {
                 handleFavorite(tool.id);
                 if (tool.isFavorite) {
+                  Haptics.notificationAsync(
+                    Haptics.NotificationFeedbackType.Success
+                  );
                   toast.show(t(text("toolHasbeenFavored")), {
                     type: "success",
                     placement: "top",
@@ -142,6 +146,9 @@ function Home(props) {
                     animationType: "zoom-in",
                   });
                 } else if (!tool.isFavorite) {
+                  Haptics.notificationAsync(
+                    Haptics.NotificationFeedbackType.Success
+                  );
                   toast.show(t(text("toolHasbeenUnFavored")), {
                     type: "success",
                     placement: "top",
@@ -150,6 +157,9 @@ function Home(props) {
                     animationType: "zoom-in",
                   });
                 } else {
+                  Haptics.notificationAsync(
+                    Haptics.NotificationFeedbackType.Error
+                  );
                   toast.show(t(text("errorFavoriting")), {
                     type: "warning",
                     placement: "top",
@@ -161,6 +171,9 @@ function Home(props) {
               } else if (e.nativeEvent.name === t(text("hide"))) {
                 changeVis(tool.id);
                 if (tool.isHidden) {
+                  Haptics.notificationAsync(
+                    Haptics.NotificationFeedbackType.Success
+                  );
                   toast.show(t(text("toolHasBeenHidden")), {
                     type: "success",
                     placement: "top",
@@ -169,6 +182,9 @@ function Home(props) {
                     animationType: "zoom-in",
                   });
                 } else {
+                  Haptics.notificationAsync(
+                    Haptics.NotificationFeedbackType.Error
+                  );
                   toast.show(t(text("errorHiding")), {
                     type: "warning",
                     placement: "top",

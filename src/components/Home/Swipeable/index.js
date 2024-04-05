@@ -10,6 +10,8 @@ import { useToast } from "react-native-toast-notifications";
 
 import { NativeModules } from "react-native";
 
+import * as Haptics from "expo-haptics";
+
 const deviceLanguage =
   Platform.OS === "ios"
     ? NativeModules.SettingsManager.settings.AppleLocale ||
@@ -61,6 +63,7 @@ class SwipeableRow extends Component {
         onPress={() => {
           this.props.changeVis(this.props.tool.id);
           if (this.props.tool.isHidden) {
+            Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
             toast.show(t(text("toolHasBeenHidden")), {
               type: "success",
               placement: "top",
@@ -70,6 +73,7 @@ class SwipeableRow extends Component {
             });
             this.closeRow(this.props.index, true);
           } else {
+            Haptics.notificationAsync(Haptics.NotificationFeedbackType.Error);
             toast.show(t(text("errorHiding")), {
               type: "warning",
               placement: "top",
@@ -129,6 +133,7 @@ class SwipeableRow extends Component {
         onPress={() => {
           this.props.handleFavorite(this.props.tool.id);
           if (this.props.tool.isFavorite) {
+            Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
             toast.show(t(text("toolHasbeenFavored")), {
               type: "success",
               placement: "top",
@@ -138,6 +143,7 @@ class SwipeableRow extends Component {
             });
             this.closeRow(this.props.index, true);
           } else if (!this.props.tool.isFavorite) {
+            Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
             toast.show(t(text("toolHasbeenUnFavored")), {
               type: "success",
               placement: "top",
@@ -147,6 +153,7 @@ class SwipeableRow extends Component {
             });
             this.closeRow(this.props.index, true);
           } else {
+            Haptics.notificationAsync(Haptics.NotificationFeedbackType.Error);
             toast.show(t(text("errorFavoriting")), {
               type: "warning",
               placement: "top",

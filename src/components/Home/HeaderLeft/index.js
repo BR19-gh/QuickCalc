@@ -2,6 +2,7 @@ import { Text, View, TouchableOpacity, NativeModules } from "react-native";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import { useNavigation } from "@react-navigation/native";
 import i18n from "../../../lang/i18n";
+import * as Haptics from "expo-haptics";
 
 const Header = ({ setIsEditing, isEditing }) => {
   const navigation = useNavigation();

@@ -31,6 +31,7 @@ import { clearAsyncStorage } from "../../../_DATA";
 import { useToast } from "react-native-toast-notifications";
 import { connect } from "react-redux";
 import { handleInitialData } from "../../store/actions/shared";
+import * as Haptics from "expo-haptics";
 
 const openAppPref = (t, text) => {
   if (Platform.OS === "ios") {
@@ -58,6 +59,7 @@ const openAppPref = (t, text) => {
 };
 
 const deleteData = (t, text, toast, dispatch) => {
+  Haptics.notificationAsync(Haptics.NotificationFeedbackType.Warning);
   Alert.alert(
     t(text("areYouSureYoutoDeleteData")),
     t(text("thisWillDeleteAllData")),

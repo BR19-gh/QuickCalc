@@ -8,6 +8,8 @@ import { NativeModules } from "react-native";
 
 import SweetSFSymbol from "sweet-sfsymbols";
 
+import * as Haptics from "expo-haptics";
+
 const deviceLanguage =
   Platform.OS === "ios"
     ? NativeModules.SettingsManager.settings.AppleLocale ||
@@ -71,33 +73,38 @@ const Card = ({
           navigation.navigate(tool.link);
         }
       }}
-      onLongPress={() =>
-        tool.isHidden
-          ? Alert.alert(
-              t(text("unableToMove")),
-              t(text("youCannotMoveHidenTools")),
-              [
-                {
-                  text: t(text("gotIt")),
-                  onPress: () => null,
-                  style: "Ok",
-                },
-              ]
-            )
-          : isShowedFavorite || isEditingFavorite
-          ? Alert.alert(
-              t(text("unableToMove")),
-              t(text("youCannotMoveToolsInFavorite")),
-              [
-                {
-                  text: t(text("gotIt")),
-                  onPress: () => null,
-                  style: "Ok",
-                },
-              ]
-            )
-          : drag()
-      }
+      onLongPress={() => {
+        if (tool.isHidden) {
+          Haptics.notificationAsync(Haptics.NotificationFeedbackType.Error);
+          Alert.alert(
+            t(text("unableToMove")),
+            t(text("youCannotMoveHidenTools")),
+            [
+              {
+                text: t(text("gotIt")),
+                onPress: () => null,
+                style: "Ok",
+              },
+            ]
+          );
+        } else if (isShowedFavorite || isEditingFavorite) {
+          Haptics.notificationAsync(Haptics.NotificationFeedbackType.Error);
+          Alert.alert(
+            t(text("unableToMove")),
+            t(text("youCannotMoveToolsInFavorite")),
+            [
+              {
+                text: t(text("gotIt")),
+                onPress: () => null,
+                style: "Ok",
+              },
+            ]
+          );
+        } else {
+          Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
+          drag();
+        }
+      }}
       disabled={isActive}
     >
       <View className={"w-full justify-start flex-row-reverse"}>
