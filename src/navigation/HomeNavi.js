@@ -57,7 +57,7 @@ const HomeNavi = ({ isEditing, setIsEditing, theme }) => {
               ? t(text("selectToFavor"))
               : t(text("favorite"))
             : isEditing
-            ? t(text("selectToHide"))
+            ? t(text("selectToHideOrToMove"))
             : t(text("home")),
         }}
         name="HomeNavi"

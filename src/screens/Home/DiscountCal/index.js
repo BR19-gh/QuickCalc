@@ -45,13 +45,29 @@ function DiscountCal({ theme }) {
     Keyboard.dismiss();
   };
 
-  const a2e = (s) => s.replace(/[٠-٩]/g, (d) => "٠١٢٣٤٥٦٧٨٩".indexOf(d));
+  const a2e = (s) => {
+    if (s) return s.replace(/[٠-٩]/g, (d) => "٠١٢٣٤٥٦٧٨٩".indexOf(d));
+  };
 
   const calculateDiscount = () => {
-    let priceInEn = a2e(price);
-    let discountInEn = a2e(discount);
-    setDiscountAmount(priceInEn * (discountInEn / 100));
-    setPriceAfter(priceInEn - priceInEn * (discountInEn / 100));
+    if (price && discount) {
+      let priceInEn = a2e(price);
+      let discountInEn = a2e(discount);
+
+      let discountAmount = priceInEn * (discountInEn / 100);
+      let priceAfter = priceInEn - discountAmount;
+
+      if (discountAmount.toString().includes(".")) {
+        setDiscountAmount(discountAmount.toFixed(2));
+      } else {
+        setDiscountAmount(discountAmount);
+      }
+      if (priceAfter.toString().includes(".")) {
+        setPriceAfter(priceAfter.toFixed(2));
+      } else {
+        setPriceAfter(priceAfter);
+      }
+    }
   };
 
   const isDark = (darkOp, lightp) => (theme === "dark" ? darkOp : lightp);
@@ -67,15 +83,15 @@ function DiscountCal({ theme }) {
           <TextInput
             className={"mt-5"}
             style={{
-              backgroundColor: isDark("#18214e", "#c3ddff"),
+              backgroundColor: isDark("#CCCCCC", "#FFFFFF"),
               width: 150,
               height: 150,
-              fontSize: 30,
+              fontSize: 40,
               textAlign: "center",
-              color: isDark("white", "black"),
+              color: isDark("#283dab", "#283987"),
               borderRadius: 10,
               borderWidth: 1,
-              borderColor: "#283dab",
+              borderColor: "#283dab88",
             }}
             blurOnSubmit={false}
             returnKeyType={"done"}
@@ -83,7 +99,7 @@ function DiscountCal({ theme }) {
             value={price}
             onChangeText={(value) => setPrice(value)}
             onFocus={() => setPrice("")}
-            placeholderTextColor={isDark("#283987", "#9fc5ff")}
+            placeholderTextColor={isDark("#28398788", "#28398755")}
             placeholder={t(text("price"))}
             keyboardType="numeric"
           />
@@ -92,15 +108,15 @@ function DiscountCal({ theme }) {
             className={"mt-5"}
             ref={secondInput}
             style={{
-              backgroundColor: isDark("#18214e", "#c3ddff"),
+              backgroundColor: isDark("#CCCCCC", "#FFFFFF"),
               width: 150,
               height: 150,
-              fontSize: 30,
+              fontSize: 40,
               textAlign: "center",
-              color: isDark("white", "black"),
+              color: isDark("#283dab", "#283987"),
               borderRadius: 10,
               borderWidth: 1,
-              borderColor: "#283dab",
+              borderColor: "#283dab88",
             }}
             returnKeyType="done"
             keyboardType="decimal-pad"
@@ -110,13 +126,13 @@ function DiscountCal({ theme }) {
             value={discount}
             onFocus={() => setDiscount("")}
             onChangeText={(value) => setDiscount(value)}
-            placeholderTextColor={isDark("#283987", "#9fc5ff")}
+            placeholderTextColor={isDark("#28398788", "#28398755")}
             placeholder={t(text("discount"))}
           />
 
           <TouchableOpacity
             className={
-              "rounded-lg w-60 h-20 mt-10 justify-center" +
+              "rounded-lg w-56 h-20 mt-10 justify-center" +
               isDark(" bg-blue-900 ", " bg-blue-500 ")
             }
             onPress={calculateDiscount}
@@ -126,24 +142,32 @@ function DiscountCal({ theme }) {
           <View className="w-full flex-row flex-wrap">
             <View className="w-full flex-row p-2 mt-10 text-left">
               <Text
-                className={"text-2xl" + isDark(" text-white", " text-black")}
+                className={
+                  "text-2xl" + isDark(" text-blue-100", " text-blue-900")
+                }
               >
                 {t(text("priceAfter"))}
               </Text>
               <Text
-                className={"text-4xl" + isDark(" text-white", " text-black")}
+                className={
+                  "text-4xl" + isDark(" text-blue-100", " text-blue-900")
+                }
               >
                 {priceAfter}
               </Text>
             </View>
             <View className="flex-row p-2">
               <Text
-                className={"text-2xl" + isDark(" text-white", " text-black")}
+                className={
+                  "text-2xl" + isDark(" text-blue-100", " text-blue-900")
+                }
               >
                 {t(text("discountAmount"))}
               </Text>
               <Text
-                className={"text-4xl" + isDark(" text-white", " text-black")}
+                className={
+                  "text-4xl" + isDark(" text-blue-100", " text-blue-900")
+                }
               >
                 {discountAmount}
               </Text>

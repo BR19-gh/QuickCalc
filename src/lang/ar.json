@@ -16,7 +16,7 @@
           "home": "الرئيسية",
           "favorite": "المفضلة",
           "settings": "الإعدادات",
-          "selectToHide": "اختر للإخفاء",
+          "selectToHideOrToMove": "اختر للإخفاء أو النقل",
           "selectToFavor": "اختر للتفضيل",
           "edit": "تعديل",
           "done": "تم",
@@ -33,6 +33,7 @@
           "hide": "إخفاء",
           "favorite": "تفضيل",
           "unfavorite": "إلغاء\nالتفضيل",
+          "move": "نقل",
           "noTools": "لا توجد أدوات٫ حدث للتأكد",
           "hiddenTools": "الأدوات المخفية",
           "unfavoredTools": "الأدوات غير المفضلة",
@@ -55,7 +56,7 @@
             "discount": "الخصم",
             "price": "المبلغ",
             "calculate": "احسب",
-            "priceAfter": "السعر بعد الخصم: ",
+            "priceAfter": "المبلغ الجديد: ",
             "discountAmount": "مقدار الخصم: "
           }
         }

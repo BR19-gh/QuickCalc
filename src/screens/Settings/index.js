@@ -203,7 +203,7 @@ function Settings({ theme, isThemeChanged, setIsThemeChanged, dispatch }) {
                                 height: 30,
                                 backgroundColor:
                                   theme === "dark" ? "#555555" : "#E9ECEF",
-                                borderRadius: 12,
+                                borderRadius: 10,
                                 flexDirection: "row",
                                 justifyContent: "center",
                                 alignItems: "center",
@@ -231,8 +231,7 @@ function Settings({ theme, isThemeChanged, setIsThemeChanged, dispatch }) {
                                   width: "100%",
                                   flexDirection: "row",
                                   paddingHorizontal: 12,
-                                  justifyContent: "center",
-                                  alignItems: "center",
+
                                   paddingVertical: 8,
                                 },
                                 ...(isSelected && {
@@ -242,6 +241,7 @@ function Settings({ theme, isThemeChanged, setIsThemeChanged, dispatch }) {
                               }}
                             >
                               <Text
+                                className="text-center"
                                 style={{
                                   flex: 1,
                                   fontSize: 18,
@@ -270,6 +270,36 @@ function Settings({ theme, isThemeChanged, setIsThemeChanged, dispatch }) {
                   type="newpage"
                   onPress={() => openAppPref(t, text)}
                 />
+              </SettingsGroup>
+            </View>
+
+            <View>
+              <Text style={stylesSettings.groupTitle}>{t(text("app"))}</Text>
+              <SettingsGroup>
+                <SettingsInfoDisplay
+                  title={t(text("version"))}
+                  status={"1.0.0.0"}
+                  type="custom"
+                />
+                <TouchableOpacity
+                  onPress={() => deleteData(t, text, toast, dispatch)}
+                >
+                  <SettingsInfoDisplay
+                    title={
+                      <Text className={"text-destructive"}>
+                        {t(text("deleteData"))}
+                      </Text>
+                    }
+                    status={
+                      <SweetSFSymbol
+                        name={"trash"}
+                        size={20}
+                        colors={["#e63746"]}
+                      />
+                    }
+                    type="custom"
+                  />
+                </TouchableOpacity>
               </SettingsGroup>
             </View>
             <View>
@@ -324,35 +354,6 @@ function Settings({ theme, isThemeChanged, setIsThemeChanged, dispatch }) {
                   type="newpage"
                   onPress={() => Communications.web("https://br19.me")}
                 />
-              </SettingsGroup>
-            </View>
-            <View>
-              <Text style={stylesSettings.groupTitle}>{t(text("app"))}</Text>
-              <SettingsGroup>
-                <SettingsInfoDisplay
-                  title={t(text("version"))}
-                  status={"1.0.0.0"}
-                  type="custom"
-                />
-                <TouchableOpacity
-                  onPress={() => deleteData(t, text, toast, dispatch)}
-                >
-                  <SettingsInfoDisplay
-                    title={
-                      <Text className={"text-destructive"}>
-                        {t(text("deleteData"))}
-                      </Text>
-                    }
-                    status={
-                      <SweetSFSymbol
-                        name={"trash"}
-                        size={20}
-                        colors={["#e63746"]}
-                      />
-                    }
-                    type="custom"
-                  />
-                </TouchableOpacity>
               </SettingsGroup>
             </View>
           </SettingsProvider>

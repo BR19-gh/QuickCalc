@@ -119,15 +119,35 @@ function Home(props) {
         >
           <ContextMenu
             dropdownMenuMode={false}
-            actions={[
-              {
-                title: tool.isFavorite
-                  ? t(text("unfavorite"))
-                  : t(text("favorite")),
-                systemIcon: tool.isFavorite ? "star.slash.fill" : "star.fill",
-              },
-              { title: t(text("hide")), systemIcon: "eye.slash.fill" },
-            ]}
+            actions={
+              props.isShowedFavorite
+                ? [
+                    {
+                      title: tool.isFavorite
+                        ? t(text("unfavorite"))
+                        : t(text("favorite")),
+                      systemIcon: tool.isFavorite
+                        ? "star.slash.fill"
+                        : "star.fill",
+                    },
+                    { title: t(text("hide")), systemIcon: "eye.slash.fill" },
+                  ]
+                : [
+                    {
+                      title: tool.isFavorite
+                        ? t(text("unfavorite"))
+                        : t(text("favorite")),
+                      systemIcon: tool.isFavorite
+                        ? "star.slash.fill"
+                        : "star.fill",
+                    },
+                    { title: t(text("hide")), systemIcon: "eye.slash.fill" },
+                    {
+                      title: t(text("move")),
+                      systemIcon: "arrow.up.and.down.and.arrow.left.and.right",
+                    },
+                  ]
+            }
             onPress={(e) => {
               if (
                 e.nativeEvent.name === t(text("favorite")) ||
@@ -192,6 +212,12 @@ function Home(props) {
                     offset: 20,
                     animationType: "zoom-in",
                   });
+                }
+              } else if (e.nativeEvent.name === t(text("move"))) {
+                if (props.isShowedFavorite) {
+                  null;
+                } else {
+                  props.setIsEditing(true);
                 }
               }
             }}
