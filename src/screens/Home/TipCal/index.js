@@ -188,7 +188,7 @@ function TipCal({ theme }) {
                   backgroundColor: isDark("#CCCCCC", "#FFFFFF"),
                   width: 150,
                   height: 150,
-                  fontSize: numberOfPpl ? 40 : lang === "en" ? 15 : 20,
+                  fontSize: numberOfPpl ? 40 : lang === "ar" ? 20 : 15,
                   textAlign: "center",
                   color: isDark("#283dab", "#283987"),
                   borderRadius: 10,
