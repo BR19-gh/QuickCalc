@@ -11,19 +11,15 @@ import {
 } from "react-native";
 import styles from "./styles";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
-
-//import TextInput from "react-native-text-input-interactive";
+import SweetSFSymbol from "sweet-sfsymbols";
 
 import { useEffect, useState } from "react";
 
-import { handleInitialData } from "../../../store/actions/shared";
 import { connect } from "react-redux";
 
 import { useTranslation } from "react-i18next";
 
 import { useRef } from "react";
-
-// import { deleteAccount } from "../../store/actions/tools";
 
 function DiscountCal({ theme }) {
   const { t } = useTranslation();
@@ -49,7 +45,7 @@ function DiscountCal({ theme }) {
     if (s) return s.replace(/[٠-٩]/g, (d) => "٠١٢٣٤٥٦٧٨٩".indexOf(d));
   };
 
-  const calculateDiscount = () => {
+  const calculate = () => {
     if (price && discount) {
       let priceInEn = a2e(price);
       let discountInEn = a2e(discount);
@@ -70,77 +66,122 @@ function DiscountCal({ theme }) {
     }
   };
 
+  const reset = () => {
+    setPrice("");
+    setDiscount("");
+    setDiscountAmount("0");
+    setPriceAfter("0");
+  };
+
   const isDark = (darkOp, lightp) => (theme === "dark" ? darkOp : lightp);
 
   return (
     <View className={styles.container}>
-      <ScrollView
-        style={{
-          height: "100%",
-        }}
-      >
-        <View className={"mt-2.5 items-center"}>
-          <TextInput
-            className={"mt-5"}
-            style={{
-              backgroundColor: isDark("#CCCCCC", "#FFFFFF"),
-              width: 150,
-              height: 150,
-              fontSize: 40,
-              textAlign: "center",
-              color: isDark("#283dab", "#283987"),
-              borderRadius: 10,
-              borderWidth: 1,
-              borderColor: "#283dab88",
-            }}
-            blurOnSubmit={false}
-            returnKeyType={"done"}
-            onSubmitEditing={focusOnSecondInput}
-            value={price}
-            onChangeText={(value) => setPrice(value)}
-            onFocus={() => setPrice("")}
-            placeholderTextColor={isDark("#28398788", "#28398755")}
-            placeholder={t(text("price"))}
-            keyboardType="numeric"
-          />
+      <ScrollView>
+        <View className={"w-full mt-10 items-center"}>
+          <View className={"w-full flex-row justify-evenly"}>
+            <View>
+              <Text
+                className={
+                  "text-center p-6 text-4xl font-semibold" +
+                  isDark(" text-blue-100", " text-blue-900")
+                }
+              >
+                {t(text("price"))}
+              </Text>
+              <TextInput
+                style={{
+                  backgroundColor: isDark("#CCCCCC", "#FFFFFF"),
+                  width: 150,
+                  height: 150,
+                  fontSize: price ? 40 : 20,
+                  textAlign: "center",
+                  color: isDark("#283dab", "#283987"),
+                  borderRadius: 10,
+                  borderWidth: 1,
+                  borderColor: "#283dab88",
+                }}
+                blurOnSubmit={false}
+                returnKeyType={"done"}
+                onSubmitEditing={focusOnSecondInput}
+                value={price}
+                onChangeText={(value) => setPrice(value)}
+                onFocus={() => setPrice("")}
+                placeholderTextColor={isDark("#28398788", "#28398755")}
+                placeholder={t(text("price"))}
+                keyboardType="numeric"
+              />
+            </View>
+            <View>
+              <Text
+                className={
+                  "text-center p-6 font-semibold text-4xl" +
+                  isDark(" text-blue-100", " text-blue-900")
+                }
+              >
+                {t(text("discount"))}
+              </Text>
+              <TextInput
+                ref={secondInput}
+                style={{
+                  backgroundColor: isDark("#CCCCCC", "#FFFFFF"),
+                  width: 150,
+                  height: 150,
+                  fontSize: discount ? 40 : 20,
+                  textAlign: "center",
+                  color: isDark("#283dab", "#283987"),
+                  borderRadius: 10,
+                  borderWidth: 1,
+                  borderColor: "#283dab88",
+                }}
+                returnKeyType="done"
+                keyboardType="decimal-pad"
+                onSubmitEditing={() => {
+                  hideKeyboard();
+                }}
+                value={discount}
+                onFocus={() => setDiscount("")}
+                onChangeText={(value) => setDiscount(value)}
+                placeholderTextColor={isDark("#28398788", "#28398755")}
+                placeholder={t(text("discount"))}
+              />
+            </View>
+          </View>
 
-          <TextInput
-            className={"mt-5"}
-            ref={secondInput}
-            style={{
-              backgroundColor: isDark("#CCCCCC", "#FFFFFF"),
-              width: 150,
-              height: 150,
-              fontSize: 40,
-              textAlign: "center",
-              color: isDark("#283dab", "#283987"),
-              borderRadius: 10,
-              borderWidth: 1,
-              borderColor: "#283dab88",
-            }}
-            returnKeyType="done"
-            keyboardType="decimal-pad"
-            onSubmitEditing={() => {
-              hideKeyboard();
-            }}
-            value={discount}
-            onFocus={() => setDiscount("")}
-            onChangeText={(value) => setDiscount(value)}
-            placeholderTextColor={isDark("#28398788", "#28398755")}
-            placeholder={t(text("discount"))}
-          />
+          <View className={"items-center"}>
+            <TouchableOpacity
+              className={
+                "rounded-lg w-48 h-20 mt-10 flex-row items-center justify-evenly" +
+                isDark(" bg-blue-900 ", " bg-blue-500 ")
+              }
+              onPress={calculate}
+            >
+              <Text className={styles.btnText}>{t(text("calculate"))}</Text>
+              <SweetSFSymbol
+                name={"plusminus.circle.fill"}
+                size={30}
+                colors={["white"]}
+              />
+            </TouchableOpacity>
+            <TouchableOpacity
+              className={
+                "rounded-md w-36 h-14 mt-2.5 flex-row items-center justify-evenly bg-blue-700"
+              }
+              onPress={reset}
+            >
+              <Text className={"text-xl text-white text-center"}>
+                {t(text("reset"))}
+              </Text>
+              <SweetSFSymbol
+                name={"arrow.counterclockwise.circle.fill"}
+                size={20}
+                colors={["white"]}
+              />
+            </TouchableOpacity>
+          </View>
 
-          <TouchableOpacity
-            className={
-              "rounded-lg w-56 h-20 mt-10 justify-center" +
-              isDark(" bg-blue-900 ", " bg-blue-500 ")
-            }
-            onPress={calculateDiscount}
-          >
-            <Text className={styles.btnText}>{t(text("calculate"))}</Text>
-          </TouchableOpacity>
-          <View className="w-full flex-row flex-wrap">
-            <View className="w-full flex-row p-2 mt-10 text-left">
+          <View className="w-full flex-row flex-wrap mt-10">
+            <View className="w-full flex-row p-2 text-left">
               <Text
                 className={
                   "text-2xl" + isDark(" text-blue-100", " text-blue-900")
@@ -150,7 +191,8 @@ function DiscountCal({ theme }) {
               </Text>
               <Text
                 className={
-                  "text-4xl" + isDark(" text-blue-100", " text-blue-900")
+                  "text-4xl font-semibold" +
+                  isDark(" text-blue-100", " text-blue-900")
                 }
               >
                 {priceAfter}
@@ -166,7 +208,8 @@ function DiscountCal({ theme }) {
               </Text>
               <Text
                 className={
-                  "text-4xl" + isDark(" text-blue-100", " text-blue-900")
+                  "text-4xl font-semibold" +
+                  isDark(" text-blue-100", " text-blue-900")
                 }
               >
                 {discountAmount}
@@ -175,7 +218,6 @@ function DiscountCal({ theme }) {
           </View>
         </View>
       </ScrollView>
-
       <StatusBar style="auto" />
     </View>
   );

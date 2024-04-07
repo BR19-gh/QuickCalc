@@ -16,7 +16,7 @@
           "home": "الرئيسية",
           "favorite": "المفضلة",
           "settings": "الإعدادات",
-          "selectToHideOrToMove": "اختر للإخفاء أو النقل",
+          "selectToHideOrToMove": "اضغط للإخفاء أو النقل",
           "selectToFavor": "اختر للتفضيل",
           "edit": "تعديل",
           "done": "تم",
@@ -57,7 +57,21 @@
             "price": "المبلغ",
             "calculate": "احسب",
             "priceAfter": "المبلغ الجديد: ",
-            "discountAmount": "مقدار الخصم: "
+            "discountAmount": "مقدار الخصم: ",
+            "reset": "إعادة تعيين"
+          }
+        },
+        "TipCal": {
+          "title": "حاسبة البقشيش",
+          "text": {
+            "tip": "نسبة البقشيش",
+            "percentage": "النسبة",
+            "price": "المبلغ",
+            "calculate": "احسب",
+            "tipAmount": "قيمة البقشيش لكل شخص: ",
+            "numberOfPpl": "عدد الأشخاص",
+            "number": "العدد",
+            "reset": "إعادة تعيين"
           }
         }
       },

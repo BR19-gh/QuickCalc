@@ -18,6 +18,7 @@ const HomeNavi = ({ isEditing, setIsEditing, theme }) => {
   const { t } = useTranslation();
   const text = (text) => "screens.Navi.text." + text;
   const DiscountCaltext = (text) => "screens.Home.DiscountCal." + text;
+  const TipCaltext = (text) => "screens.Home.TipCal." + text;
 
   const [isShowedFavorite, setIsShowedFavorite] = useState(false);
   const [isEditingFavorite, seIsEditingFavorite] = useState(false);
@@ -89,9 +90,10 @@ const HomeNavi = ({ isEditing, setIsEditing, theme }) => {
       <Stack.Screen
         options={{
           headerLeft: () => <HeaderLeft />,
+          title: t(TipCaltext("title")),
         }}
         name="TipCal"
-        component={TipCal}
+        children={() => <TipCal theme={theme} />}
       />
       <Stack.Screen
         options={{

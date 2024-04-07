@@ -16,7 +16,7 @@
           "home": "Home",
           "favorite": "Favorite",
           "settings": "Settings",
-          "selectToHideOrToMove": "Select To Hide Or To Move",
+          "selectToHideOrToMove": "Press To Hide Or To Move",
           "selectToFavor": "Select Favorite",
           "edit": "Edit",
           "done": "Done",
@@ -57,7 +57,21 @@
             "price": "Price",
             "calculate": "Calculate",
             "priceAfter": "Price After: ",
-            "discountAmount": "Discount Amount: "
+            "discountAmount": "Discount Amount: ",
+            "reset": "Reset"
+          },
+          "TipCal": {
+            "title": "Tip Calculator",
+            "text": {
+              "tip": "Tip Percentage",
+              "precenatge": "Percentage",
+              "price": "Price",
+              "calculate": "Calculate",
+              "tipAmount": "Tip amount for every person: ",
+              "numberOfPpl": "Number of People",
+              "number": "Number",
+              "reset": "Reset"
+            }
           }
         }
       },
