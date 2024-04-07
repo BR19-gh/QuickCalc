@@ -47,7 +47,6 @@ const Header = ({
           name={"arrow.clockwise"}
           size={22}
           colors={["#3B82F6"]}
-          style={{ marginTop: 2 }}
         />
       </TouchableOpacity>
       <TouchableOpacity
@@ -62,7 +61,6 @@ const Header = ({
           name={isShowedFavorite ? "star.fill" : "star"}
           size={22}
           colors={["#3B82F6"]}
-          style={{ marginTop: 2 }}
         />
       </TouchableOpacity>
     </>

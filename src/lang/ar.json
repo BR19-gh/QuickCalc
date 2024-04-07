@@ -33,6 +33,7 @@
           "hide": "إخفاء",
           "favorite": "تفضيل",
           "unfavorite": "إلغاء\nالتفضيل",
+          "unfavorite2": "إلغاء التفضيل",
           "move": "نقل",
           "noTools": "لا توجد أدوات٫ حدث للتأكد",
           "hiddenTools": "الأدوات المخفية",
@@ -55,7 +56,7 @@
           "text": {
             "discount": "الخصم",
             "price": "المبلغ",
-            "calculate": "احسب",
+            "calculate": "احـســـب",
             "priceAfter": "المبلغ الجديد: ",
             "discountAmount": "مقدار الخصم: ",
             "reset": "إعادة تعيين"
@@ -65,10 +66,10 @@
           "title": "حاسبة البقشيش",
           "text": {
             "tip": "نسبة البقشيش",
-            "percentage": "النسبة",
+            "precenatge": "النسبة",
             "price": "المبلغ",
-            "calculate": "احسب",
-            "tipAmount": "قيمة البقشيش لكل شخص: ",
+            "calculate": "احـســـب",
+            "tipAmount": "كل شخص سيدفع: ",
             "numberOfPpl": "عدد الأشخاص",
             "number": "العدد",
             "reset": "إعادة تعيين"

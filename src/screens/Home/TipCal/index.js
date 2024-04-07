@@ -13,13 +13,12 @@ import styles from "./styles";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import SweetSFSymbol from "sweet-sfsymbols";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 
 import { connect } from "react-redux";
 
 import { useTranslation } from "react-i18next";
-
-import { useRef } from "react";
+import { NativeModules } from "react-native";
 
 function TipCal({ theme }) {
   const { t } = useTranslation();
@@ -83,6 +82,21 @@ function TipCal({ theme }) {
 
   const isDark = (darkOp, lightp) => (theme === "dark" ? darkOp : lightp);
 
+  const deviceLanguage =
+    Platform.OS === "ios"
+      ? NativeModules.SettingsManager.settings.AppleLocale ||
+        NativeModules.SettingsManager.settings.AppleLanguages[0] // iOS 13
+      : NativeModules.I18nManager.localeIdentifier;
+
+  let lang;
+  let str = deviceLanguage;
+  let match = str.match(/^([a-z]{2})/i);
+  if (match) {
+    lang = match[0];
+  } else {
+    lang = "en";
+  }
+
   return (
     <View className={styles.container}>
       <ScrollView
@@ -97,7 +111,7 @@ function TipCal({ theme }) {
             <View>
               <Text
                 className={
-                  "text-center p-6 text-4xl font-semibold" +
+                  "text-center p-4 text-3xl font-semibold" +
                   isDark(" text-blue-100", " text-blue-900")
                 }
               >
@@ -129,11 +143,11 @@ function TipCal({ theme }) {
             <View>
               <Text
                 className={
-                  "text-center p-6 text-4xl font-semibold" +
+                  "text-center p-4 text-3xl font-semibold" +
                   isDark(" text-blue-100", " text-blue-900")
                 }
               >
-                {t(text("percentage"))}
+                {t(text("precenatge"))}
               </Text>
               <TextInput
                 ref={(el) => (inputs.current[0] = el)}
@@ -162,7 +176,7 @@ function TipCal({ theme }) {
             <View>
               <Text
                 className={
-                  "text-center p-6 text-4xl font-semibold" +
+                  "text-center p-4 text-3xl font-semibold" +
                   isDark(" text-blue-100", " text-blue-900")
                 }
               >
@@ -174,7 +188,7 @@ function TipCal({ theme }) {
                   backgroundColor: isDark("#CCCCCC", "#FFFFFF"),
                   width: 150,
                   height: 150,
-                  fontSize: numberOfPpl ? 40 : 20,
+                  fontSize: numberOfPpl ? 40 : lang === "en" ? 15 : 20,
                   textAlign: "center",
                   color: isDark("#283dab", "#283987"),
                   borderRadius: 10,
@@ -238,7 +252,7 @@ function TipCal({ theme }) {
               </Text>
               <Text
                 className={
-                  "text-4xl font-semibold" +
+                  "text-3xl font-semibold" +
                   isDark(" text-blue-100", " text-blue-900")
                 }
               >

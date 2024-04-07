@@ -124,7 +124,7 @@ function Home(props) {
                 ? [
                     {
                       title: tool.isFavorite
-                        ? t(text("unfavorite"))
+                        ? t(text("unfavorite2"))
                         : t(text("favorite")),
                       systemIcon: tool.isFavorite
                         ? "star.slash.fill"
@@ -135,7 +135,7 @@ function Home(props) {
                 : [
                     {
                       title: tool.isFavorite
-                        ? t(text("unfavorite"))
+                        ? t(text("unfavorite2"))
                         : t(text("favorite")),
                       systemIcon: tool.isFavorite
                         ? "star.slash.fill"
@@ -151,7 +151,7 @@ function Home(props) {
             onPress={(e) => {
               if (
                 e.nativeEvent.name === t(text("favorite")) ||
-                e.nativeEvent.name === t(text("unfavorite"))
+                e.nativeEvent.name === t(text("unfavorite2"))
               ) {
                 handleFavorite(tool.id);
                 if (tool.isFavorite) {

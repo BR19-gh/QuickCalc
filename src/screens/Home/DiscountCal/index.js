@@ -83,7 +83,7 @@ function DiscountCal({ theme }) {
             <View>
               <Text
                 className={
-                  "text-center p-6 text-4xl font-semibold" +
+                  "text-center p-4 text-3xl font-semibold" +
                   isDark(" text-blue-100", " text-blue-900")
                 }
               >
@@ -115,7 +115,7 @@ function DiscountCal({ theme }) {
             <View>
               <Text
                 className={
-                  "text-center p-6 font-semibold text-4xl" +
+                  "text-center p-4 font-semibold text-3xl" +
                   isDark(" text-blue-100", " text-blue-900")
                 }
               >
@@ -191,7 +191,7 @@ function DiscountCal({ theme }) {
               </Text>
               <Text
                 className={
-                  "text-4xl font-semibold" +
+                  "text-3xl font-semibold" +
                   isDark(" text-blue-100", " text-blue-900")
                 }
               >
@@ -208,7 +208,7 @@ function DiscountCal({ theme }) {
               </Text>
               <Text
                 className={
-                  "text-4xl font-semibold" +
+                  "text-3xl font-semibold" +
                   isDark(" text-blue-100", " text-blue-900")
                 }
               >
