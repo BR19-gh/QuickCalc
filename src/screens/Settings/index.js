@@ -24,7 +24,7 @@ import { useTranslation } from "react-i18next";
 import Communications from "react-native-communications";
 import SelectDropdown from "react-native-select-dropdown";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-//import DeviceInfo from "react-native-device-info";
+import DeviceInfo from "react-native-device-info";
 import * as IntentLauncher from "expo-intent-launcher";
 import Linking from "react-native/Libraries/Linking/Linking";
 import { clearAsyncStorage } from "../../../_DATA";
@@ -274,6 +274,60 @@ function Settings({ theme, isThemeChanged, setIsThemeChanged, dispatch }) {
             </View>
 
             <View>
+              <Text style={stylesSettings.groupTitle}>
+                {t(text("contactDeveloper"))}
+              </Text>
+              <SettingsGroup>
+                <SettingsButton
+                  title={
+                    <View className="flex-row-reverse justify-end items-center">
+                      <Text className={isDarkTextColor()}>
+                        Ibrahim-abdalaziz@hotmail.com
+                      </Text>
+                      <Text>{"   "}</Text>
+                      <SweetSFSymbol
+                        name={"envelope.fill"}
+                        size={20}
+                        colors={["gray"]}
+                      />
+                    </View>
+                  }
+                  type="newpage"
+                  onPress={() =>
+                    Communications.email(
+                      "Ibrahim-abdalaziz@hotmail.com",
+                      null,
+                      null,
+                      "My Feedback",
+                      `
+                      Model: ${DeviceInfo.getModel()}\n
+                      Brand: ${DeviceInfo.getBrand()}\n
+                      OS: ${DeviceInfo.getSystemName()} ${DeviceInfo.getSystemVersion()}\n
+                      App Version: 1.0.0\n
+                      ----------------------------------------\n
+                      ((write your feedback here...)
+                      `
+                    )
+                  }
+                />
+                <SettingsButton
+                  title={
+                    <View className="flex-row-reverse justify-end items-center">
+                      <Text className={isDarkTextColor()}>BR19.me</Text>
+                      <Text>{"   "}</Text>
+                      <SweetSFSymbol
+                        name={"globe"}
+                        size={20}
+                        colors={["gray"]}
+                      />
+                    </View>
+                  }
+                  type="newpage"
+                  onPress={() => Communications.web("https://br19.me")}
+                />
+              </SettingsGroup>
+            </View>
+            <View>
               <Text style={stylesSettings.groupTitle}>{t(text("app"))}</Text>
               <SettingsGroup>
                 <SettingsInfoDisplay
@@ -300,60 +354,6 @@ function Settings({ theme, isThemeChanged, setIsThemeChanged, dispatch }) {
                     type="custom"
                   />
                 </TouchableOpacity>
-              </SettingsGroup>
-            </View>
-            <View>
-              <Text style={stylesSettings.groupTitle}>
-                {t(text("contactDeveloper"))}
-              </Text>
-              <SettingsGroup>
-                <SettingsButton
-                  title={
-                    <View className="flex-row-reverse justify-end items-center">
-                      <Text className={isDarkTextColor()}>
-                        Ibrahim-abdalaziz@hotmail.com
-                      </Text>
-                      <Text>{"   "}</Text>
-                      <SweetSFSymbol
-                        name={"envelope.fill"}
-                        size={20}
-                        colors={["gray"]}
-                      />
-                    </View>
-                  }
-                  type="newpage"
-                  onPress={() =>
-                    Communications.email(
-                      "Ibrahim-abdalaziz@hotmail.com",
-                      null,
-                      null,
-                      "My Feedback",
-                      "((write your feedback here...))"
-                      // `Model: ${DeviceInfo.getModel()}\n
-                      // Brand: ${DeviceInfo.getBrand()}\n
-                      // OS: ${DeviceInfo.getSystemName()} ${DeviceInfo.getSystemVersion()}\n
-                      // App Version: 1.0.0\n
-                      // ----------------------------------------\n
-                      // ((Your feedback))
-                      // `
-                    )
-                  }
-                />
-                <SettingsButton
-                  title={
-                    <View className="flex-row-reverse justify-end items-center">
-                      <Text className={isDarkTextColor()}>BR19.me</Text>
-                      <Text>{"   "}</Text>
-                      <SweetSFSymbol
-                        name={"globe"}
-                        size={20}
-                        colors={["gray"]}
-                      />
-                    </View>
-                  }
-                  type="newpage"
-                  onPress={() => Communications.web("https://br19.me")}
-                />
               </SettingsGroup>
             </View>
           </SettingsProvider>

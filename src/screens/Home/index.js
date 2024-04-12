@@ -218,6 +218,9 @@ function Home(props) {
                   null;
                 } else {
                   props.setIsEditing(true);
+                  props.setSearchText("");
+                  props.searchBarRef.current.clearText();
+                  props.searchBarRef.current.blur();
                 }
               }
             }}
@@ -257,6 +260,7 @@ function Home(props) {
           t={t}
         >
           <Card
+            searchTextLength={props.searchText.length}
             isEditingFavorite={props.isEditingFavorite}
             handleFavorite={handleFavorite}
             isShowedFavorite={props.isShowedFavorite}
@@ -316,8 +320,21 @@ function Home(props) {
         }
 
         <NestableDraggableFlatList
+          contentInsetAdjustmentBehavior="automatic"
           data={
-            props.isShowedFavorite
+            props.searchText.length > 0
+              ? props.isShowedFavorite
+                ? Object.values(props.tools).filter(
+                    (tool) =>
+                      tool.name[lang].includes(props.searchText) &&
+                      tool.isFavorite === true
+                  )
+                : Object.values(props.tools).filter(
+                    (tool) =>
+                      tool.name[lang].includes(props.searchText) &&
+                      tool.isHidden === false
+                  )
+              : props.isShowedFavorite
               ? Object.values(props.tools).filter(
                   (tool) => tool.isFavorite === true
                 )
@@ -326,7 +343,7 @@ function Home(props) {
                 )
           }
           onDragEnd={({ data }) => {
-            props.isShowedFavorite
+            props.isShowedFavorite || props.searchText.length > 0
               ? null
               : handleReorder([
                   ...data,
@@ -377,12 +394,18 @@ function Home(props) {
               ).length !== 0 ? (
                 Object.values(props.tools)
                   .filter((tool) =>
-                    props.isShowedFavorite
+                    props.searchText.length > 0
+                      ? tool.name[lang].includes(props.searchText) &&
+                        (props.isShowedFavorite
+                          ? tool.isFavorite === false && tool.isHidden === false
+                          : tool.isHidden === true)
+                      : props.isShowedFavorite
                       ? tool.isFavorite === false && tool.isHidden === false
                       : tool.isHidden === true
                   )
                   .map((tool) => (
                     <Card
+                      searchTextLength={props.searchText.length}
                       isEditingFavorite={props.isEditingFavorite}
                       handleFavorite={handleFavorite}
                       theme={props.theme}

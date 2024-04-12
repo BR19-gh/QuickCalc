@@ -19,6 +19,7 @@ import { connect } from "react-redux";
 
 import { useTranslation } from "react-i18next";
 import { NativeModules } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 function TipCal({ theme }) {
   const { t } = useTranslation();
@@ -98,7 +99,7 @@ function TipCal({ theme }) {
   }
 
   return (
-    <View className={styles.container}>
+    <View>
       <ScrollView
         style={{
           height: "100%",
@@ -106,7 +107,7 @@ function TipCal({ theme }) {
         }}
         ref={scrollViewRef}
       >
-        <View className={"w-full mt-2.5 items-center"}>
+        <View className={"w-full mt-28 items-center"}>
           <View className={"w-full flex-row flex-wrap justify-evenly"}>
             <View>
               <Text
@@ -242,7 +243,7 @@ function TipCal({ theme }) {
           </View>
 
           <View className="w-full flex-row flex-wrap">
-            <View className="w-full flex-row p-2 mt-10 mb-2.5 text-left">
+            <View className="w-full flex-row p-2 mt-14 mb-2.5 text-left">
               <Text
                 className={
                   "text-2xl" + isDark(" text-blue-100", " text-blue-900")
@@ -262,7 +263,6 @@ function TipCal({ theme }) {
           </View>
         </View>
       </ScrollView>
-
       <StatusBar style="auto" />
     </View>
   );

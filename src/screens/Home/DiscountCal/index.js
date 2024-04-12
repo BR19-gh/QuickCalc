@@ -20,6 +20,7 @@ import { connect } from "react-redux";
 import { useTranslation } from "react-i18next";
 
 import { useRef } from "react";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 function DiscountCal({ theme }) {
   const { t } = useTranslation();
@@ -76,9 +77,9 @@ function DiscountCal({ theme }) {
   const isDark = (darkOp, lightp) => (theme === "dark" ? darkOp : lightp);
 
   return (
-    <View className={styles.container}>
-      <ScrollView>
-        <View className={"w-full mt-10 items-center"}>
+    <View>
+      <ScrollView className="h-full">
+        <View className={"w-full mt-28 items-center"}>
           <View className={"w-full flex-row justify-evenly"}>
             <View>
               <Text
@@ -180,7 +181,7 @@ function DiscountCal({ theme }) {
             </TouchableOpacity>
           </View>
 
-          <View className="w-full flex-row flex-wrap mt-10">
+          <View className="w-full flex-row flex-wrap mt-14">
             <View className="w-full flex-row p-2 text-left">
               <Text
                 className={

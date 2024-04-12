@@ -39,76 +39,91 @@ const Card = ({
   theme,
   isShowedFavorite,
   isEditingFavorite,
-}) => (
-  <LinearGradient
-    key={tool.id}
-    colors={[...tool.colors]}
-    style={{
-      marginStart: "4%",
-      opacity: isEditingFavorite
-        ? !tool.isFavorite
-          ? 0.2
-          : 0.7
-        : isEditing
-        ? tool.isHidden
-          ? 0.2
-          : 0.7
-        : 1,
-
-      borderWidth: isEditingFavorite || isEditing ? 3.5 : 0,
-      borderColor: theme === "dark" ? "gray" : "black",
-      width: "92%",
-    }}
-    className="mb-1 mt-1 h-36 rounded-lg"
-  >
-    <TouchableOpacity
+  searchTextLength,
+}) => {
+  return (
+    <LinearGradient
       key={tool.id}
-      className={"h-full w-full flex-row flex-wrap justify-center"}
-      onPress={() => {
-        if (isEditing) {
-          changeVis(tool.id);
-        } else if (isEditingFavorite) {
-          handleFavorite(tool.id);
-        } else {
-          navigation.navigate(tool.link);
-        }
+      colors={[...tool.colors]}
+      style={{
+        marginStart: "4%",
+        opacity: isEditingFavorite
+          ? !tool.isFavorite
+            ? 0.2
+            : 0.7
+          : isEditing
+          ? tool.isHidden
+            ? 0.2
+            : 0.7
+          : 1,
+
+        borderWidth: isEditingFavorite || isEditing ? 3.5 : 0,
+        borderColor: theme === "dark" ? "gray" : "black",
+        width: "92%",
       }}
-      onLongPress={() => {
-        if (tool.isHidden) {
-          Haptics.notificationAsync(Haptics.NotificationFeedbackType.Error);
-          Alert.alert(
-            t(text("unableToMove")),
-            t(text("youCannotMoveHidenTools")),
-            [
-              {
-                text: t(text("gotIt")),
-                onPress: () => null,
-                style: "Ok",
-              },
-            ]
-          );
-        } else if (isShowedFavorite || isEditingFavorite) {
-          Haptics.notificationAsync(Haptics.NotificationFeedbackType.Error);
-          Alert.alert(
-            t(text("unableToMove")),
-            t(text("youCannotMoveToolsInFavorite")),
-            [
-              {
-                text: t(text("gotIt")),
-                onPress: () => null,
-                style: "Ok",
-              },
-            ]
-          );
-        } else {
-          Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
-          drag();
-        }
-      }}
-      disabled={isActive}
+      className="mb-1 mt-1 h-36 rounded-lg"
     >
-      <View className={"w-full justify-start flex-row-reverse"}>
-        {/* <MaterialCommunityIcons
+      <TouchableOpacity
+        key={tool.id}
+        className={"h-full w-full flex-row flex-wrap justify-center"}
+        onPress={() => {
+          if (isEditing) {
+            changeVis(tool.id);
+          } else if (isEditingFavorite) {
+            handleFavorite(tool.id);
+          } else {
+            navigation.navigate(tool.link);
+          }
+        }}
+        onLongPress={() => {
+          if (tool.isHidden) {
+            Haptics.notificationAsync(Haptics.NotificationFeedbackType.Error);
+            Alert.alert(
+              t(text("unableToMove")),
+              t(text("youCannotMoveHidenTools")),
+              [
+                {
+                  text: t(text("gotIt")),
+                  onPress: () => null,
+                  style: "Ok",
+                },
+              ]
+            );
+          } else if (isShowedFavorite || isEditingFavorite) {
+            Haptics.notificationAsync(Haptics.NotificationFeedbackType.Error);
+            Alert.alert(
+              t(text("unableToMove")),
+              t(text("youCannotMoveToolsInFavorite")),
+              [
+                {
+                  text: t(text("gotIt")),
+                  onPress: () => null,
+                  style: "Ok",
+                },
+              ]
+            );
+          } else if (searchTextLength > 0) {
+            Haptics.notificationAsync(Haptics.NotificationFeedbackType.Error);
+            Alert.alert(
+              t(text("unableToMove")),
+              t(text("youCannotMoveWhileSearching")),
+              [
+                {
+                  text: t(text("gotIt")),
+                  onPress: () => null,
+                  style: "Ok",
+                },
+              ]
+            );
+          } else {
+            Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
+            drag();
+          }
+        }}
+        disabled={isActive}
+      >
+        <View className={"w-full justify-start flex-row-reverse"}>
+          {/* <MaterialCommunityIcons
           className={styles.icon}
           name={tool.icon}
           size={24}
@@ -117,26 +132,27 @@ const Card = ({
             width: "11%",
           }}
         /> */}
-        <SweetSFSymbol
-          name={tool.icon}
-          size={24}
-          colors={["white"]}
-          style={{
-            margin: 16,
-          }}
-        />
+          <SweetSFSymbol
+            name={tool.icon}
+            size={24}
+            colors={["white"]}
+            style={{
+              margin: 16,
+            }}
+          />
 
-        <Text
-          className={styles.btnText}
-          style={{
-            width: "80%",
-          }}
-        >
-          {lang === "en" ? tool.name.en : tool.name.ar}
-        </Text>
-      </View>
-    </TouchableOpacity>
-  </LinearGradient>
-);
+          <Text
+            className={styles.btnText}
+            style={{
+              width: "80%",
+            }}
+          >
+            {lang === "en" ? tool.name.en : tool.name.ar}
+          </Text>
+        </View>
+      </TouchableOpacity>
+    </LinearGradient>
+  );
+};
 
 export default Card;

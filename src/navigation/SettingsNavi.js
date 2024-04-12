@@ -16,9 +16,8 @@ const SettingsNavi = ({
   return (
     <Stack.Navigator
       screenOptions={{
-        headerTranslucent: true,
-        headerBlurEffect: "systemChromeMaterial",
-        headerHideShadow: true,
+        headerBlurEffect: theme,
+        headerTransparent: true,
         headerTitleStyle: {
           fontSize: 20,
         },
@@ -26,7 +25,7 @@ const SettingsNavi = ({
     >
       <Stack.Screen
         options={{
-          // headerRight: () => <HeaderRight handleEdit={handleEdit} />,
+          headerLargeTitle: true,
           title: t(text("settings")),
         }}
         name="SettingsNavi"

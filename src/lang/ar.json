@@ -22,7 +22,9 @@
           "done": "تم",
           "editFavorite": "تعديل المفضلة",
           "refreshing": "جار التحديث...",
-          "refreshComplated": "اكتمل التحديث!"
+          "refreshComplated": "اكتمل التحديث!",
+          "search": "بحث في الأدوات",
+          "searchFavorite": "البحث في الأدوات المفضلة"
         }
       },
       "Home": {
@@ -44,6 +46,7 @@
           "unableToMove": "النقل غير ممكن",
           "youCannotMoveHidenTools": "لنقل الأدوات المخفية، إضغط ضغطة واحدة على الأداة المراد اظهارها ",
           "youCannotMoveToolsInFavorite": "لا يمكنك النقل في صفحة المفضلة، انقل الادوات في الصفحة الرئيسية وسينعكس نقلك هنا",
+          "youCannotMoveWhileSearching": "لا يمكنك النقل أثناء البحث، ألغي البحث أولا",
           "gotIt": "فهمت",
           "toolHasBeenHidden": "تم إخفاء الأداة",
           "toolHasbeenFavored": "تم تفضيل الأداة",
@@ -73,6 +76,20 @@
             "numberOfPpl": "عدد الأشخاص",
             "number": "العدد",
             "reset": "إعادة تعيين"
+          }
+        },
+        "CurrencyCon": {
+          "title": "محول العملات",
+          "text": {
+            "calculate": "احـســـب",
+            "reset": "إعادة تعيين",
+            "selectCurrency": "اختر عملة",
+            "searchCurrency": "ابحث عن عملة",
+            "from": "من",
+            "to": "إلى",
+            "conversionResult": "نتيجة التحويل: ",
+            "connectionErrorTitle": "خطأ في الاتصال",
+            "connectionErrorMsg": "هناك مشكلة في الاتصال، هذه الأداة تستعمل اتصال الإنترنت، الرجاء التحقق من اتصالك قبل استعمالها"
           }
         }
       },

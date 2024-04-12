@@ -1,7 +1,7 @@
 import { StatusBar } from "expo-status-bar";
 import { Text, View, TouchableOpacity } from "react-native";
 import styles from "./styles";
-import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
+import SweetSFSymbol from "sweet-sfsymbols";
 import { useTranslation } from "react-i18next";
 import { useColorScheme } from "react-native";
 import { useEffect } from "react";
@@ -41,11 +41,11 @@ function Welcome(props) {
         className={styles.icon + (props.theme === "dark" && " text-blue-500")}
       >
         myTools
-        <MaterialCommunityIcons
-          name="tools"
-          size={60}
+        {/* <SweetSFSymbol
+          name="wrench.and.screwdriver"
+          size={45}
           color={props.theme ? "#2d5ba0" : "#294d7f"}
-        />
+        /> */}
       </Text>
       <Text
         className={styles.paragraph + (props.theme === "dark" && " text-white")}

@@ -22,7 +22,9 @@
           "done": "Done",
           "editFavorite": "Edit Favorite",
           "refreshing": "Refreshing...",
-          "refreshComplated": "Refresh complated!"
+          "refreshComplated": "Refresh complated!",
+          "search": "Search Tools",
+          "searchFavorite": "Search Favored Tools"
         }
       },
       "Home": {
@@ -43,7 +45,8 @@
           "noUnfavoredTools": "No unfavored tools, refresh to check",
           "unableToMove": "Unable To Move",
           "youCannotMoveHidenTools": "To move hidden tools, tap once on the tool to show it",
-          "youCannotMoveToolsInFavorite": "You cannot move items on the favorite page. Move the tools on the home page, and your move will be reflected here.",
+          "youCannotMoveToolsInFavorite": "You cannot move tools on the favorite page. Move the tools on the home page, and your move will be reflected here.",
+          "youCannotMoveWhileSearching": "You cannot move tools while searching. Cancel searching first.",
           "gotIt": "Got it",
           "toolHasBeenHidden": "Tool has been hidden",
           "toolHasbeenFavored": "Tool has been added to Favorite",
@@ -73,6 +76,20 @@
             "numberOfPpl": "Number of People",
             "number": "Number",
             "reset": "Reset"
+          }
+        },
+        "CurrencyCon": {
+          "title": "Currency Converter",
+          "text": {
+            "calculate": "Calculate",
+            "reset": "Reset",
+            "selectCurrency": "Select Currency",
+            "searchCurrency": "Search Currency",
+            "from": "From",
+            "to": "To",
+            "conversionResult": "Conversion Result: ",
+            "connectionErrorTitle": "Connection Error",
+            "connectionErrorMsg": "There is an issue in connecting, this tool requires internet access. Please check your connection before using it."
           }
         }
       },

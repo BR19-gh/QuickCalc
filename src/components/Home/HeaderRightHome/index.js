@@ -1,8 +1,5 @@
 import { Text, View, TouchableOpacity } from "react-native";
-import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import SweetSFSymbol from "sweet-sfsymbols";
-import { useEffect } from "react";
-// import { useTranslation } from "react-i18next";
 import { NativeModules } from "react-native";
 import i18n from "../../../lang/i18n";
 import * as Haptics from "expo-haptics";
@@ -36,22 +33,13 @@ const Header = ({
     <View
       className={
         "items-center " +
-        (lang === "ar"
-          ? "flex-row justify-between"
-          : isShowedFavorite
-          ? "flex-row justify-between"
-          : "flex-row-reverse justify-around") +
+        "flex-row justify-between" +
         (isEditing ? " w-20" : " w-24")
       }
     >
       {isShowedFavorite ? (
         <>
-          <SweetSFSymbol
-            name={"plus"}
-            size={22}
-            colors={["transparent"]}
-            style={{ marginBottom: 4 }}
-          />
+          <SweetSFSymbol name={"plus"} size={22} colors={["transparent"]} />
           <TouchableOpacity
             onPress={() => {
               Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
@@ -64,8 +52,7 @@ const Header = ({
                 (isEditingFavorite ? " font-semibold text-lg" : " text-lg")
               }
               style={{
-                paddingEnd: lang === "ar" ? 0 : 8.5,
-                marginBottom: 6,
+                paddingEnd: 8.5,
               }}
             >
               {isEditingFavorite ? t(text("done")) : t(text("edit"))}
@@ -87,7 +74,6 @@ const Header = ({
               }
               style={{
                 paddingStart: isEditing ? (lang === "ar" ? 55 : 36) : 0,
-                marginBottom: 6,
               }}
             >
               {isEditing ? t(text("done")) : t(text("edit"))}
@@ -95,12 +81,7 @@ const Header = ({
           </TouchableOpacity>
 
           {isEditing ? (
-            <SweetSFSymbol
-              name={"plus"}
-              size={22}
-              colors={["transparent"]}
-              style={{ marginBottom: 4 }}
-            />
+            <SweetSFSymbol name={"plus"} size={22} colors={["transparent"]} />
           ) : (
             <TouchableOpacity
               onPress={() => {
@@ -108,12 +89,7 @@ const Header = ({
                 //TODO: Adding tools functionality
               }}
             >
-              <SweetSFSymbol
-                name={"plus"}
-                size={22}
-                colors={["#3B82F6"]}
-                style={{ marginBottom: 4 }}
-              />
+              <SweetSFSymbol name={"plus"} size={22} colors={["#3B82F6"]} />
             </TouchableOpacity>
           )}
         </>

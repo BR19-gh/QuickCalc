@@ -8,7 +8,7 @@ import TipCal from "../screens/Home/TipCal";
 import CurrencyCon from "../screens/Home/CurrencyCon";
 
 import { useTranslation } from "react-i18next";
-import { useState } from "react";
+import { useState, useRef } from "react";
 
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
@@ -19,16 +19,20 @@ const HomeNavi = ({ isEditing, setIsEditing, theme }) => {
   const text = (text) => "screens.Navi.text." + text;
   const DiscountCaltext = (text) => "screens.Home.DiscountCal." + text;
   const TipCaltext = (text) => "screens.Home.TipCal." + text;
+  const CurrencyConText = (text) => "screens.Home.CurrencyCon." + text;
+
+  const searchBarRef = useRef(null);
 
   const [isShowedFavorite, setIsShowedFavorite] = useState(false);
   const [isEditingFavorite, seIsEditingFavorite] = useState(false);
 
+  const [searchText, setSearchText] = useState("");
+
   return (
     <Stack.Navigator
       screenOptions={{
-        headerTranslucent: true,
-        headerBlurEffect: "systemChromeMaterial",
-        headerHideShadow: true,
+        headerBlurEffect: theme,
+        headerTransparent: true,
         headerTitleStyle: {
           fontSize: 20,
         },
@@ -36,6 +40,7 @@ const HomeNavi = ({ isEditing, setIsEditing, theme }) => {
     >
       <Stack.Screen
         options={{
+          headerLargeTitle: true,
           headerRight: () => (
             <HeaderRightHome
               seIsEditingFavorite={seIsEditingFavorite}
@@ -60,10 +65,24 @@ const HomeNavi = ({ isEditing, setIsEditing, theme }) => {
             : isEditing
             ? t(text("selectToHideOrToMove"))
             : t(text("home")),
+          headerSearchBarOptions: {
+            ref: searchBarRef,
+            placeholder: isShowedFavorite
+              ? t(text("searchFavorite"))
+              : t(text("search")),
+            value: searchText,
+            onChangeText: (text) => {
+              setSearchText(text.nativeEvent.text);
+            },
+            onCancelButtonPress: () => setSearchText(""),
+          },
         }}
         name="HomeNavi"
         children={() => (
           <Home
+            searchBarRef={searchBarRef}
+            setSearchText={setSearchText}
+            searchText={searchText}
             theme={theme}
             isEditingFavorite={isEditingFavorite}
             isShowedFavorite={isShowedFavorite}
@@ -74,22 +93,14 @@ const HomeNavi = ({ isEditing, setIsEditing, theme }) => {
       />
       <Stack.Screen
         options={{
-          headerLeft: () => <HeaderLeft />,
           title: t(DiscountCaltext("title")),
         }}
         name="DiscountCal"
         children={() => <DiscountCal theme={theme} />}
       />
+      <Stack.Screen options={{}} name="UnitsCon" component={UnitsCon} />
       <Stack.Screen
         options={{
-          headerLeft: () => <HeaderLeft />,
-        }}
-        name="UnitsCon"
-        component={UnitsCon}
-      />
-      <Stack.Screen
-        options={{
-          headerLeft: () => <HeaderLeft />,
           title: t(TipCaltext("title")),
         }}
         name="TipCal"
@@ -97,13 +108,12 @@ const HomeNavi = ({ isEditing, setIsEditing, theme }) => {
       />
       <Stack.Screen
         options={{
-          headerLeft: () => <HeaderLeft />,
+          title: t(CurrencyConText("title")),
         }}
         name="CurrencyCon"
-        component={CurrencyCon}
+        children={() => <CurrencyCon theme={theme} />}
       />
     </Stack.Navigator>
   );
 };
-
 export default HomeNavi;
