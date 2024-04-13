@@ -3,23 +3,19 @@ import {
   Text,
   View,
   TouchableOpacity,
-  FlatList,
   ScrollView,
   Keyboard,
   TextInput,
-  KeyboardAvoidingView,
 } from "react-native";
 import styles from "./styles";
-import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import SweetSFSymbol from "sweet-sfsymbols";
 
-import { useEffect, useState, useRef } from "react";
+import { useState, useRef } from "react";
 
 import { connect } from "react-redux";
 
 import { useTranslation } from "react-i18next";
-import { NativeModules } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
+import { lang } from "../../../helpers";
 
 function TipCal({ theme }) {
   const { t } = useTranslation();
@@ -82,21 +78,6 @@ function TipCal({ theme }) {
   };
 
   const isDark = (darkOp, lightp) => (theme === "dark" ? darkOp : lightp);
-
-  const deviceLanguage =
-    Platform.OS === "ios"
-      ? NativeModules.SettingsManager.settings.AppleLocale ||
-        NativeModules.SettingsManager.settings.AppleLanguages[0] // iOS 13
-      : NativeModules.I18nManager.localeIdentifier;
-
-  let lang;
-  let str = deviceLanguage;
-  let match = str.match(/^([a-z]{2})/i);
-  if (match) {
-    lang = match[0];
-  } else {
-    lang = "en";
-  }
 
   return (
     <View>

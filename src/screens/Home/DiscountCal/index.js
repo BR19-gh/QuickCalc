@@ -3,24 +3,20 @@ import {
   Text,
   View,
   TouchableOpacity,
-  FlatList,
   ScrollView,
   Keyboard,
   TextInput,
-  KeyboardAvoidingView,
 } from "react-native";
 import styles from "./styles";
-import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import SweetSFSymbol from "sweet-sfsymbols";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 import { connect } from "react-redux";
 
 import { useTranslation } from "react-i18next";
 
 import { useRef } from "react";
-import { SafeAreaView } from "react-native-safe-area-context";
 
 function DiscountCal({ theme }) {
   const { t } = useTranslation();
@@ -152,7 +148,7 @@ function DiscountCal({ theme }) {
           <View className={"items-center"}>
             <TouchableOpacity
               className={
-                "rounded-lg w-48 h-20 mt-10 flex-row items-center justify-evenly" +
+                "rounded-lg w-48 h-20 mt-14 flex-row items-center justify-evenly" +
                 isDark(" bg-blue-900 ", " bg-blue-500 ")
               }
               onPress={calculate}

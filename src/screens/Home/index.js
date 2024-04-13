@@ -25,20 +25,7 @@ import ContextMenu from "react-native-context-menu-view";
 import { useToast } from "react-native-toast-notifications";
 import * as Haptics from "expo-haptics";
 
-const deviceLanguage =
-  Platform.OS === "ios"
-    ? NativeModules.SettingsManager.settings.AppleLocale ||
-      NativeModules.SettingsManager.settings.AppleLanguages[0] // iOS 13
-    : NativeModules.I18nManager.localeIdentifier;
-
-let lang;
-let str = deviceLanguage;
-let match = str.match(/^([a-z]{2})/i);
-if (match) {
-  lang = match[0];
-} else {
-  lang = "en";
-}
+import { lang } from "../../helpers";
 
 function Home(props) {
   useEffect(() => {

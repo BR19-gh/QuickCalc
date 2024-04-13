@@ -1,9 +1,10 @@
-import SelectDropdown from "react-native-select-dropdown";
-import { View, Text } from "react-native";
+// import SelectDropdown from "react-native-select-dropdown";
 import { lang, CURRENCY_INFO } from "../../../../helpers/index";
 import SweetSFSymbol from "sweet-sfsymbols";
-
 import * as Haptics from "expo-haptics";
+import React, { useState } from "react";
+import { StyleSheet, Text, View } from "react-native";
+import { Dropdown } from "react-native-element-dropdown";
 
 CURRENCY_INFO.sort((a, b) =>
   lang === "ar"
@@ -11,97 +12,87 @@ CURRENCY_INFO.sort((a, b) =>
     : a.name.localeCompare(b.name)
 );
 
-const Dropdown = ({ theme, text, t, setCurrency, currency }) => (
-  <SelectDropdown
-    renderSearchInputLeftIcon={() => (
-      <SweetSFSymbol
-        name="magnifyingglass"
-        size={15}
-        color={theme === "dark" ? "#ffffff55" : "#151E2655"}
-      />
-    )}
-    searchPlaceHolderColor={theme === "dark" ? "#ffffff55" : "#151E2655"}
-    searchPlaceHolder={t(text("searchCurrency"))}
-    searchInputTxtColor={theme === "dark" ? "#fff" : "#151E26"}
-    searchInputStyle={{
-      backgroundColor: theme === "dark" ? "#333333" : "#FFFFFF",
-      paddingHorizontal: 12,
-      alignItems: "center",
-    }}
-    search
-    data={[...CURRENCY_INFO]}
-    onSelect={(selectedItem, index) => {
-      Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Heavy);
+const DropdownComponent = ({ theme, text, t, setCurrency, currency }) => {
+  const [isFocus, setIsFocus] = useState(false);
 
-      setCurrency(selectedItem);
-    }}
-    renderButton={(selectedItem, isOpened) => {
-      return (
-        <View
-          style={{
-            height: 30,
-            marginBottom: 15,
-            backgroundColor: theme === "dark" ? "#555555" : "#E9ECEF",
-            borderRadius: 10,
-            flexDirection: "row",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        >
-          <Text
-            style={{
-              color: theme === "dark" ? "#fff" : "#151E26",
-              flex: 1,
-              fontSize: 13,
-              fontWeight: "bold",
-              textAlign: "center",
-            }}
-          >
-            {currency
-              ? lang === "ar"
-                ? currency.arabic_name
-                : currency.name
-              : t(text("selectCurrency"))}
-          </Text>
-        </View>
-      );
-    }}
-    renderItem={(item, index, isSelected) => {
-      return (
-        <View
-          style={{
-            ...{
-              width: "100%",
-              flexDirection: "row",
-              paddingHorizontal: 12,
-
-              paddingVertical: 8,
-            },
-            ...(isSelected && {
-              backgroundColor: theme === "dark" ? "#333333" : "#D2D9DF",
-            }),
-          }}
-        >
-          <Text
-            className="text-center"
-            style={{
-              flex: 1,
-              fontSize: 18,
-              fontWeight: "500",
-              color: theme === "dark" ? "#fff" : "#151E26",
-            }}
-          >
-            {lang === "ar" ? item.arabic_name : item.name}
-          </Text>
-        </View>
-      );
-    }}
-    showsVerticalScrollIndicator={false}
-    dropdownStyle={{
+  const styles = StyleSheet.create({
+    container: {
+      backgroundColor: "transparent",
+    },
+    dropdown: {
       backgroundColor: theme === "dark" ? "#555555" : "#E9ECEF",
+      height: 40,
+      borderColor: "#283dab88",
+      borderWidth: 0.5,
       borderRadius: 8,
-    }}
-  />
-);
+      paddingHorizontal: 10,
+      marginBottom: 10,
+    },
+  });
 
-export default Dropdown;
+  return (
+    <Dropdown
+      activeColor={theme === "dark" ? "#2F2F2F" : "#D2D2D2"}
+      itemContainerStyle={{
+        backgroundColor: theme === "dark" ? "#555555" : "#E9ECEF",
+      }}
+      itemTextStyle={{
+        color: theme === "dark" ? "#fff" : "#151E26",
+      }}
+      containerStyle={{
+        borderColor: theme === "dark" ? "#555555" : "#E9ECEF",
+        borderRadius: 8,
+        backgroundColor: theme === "dark" ? "#555555" : "#E9ECEF",
+        paddingBottom: 5,
+      }}
+      style={[styles.dropdown, isFocus && { borderColor: "blue" }]}
+      placeholderStyle={{
+        fontSize: 14,
+        fontWeight: "bold",
+        color: theme === "dark" ? "#fff" : "#151E26",
+      }}
+      selectedTextStyle={{
+        fontSize: 14,
+        fontWeight: "bold",
+        color: theme === "dark" ? "#fff" : "#151E26",
+      }}
+      inputSearchStyle={{
+        height: 40,
+        fontSize: 14,
+        color: theme === "dark" ? "#fff" : "#151E26",
+      }}
+      iconStyle={styles.iconStyle}
+      data={[...CURRENCY_INFO]}
+      search
+      maxHeight={300}
+      labelField={lang === "ar" ? "arabic_name" : "name"}
+      valueField="code"
+      placeholder={!isFocus ? t(text("selectCurrency")) : "..."}
+      searchPlaceholder={t(text("searchCurrency"))}
+      searchPlaceholderStyle={{
+        color: theme === "dark" ? "#fff" : "#151E26",
+      }}
+      renderRightIcon={() => (
+        <SweetSFSymbol
+          style={{
+            marginRight: 5,
+          }}
+          name="chevron.down"
+          size={10}
+          color={theme === "dark" ? "#fff" : "#151E26"}
+        />
+      )}
+      value={currency}
+      onFocus={() => setIsFocus(true)}
+      onBlur={() => setIsFocus(false)}
+      onChange={(item) => {
+        Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Heavy);
+        setCurrency(item);
+        console.log("Currency changed to ", item);
+        setIsFocus(false);
+      }}
+    />
+  );
+};
+
+export default DropdownComponent;

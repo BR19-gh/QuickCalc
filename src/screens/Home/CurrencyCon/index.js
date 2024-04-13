@@ -21,15 +21,13 @@ import { useTranslation } from "react-i18next";
 
 import { useRef } from "react";
 
-import { handleCurrencyConversion } from "../../../store/actions/shared";
-
-// import { lang, CURRENCY_INFO } from "../../../helpers";
+import { handleCurrencyConversion } from "../../../store/actions/currResult";
 
 import Dropdown from "../../../components/Home/CurrencyCon/Dropdown";
 
 //import { useNetInfo } from "@react-native-community/netinfo";
 
-function CurrencyCon({ theme, dispatch }) {
+function CurrencyCon({ theme, dispatch, currResult }) {
   const { t } = useTranslation();
   const text = (text) => "screens.Home.CurrencyCon.text." + text;
   const secondInput = useRef(null);
@@ -54,8 +52,6 @@ function CurrencyCon({ theme, dispatch }) {
   //   }
   // }, [netInfo.isConnected]);
 
-  const [result, setResult] = useState("0");
-
   // const focusOnSecondInput = () => {
   //   if (secondInput && secondInput.current) {
   //     secondInput.current.focus();
@@ -77,17 +73,33 @@ function CurrencyCon({ theme, dispatch }) {
   };
 
   const calculate = () => {
-    dispatch(
-      handleCurrencyConversion(
-        (fromValue = fromCurrencyValue),
-        (fromType = fromCurrency.code),
-        (toType = toCurrency.code),
-        (setResult = setToCurrencyValue)
-      )
-    );
+    if (fromCurrencyValue && fromCurrency && toCurrency) {
+      dispatch(
+        handleCurrencyConversion(
+          (fromValue = a2e(fromCurrencyValue)),
+          (fromType = fromCurrency.code),
+          (toType = toCurrency.code)
+        )
+      );
+    } else {
+      return null;
+    }
   };
 
+  useEffect(() => {
+    setToCurrencyValue(
+      currResult === undefined ? "" : Number(currResult.result).toFixed(2)
+    );
+  }, [currResult]);
+
   const reset = () => {
+    dispatch(
+      handleCurrencyConversion(
+        (fromValue = null),
+        (fromType = null),
+        (toType = null)
+      )
+    );
     setFromCurrency("");
     setToCurrency("");
     setFromCurrencyValue("");
@@ -99,7 +111,7 @@ function CurrencyCon({ theme, dispatch }) {
   return (
     <View>
       <ScrollView className="h-full">
-        <View className={"w-full mt-48 items-center"}>
+        <View className={"w-full mt-32 items-center"}>
           <View className={"w-full flex-row justify-evenly"}>
             <View>
               <Dropdown
@@ -123,7 +135,6 @@ function CurrencyCon({ theme, dispatch }) {
                 }}
                 blurOnSubmit={false}
                 returnKeyType={"done"}
-                // onSubmitEditing={focusOnSecondInput}
                 onSubmitEditing={() => {
                   hideKeyboard();
                 }}
@@ -141,9 +152,12 @@ function CurrencyCon({ theme, dispatch }) {
               }}
             >
               <SweetSFSymbol
-                name={"arrow.left.arrow.right.square.fill"}
-                size={30}
-                color={isDark("#283dab", "#283987")}
+                style={{
+                  marginTop: 7,
+                }}
+                name={"arrow.left.arrow.right"}
+                size={25}
+                colors={[isDark("#0082F6", "#1E3A8A")]}
               />
             </TouchableOpacity>
             <View>
@@ -162,7 +176,7 @@ function CurrencyCon({ theme, dispatch }) {
                   backgroundColor: isDark("#888888", "#CCCCCC"),
                   width: 150,
                   height: 150,
-                  fontSize: toCurrencyValue ? 40 : 20,
+                  fontSize: currResult.result ? 40 : 20,
                   textAlign: "center",
                   color: isDark("#283dab", "#283987"),
                   borderRadius: 10,
@@ -171,10 +185,9 @@ function CurrencyCon({ theme, dispatch }) {
                 }}
                 returnKeyType="done"
                 keyboardType="decimal-pad"
-                onSubmitEditing={() => {
-                  hideKeyboard();
-                }}
-                value={toCurrencyValue}
+                value={
+                  currResult.result ? Number(currResult.result).toFixed(3) : ""
+                }
                 onFocus={() => setToCurrencyValue("")}
                 onChangeText={(value) => setToCurrencyValue(value)}
                 placeholderTextColor={isDark("#28398788", "#28398755")}
@@ -215,14 +228,15 @@ function CurrencyCon({ theme, dispatch }) {
             </TouchableOpacity>
           </View>
 
-          {/* <View className="w-full flex-row flex-wrap mt-10">
+          <View className="w-full flex-row flex-wrap mt-10">
             <View className="w-full flex-row p-2 text-left">
               <Text
                 className={
                   "text-2xl" + isDark(" text-blue-100", " text-blue-900")
                 }
               >
-                {t(text("conversionResult"))}
+                {t(text("from"))}
+                {":  "}
               </Text>
               <Text
                 className={
@@ -230,10 +244,34 @@ function CurrencyCon({ theme, dispatch }) {
                   isDark(" text-blue-100", " text-blue-900")
                 }
               >
-                {result}
+                {(currResult["from-value"] ? currResult["from-value"] : "") +
+                  " " +
+                  (currResult["from-type"] ? currResult["from-type"] : "")}
               </Text>
             </View>
-          </View> */}
+            <View className="w-full flex-row p-2 text-left">
+              <Text
+                className={
+                  "text-2xl" + isDark(" text-blue-100", " text-blue-900")
+                }
+              >
+                {t(text("to"))}
+                {":  "}
+              </Text>
+              <Text
+                className={
+                  "text-3xl font-semibold" +
+                  isDark(" text-blue-100", " text-blue-900")
+                }
+              >
+                {(currResult.result
+                  ? Number(currResult.result).toFixed(4)
+                  : "") +
+                  " " +
+                  (currResult["to-type"] ? currResult["to-type"] : "")}
+              </Text>
+            </View>
+          </View>
         </View>
       </ScrollView>
       <StatusBar style="auto" />
@@ -241,9 +279,9 @@ function CurrencyCon({ theme, dispatch }) {
   );
 }
 
-const mapStateToProps = ({ tools }) => {
+const mapStateToProps = ({ currResult }) => {
   return {
-    tools,
+    currResult,
   };
 };
 

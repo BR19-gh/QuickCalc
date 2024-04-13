@@ -83,13 +83,18 @@
           "text": {
             "calculate": "Calculate",
             "reset": "Reset",
+            "currency": "Currency",
             "selectCurrency": "Select Currency",
             "searchCurrency": "Search Currency",
             "from": "From",
             "to": "To",
             "conversionResult": "Conversion Result: ",
             "connectionErrorTitle": "Connection Error",
-            "connectionErrorMsg": "There is an issue in connecting, this tool requires internet access. Please check your connection before using it."
+            "connectionErrorMsg": "There is an issue connecting to the internet, this tool requires internet access. Please check your connection before using it.",
+            "gotIt": "Got it",
+            "errorTitle": "An error occurred",
+            "pleaseShareError": "\n\nPlease share this error with the developer, contact information in the settings.",
+            "errorTitleUnkown": "an unknown error occurred"
           }
         }
       },
