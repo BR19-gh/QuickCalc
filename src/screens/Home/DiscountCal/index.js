@@ -144,7 +144,7 @@ function DiscountCal({ theme }) {
                 onFocus={() => setDiscount("")}
                 onChangeText={(value) => setDiscount(value)}
                 placeholderTextColor={isDark("#28398788", "#28398755")}
-                placeholder={t(text("discount"))}
+                placeholder={t(text("discountPres"))}
               />
             </View>
           </View>

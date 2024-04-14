@@ -58,6 +58,7 @@
           "title": "Discount Calculator",
           "text": {
             "discount": "Discount",
+            "discountPres": "Discount %",
             "price": "Price",
             "calculate": "Calculate",
             "priceAfter": "Price After: ",
