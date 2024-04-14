@@ -20,6 +20,7 @@ const HomeNavi = ({ isEditing, setIsEditing, theme }) => {
   const DiscountCaltext = (text) => "screens.Home.DiscountCal." + text;
   const TipCaltext = (text) => "screens.Home.TipCal." + text;
   const CurrencyConText = (text) => "screens.Home.CurrencyCon." + text;
+  const UnitsConText = (text) => "screens.Home.UnitsCon." + text;
 
   const searchBarRef = useRef(null);
 
@@ -98,7 +99,13 @@ const HomeNavi = ({ isEditing, setIsEditing, theme }) => {
         name="DiscountCal"
         children={() => <DiscountCal theme={theme} />}
       />
-      <Stack.Screen options={{}} name="UnitsCon" component={UnitsCon} />
+      <Stack.Screen
+        options={{
+          title: t(UnitsConText("title")),
+        }}
+        name="UnitsCon"
+        children={() => <UnitsCon theme={theme} />}
+      />
       <Stack.Screen
         options={{
           title: t(TipCaltext("title")),

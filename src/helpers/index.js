@@ -29,6 +29,121 @@ if (match) {
 
 export const lang = lan;
 
+export const UNIT_INFO = [
+  {
+    en: "Length",
+    ar: "الطول",
+
+    units: [
+      { meausrement: "Length", en: "Meter", ar: "متر", code: "Meter" },
+      { meausrement: "Length", en: "Inch", ar: "بوصة", code: "Inch" },
+      { meausrement: "Length", en: "Feet", ar: "قدم", code: "Feet" },
+      { meausrement: "Length", en: "Micron", ar: "ميكرومتر", code: "Micron" },
+      { meausrement: "Length", en: "Yard", ar: "ياردة", code: "Yard" },
+      { meausrement: "Length", en: "Mile", ar: "ميل", code: "Mile" },
+    ],
+  },
+  {
+    en: "Temperature",
+    ar: "الحرارة",
+
+    units: [
+      {
+        meausrement: "Temperature",
+        en: "Celsius",
+        ar: "درجة مئوية",
+        code: "Celsius",
+      },
+      {
+        meausrement: "Temperature",
+        en: "Fahrenheit",
+        ar: "فهرنهايت",
+        code: "Fahrenheit",
+      },
+      // { meausrement: "Temperature", en: "Kelvin", ar: "كلفن", code: "Kelvin" },
+    ],
+  },
+  {
+    en: "Time",
+    ar: "الوقت",
+
+    units: [
+      { meausrement: "Time", en: "Second", ar: "ثانية", code: "Second" },
+      { meausrement: "Time", en: "Minute", ar: "دقيقة", code: "Minute" },
+      { meausrement: "Time", en: "Hour", ar: "ساعة", code: "Hour" },
+      { meausrement: "Time", en: "Day", ar: "يوم", code: "Day" },
+      { meausrement: "Time", en: "Week", ar: "أسبوع", code: "Week" },
+      { meausrement: "Time", en: "Month", ar: "شهر", code: "Month" },
+    ],
+  },
+  {
+    en: "Volume",
+    ar: "الحجم",
+
+    units: [
+      { meausrement: "Volume", en: "Liter", ar: "لتر", code: "Liter" },
+      { meausrement: "Volume", en: "Gallon", ar: "جالون", code: "Gallon" },
+      { meausrement: "Volume", en: "Pint", ar: "باينت", code: "Pint" },
+    ],
+  },
+  {
+    en: "Mass",
+    ar: "الكتلة",
+
+    units: [
+      { meausrement: "Mass", en: "Gram", ar: "غرام", code: "Gram" },
+      { meausrement: "Mass", en: "Kilogram", ar: "كيلوغرام", code: "Kilogram" },
+      { meausrement: "Mass", en: "Tonne", ar: "طن", code: "Tonne" },
+      { meausrement: "Mass", en: "Ounce", ar: "أونصة", code: "Ounce" },
+      { meausrement: "Mass", en: "Pound", ar: "رطل", code: "Pound" },
+    ],
+  },
+  {
+    en: "Energy",
+    ar: "الطاقة",
+
+    units: [
+      { meausrement: "Energy", en: "Joule", ar: "جول", code: "Joule" },
+      { meausrement: "Energy", en: "Watt-hour", ar: "واط-ساعة", code: "Watt" },
+    ],
+  },
+  {
+    en: "Angle",
+    ar: "الزاوية",
+
+    units: [
+      { meausrement: "Angle", en: "Degree", ar: "درجة", code: "Degree" },
+      { meausrement: "Angle", en: "Radian", ar: "راديان", code: "Radian" },
+    ],
+  },
+  {
+    en: "Electric",
+    ar: "الكهرباء",
+
+    units: [
+      { meausrement: "Electric", en: "Ampere", ar: "أمبير", code: "Amp" },
+      { meausrement: "Electric", en: "Volt", ar: "فولت", code: "Volt" },
+      { meausrement: "Electric", en: "Ohm", ar: "أوم", code: "Ohm" },
+      { meausrement: "Electric", en: "Pascal", ar: "باسكال", code: "Pascal" },
+    ],
+  },
+  {
+    en: "Data",
+    ar: "البيانات",
+
+    units: [
+      { meausrement: "Data", en: "Bit", ar: "بت", code: "Bit" },
+      { meausrement: "Data", en: "Byte", ar: "بايت", code: "Byte" },
+    ],
+  },
+  {
+    en: "Substance",
+    ar: "المادة",
+
+    units: [{ meausrement: "Substance", en: "Mole", ar: "مول", code: "Mole" }],
+  },
+];
+
 export const CURRENCY_INFO = [
   {
     code: "AED",

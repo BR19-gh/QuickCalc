@@ -96,6 +96,27 @@
             "pleaseShareError": "\n\nPlease share this error with the developer, contact information in the settings.",
             "errorTitleUnkown": "an unknown error occurred"
           }
+        },
+        "UnitsCon": {
+          "title": "Units Converter",
+          "text": {
+            "calculate": "Calculate",
+            "reset": "Reset",
+            "Unit": "Unit",
+            "selectUnit": "Select Unit",
+            "selectMeasurement": "Select Measurement",
+            "searchUnit": "Search Unit",
+            "searchMeasurement": "Search Measurement",
+            "from": "From",
+            "to": "To",
+            "conversionResult": "Conversion Result: ",
+            "connectionErrorTitle": "Connection Error",
+            "connectionErrorMsg": "There is an issue connecting to the internet, this tool requires internet access. Please check your connection before using it.",
+            "gotIt": "Got it",
+            "errorTitle": "An error occurred",
+            "pleaseShareError": "\n\nPlease share this error with the developer, contact information in the settings.",
+            "errorTitleUnkown": "an unknown error occurred"
+          }
         }
       },
       "Settings": {

@@ -18,6 +18,8 @@ import { useTranslation } from "react-i18next";
 
 import { useRef } from "react";
 
+import * as Haptics from "expo-haptics";
+
 function DiscountCal({ theme }) {
   const { t } = useTranslation();
   const text = (text) => "screens.Home.DiscountCal.text." + text;
@@ -44,6 +46,7 @@ function DiscountCal({ theme }) {
 
   const calculate = () => {
     if (price && discount) {
+      Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
       let priceInEn = a2e(price);
       let discountInEn = a2e(discount);
 
@@ -64,6 +67,7 @@ function DiscountCal({ theme }) {
   };
 
   const reset = () => {
+    Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
     setPrice("");
     setDiscount("");
     setDiscountAmount("0");

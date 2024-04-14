@@ -25,6 +25,8 @@ import { handleCurrencyConversion } from "../../../store/actions/currResult";
 
 import Dropdown from "../../../components/Home/CurrencyCon/Dropdown";
 
+import * as Haptics from "expo-haptics";
+
 //import { useNetInfo } from "@react-native-community/netinfo";
 
 function CurrencyCon({ theme, dispatch, currResult }) {
@@ -74,6 +76,7 @@ function CurrencyCon({ theme, dispatch, currResult }) {
 
   const calculate = () => {
     if (fromCurrencyValue && fromCurrency && toCurrency) {
+      Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
       dispatch(
         handleCurrencyConversion(
           (fromValue = a2e(fromCurrencyValue)),
@@ -93,6 +96,7 @@ function CurrencyCon({ theme, dispatch, currResult }) {
   }, [currResult]);
 
   const reset = () => {
+    Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
     dispatch(
       handleCurrencyConversion(
         (fromValue = null),
@@ -186,7 +190,7 @@ function CurrencyCon({ theme, dispatch, currResult }) {
                 returnKeyType="done"
                 keyboardType="decimal-pad"
                 value={
-                  currResult.result ? Number(currResult.result).toFixed(3) : ""
+                  currResult.result ? Number(currResult.result).toFixed(2) : ""
                 }
                 onFocus={() => setToCurrencyValue("")}
                 onChangeText={(value) => setToCurrencyValue(value)}

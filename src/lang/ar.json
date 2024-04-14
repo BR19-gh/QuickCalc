@@ -96,6 +96,27 @@
             "pleaseShareError": "\n\nالرجاء مشاركة هذا الخطأ مع المطور، معلومات التواصل في الإعدادات",
             "errorTitleUnkown": "حدث خطأ غير معروف"
           }
+        },
+        "UnitsCon": {
+          "title": "محول الوحدات",
+          "text": {
+            "calculate": "احـســـب",
+            "reset": "إعادة تعيين",
+            "currency": "الوحدة",
+            "selectUnit": "اختر وحدة",
+            "selectMeasurement": "اختر قياس",
+            "searchUnit": "ابحث عن وحدة",
+            "searchMeasurement": "ابحث عن قياس",
+            "from": "من",
+            "to": "إلى",
+            "conversionResult": "نتيجة التحويل: ",
+            "connectionErrorTitle": "خطأ في الاتصال",
+            "connectionErrorMsg": "هناك مشكلة في الاتصال، هذه الأداة تستعمل اتصال الإنترنت، الرجاء التحقق من اتصالك قبل استعمالها",
+            "gotIt": "فهمت",
+            "errorTitle": "حدث خطأ",
+            "pleaseShareError": "\n\nالرجاء مشاركة هذا الخطأ مع المطور، معلومات التواصل في الإعدادات",
+            "errorTitleUnkown": "حدث خطأ غير معروف"
+          }
         }
       },
       "Settings": {

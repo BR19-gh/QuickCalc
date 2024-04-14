@@ -3,6 +3,7 @@ import { receiveTools } from "./tools";
 import { getToolsInitial } from "../../../_DATA";
 import { receiveColors } from "./colors";
 import { receiveCurrResult } from "./currResult";
+import { receiveUnitResult } from "./unitResult";
 
 export function handleInitialData() {
   return (dispatch) => {
@@ -12,6 +13,7 @@ export function handleInitialData() {
           dispatch(receiveTools(tools));
           dispatch(receiveColors(colors));
           dispatch(receiveCurrResult({ currResult: "" }));
+          dispatch(receiveUnitResult({ unitResult: "" }));
         })
 
         .catch((error) => {

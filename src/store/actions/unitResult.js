@@ -3,8 +3,8 @@ import { Alert } from "react-native";
 import { lang } from "../../helpers";
 import * as Haptics from "expo-haptics";
 
-export function receiveCurrResult(result) {
-  console.log("receiveCurrResult", result);
+export function receiveUnitResult(result) {
+  console.log("receiveUnitResult", result);
   return {
     type: GET_RESULT,
     result,
@@ -14,8 +14,8 @@ export function receiveCurrResult(result) {
 const userId = "br19";
 const apiKey = "dI2mGhNHzpffVltyJF85aSpfPWohuip0YLw3FR8hRlzoyZMg";
 
-export function handleCurrencyConversion(fromValue, fromType, toType) {
-  console.log("handleCurrencyConversion", fromValue, fromType, toType);
+export function handleUnitConversion(fromValue, fromType, toType) {
+  console.log("handleUnitConversion", fromValue, fromType, toType);
 
   const data = new FormData();
   data.append("from-value", fromValue);
@@ -25,7 +25,7 @@ export function handleCurrencyConversion(fromValue, fromType, toType) {
   return (dispatch) => {
     if (fromValue === null || fromType === null || toType === null) {
       dispatch(
-        receiveCurrResult({
+        receiveUnitResult({
           result: "",
           "from-value": "",
           "from-type": "",
@@ -69,7 +69,7 @@ export function handleCurrencyConversion(fromValue, fromType, toType) {
               ]
             );
           } else {
-            dispatch(receiveCurrResult(data));
+            dispatch(receiveUnitResult(data));
           }
         })
         .catch((error) => {

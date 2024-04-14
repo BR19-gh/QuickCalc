@@ -17,6 +17,8 @@ import { connect } from "react-redux";
 import { useTranslation } from "react-i18next";
 import { lang } from "../../../helpers";
 
+import * as Haptics from "expo-haptics";
+
 function TipCal({ theme }) {
   const { t } = useTranslation();
   const text = (text) => "screens.Home.TipCal.text." + text;
@@ -52,6 +54,7 @@ function TipCal({ theme }) {
 
   const calculate = () => {
     if (price && tip && numberOfPpl) {
+      Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
       let priceInEn = a2e(price);
       let tipInEn = a2e(tip);
       let numberOfPplInEn = a2e(numberOfPpl);
@@ -70,6 +73,7 @@ function TipCal({ theme }) {
   };
 
   const reset = () => {
+    Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
     setPrice("");
     setTip("");
     setNumberOfPpl("");
