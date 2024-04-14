@@ -6,6 +6,7 @@ import DiscountCal from "../screens/Home/DiscountCal";
 import UnitsCon from "../screens/Home/UnitsCon";
 import TipCal from "../screens/Home/TipCal";
 import CurrencyCon from "../screens/Home/CurrencyCon";
+import CalendarCon from "../screens/Home/CalendarCon";
 
 import { useTranslation } from "react-i18next";
 import { useState, useRef } from "react";
@@ -21,6 +22,7 @@ const HomeNavi = ({ isEditing, setIsEditing, theme }) => {
   const TipCaltext = (text) => "screens.Home.TipCal." + text;
   const CurrencyConText = (text) => "screens.Home.CurrencyCon." + text;
   const UnitsConText = (text) => "screens.Home.UnitsCon." + text;
+  const CalendarConText = (text) => "screens.Home.CalendarCon." + text;
 
   const searchBarRef = useRef(null);
 
@@ -119,6 +121,13 @@ const HomeNavi = ({ isEditing, setIsEditing, theme }) => {
         }}
         name="CurrencyCon"
         children={() => <CurrencyCon theme={theme} />}
+      />
+      <Stack.Screen
+        options={{
+          title: t(CalendarConText("title")),
+        }}
+        name="CalendarCon"
+        children={() => <CalendarCon theme={theme} />}
       />
     </Stack.Navigator>
   );

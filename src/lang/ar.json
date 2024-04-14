@@ -118,6 +118,18 @@
             "pleaseShareError": "\n\nالرجاء مشاركة هذا الخطأ مع المطور، معلومات التواصل في الإعدادات",
             "errorTitleUnkown": "حدث خطأ غير معروف"
           }
+        },
+        "CalendarCon": {
+          "title": "محول التقويم",
+          "text": {
+            "discount": "الخصم",
+            "discountPres": "الخصم ٪",
+            "price": "المبلغ",
+            "calculate": "احـســـب",
+            "priceAfter": "المبلغ الجديد: ",
+            "discountAmount": "مقدار الخصم: ",
+            "reset": "إعادة تعيين"
+          }
         }
       },
       "Settings": {

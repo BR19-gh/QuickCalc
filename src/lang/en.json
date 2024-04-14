@@ -118,6 +118,18 @@
             "pleaseShareError": "\n\nPlease share this error with the developer, contact information in the settings.",
             "errorTitleUnkown": "an unknown error occurred"
           }
+        },
+        "CalendarCon": {
+          "title": "Calendar Converter",
+          "text": {
+            "discount": "Discount",
+            "discountPres": "Discount %",
+            "price": "Price",
+            "calculate": "Calculate",
+            "priceAfter": "Price After: ",
+            "discountAmount": "Discount Amount: ",
+            "reset": "Reset"
+          }
         }
       },
       "Settings": {

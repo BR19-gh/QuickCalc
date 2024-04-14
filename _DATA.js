@@ -72,6 +72,22 @@ const TOOLS = [
     isFavorite: false,
     isHidden: false,
   },
+  {
+    id: 5,
+    name: {
+      en: "Calendar Converter",
+      ar: "محول التقويم",
+    },
+    description: {
+      en: "Convert between calendars",
+      ar: "حول بين مختلف التقاويم",
+    },
+    icon: "calendar",
+    colors: ["#8e2f9c", "#752880", "#3f0e44"],
+    link: "CalendarCon",
+    isFavorite: false,
+    isHidden: false,
+  },
   // {
   //   id: 5,
   //   name: "Create Tool",

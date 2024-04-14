@@ -16,13 +16,13 @@ let str = deviceLanguage;
 let match = str.match(/^([a-z]{2})/i);
 if (match) {
   lang = match[0];
-  if (lang == "ar") {
-    I18nManager.forceRTL(true);
-    I18nManager.allowRTL(true);
-  } else {
-    I18nManager.forceRTL(false);
-    I18nManager.allowRTL(false);
-  }
+  // if (lang == "ar") {
+  //   I18nManager.forceRTL(true);
+  //   I18nManager.allowRTL(true);
+  // } else {
+  //   I18nManager.forceRTL(false);
+  //   I18nManager.allowRTL(false);
+  // }
 }
 // } else {
 //   Alert.alert(

@@ -70,7 +70,9 @@ function CurrencyCon({ theme, dispatch, currResult }) {
 
   const switchCur = () => {
     const temp = fromCurrency;
-    setFromCurrency(toCurrency);
+    const temp2 = toCurrency;
+    reset();
+    setFromCurrency(temp2);
     setToCurrency(temp);
   };
 

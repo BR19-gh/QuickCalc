@@ -26,7 +26,6 @@ const DropdownComponent = ({ theme, text, t, setUnit, unit, measurement }) => {
   const [filteredUnits, setFilteredUnits] = useState([{ units: [{}] }]);
 
   useEffect(() => {
-    console.log("measurement changed", measurement);
     setFilteredUnits(
       measurement
         ? UNIT_INFO.map((category) => ({
