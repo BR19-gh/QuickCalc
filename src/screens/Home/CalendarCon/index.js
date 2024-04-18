@@ -71,7 +71,13 @@ function CalendarCon({ theme }) {
         Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
         let result = {};
         if (fromCalendar.value === "gregorian") {
-          if (fromCalendarValue.month < 1 || fromCalendarValue.day < 1) {
+          if (
+            fromCalendarValue.year < 1 ||
+            fromCalendarValue.month < 1 ||
+            fromCalendarValue.month > 12 ||
+            fromCalendarValue.day < 1 ||
+            fromCalendarValue.day > 31
+          ) {
             Haptics.notificationAsync(Haptics.NotificationFeedbackType.Warning);
             Alert.alert(
               t(text("errorInValidInput")),
@@ -122,28 +128,38 @@ function CalendarCon({ theme }) {
               day: preResult.hd,
             };
           } else if (toCalendar.value === "persian") {
-            result = toPersian(
-              Number(fromCalendarValue.year),
-              Number(fromCalendarValue.month) - 1,
-              Number(fromCalendarValue.day)
-            );
-          } else if (toCalendar.value === "hebrew") {
-            result = toHebrew(
-              Number(fromCalendarValue.year),
-              Number(fromCalendarValue.month) - 1,
-              Number(fromCalendarValue.day)
-            );
-          } else {
             if (fromCalendarValue.year < 100) {
               Haptics.notificationAsync(
                 Haptics.NotificationFeedbackType.Warning
               );
               Alert.alert(
                 t(text("errorUnacceptableInput")),
-                t(text("errorUnacceptableInputMsg2"))
+                t(text("errorUnacceptableInputMsg"))
               );
               return null;
             }
+            result = toPersian(
+              Number(fromCalendarValue.year),
+              Number(fromCalendarValue.month) - 1,
+              Number(fromCalendarValue.day)
+            );
+          } else if (toCalendar.value === "hebrew") {
+            if (fromCalendarValue.year < 100) {
+              Haptics.notificationAsync(
+                Haptics.NotificationFeedbackType.Warning
+              );
+              Alert.alert(
+                t(text("errorUnacceptableInput")),
+                t(text("errorUnacceptableInputMsg"))
+              );
+              return null;
+            }
+            result = toHebrew(
+              Number(fromCalendarValue.year),
+              Number(fromCalendarValue.month) - 1,
+              Number(fromCalendarValue.day)
+            );
+          } else {
             result = {
               year: Number(fromCalendarValue.year),
               month: Number(fromCalendarValue.month),

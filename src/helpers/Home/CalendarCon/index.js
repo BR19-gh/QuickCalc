@@ -83,8 +83,8 @@ const monthsNamePersian = [
   "اسفند",
 ];
 const monthsNameHebrew = [
-  "Tishrei",
-  "Cheshvan",
+  "Tishri",
+  "Heshvan",
   "Kislev",
   "Tevet",
   "Shevat",
@@ -92,7 +92,7 @@ const monthsNameHebrew = [
   "Nisan",
   "Iyar",
   "Sivan",
-  "Tammuz",
+  "Tamuz",
   "Av",
   "Elul",
 ];
@@ -148,7 +148,6 @@ export const toHebrew = (gy, gm, gd) => {
   );
   let dateParts = dateSrting.split(" ").map((part) => part.trim());
   dateParts[1] = dateParts[1].replace(",", "");
-
   return {
     day: dateParts[1],
     month: monthsNameHebrew.indexOf(dateParts[0].trim()) + 1,

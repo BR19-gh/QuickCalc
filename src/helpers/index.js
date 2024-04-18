@@ -39,25 +39,25 @@ export const CALENDAR_INFO = [
   {
     en: "Islamic",
     ar: "هجري",
-    short: { ar: "هـ", en: "AH" },
+    short: { ar: "ھ", en: "AH" },
     value: "islamicLunar",
   },
   {
     en: "Islamic Solar",
     ar: "هجري شمسي",
-    short: { ar: "هـ ش", en: "SH" },
+    short: { ar: "ھ ش", en: "SH" },
     value: "islamicSolar",
   },
   {
     en: "Persian",
     ar: "فارسي",
-    short: { ar: "ف", en: "PE" },
+    short: { ar: "ف", en: "HS" },
     value: "persian",
   },
   {
     en: "Hebrew",
     ar: "عبري",
-    short: { ar: "ع", en: "HE" },
+    short: { ar: "ع", en: "AM" },
     value: "hebrew",
   },
 ];
@@ -71,13 +71,13 @@ export const CALENDAR_INFO_LIMITED = [
   {
     en: "Islamic",
     ar: "هجري",
-    short: { ar: "هـ", en: "AH" },
+    short: { ar: "ھ", en: "AH" },
     value: "islamicLunar",
   },
   {
     en: "Islamic Solar",
     ar: "هجري شمسي",
-    short: { ar: "هـ ش", en: "SH" },
+    short: { ar: "ھ ش", en: "SH" },
     value: "islamicSolar",
   },
 ];
