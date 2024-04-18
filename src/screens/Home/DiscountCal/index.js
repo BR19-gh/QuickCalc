@@ -46,7 +46,7 @@ function DiscountCal({ theme }) {
 
   const calculate = () => {
     if (price && discount) {
-      Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
+      Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
       let priceInEn = a2e(price);
       let discountInEn = a2e(discount);
 

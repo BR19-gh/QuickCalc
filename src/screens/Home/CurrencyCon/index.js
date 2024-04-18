@@ -78,7 +78,7 @@ function CurrencyCon({ theme, dispatch, currResult }) {
 
   const calculate = () => {
     if (fromCurrencyValue && fromCurrency && toCurrency) {
-      Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
+      Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
       dispatch(
         handleCurrencyConversion(
           (fromValue = a2e(fromCurrencyValue)),

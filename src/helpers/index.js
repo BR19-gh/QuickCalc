@@ -29,6 +29,59 @@ if (match) {
 
 export const lang = lan;
 
+export const CALENDAR_INFO = [
+  {
+    en: "Gregorian",
+    ar: "ميلادي",
+    short: { ar: "م", en: "AD" },
+    value: "gregorian",
+  },
+  {
+    en: "Islamic",
+    ar: "هجري",
+    short: { ar: "هـ", en: "AH" },
+    value: "islamicLunar",
+  },
+  {
+    en: "Islamic Solar",
+    ar: "هجري شمسي",
+    short: { ar: "هـ ش", en: "SH" },
+    value: "islamicSolar",
+  },
+  {
+    en: "Persian",
+    ar: "فارسي",
+    short: { ar: "ف", en: "PE" },
+    value: "persian",
+  },
+  {
+    en: "Hebrew",
+    ar: "عبري",
+    short: { ar: "ع", en: "HE" },
+    value: "hebrew",
+  },
+];
+export const CALENDAR_INFO_LIMITED = [
+  {
+    en: "Gregorian",
+    ar: "ميلادي",
+    short: { ar: "م", en: "AD" },
+    value: "gregorian",
+  },
+  {
+    en: "Islamic",
+    ar: "هجري",
+    short: { ar: "هـ", en: "AH" },
+    value: "islamicLunar",
+  },
+  {
+    en: "Islamic Solar",
+    ar: "هجري شمسي",
+    short: { ar: "هـ ش", en: "SH" },
+    value: "islamicSolar",
+  },
+];
+
 export const UNIT_INFO = [
   {
     en: "Length",

@@ -1,16 +1,9 @@
 import { StatusBar } from "expo-status-bar";
-import {
-  Text,
-  View,
-  TouchableOpacity,
-  ScrollView,
-  Keyboard,
-  TextInput,
-} from "react-native";
+import { Text, View, TouchableOpacity, ScrollView, Alert } from "react-native";
 import styles from "./styles";
 import SweetSFSymbol from "sweet-sfsymbols";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { connect } from "react-redux";
 
@@ -20,131 +13,400 @@ import { useRef } from "react";
 
 import * as Haptics from "expo-haptics";
 
+import DateInput from "../../../components/Home/CalendarCon/DateInput";
+import DropdownComponent from "../../../components/Home/CalendarCon/Dropdown";
+import {
+  toHijri,
+  toGregorian,
+  toPersian,
+  toHebrew,
+} from "../../../helpers/Home/CalendarCon";
+import { toSolarHijri, toGregorian as toGregorianSolar } from "solarhijri-js";
+import { lang, CALENDAR_INFO } from "../../../helpers";
+
 function CalendarCon({ theme }) {
   const { t } = useTranslation();
-  const text = (text) => "screens.Home.DiscountCal.text." + text;
+  const text = (text) => "screens.Home.CalendarCon.text." + text;
   const secondInput = useRef(null);
-  const [price, setPrice] = useState();
-  const [discount, setDiscount] = useState();
+  const [isLimited, setIsLimited] = useState(false);
+  const [fromText, setFromText] = useState("");
+  const [fromCalendar, setFromCalendar] = useState("");
+  const [toCalendar, setToCalendar] = useState("");
+  const [fromCalendarValue, setFromCalendarValue] = useState({
+    year: "",
+    month: "",
+    day: "",
+  });
+  const [toCalendarValue, setToCalendarValue] = useState({
+    year: "",
+    month: "",
+    day: "",
+  });
 
-  const [discountAmount, setDiscountAmount] = useState("0");
-  const [priceAfter, setPriceAfter] = useState("0");
+  const switchCur = () => {
+    const temp = fromCalendar;
+    const temp2 = toCalendar;
+    reset();
 
-  const focusOnSecondInput = () => {
-    if (secondInput && secondInput.current) {
-      secondInput.current.focus();
+    if (temp2.value !== "gregorian") {
+      setIsLimited(true);
+    } else {
+      setIsLimited(false);
     }
-  };
 
-  const hideKeyboard = () => {
-    Keyboard.dismiss();
-  };
-
-  const a2e = (s) => {
-    if (s) return s.replace(/[٠-٩]/g, (d) => "٠١٢٣٤٥٦٧٨٩".indexOf(d));
+    setFromCalendar(temp2);
+    setToCalendar(temp);
   };
 
   const calculate = () => {
-    if (price && discount) {
-      Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
-      let priceInEn = a2e(price);
-      let discountInEn = a2e(discount);
+    if (fromCalendar && toCalendar) {
+      if (
+        fromCalendarValue.day &&
+        fromCalendarValue.month &&
+        fromCalendarValue.year &&
+        !isNaN(fromCalendarValue.day) &&
+        !isNaN(fromCalendarValue.month) &&
+        !isNaN(fromCalendarValue.year)
+      ) {
+        Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
+        let result = {};
+        if (fromCalendar.value === "gregorian") {
+          if (fromCalendarValue.month < 1 || fromCalendarValue.day < 1) {
+            Haptics.notificationAsync(Haptics.NotificationFeedbackType.Warning);
+            Alert.alert(
+              t(text("errorInValidInput")),
+              t(text("errorInValidInputMsg"))
+            );
+            return null;
+          }
+          if (toCalendar.value === "islamicLunar") {
+            if (fromCalendarValue.year < 100) {
+              Haptics.notificationAsync(
+                Haptics.NotificationFeedbackType.Warning
+              );
+              Alert.alert(
+                t(text("errorUnacceptableInput")),
+                t(text("errorUnacceptableInputMsg"))
+              );
+              return null;
+            }
+            let preResult = toHijri(
+              Number(fromCalendarValue.year),
+              Number(fromCalendarValue.month),
+              Number(fromCalendarValue.day)
+            );
+            result = {
+              year: preResult.hy,
+              month: preResult.hm,
+              day: preResult.hd,
+            };
+          } else if (toCalendar.value === "islamicSolar") {
+            if (fromCalendarValue.year < 1) {
+              Haptics.notificationAsync(
+                Haptics.NotificationFeedbackType.Warning
+              );
+              Alert.alert(
+                t(text("errorUnacceptableInput")),
+                t(text("errorUnacceptableInputMsg2"))
+              );
+              return null;
+            }
+            let preResult = toSolarHijri(
+              Number(fromCalendarValue.year),
+              Number(fromCalendarValue.month),
+              Number(fromCalendarValue.day)
+            );
+            result = {
+              year: preResult.hy,
+              month: preResult.hm,
+              day: preResult.hd,
+            };
+          } else if (toCalendar.value === "persian") {
+            result = toPersian(
+              Number(fromCalendarValue.year),
+              Number(fromCalendarValue.month) - 1,
+              Number(fromCalendarValue.day)
+            );
+          } else if (toCalendar.value === "hebrew") {
+            result = toHebrew(
+              Number(fromCalendarValue.year),
+              Number(fromCalendarValue.month) - 1,
+              Number(fromCalendarValue.day)
+            );
+          } else {
+            if (fromCalendarValue.year < 100) {
+              Haptics.notificationAsync(
+                Haptics.NotificationFeedbackType.Warning
+              );
+              Alert.alert(
+                t(text("errorUnacceptableInput")),
+                t(text("errorUnacceptableInputMsg2"))
+              );
+              return null;
+            }
+            result = {
+              year: Number(fromCalendarValue.year),
+              month: Number(fromCalendarValue.month),
+              day: Number(fromCalendarValue.day),
+            };
+          }
+        } else if (fromCalendar.value === "islamicLunar") {
+          if (
+            fromCalendarValue.year < 1 ||
+            fromCalendarValue.month < 1 ||
+            fromCalendarValue.month > 12 ||
+            fromCalendarValue.day < 1 ||
+            fromCalendarValue.day > 30
+          ) {
+            Haptics.notificationAsync(Haptics.NotificationFeedbackType.Warning);
+            Alert.alert(
+              t(text("errorInValidInput")),
+              t(text("errorInValidInputMsg"))
+            );
+            return null;
+          }
+          if (toCalendar.value === "gregorian") {
+            let preResult = toGregorian(
+              Number(fromCalendarValue.year),
+              Number(fromCalendarValue.month),
+              Number(fromCalendarValue.day)
+            );
+            result = {
+              year: preResult.gy,
+              month: preResult.gm,
+              day: preResult.gd,
+            };
+          } else if (toCalendar.value === "islamicSolar") {
+            let preResult = toGregorian(
+              Number(fromCalendarValue.year),
+              Number(fromCalendarValue.month),
+              Number(fromCalendarValue.day)
+            );
 
-      let discountAmount = priceInEn * (discountInEn / 100);
-      let priceAfter = priceInEn - discountAmount;
+            let preResult2 = toSolarHijri(
+              preResult.gy,
+              preResult.gm,
+              preResult.gd
+            );
+            result = {
+              year: preResult2.hy,
+              month: preResult2.hm,
+              day: preResult2.hd,
+            };
+          } else {
+            result = {
+              year: Number(fromCalendarValue.year),
+              month: Number(fromCalendarValue.month),
+              day: Number(fromCalendarValue.day),
+            };
+          }
+        } else if (fromCalendar.value === "islamicSolar") {
+          if (
+            fromCalendarValue.year < 1 ||
+            fromCalendarValue.month < 1 ||
+            fromCalendarValue.month > 12 ||
+            fromCalendarValue.day < 1 ||
+            fromCalendarValue.day > 31
+          ) {
+            Haptics.notificationAsync(Haptics.NotificationFeedbackType.Warning);
+            Alert.alert(
+              t(text("errorInValidInput")),
+              t(text("errorInValidInputMsg"))
+            );
+            return null;
+          }
+          if (toCalendar.value === "gregorian") {
+            let preResult = toGregorianSolar(
+              Number(fromCalendarValue.year),
+              Number(fromCalendarValue.month),
+              Number(fromCalendarValue.day)
+            );
+            result = {
+              year: preResult.gy,
+              month: preResult.gm,
+              day: preResult.gd,
+            };
+          } else if (toCalendar.value === "islamicLunar") {
+            let preResult = toGregorianSolar(
+              Number(fromCalendarValue.year),
+              Number(fromCalendarValue.month),
+              Number(fromCalendarValue.day)
+            );
+            let preResult2 = toHijri(preResult.gy, preResult.gm, preResult.gd);
+            result = {
+              year: preResult2.hy,
+              month: preResult2.hm,
+              day: preResult2.hd,
+            };
+          } else {
+            result = {
+              year: Number(fromCalendarValue.year),
+              month: Number(fromCalendarValue.month),
+              day: Number(fromCalendarValue.day),
+            };
+          }
+        }
+        setFromText(
+          fromCalendar[lang] &&
+            `${fromCalendarValue.day} ${t(
+              text(
+                "monthsName." +
+                  fromCalendar.value +
+                  "." +
+                  fromCalendarValue.month
+              )
+            )} ${fromCalendarValue.year} ${fromCalendar["short"][lang]}`
+        );
 
-      if (discountAmount.toString().includes(".")) {
-        setDiscountAmount(discountAmount.toFixed(2));
+        setToCalendarValue({
+          year: `${result.year}`,
+          month: `${result.month}`,
+          day: `${result.day}`,
+        });
       } else {
-        setDiscountAmount(discountAmount);
+        Haptics.notificationAsync(Haptics.NotificationFeedbackType.Warning);
+
+        Alert.alert(
+          t(text("errorInValidInput")),
+          t(text("errorInValidInputMsg"))
+        );
+        return null;
       }
-      if (priceAfter.toString().includes(".")) {
-        setPriceAfter(priceAfter.toFixed(2));
-      } else {
-        setPriceAfter(priceAfter);
-      }
+    } else {
+      Haptics.notificationAsync(Haptics.NotificationFeedbackType.Warning);
+
+      Alert.alert(
+        t(text("errorNoCalendarsSelected")),
+        t(text("errorNoCalendarsSelectedMsg"))
+      );
     }
   };
 
   const reset = () => {
     Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
-    setPrice("");
-    setDiscount("");
-    setDiscountAmount("0");
-    setPriceAfter("0");
+    setFromText("");
+    setFromCalendar("");
+    setToCalendar("");
+    setFromCalendarValue({
+      year: "",
+      month: "",
+      day: "",
+    });
+    setToCalendarValue({
+      year: "",
+      month: "",
+      day: "",
+    });
   };
+
+  useEffect(() => {
+    setToCalendarValue({
+      year: "",
+      month: "",
+      day: "",
+    });
+  }, [fromCalendar, toCalendar]);
 
   const isDark = (darkOp, lightp) => (theme === "dark" ? darkOp : lightp);
 
   return (
     <View>
       <ScrollView className="h-full">
-        <View className={"w-full mt-28 items-center"}>
+        <View className={"w-full mt-32 items-center"}>
           <View className={"w-full flex-row justify-evenly"}>
             <View>
-              <Text
-                className={
-                  "text-center p-4 text-3xl font-semibold" +
-                  isDark(" text-blue-100", " text-blue-900")
-                }
-              >
-                {t(text("price"))}
-              </Text>
-              <TextInput
-                style={{
-                  backgroundColor: isDark("#CCCCCC", "#FFFFFF"),
-                  width: 150,
-                  height: 150,
-                  fontSize: price ? 40 : 20,
-                  textAlign: "center",
-                  color: isDark("#283dab", "#283987"),
-                  borderRadius: 10,
-                  borderWidth: 1,
-                  borderColor: "#283dab88",
-                }}
-                blurOnSubmit={false}
-                returnKeyType={"done"}
-                onSubmitEditing={focusOnSecondInput}
-                value={price}
-                onChangeText={(value) => setPrice(value)}
-                onFocus={() => setPrice("")}
-                placeholderTextColor={isDark("#28398788", "#28398755")}
-                placeholder={t(text("price"))}
-                keyboardType="numeric"
+              <DropdownComponent
+                isFrom={true}
+                isLimited={isLimited}
+                setIsLimited={setIsLimited}
+                selectCalendar={"selectFromCalendar"}
+                theme={theme}
+                text={text}
+                t={t}
+                calendar={fromCalendar}
+                setCalendar={setFromCalendar}
+              />
+
+              <DateInput
+                text={text}
+                t={t}
+                isDark={isDark}
+                isEditable={true}
+                date="day"
+                calendarValue={fromCalendarValue}
+                setCalendarValue={setFromCalendarValue}
+              />
+              <DateInput
+                text={text}
+                t={t}
+                isDark={isDark}
+                isEditable={true}
+                date="month"
+                calendarValue={fromCalendarValue}
+                setCalendarValue={setFromCalendarValue}
+              />
+              <DateInput
+                text={text}
+                t={t}
+                isDark={isDark}
+                isEditable={true}
+                date="year"
+                calendarValue={fromCalendarValue}
+                setCalendarValue={setFromCalendarValue}
               />
             </View>
-            <View>
-              <Text
-                className={
-                  "text-center p-4 font-semibold text-3xl" +
-                  isDark(" text-blue-100", " text-blue-900")
-                }
-              >
-                {t(text("discount"))}
-              </Text>
-              <TextInput
-                ref={secondInput}
+            <TouchableOpacity
+              onPress={() => {
+                switchCur();
+              }}
+            >
+              <SweetSFSymbol
                 style={{
-                  backgroundColor: isDark("#CCCCCC", "#FFFFFF"),
-                  width: 150,
-                  height: 150,
-                  fontSize: discount ? 40 : 20,
-                  textAlign: "center",
-                  color: isDark("#283dab", "#283987"),
-                  borderRadius: 10,
-                  borderWidth: 1,
-                  borderColor: "#283dab88",
+                  marginTop: 7,
                 }}
-                returnKeyType="done"
-                keyboardType="decimal-pad"
-                onSubmitEditing={() => {
-                  hideKeyboard();
-                }}
-                value={discount}
-                onFocus={() => setDiscount("")}
-                onChangeText={(value) => setDiscount(value)}
-                placeholderTextColor={isDark("#28398788", "#28398755")}
-                placeholder={t(text("discountPres"))}
+                name={"arrow.left.arrow.right"}
+                size={25}
+                colors={[isDark("#0082F6", "#1E3A8A")]}
+              />
+            </TouchableOpacity>
+            <View>
+              <DropdownComponent
+                isFrom={false}
+                isLimited={isLimited}
+                setIsLimited={setIsLimited}
+                selectCalendar={"selectToCalendar"}
+                theme={theme}
+                text={text}
+                t={t}
+                calendar={toCalendar}
+                setCalendar={setToCalendar}
+              />
+              <DateInput
+                text={text}
+                t={t}
+                isDark={isDark}
+                isEditable={false}
+                date="day"
+                calendarValue={toCalendarValue}
+                setCalendarValue={setToCalendarValue}
+              />
+              <DateInput
+                text={text}
+                t={t}
+                isDark={isDark}
+                isEditable={false}
+                date="month"
+                calendarValue={toCalendarValue}
+                setCalendarValue={setToCalendarValue}
+              />
+              <DateInput
+                text={text}
+                t={t}
+                isDark={isDark}
+                isEditable={false}
+                date="year"
+                calendarValue={toCalendarValue}
+                setCalendarValue={setToCalendarValue}
               />
             </View>
           </View>
@@ -181,39 +443,54 @@ function CalendarCon({ theme }) {
             </TouchableOpacity>
           </View>
 
-          <View className="w-full flex-row flex-wrap mt-14">
+          <View className="w-full flex-row flex-wrap mt-10">
             <View className="w-full flex-row p-2 text-left">
               <Text
                 className={
                   "text-2xl" + isDark(" text-blue-100", " text-blue-900")
                 }
               >
-                {t(text("priceAfter"))}
+                {t(text("from"))}
+                {":  "}
               </Text>
               <Text
                 className={
-                  "text-3xl font-semibold" +
+                  "text-2xl font-semibold" +
                   isDark(" text-blue-100", " text-blue-900")
                 }
               >
-                {priceAfter}
+                {fromText}
               </Text>
             </View>
-            <View className="flex-row p-2">
+
+            <View className="w-full flex-row p-2 text-left">
               <Text
                 className={
                   "text-2xl" + isDark(" text-blue-100", " text-blue-900")
                 }
               >
-                {t(text("discountAmount"))}
+                {t(text("to"))}
+                {":  "}
               </Text>
               <Text
                 className={
-                  "text-3xl font-semibold" +
+                  "text-2xl font-semibold" +
                   isDark(" text-blue-100", " text-blue-900")
                 }
               >
-                {discountAmount}
+                {toCalendar[lang] &&
+                toCalendarValue.day !== "" &&
+                toCalendarValue.month !== "" &&
+                toCalendarValue.year !== ""
+                  ? `${toCalendarValue.day} ${t(
+                      text(
+                        "monthsName." +
+                          toCalendar.value +
+                          "." +
+                          toCalendarValue.month
+                      )
+                    )} ${toCalendarValue.year} ${toCalendar["short"][lang]}`
+                  : ""}
               </Text>
             </View>
           </View>
@@ -224,9 +501,9 @@ function CalendarCon({ theme }) {
   );
 }
 
-const mapStateToProps = ({ tools }) => {
+const mapStateToProps = ({ calenResult }) => {
   return {
-    tools,
+    calenResult,
   };
 };
 

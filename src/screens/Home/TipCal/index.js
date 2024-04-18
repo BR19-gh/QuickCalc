@@ -54,7 +54,7 @@ function TipCal({ theme }) {
 
   const calculate = () => {
     if (price && tip && numberOfPpl) {
-      Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
+      Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
       let priceInEn = a2e(price);
       let tipInEn = a2e(tip);
       let numberOfPplInEn = a2e(numberOfPpl);

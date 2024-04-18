@@ -85,7 +85,7 @@ function UnitsCon({ theme, dispatch, unitResult }) {
 
   const calculate = () => {
     if (fromUnitValue && fromUnit && toUnit) {
-      Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
+      Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
       dispatch(
         handleUnitConversion(
           (fromValue = a2e(fromUnitValue)),
