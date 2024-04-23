@@ -188,21 +188,35 @@ function UnitsCon({ theme, dispatch, unitResult }) {
             searchPlaceholderStyle={{
               color: theme === "dark" ? "#fff" : "#151E26",
             }}
-            renderRightIcon={() => (
-              <SweetSFSymbol
-                style={{
-                  marginRight: 5,
-                }}
-                name="chevron.down"
-                size={10}
-                color={theme === "dark" ? "#fff" : "#151E26"}
-              />
-            )}
+            renderRightIcon={() =>
+              lang === "ar" ? null : (
+                <SweetSFSymbol
+                  style={{
+                    marginRight: 5,
+                  }}
+                  name={isFocus ? "chevron.down" : "chevron.up"}
+                  size={10}
+                  colors={theme === "dark" ? "#fff" : "#151E26"}
+                />
+              )
+            }
+            renderLeftIcon={() =>
+              lang === "ar" ? (
+                <SweetSFSymbol
+                  style={{
+                    marginRight: 5,
+                  }}
+                  name={isFocus ? "chevron.down" : "chevron.up"}
+                  size={10}
+                  colors={theme === "dark" ? "#fff" : "#151E26"}
+                />
+              ) : null
+            }
             value={measurement}
             onFocus={() => setIsFocus(true)}
             onBlur={() => setIsFocus(false)}
             onChange={(item) => {
-              Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Heavy);
+              Haptics.selectionAsync();
               setMeasurement(item.en);
 
               setIsFocus(false);

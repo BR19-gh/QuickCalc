@@ -3,6 +3,7 @@ import SweetSFSymbol from "sweet-sfsymbols";
 import { NativeModules } from "react-native";
 import i18n from "../../../lang/i18n";
 import * as Haptics from "expo-haptics";
+import { useNavigation } from "@react-navigation/native";
 
 const Header = ({
   setIsEditing,
@@ -28,6 +29,8 @@ const Header = ({
   } else {
     lang = "en";
   }
+
+  const navigation = useNavigation();
 
   return (
     <View
@@ -86,7 +89,7 @@ const Header = ({
             <TouchableOpacity
               onPress={() => {
                 Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
-                //TODO: Adding tools functionality
+                navigation.navigate("NewTool");
               }}
             >
               <SweetSFSymbol name={"plus"} size={22} colors={["#3B82F6"]} />

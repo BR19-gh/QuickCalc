@@ -1,0 +1,2534 @@
+[
+  {
+    "key": 12,
+    "value": "1.magnifyingglass"
+  },
+
+  {
+    "key": 64,
+    "value": "airplayaudio"
+  },
+  {
+    "key": 65,
+    "value": "airplayvideo"
+  },
+  {
+    "key": 66,
+    "value": "alarm"
+  },
+  {
+    "key": 67,
+    "value": "alt"
+  },
+  {
+    "key": 68,
+    "value": "ant"
+  },
+  {
+    "key": 69,
+    "value": "antenna.radiowaves.left.and.right"
+  },
+  {
+    "key": 70,
+    "value": "app.badge"
+  },
+  {
+    "key": 71,
+    "value": "app"
+  },
+  {
+    "key": 72,
+    "value": "app.gift"
+  },
+  {
+    "key": 73,
+    "value": "archivebox"
+  },
+  {
+    "key": 74,
+    "value": "arkit"
+  },
+  {
+    "key": 75,
+    "value": "arrow.2.circlepath"
+  },
+  {
+    "key": 76,
+    "value": "arrow.2.squarepath"
+  },
+  {
+    "key": 77,
+    "value": "arrow.3.trianglepath"
+  },
+  {
+    "key": 78,
+    "value": "arrow.branch"
+  },
+  {
+    "key": 79,
+    "value": "arrow.clockwise"
+  },
+  {
+    "key": 80,
+    "value": "arrow.clockwise.icloud"
+  },
+  {
+    "key": 81,
+    "value": "arrow.counterclockwise"
+  },
+  {
+    "key": 82,
+    "value": "arrow.counterclockwise.icloud"
+  },
+  {
+    "key": 83,
+    "value": "arrow.down"
+  },
+  {
+    "key": 84,
+    "value": "arrow.down.doc"
+  },
+  {
+    "key": 85,
+    "value": "arrow.down.left"
+  },
+  {
+    "key": 86,
+    "value": "arrow.down.left.video"
+  },
+  {
+    "key": 87,
+    "value": "arrow.down.right.and.arrow.up.left"
+  },
+  {
+    "key": 88,
+    "value": "arrow.down.right"
+  },
+  {
+    "key": 89,
+    "value": "arrow.down.to.line"
+  },
+  {
+    "key": 90,
+    "value": "arrow.left.and.right"
+  },
+  {
+    "key": 91,
+    "value": "arrow.left"
+  },
+  {
+    "key": 92,
+    "value": "arrow.left.to.line"
+  },
+  {
+    "key": 93,
+    "value": "arrow.merge"
+  },
+  {
+    "key": 94,
+    "value": "arrow.right.arrow.left"
+  },
+  {
+    "key": 95,
+    "value": "arrow.right"
+  },
+  {
+    "key": 96,
+    "value": "arrow.right.to.line"
+  },
+  {
+    "key": 97,
+    "value": "arrow.swap"
+  },
+  {
+    "key": 98,
+    "value": "arrow.turn.down.left"
+  },
+  {
+    "key": 99,
+    "value": "arrow.turn.down.right"
+  },
+  {
+    "key": 100,
+    "value": "arrow.turn.left.down"
+  },
+  {
+    "key": 101,
+    "value": "arrow.turn.left.up"
+  },
+  {
+    "key": 102,
+    "value": "arrow.turn.right.down"
+  },
+  {
+    "key": 103,
+    "value": "arrow.turn.right.up"
+  },
+  {
+    "key": 104,
+    "value": "arrow.turn.up.left"
+  },
+  {
+    "key": 105,
+    "value": "arrow.turn.up.right"
+  },
+  {
+    "key": 106,
+    "value": "arrow.up.and.down"
+  },
+  {
+    "key": 107,
+    "value": "arrow.up.arrow.down"
+  },
+  {
+    "key": 108,
+    "value": "arrow.up.bin"
+  },
+  {
+    "key": 109,
+    "value": "arrow.up"
+  },
+  {
+    "key": 110,
+    "value": "arrow.up.doc"
+  },
+  {
+    "key": 111,
+    "value": "arrow.up.left.and.arrow.down.right"
+  },
+  {
+    "key": 112,
+    "value": "arrow.up.left"
+  },
+  {
+    "key": 113,
+    "value": "arrow.up.right"
+  },
+  {
+    "key": 114,
+    "value": "arrow.up.right.diamond"
+  },
+  {
+    "key": 115,
+    "value": "arrow.up.right.video"
+  },
+  {
+    "key": 116,
+    "value": "arrow.up.to.line"
+  },
+  {
+    "key": 117,
+    "value": "arrow.upright"
+  },
+  {
+    "key": 118,
+    "value": "arrow.uturn.down"
+  },
+  {
+    "key": 119,
+    "value": "arrow.uturn.left"
+  },
+  {
+    "key": 120,
+    "value": "arrow.uturn.right"
+  },
+  {
+    "key": 121,
+    "value": "arrow.uturn.up"
+  },
+  {
+    "key": 122,
+    "value": "arrowshape.turn.up.left.2"
+  },
+  {
+    "key": 123,
+    "value": "arrowshape.turn.up.left"
+  },
+  {
+    "key": 124,
+    "value": "arrowshape.turn.up.right"
+  },
+  {
+    "key": 125,
+    "value": "arrowtriangle.down"
+  },
+  {
+    "key": 126,
+    "value": "arrowtriangle.left"
+  },
+  {
+    "key": 127,
+    "value": "arrowtriangle.right"
+  },
+  {
+    "key": 128,
+    "value": "arrowtriangle.up"
+  },
+  {
+    "key": 129,
+    "value": "asterisk"
+  },
+  {
+    "key": 130,
+    "value": "at.badge.minus"
+  },
+  {
+    "key": 131,
+    "value": "at.badge.plus"
+  },
+  {
+    "key": 132,
+    "value": "at"
+  },
+  {
+    "key": 133,
+    "value": "australsign"
+  },
+  {
+    "key": 134,
+    "value": "b"
+  },
+  {
+    "key": 135,
+    "value": "backward.end"
+  },
+  {
+    "key": 136,
+    "value": "backward"
+  },
+  {
+    "key": 137,
+    "value": "badge.plus.radiowaves.right"
+  },
+  {
+    "key": 138,
+    "value": "bag.badge.minus"
+  },
+  {
+    "key": 139,
+    "value": "bag.badge.plus"
+  },
+  {
+    "key": 140,
+    "value": "bag"
+  },
+  {
+    "key": 141,
+    "value": "bahtsign"
+  },
+  {
+    "key": 142,
+    "value": "bandage"
+  },
+  {
+    "key": 143,
+    "value": "barcode.viewfinder"
+  },
+  {
+    "key": 144,
+    "value": "barcode"
+  },
+  {
+    "key": 145,
+    "value": "battery.0"
+  },
+  {
+    "key": 146,
+    "value": "battery.100"
+  },
+  {
+    "key": 147,
+    "value": "battery.25"
+  },
+  {
+    "key": 148,
+    "value": "bed.double"
+  },
+  {
+    "key": 149,
+    "value": "bell"
+  },
+  {
+    "key": 150,
+    "value": "bell.slash"
+  },
+  {
+    "key": 151,
+    "value": "bin.xmark"
+  },
+  {
+    "key": 152,
+    "value": "bitcoinsign"
+  },
+  {
+    "key": 153,
+    "value": "bold.italic.underline"
+  },
+  {
+    "key": 154,
+    "value": "bold.underline"
+  },
+  {
+    "key": 155,
+    "value": "bold"
+  },
+  {
+    "key": 156,
+    "value": "bolt.badge.a"
+  },
+  {
+    "key": 157,
+    "value": "bolt"
+  },
+  {
+    "key": 158,
+    "value": "bolt.horizontal"
+  },
+  {
+    "key": 159,
+    "value": "bolt.horizontal.icloud"
+  },
+  {
+    "key": 160,
+    "value": "bolt.slash"
+  },
+  {
+    "key": 161,
+    "value": "book"
+  },
+  {
+    "key": 162,
+    "value": "bookmark"
+  },
+  {
+    "key": 163,
+    "value": "briefcase"
+  },
+  {
+    "key": 164,
+    "value": "bubble.left.and.bubble.right"
+  },
+  {
+    "key": 165,
+    "value": "bubble.left"
+  },
+  {
+    "key": 166,
+    "value": "bubble.middle.bottom"
+  },
+  {
+    "key": 167,
+    "value": "bubble.middle.top"
+  },
+  {
+    "key": 168,
+    "value": "bubble.right"
+  },
+  {
+    "key": 169,
+    "value": "burn"
+  },
+  {
+    "key": 170,
+    "value": "burst"
+  },
+  {
+    "key": 172,
+    "value": "calendar.badge.minus"
+  },
+  {
+    "key": 173,
+    "value": "calendar.badge.plus"
+  },
+  {
+    "key": 174,
+    "value": "calendar"
+  },
+  {
+    "key": 175,
+    "value": "camera"
+  },
+  {
+    "key": 176,
+    "value": "camera.on.rectangle"
+  },
+  {
+    "key": 177,
+    "value": "camera.rotate"
+  },
+  {
+    "key": 178,
+    "value": "camera.viewfinder"
+  },
+  {
+    "key": 179,
+    "value": "capslock"
+  },
+  {
+    "key": 180,
+    "value": "capsule"
+  },
+  {
+    "key": 181,
+    "value": "captions.bubble"
+  },
+  {
+    "key": 182,
+    "value": "car"
+  },
+  {
+    "key": 183,
+    "value": "cart.badge.minus"
+  },
+  {
+    "key": 184,
+    "value": "cart.badge.plus"
+  },
+  {
+    "key": 185,
+    "value": "cart"
+  },
+  {
+    "key": 186,
+    "value": "cedisign"
+  },
+  {
+    "key": 187,
+    "value": "centsign"
+  },
+  {
+    "key": 188,
+    "value": "chart.bar"
+  },
+  {
+    "key": 189,
+    "value": "chart.pie"
+  },
+  {
+    "key": 190,
+    "value": "checkmark"
+  },
+  {
+    "key": 191,
+    "value": "checkmark.rectangle"
+  },
+  {
+    "key": 192,
+    "value": "checkmark.seal"
+  },
+  {
+    "key": 193,
+    "value": "checkmark.shield"
+  },
+  {
+    "key": 194,
+    "value": "chevron.compact.down"
+  },
+  {
+    "key": 195,
+    "value": "chevron.compact.left"
+  },
+  {
+    "key": 196,
+    "value": "chevron.compact.right"
+  },
+  {
+    "key": 197,
+    "value": "chevron.compact.up"
+  },
+  {
+    "key": 198,
+    "value": "chevron.down"
+  },
+  {
+    "key": 199,
+    "value": "chevron.left.2"
+  },
+  {
+    "key": 200,
+    "value": "chevron.left"
+  },
+  {
+    "key": 201,
+    "value": "chevron.left.slash.chevron.right"
+  },
+  {
+    "key": 202,
+    "value": "chevron.right.2"
+  },
+  {
+    "key": 203,
+    "value": "chevron.right"
+  },
+  {
+    "key": 204,
+    "value": "chevron.up.chevron.down"
+  },
+  {
+    "key": 205,
+    "value": "chevron.up"
+  },
+  {
+    "key": 206,
+    "value": "circle.bottomthird.split"
+  },
+  {
+    "key": 207,
+    "value": "circle"
+  },
+  {
+    "key": 208,
+    "value": "circle.grid.3x3"
+  },
+  {
+    "key": 209,
+    "value": "circle.grid.hex"
+  },
+
+  {
+    "key": 212,
+    "value": "clear"
+  },
+  {
+    "key": 213,
+    "value": "clock"
+  },
+  {
+    "key": 214,
+    "value": "cloud.bolt"
+  },
+  {
+    "key": 215,
+    "value": "cloud.bolt.rain"
+  },
+  {
+    "key": 216,
+    "value": "cloud.drizzle"
+  },
+  {
+    "key": 217,
+    "value": "cloud"
+  },
+  {
+    "key": 218,
+    "value": "cloud.fog"
+  },
+  {
+    "key": 219,
+    "value": "cloud.hail"
+  },
+  {
+    "key": 220,
+    "value": "cloud.heavyrain"
+  },
+  {
+    "key": 221,
+    "value": "cloud.moon.bolt"
+  },
+  {
+    "key": 222,
+    "value": "cloud.moon"
+  },
+  {
+    "key": 223,
+    "value": "cloud.moon.rain"
+  },
+  {
+    "key": 224,
+    "value": "cloud.rain"
+  },
+  {
+    "key": 225,
+    "value": "cloud.sleet"
+  },
+  {
+    "key": 226,
+    "value": "cloud.snow"
+  },
+  {
+    "key": 227,
+    "value": "cloud.sun.bolt"
+  },
+  {
+    "key": 228,
+    "value": "cloud.sun"
+  },
+  {
+    "key": 229,
+    "value": "cloud.sun.rain"
+  },
+  {
+    "key": 230,
+    "value": "coloncurrencysign"
+  },
+  {
+    "key": 231,
+    "value": "command"
+  },
+  {
+    "key": 232,
+    "value": "control"
+  },
+  {
+    "key": 233,
+    "value": "creditcard"
+  },
+  {
+    "key": 234,
+    "value": "crop.rotate"
+  },
+  {
+    "key": 235,
+    "value": "crop"
+  },
+  {
+    "key": 236,
+    "value": "cruzeirosign"
+  },
+  {
+    "key": 237,
+    "value": "cube.box"
+  },
+  {
+    "key": 238,
+    "value": "cube"
+  },
+  {
+    "key": 239,
+    "value": "cursor.rays"
+  },
+  {
+    "key": 241,
+    "value": "decrease.quotelevel"
+  },
+  {
+    "key": 242,
+    "value": "delete.left"
+  },
+  {
+    "key": 243,
+    "value": "delete.right"
+  },
+  {
+    "key": 244,
+    "value": "desktopcomputer"
+  },
+  {
+    "key": 245,
+    "value": "dial"
+  },
+  {
+    "key": 246,
+    "value": "divide"
+  },
+  {
+    "key": 247,
+    "value": "doc.append"
+  },
+  {
+    "key": 248,
+    "value": "doc"
+  },
+  {
+    "key": 249,
+    "value": "doc.on.clipboard"
+  },
+  {
+    "key": 250,
+    "value": "doc.on.doc"
+  },
+  {
+    "key": 251,
+    "value": "doc.plaintext"
+  },
+  {
+    "key": 252,
+    "value": "doc.richtext"
+  },
+  {
+    "key": 253,
+    "value": "doc.text"
+  },
+  {
+    "key": 254,
+    "value": "doc.text.magnifyingglass"
+  },
+  {
+    "key": 255,
+    "value": "doc.text.viewfinder"
+  },
+  {
+    "key": 256,
+    "value": "dollarsign"
+  },
+  {
+    "key": 257,
+    "value": "dongsign"
+  },
+  {
+    "key": 259,
+    "value": "dot.radiowaves.left.and.right"
+  },
+  {
+    "key": 260,
+    "value": "dot.radiowaves.right"
+  },
+  {
+    "key": 261,
+    "value": "drop.triangle"
+  },
+  {
+    "key": 263,
+    "value": "ear"
+  },
+  {
+    "key": 264,
+    "value": "eject"
+  },
+  {
+    "key": 265,
+    "value": "ellipses.bubble"
+  },
+  {
+    "key": 266,
+    "value": "ellipsis"
+  },
+  {
+    "key": 267,
+    "value": "envelope.badge"
+  },
+  {
+    "key": 268,
+    "value": "envelope"
+  },
+  {
+    "key": 269,
+    "value": "envelope.open"
+  },
+  {
+    "key": 270,
+    "value": "equal"
+  },
+  {
+    "key": 271,
+    "value": "escape"
+  },
+  {
+    "key": 272,
+    "value": "eurosign"
+  },
+  {
+    "key": 273,
+    "value": "exclamationmark.bubble"
+  },
+  {
+    "key": 274,
+    "value": "exclamationmark"
+  },
+  {
+    "key": 275,
+    "value": "exclamationmark.icloud"
+  },
+  {
+    "key": 276,
+    "value": "exclamationmark.octagon"
+  },
+  {
+    "key": 277,
+    "value": "exclamationmark.shield"
+  },
+  {
+    "key": 278,
+    "value": "exclamationmark.triangle"
+  },
+  {
+    "key": 279,
+    "value": "eye"
+  },
+  {
+    "key": 280,
+    "value": "eye.slash"
+  },
+  {
+    "key": 281,
+    "value": "eyedropper.full"
+  },
+  {
+    "key": 282,
+    "value": "eyedropper.halffull"
+  },
+  {
+    "key": 283,
+    "value": "eyedropper"
+  },
+  {
+    "key": 284,
+    "value": "eyeglasses"
+  },
+  {
+    "key": 285,
+    "value": "f"
+  },
+  {
+    "key": 286,
+    "value": "f.cursive"
+  },
+  {
+    "key": 287,
+    "value": "faceid"
+  },
+  {
+    "key": 288,
+    "value": "film"
+  },
+  {
+    "key": 289,
+    "value": "flag"
+  },
+  {
+    "key": 290,
+    "value": "flag.slash"
+  },
+  {
+    "key": 291,
+    "value": "flame"
+  },
+  {
+    "key": 292,
+    "value": "florinsign"
+  },
+  {
+    "key": 293,
+    "value": "flowchart"
+  },
+  {
+    "key": 294,
+    "value": "folder.badge.minus"
+  },
+  {
+    "key": 295,
+    "value": "folder.badge.person.crop"
+  },
+  {
+    "key": 296,
+    "value": "folder.badge.plus"
+  },
+  {
+    "key": 297,
+    "value": "folder"
+  },
+  {
+    "key": 298,
+    "value": "forward.end"
+  },
+  {
+    "key": 299,
+    "value": "forward"
+  },
+  {
+    "key": 300,
+    "value": "francsign"
+  },
+  {
+    "key": 301,
+    "value": "function"
+  },
+  {
+    "key": 302,
+    "value": "fx"
+  },
+  {
+    "key": 304,
+    "value": "gamecontroller"
+  },
+  {
+    "key": 305,
+    "value": "gauge.badge.minus"
+  },
+  {
+    "key": 306,
+    "value": "gauge.badge.plus"
+  },
+  {
+    "key": 307,
+    "value": "gauge"
+  },
+  {
+    "key": 308,
+    "value": "gear"
+  },
+  {
+    "key": 309,
+    "value": "gift"
+  },
+  {
+    "key": 310,
+    "value": "globe"
+  },
+  {
+    "key": 311,
+    "value": "gobackward.10.ar"
+  },
+  {
+    "key": 312,
+    "value": "gobackward.10.hi"
+  },
+  {
+    "key": 313,
+    "value": "gobackward.10"
+  },
+  {
+    "key": 314,
+    "value": "gobackward.15.ar"
+  },
+  {
+    "key": 315,
+    "value": "gobackward.15.hi"
+  },
+  {
+    "key": 316,
+    "value": "gobackward.15"
+  },
+  {
+    "key": 317,
+    "value": "gobackward.30.ar"
+  },
+  {
+    "key": 318,
+    "value": "gobackward.30.hi"
+  },
+  {
+    "key": 319,
+    "value": "gobackward.30"
+  },
+  {
+    "key": 320,
+    "value": "gobackward.45.ar"
+  },
+  {
+    "key": 321,
+    "value": "gobackward.45.hi"
+  },
+  {
+    "key": 322,
+    "value": "gobackward.45"
+  },
+  {
+    "key": 323,
+    "value": "gobackward.60.ar"
+  },
+  {
+    "key": 324,
+    "value": "gobackward.60.hi"
+  },
+  {
+    "key": 325,
+    "value": "gobackward.60"
+  },
+  {
+    "key": 326,
+    "value": "gobackward.75.ar"
+  },
+  {
+    "key": 327,
+    "value": "gobackward.75.hi"
+  },
+  {
+    "key": 328,
+    "value": "gobackward.75"
+  },
+  {
+    "key": 329,
+    "value": "gobackward.90.ar"
+  },
+  {
+    "key": 330,
+    "value": "gobackward.90.hi"
+  },
+  {
+    "key": 331,
+    "value": "gobackward.90"
+  },
+  {
+    "key": 332,
+    "value": "gobackward.minus"
+  },
+  {
+    "key": 333,
+    "value": "gobackward"
+  },
+  {
+    "key": 334,
+    "value": "goforward.10.ar"
+  },
+  {
+    "key": 335,
+    "value": "goforward.10.hi"
+  },
+  {
+    "key": 336,
+    "value": "goforward.10"
+  },
+  {
+    "key": 337,
+    "value": "goforward.15.ar"
+  },
+  {
+    "key": 338,
+    "value": "goforward.15.hi"
+  },
+  {
+    "key": 339,
+    "value": "goforward.15"
+  },
+  {
+    "key": 340,
+    "value": "goforward.30.ar"
+  },
+  {
+    "key": 341,
+    "value": "goforward.30.hi"
+  },
+  {
+    "key": 342,
+    "value": "goforward.30"
+  },
+  {
+    "key": 343,
+    "value": "goforward.45.ar"
+  },
+  {
+    "key": 344,
+    "value": "goforward.45.hi"
+  },
+  {
+    "key": 345,
+    "value": "goforward.45"
+  },
+  {
+    "key": 346,
+    "value": "goforward.60.ar"
+  },
+  {
+    "key": 347,
+    "value": "goforward.60.hi"
+  },
+  {
+    "key": 348,
+    "value": "goforward.60"
+  },
+  {
+    "key": 349,
+    "value": "goforward.75.ar"
+  },
+  {
+    "key": 350,
+    "value": "goforward.75.hi"
+  },
+  {
+    "key": 351,
+    "value": "goforward.75"
+  },
+  {
+    "key": 352,
+    "value": "goforward.90.ar"
+  },
+  {
+    "key": 353,
+    "value": "goforward.90.hi"
+  },
+  {
+    "key": 354,
+    "value": "goforward.90"
+  },
+  {
+    "key": 355,
+    "value": "goforward.plus"
+  },
+  {
+    "key": 356,
+    "value": "goforward"
+  },
+  {
+    "key": 357,
+    "value": "greaterthan"
+  },
+  {
+    "key": 358,
+    "value": "grid"
+  },
+  {
+    "key": 359,
+    "value": "guaranisign"
+  },
+  {
+    "key": 360,
+    "value": "guitars"
+  },
+  {
+    "key": 362,
+    "value": "hammer"
+  },
+  {
+    "key": 363,
+    "value": "hand.draw"
+  },
+  {
+    "key": 364,
+    "value": "hand.point.left"
+  },
+  {
+    "key": 365,
+    "value": "hand.point.right"
+  },
+  {
+    "key": 366,
+    "value": "hand.raised"
+  },
+  {
+    "key": 367,
+    "value": "hand.raised.slash"
+  },
+  {
+    "key": 368,
+    "value": "hand.thumbsdown"
+  },
+  {
+    "key": 369,
+    "value": "hand.thumbsup"
+  },
+  {
+    "key": 370,
+    "value": "hare"
+  },
+  {
+    "key": 371,
+    "value": "headphones"
+  },
+  {
+    "key": 372,
+    "value": "heart"
+  },
+  {
+    "key": 373,
+    "value": "heart.slash"
+  },
+  {
+    "key": 374,
+    "value": "helm"
+  },
+  {
+    "key": 375,
+    "value": "hexagon"
+  },
+  {
+    "key": 376,
+    "value": "hifispeaker"
+  },
+
+  {
+    "key": 379,
+    "value": "hourglass"
+  },
+  {
+    "key": 380,
+    "value": "house"
+  },
+  {
+    "key": 381,
+    "value": "hryvniasign"
+  },
+  {
+    "key": 382,
+    "value": "hurricane"
+  },
+  {
+    "key": 384,
+    "value": "icloud.and.arrow.down"
+  },
+  {
+    "key": 385,
+    "value": "icloud.and.arrow.up"
+  },
+  {
+    "key": 386,
+    "value": "icloud"
+  },
+  {
+    "key": 387,
+    "value": "icloud.slash"
+  },
+  {
+    "key": 388,
+    "value": "increase.quotelevel"
+  },
+  {
+    "key": 389,
+    "value": "indianrupeesign"
+  },
+  {
+    "key": 390,
+    "value": "info"
+  },
+  {
+    "key": 391,
+    "value": "italic"
+  },
+
+  {
+    "key": 393,
+    "value": "k"
+  },
+  {
+    "key": 394,
+    "value": "keyboard.chevron.compact.down"
+  },
+  {
+    "key": 395,
+    "value": "keyboard"
+  },
+  {
+    "key": 396,
+    "value": "kipsign"
+  },
+
+  {
+    "key": 399,
+    "value": "larisign"
+  },
+  {
+    "key": 400,
+    "value": "lasso"
+  },
+  {
+    "key": 401,
+    "value": "leaf.arrow.circlepath"
+  },
+  {
+    "key": 402,
+    "value": "lessthan"
+  },
+  {
+    "key": 403,
+    "value": "light.max"
+  },
+  {
+    "key": 404,
+    "value": "light.min"
+  },
+  {
+    "key": 405,
+    "value": "lightbulb"
+  },
+  {
+    "key": 406,
+    "value": "lightbulb.slash"
+  },
+  {
+    "key": 407,
+    "value": "line.horizontal.3.decrease"
+  },
+  {
+    "key": 408,
+    "value": "line.horizontal.3"
+  },
+  {
+    "key": 409,
+    "value": "link"
+  },
+  {
+    "key": 410,
+    "value": "link.icloud"
+  },
+  {
+    "key": 411,
+    "value": "lirasign"
+  },
+  {
+    "key": 412,
+    "value": "list.bullet.below.rectangle"
+  },
+  {
+    "key": 413,
+    "value": "list.bullet.indent"
+  },
+  {
+    "key": 414,
+    "value": "list.bullet"
+  },
+  {
+    "key": 415,
+    "value": "list.dash"
+  },
+  {
+    "key": 416,
+    "value": "list.number.rtl"
+  },
+  {
+    "key": 417,
+    "value": "list.number"
+  },
+  {
+    "key": 418,
+    "value": "livephoto.play"
+  },
+  {
+    "key": 419,
+    "value": "livephoto.slash"
+  },
+  {
+    "key": 420,
+    "value": "livephoto"
+  },
+  {
+    "key": 421,
+    "value": "location"
+  },
+  {
+    "key": 422,
+    "value": "location.north"
+  },
+  {
+    "key": 423,
+    "value": "location.north.line"
+  },
+  {
+    "key": 424,
+    "value": "location.slash"
+  },
+  {
+    "key": 425,
+    "value": "lock"
+  },
+  {
+    "key": 426,
+    "value": "lock.icloud"
+  },
+  {
+    "key": 427,
+    "value": "lock.open"
+  },
+  {
+    "key": 428,
+    "value": "lock.rotation.open"
+  },
+  {
+    "key": 429,
+    "value": "lock.rotation"
+  },
+  {
+    "key": 430,
+    "value": "lock.shield"
+  },
+  {
+    "key": 431,
+    "value": "lock.slash"
+  },
+
+  {
+    "key": 433,
+    "value": "macwindow"
+  },
+  {
+    "key": 434,
+    "value": "magnifyingglass"
+  },
+  {
+    "key": 435,
+    "value": "manatsign"
+  },
+  {
+    "key": 436,
+    "value": "map"
+  },
+  {
+    "key": 437,
+    "value": "mappin.and.ellipse"
+  },
+  {
+    "key": 438,
+    "value": "mappin.slash"
+  },
+  {
+    "key": 439,
+    "value": "mappin"
+  },
+  {
+    "key": 440,
+    "value": "memories.badge.minus"
+  },
+  {
+    "key": 441,
+    "value": "memories.badge.plus"
+  },
+  {
+    "key": 442,
+    "value": "memories"
+  },
+  {
+    "key": 443,
+    "value": "message"
+  },
+  {
+    "key": 444,
+    "value": "metronome"
+  },
+  {
+    "key": 445,
+    "value": "mic"
+  },
+  {
+    "key": 446,
+    "value": "mic.slash"
+  },
+  {
+    "key": 447,
+    "value": "millsign"
+  },
+  {
+    "key": 448,
+    "value": "minus"
+  },
+  {
+    "key": 449,
+    "value": "minus.magnifyingglass"
+  },
+  {
+    "key": 450,
+    "value": "minus.rectangle"
+  },
+  {
+    "key": 451,
+    "value": "minus.slash.plus"
+  },
+  {
+    "key": 452,
+    "value": "moon"
+  },
+  {
+    "key": 453,
+    "value": "moon.stars"
+  },
+  {
+    "key": 454,
+    "value": "moon.zzz"
+  },
+  {
+    "key": 455,
+    "value": "multiply"
+  },
+  {
+    "key": 456,
+    "value": "music.house"
+  },
+  {
+    "key": 457,
+    "value": "music.mic"
+  },
+  {
+    "key": 458,
+    "value": "music.note.list"
+  },
+  {
+    "key": 459,
+    "value": "music.note"
+  },
+
+  {
+    "key": 461,
+    "value": "nairasign"
+  },
+  {
+    "key": 462,
+    "value": "nosign"
+  },
+  {
+    "key": 463,
+    "value": "number"
+  },
+
+  {
+    "key": 465,
+    "value": "option"
+  },
+
+  {
+    "key": 467,
+    "value": "paintbrush"
+  },
+  {
+    "key": 468,
+    "value": "pano"
+  },
+  {
+    "key": 469,
+    "value": "paperclip"
+  },
+  {
+    "key": 470,
+    "value": "paperplane"
+  },
+  {
+    "key": 471,
+    "value": "paragraph"
+  },
+  {
+    "key": 472,
+    "value": "pause"
+  },
+  {
+    "key": 473,
+    "value": "pause.rectangle"
+  },
+  {
+    "key": 474,
+    "value": "pencil.and.ellipsis.rectangle"
+  },
+  {
+    "key": 475,
+    "value": "pencil.and.outline"
+  },
+  {
+    "key": 476,
+    "value": "pencil"
+  },
+  {
+    "key": 477,
+    "value": "pencil.slash"
+  },
+  {
+    "key": 481,
+    "value": "pencil.tip"
+  },
+  {
+    "key": 482,
+    "value": "percent"
+  },
+
+  {
+    "key": 484,
+    "value": "person.3"
+  },
+  {
+    "key": 485,
+    "value": "person.and.person"
+  },
+  {
+    "key": 486,
+    "value": "person.badge.minus"
+  },
+  {
+    "key": 487,
+    "value": "person.badge.plus"
+  },
+  {
+    "key": 488,
+    "value": "person"
+  },
+  {
+    "key": 495,
+    "value": "person.crop.rectangle"
+  },
+  {
+    "key": 496,
+    "value": "person.icloud"
+  },
+  {
+    "key": 497,
+    "value": "personalhotspot"
+  },
+  {
+    "key": 498,
+    "value": "perspective"
+  },
+  {
+    "key": 499,
+    "value": "pesetasign"
+  },
+  {
+    "key": 500,
+    "value": "pesosign"
+  },
+  {
+    "key": 501,
+    "value": "phone.arrow.down.left"
+  },
+  {
+    "key": 502,
+    "value": "phone.arrow.right"
+  },
+  {
+    "key": 503,
+    "value": "phone.arrow.up.right"
+  },
+  {
+    "key": 504,
+    "value": "phone.badge.plus"
+  },
+  {
+    "key": 505,
+    "value": "phone"
+  },
+  {
+    "key": 506,
+    "value": "phone.down"
+  },
+  {
+    "key": 507,
+    "value": "photo"
+  },
+  {
+    "key": 508,
+    "value": "photo.on.rectangle"
+  },
+  {
+    "key": 509,
+    "value": "pin"
+  },
+  {
+    "key": 510,
+    "value": "pin.slash"
+  },
+  {
+    "key": 511,
+    "value": "play"
+  },
+  {
+    "key": 512,
+    "value": "play.rectangle"
+  },
+  {
+    "key": 513,
+    "value": "playpause"
+  },
+  {
+    "key": 514,
+    "value": "plus.app"
+  },
+  {
+    "key": 515,
+    "value": "plus.bubble"
+  },
+  {
+    "key": 516,
+    "value": "plus"
+  },
+  {
+    "key": 517,
+    "value": "plus.magnifyingglass"
+  },
+  {
+    "key": 518,
+    "value": "plus.rectangle"
+  },
+  {
+    "key": 519,
+    "value": "plus.rectangle.on.rectangle"
+  },
+  {
+    "key": 520,
+    "value": "plus.slash.minus"
+  },
+
+  {
+    "key": 522,
+    "value": "plusminus"
+  },
+  {
+    "key": 523,
+    "value": "power"
+  },
+  {
+    "key": 524,
+    "value": "printer"
+  },
+  {
+    "key": 525,
+    "value": "projective"
+  },
+  {
+    "key": 526,
+    "value": "purchased"
+  },
+  {
+    "key": 528,
+    "value": "qrcode.viewfinder"
+  },
+  {
+    "key": 529,
+    "value": "qrcode"
+  },
+  {
+    "key": 530,
+    "value": "questionmark"
+  },
+  {
+    "key": 531,
+    "value": "questionmark.diamond"
+  },
+  {
+    "key": 532,
+    "value": "questionmark.video.rtl"
+  },
+  {
+    "key": 533,
+    "value": "questionmark.video"
+  },
+  {
+    "key": 534,
+    "value": "quote.bubble"
+  },
+  {
+    "key": 536,
+    "value": "radiowaves.left"
+  },
+  {
+    "key": 537,
+    "value": "radiowaves.right"
+  },
+  {
+    "key": 538,
+    "value": "rays"
+  },
+  {
+    "key": 539,
+    "value": "realtimetext"
+  },
+  {
+    "key": 540,
+    "value": "recordingtape"
+  },
+  {
+    "key": 541,
+    "value": "rectangle.3.offgrid"
+  },
+  {
+    "key": 542,
+    "value": "rectangle.and.arrow.up.right.and.arrow.down.left.slash"
+  },
+  {
+    "key": 543,
+    "value": "rectangle.and.arrow.up.right.and.arrow.down.left"
+  },
+  {
+    "key": 544,
+    "value": "rectangle.and.paperclip"
+  },
+  {
+    "key": 545,
+    "value": "rectangle.badge.checkmark"
+  },
+  {
+    "key": 546,
+    "value": "rectangle.badge.xmark"
+  },
+  {
+    "key": 547,
+    "value": "rectangle.compress.vertical"
+  },
+  {
+    "key": 548,
+    "value": "rectangle.dock"
+  },
+  {
+    "key": 549,
+    "value": "rectangle.expand.vertical"
+  },
+  {
+    "key": 550,
+    "value": "rectangle"
+  },
+  {
+    "key": 551,
+    "value": "rectangle.grid.1x2"
+  },
+  {
+    "key": 552,
+    "value": "rectangle.grid.2x2"
+  },
+  {
+    "key": 553,
+    "value": "rectangle.grid.3x2"
+  },
+  {
+    "key": 554,
+    "value": "rectangle.on.rectangle.angled"
+  },
+  {
+    "key": 555,
+    "value": "rectangle.on.rectangle"
+  },
+  {
+    "key": 556,
+    "value": "rectangle.split.3x1"
+  },
+  {
+    "key": 557,
+    "value": "rectangle.split.3x3"
+  },
+  {
+    "key": 558,
+    "value": "rectangle.stack.badge.minus"
+  },
+  {
+    "key": 559,
+    "value": "rectangle.stack.badge.person.crop"
+  },
+  {
+    "key": 560,
+    "value": "rectangle.stack.badge.plus"
+  },
+  {
+    "key": 561,
+    "value": "rectangle.stack"
+  },
+  {
+    "key": 562,
+    "value": "rectangle.stack.person.crop"
+  },
+  {
+    "key": 563,
+    "value": "repeat.1"
+  },
+  {
+    "key": 564,
+    "value": "repeat"
+  },
+  {
+    "key": 565,
+    "value": "return"
+  },
+  {
+    "key": 566,
+    "value": "rhombus"
+  },
+
+  {
+    "key": 568,
+    "value": "rosette"
+  },
+  {
+    "key": 569,
+    "value": "rotate.left"
+  },
+  {
+    "key": 570,
+    "value": "rotate.right"
+  },
+  {
+    "key": 571,
+    "value": "rublesign"
+  },
+  {
+    "key": 572,
+    "value": "rupeesign"
+  },
+
+  {
+    "key": 574,
+    "value": "safari"
+  },
+  {
+    "key": 575,
+    "value": "scissors"
+  },
+  {
+    "key": 576,
+    "value": "scope"
+  },
+  {
+    "key": 577,
+    "value": "scribble"
+  },
+  {
+    "key": 578,
+    "value": "selection.pin.in.out"
+  },
+  {
+    "key": 580,
+    "value": "shield"
+  },
+  {
+    "key": 582,
+    "value": "shield.slash"
+  },
+  {
+    "key": 583,
+    "value": "shift"
+  },
+  {
+    "key": 584,
+    "value": "shuffle"
+  },
+  {
+    "key": 585,
+    "value": "sidebar.left"
+  },
+  {
+    "key": 586,
+    "value": "sidebar.right"
+  },
+  {
+    "key": 587,
+    "value": "signature"
+  },
+  {
+    "key": 588,
+    "value": "skew"
+  },
+  {
+    "key": 590,
+    "value": "slider.horizontal.3"
+  },
+  {
+    "key": 591,
+    "value": "slider.horizontal.below.rectangle"
+  },
+  {
+    "key": 592,
+    "value": "slowmo"
+  },
+  {
+    "key": 593,
+    "value": "smiley"
+  },
+  {
+    "key": 594,
+    "value": "smoke"
+  },
+  {
+    "key": 595,
+    "value": "snow"
+  },
+  {
+    "key": 596,
+    "value": "sparkles"
+  },
+  {
+    "key": 597,
+    "value": "speaker.zzz.rtl"
+  },
+
+  {
+    "key": 599,
+    "value": "speedometer"
+  },
+  {
+    "key": 600,
+    "value": "sportscourt"
+  },
+  {
+    "key": 601,
+    "value": "square.and.arrow.down"
+  },
+  {
+    "key": 603,
+    "value": "square.and.arrow.up"
+  },
+  {
+    "key": 606,
+    "value": "square.and.pencil"
+  },
+
+  {
+    "key": 608,
+    "value": "square"
+  },
+  {
+    "key": 609,
+    "value": "square.grid.2x2"
+  },
+  {
+    "key": 610,
+    "value": "square.grid.3x2"
+  },
+
+  {
+    "key": 615,
+    "value": "square.split.1x2"
+  },
+  {
+    "key": 616,
+    "value": "square.split.2x1"
+  },
+  {
+    "key": 617,
+    "value": "square.split.2x2"
+  },
+  {
+    "key": 618,
+    "value": "square.stack.3d.down.dottedline"
+  },
+  {
+    "key": 619,
+    "value": "square.stack.3d.down.right"
+  },
+  {
+    "key": 620,
+    "value": "square.stack.3d.up"
+  },
+  {
+    "key": 621,
+    "value": "square.stack.3d.up.slash"
+  },
+  {
+    "key": 622,
+    "value": "square.stack"
+  },
+  {
+    "key": 623,
+    "value": "squares.below.rectangle"
+  },
+  {
+    "key": 624,
+    "value": "star"
+  },
+  {
+    "key": 626,
+    "value": "star.slash"
+  },
+  {
+    "key": 627,
+    "value": "staroflife"
+  },
+  {
+    "key": 628,
+    "value": "sterlingsign"
+  },
+  {
+    "key": 629,
+    "value": "stop"
+  },
+  {
+    "key": 630,
+    "value": "stopwatch"
+  },
+  {
+    "key": 631,
+    "value": "strikethrough"
+  },
+  {
+    "key": 632,
+    "value": "suit.club"
+  },
+  {
+    "key": 633,
+    "value": "suit.diamond"
+  },
+  {
+    "key": 634,
+    "value": "suit.heart"
+  },
+  {
+    "key": 635,
+    "value": "suit.spade"
+  },
+  {
+    "key": 636,
+    "value": "sum"
+  },
+  {
+    "key": 637,
+    "value": "sun.dust"
+  },
+  {
+    "key": 638,
+    "value": "sun.haze"
+  },
+  {
+    "key": 639,
+    "value": "sun.max"
+  },
+  {
+    "key": 640,
+    "value": "sun.min"
+  },
+  {
+    "key": 641,
+    "value": "sunrise"
+  },
+  {
+    "key": 642,
+    "value": "sunset"
+  },
+  {
+    "key": 643,
+    "value": "t.bubble"
+  },
+  {
+    "key": 645,
+    "value": "table.badge.more"
+  },
+  {
+    "key": 646,
+    "value": "table"
+  },
+  {
+    "key": 647,
+    "value": "tag"
+  },
+  {
+    "key": 648,
+    "value": "teletype"
+  },
+  {
+    "key": 649,
+    "value": "tengesign"
+  },
+  {
+    "key": 650,
+    "value": "text.aligncenter"
+  },
+  {
+    "key": 651,
+    "value": "text.alignleft"
+  },
+  {
+    "key": 652,
+    "value": "text.alignright"
+  },
+  {
+    "key": 653,
+    "value": "text.append"
+  },
+  {
+    "key": 654,
+    "value": "text.badge.checkmark"
+  },
+  {
+    "key": 655,
+    "value": "text.badge.minus"
+  },
+  {
+    "key": 656,
+    "value": "text.badge.plus"
+  },
+  {
+    "key": 657,
+    "value": "text.badge.star"
+  },
+  {
+    "key": 658,
+    "value": "text.badge.xmark"
+  },
+  {
+    "key": 659,
+    "value": "text.bubble"
+  },
+  {
+    "key": 660,
+    "value": "text.chevron.left"
+  },
+  {
+    "key": 661,
+    "value": "text.chevron.right"
+  },
+  {
+    "key": 662,
+    "value": "text.cursor"
+  },
+  {
+    "key": 663,
+    "value": "text.insert"
+  },
+  {
+    "key": 664,
+    "value": "text.justify"
+  },
+  {
+    "key": 665,
+    "value": "text.justifyleft"
+  },
+  {
+    "key": 666,
+    "value": "text.justifyright"
+  },
+  {
+    "key": 667,
+    "value": "text.quote"
+  },
+  {
+    "key": 668,
+    "value": "textbox"
+  },
+  {
+    "key": 669,
+    "value": "textformat.123"
+  },
+  {
+    "key": 670,
+    "value": "textformat.abc.dottedunderline"
+  },
+  {
+    "key": 671,
+    "value": "textformat.abc"
+  },
+  {
+    "key": 672,
+    "value": "textformat"
+  },
+  {
+    "key": 673,
+    "value": "textformat.size"
+  },
+  {
+    "key": 674,
+    "value": "textformat.subscript"
+  },
+  {
+    "key": 675,
+    "value": "textformat.superscript"
+  },
+  {
+    "key": 676,
+    "value": "thermometer.snowflake"
+  },
+  {
+    "key": 677,
+    "value": "thermometer.sun"
+  },
+  {
+    "key": 678,
+    "value": "thermometer"
+  },
+  {
+    "key": 679,
+    "value": "timelapse"
+  },
+  {
+    "key": 680,
+    "value": "timer"
+  },
+  {
+    "key": 681,
+    "value": "tornado"
+  },
+  {
+    "key": 682,
+    "value": "tortoise"
+  },
+  {
+    "key": 683,
+    "value": "tram"
+  },
+  {
+    "key": 684,
+    "value": "trash"
+  },
+  {
+    "key": 685,
+    "value": "trash.slash"
+  },
+  {
+    "key": 686,
+    "value": "tray.2"
+  },
+  {
+    "key": 687,
+    "value": "tray.and.arrow.down"
+  },
+  {
+    "key": 688,
+    "value": "tray.and.arrow.up"
+  },
+  {
+    "key": 689,
+    "value": "tray"
+  },
+  {
+    "key": 690,
+    "value": "tray.full"
+  },
+  {
+    "key": 691,
+    "value": "triangle"
+  },
+  {
+    "key": 694,
+    "value": "tropicalstorm"
+  },
+  {
+    "key": 695,
+    "value": "tugriksign"
+  },
+  {
+    "key": 696,
+    "value": "tuningfork"
+  },
+  {
+    "key": 697,
+    "value": "turkishlirasign"
+  },
+  {
+    "key": 698,
+    "value": "tv"
+  },
+  {
+    "key": 699,
+    "value": "tv.music.note"
+  },
+  {
+    "key": 701,
+    "value": "uiwindow.split.2x1"
+  },
+  {
+    "key": 702,
+    "value": "umbrella"
+  },
+  {
+    "key": 703,
+    "value": "underline"
+  },
+  {
+    "key": 705,
+    "value": "video.badge.plus"
+  },
+  {
+    "key": 706,
+    "value": "video"
+  },
+  {
+    "key": 707,
+    "value": "video.slash"
+  },
+  {
+    "key": 708,
+    "value": "view.2d"
+  },
+  {
+    "key": 709,
+    "value": "view.3d"
+  },
+  {
+    "key": 710,
+    "value": "viewfinder"
+  },
+  {
+    "key": 711,
+    "value": "volume.1"
+  },
+  {
+    "key": 712,
+    "value": "volume.2"
+  },
+  {
+    "key": 713,
+    "value": "volume.3"
+  },
+  {
+    "key": 714,
+    "value": "volume"
+  },
+  {
+    "key": 715,
+    "value": "volume.slash.rtl"
+  },
+  {
+    "key": 716,
+    "value": "volume.slash"
+  },
+  {
+    "key": 717,
+    "value": "volume.zzz"
+  },
+  {
+    "key": 719,
+    "value": "wand.and.rays.inverse"
+  },
+  {
+    "key": 720,
+    "value": "wand.and.rays"
+  },
+  {
+    "key": 721,
+    "value": "wand.and.stars.inverse"
+  },
+  {
+    "key": 722,
+    "value": "wand.and.stars"
+  },
+  {
+    "key": 723,
+    "value": "waveform"
+  },
+  {
+    "key": 724,
+    "value": "waveform.path.badge.minus"
+  },
+  {
+    "key": 725,
+    "value": "waveform.path.badge.plus"
+  },
+  {
+    "key": 726,
+    "value": "waveform.path.ecg"
+  },
+  {
+    "key": 727,
+    "value": "waveform.path"
+  },
+  {
+    "key": 728,
+    "value": "wifi.exclamationmark"
+  },
+  {
+    "key": 729,
+    "value": "wifi.slash"
+  },
+  {
+    "key": 730,
+    "value": "wifi"
+  },
+  {
+    "key": 731,
+    "value": "wind.snow"
+  },
+  {
+    "key": 732,
+    "value": "wind"
+  },
+  {
+    "key": 733,
+    "value": "wonsign"
+  },
+  {
+    "key": 734,
+    "value": "wrench"
+  },
+  {
+    "key": 736,
+    "value": "x.squareroot"
+  },
+  {
+    "key": 737,
+    "value": "xmark"
+  },
+  {
+    "key": 738,
+    "value": "xmark.icloud"
+  },
+  {
+    "key": 739,
+    "value": "xmark.octagon"
+  },
+  {
+    "key": 740,
+    "value": "xmark.rectangle"
+  },
+  {
+    "key": 741,
+    "value": "xmark.seal"
+  },
+  {
+    "key": 742,
+    "value": "xmark.shield"
+  },
+  {
+    "key": 744,
+    "value": "yensign"
+  },
+  {
+    "key": 746,
+    "value": "zzz"
+  }
+]

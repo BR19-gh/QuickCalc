@@ -16,8 +16,10 @@ const DateInput = ({
   isDark,
   t,
   text,
+  maxLength = date === "day" ? 2 : date === "month" ? 2 : 4,
 }) => (
   <TextInput
+    maxLength={maxLength}
     editable={isEditable}
     style={{
       backgroundColor: isEditable

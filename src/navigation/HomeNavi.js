@@ -1,12 +1,12 @@
 import Home from "../screens/Home";
 import HeaderRightHome from "../components/Home/HeaderRightHome";
-import HeaderLeft from "../components/Home/HeaderLeft";
 import HeaderLeftHome from "../components/Home/HeaderLeftHome";
 import DiscountCal from "../screens/Home/DiscountCal";
 import UnitsCon from "../screens/Home/UnitsCon";
 import TipCal from "../screens/Home/TipCal";
 import CurrencyCon from "../screens/Home/CurrencyCon";
 import CalendarCon from "../screens/Home/CalendarCon";
+import NewTool from "../screens/Home/NewTool";
 
 import { useTranslation } from "react-i18next";
 import { useState, useRef } from "react";
@@ -23,6 +23,7 @@ const HomeNavi = ({ isEditing, setIsEditing, theme }) => {
   const CurrencyConText = (text) => "screens.Home.CurrencyCon." + text;
   const UnitsConText = (text) => "screens.Home.UnitsCon." + text;
   const CalendarConText = (text) => "screens.Home.CalendarCon." + text;
+  const NewTooltext = (text) => "screens.Home.NewTool." + text;
 
   const searchBarRef = useRef(null);
 
@@ -100,6 +101,13 @@ const HomeNavi = ({ isEditing, setIsEditing, theme }) => {
         }}
         name="DiscountCal"
         children={() => <DiscountCal theme={theme} />}
+      />
+      <Stack.Screen
+        options={{
+          title: t(NewTooltext("title")),
+        }}
+        name="NewTool"
+        children={() => <NewTool theme={theme} />}
       />
       <Stack.Screen
         options={{
