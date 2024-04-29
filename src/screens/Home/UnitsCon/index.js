@@ -31,6 +31,7 @@ import { lang, UNIT_INFO } from "../../../helpers";
 
 import * as Haptics from "expo-haptics";
 
+import { useToast } from "react-native-toast-notifications";
 //import { useNetInfo } from "@react-native-community/netinfo";
 
 function UnitsCon({ theme, dispatch, unitResult }) {
@@ -83,14 +84,28 @@ function UnitsCon({ theme, dispatch, unitResult }) {
     setMeasurement(temp3);
   };
 
+  const toast = useToast();
+
   const calculate = () => {
     if (fromUnitValue && fromUnit && toUnit) {
       Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
+
+      let refreshToast = toast.show(t(text("calculating")), {
+        placement: "top",
+        type: "normal",
+      });
+
       dispatch(
         handleUnitConversion(
           (fromValue = a2e(fromUnitValue)),
           (fromType = fromUnit.code),
-          (toType = toUnit.code)
+          (toType = toUnit.code),
+          (updatedToast = () =>
+            toast.update(refreshToast, t(text("done")), {
+              type: "success",
+              duration: 2000,
+              placement: "top",
+            }))
         )
       );
     } else {

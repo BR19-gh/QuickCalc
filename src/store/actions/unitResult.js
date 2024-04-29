@@ -14,7 +14,12 @@ export function receiveUnitResult(result) {
 const userId = "br19";
 const apiKey = "dI2mGhNHzpffVltyJF85aSpfPWohuip0YLw3FR8hRlzoyZMg";
 
-export function handleUnitConversion(fromValue, fromType, toType) {
+export function handleUnitConversion(
+  fromValue,
+  fromType,
+  toType,
+  updatedToast
+) {
   console.log("handleUnitConversion", fromValue, fromType, toType);
 
   const data = new FormData();
@@ -69,6 +74,7 @@ export function handleUnitConversion(fromValue, fromType, toType) {
               ]
             );
           } else {
+            updatedToast();
             dispatch(receiveUnitResult(data));
           }
         })

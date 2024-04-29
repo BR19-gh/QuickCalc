@@ -14,7 +14,12 @@ export function receiveCurrResult(result) {
 const userId = "br19";
 const apiKey = "dI2mGhNHzpffVltyJF85aSpfPWohuip0YLw3FR8hRlzoyZMg";
 
-export function handleCurrencyConversion(fromValue, fromType, toType) {
+export function handleCurrencyConversion(
+  fromValue,
+  fromType,
+  toType,
+  updatedToast
+) {
   console.log("handleCurrencyConversion", fromValue, fromType, toType);
 
   const data = new FormData();
@@ -69,6 +74,7 @@ export function handleCurrencyConversion(fromValue, fromType, toType) {
               ]
             );
           } else {
+            updatedToast();
             dispatch(receiveCurrResult(data));
           }
         })

@@ -75,8 +75,10 @@ const Header = ({ currentTool, t, tools, dispatch }) => {
         ]}
         onPress={(e) => {
           if (e.nativeEvent.name === t(text("details"))) {
+            Haptics.selectionAsync();
             Alert.alert(currentTool.name, currentTool.description);
           } else if (e.nativeEvent.name === t(text("edit"))) {
+            Haptics.selectionAsync();
             navigation.navigate("EditTool", {
               tool: currentTool,
             });

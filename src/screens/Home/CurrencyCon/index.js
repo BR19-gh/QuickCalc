@@ -3,12 +3,9 @@ import {
   Text,
   View,
   TouchableOpacity,
-  FlatList,
   ScrollView,
   Keyboard,
   TextInput,
-  KeyboardAvoidingView,
-  Alert,
 } from "react-native";
 import styles from "./styles";
 import SweetSFSymbol from "sweet-sfsymbols";
@@ -27,6 +24,7 @@ import Dropdown from "../../../components/Home/CurrencyCon/Dropdown";
 
 import * as Haptics from "expo-haptics";
 
+import { useToast } from "react-native-toast-notifications";
 //import { useNetInfo } from "@react-native-community/netinfo";
 
 function CurrencyCon({ theme, dispatch, currResult }) {
@@ -76,14 +74,28 @@ function CurrencyCon({ theme, dispatch, currResult }) {
     setToCurrency(temp);
   };
 
+  const toast = useToast();
+
   const calculate = () => {
     if (fromCurrencyValue && fromCurrency && toCurrency) {
       Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
+
+      let refreshToast = toast.show(t(text("calculating")), {
+        placement: "top",
+        type: "normal",
+      });
+
       dispatch(
         handleCurrencyConversion(
           (fromValue = a2e(fromCurrencyValue)),
           (fromType = fromCurrency.code),
-          (toType = toCurrency.code)
+          (toType = toCurrency.code),
+          (updatedToast = () =>
+            toast.update(refreshToast, t(text("done")), {
+              type: "success",
+              duration: 2000,
+              placement: "top",
+            }))
         )
       );
     } else {

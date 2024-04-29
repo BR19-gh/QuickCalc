@@ -18,9 +18,6 @@ const SettingsNavi = ({
       screenOptions={{
         headerBlurEffect: theme,
         headerTransparent: true,
-        headerTitleStyle: {
-          fontSize: 20,
-        },
       }}
     >
       <Stack.Screen

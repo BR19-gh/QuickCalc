@@ -5,7 +5,6 @@ import * as Haptics from "expo-haptics";
 import { connect } from "react-redux";
 
 const Header = ({ currentTool, t, tools, dispatch }) => {
-  const text = (text) => "screens.Home.CreatedTool.Header." + text;
   function getToolByName(link) {
     for (const toolId in tools) {
       if (tools.hasOwnProperty(toolId)) {
@@ -28,6 +27,7 @@ const Header = ({ currentTool, t, tools, dispatch }) => {
     >
       <TouchableOpacity
         onPress={() => {
+          Haptics.selectionAsync();
           Alert.alert(
             lang === "ar" ? tool.name.ar : tool.name.en,
             lang === "ar" ? tool.description.ar : tool.description.en

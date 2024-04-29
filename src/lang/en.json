@@ -66,11 +66,11 @@
             "toolColor": "Tool Color",
             "operandNum": "Number of Operands",
             "operandNumPlaceholder": "Number",
-            "operandNumInfo": "This number will determine how many operands (variables) will be accepted by the tool. \n\nMinimum is 2\nMaximum is 5",
+            "operandNumInfo": "This number will determine how many operands will be accepted by the tool. \n\nMinimum is 2\nMaximum is 5",
             "equation": "Equation",
             "operand": "Operand",
             "operator": "Operator",
-            "equationInfo": "In the Operands field, put the names of the operands (variables) as a reference, or put a constant number if it was part of the equation. \nIn the Operators field, put the mathematical operation you want to perform between the operands.\n\nFrom left to right",
+            "equationInfo": "In Operands fields, you can write either a variable name or a constant number:\n1- If you write a variable name: it will appear as a box field that you can fill in when using the tool later with any number you want.\n2- If you write a constant number: it will be part of the equation when you use the tool later.\n\nIn Operators fields, put the mathematical operation you want to perform on the operands\n\nExample:\nA tool for calculating discounts will look like this: amount + discount × 0.1.\n\n\nWrite equation from right to left.",
             "noOperands": "Equation must have from 2 to 5 operands",
             "save": "Save",
             "selectIcon": "Select Icon",
@@ -149,7 +149,9 @@
             "gotIt": "Got it",
             "errorTitle": "An error occurred",
             "pleaseShareError": "\n\nPlease share this error with the developer, contact information in the settings.",
-            "errorTitleUnkown": "an unknown error occurred"
+            "errorTitleUnkown": "an unknown error occurred",
+            "calculating": "Calculating...",
+            "done": "Done!"
           }
         },
         "UnitsCon": {
@@ -170,7 +172,9 @@
             "gotIt": "Got it",
             "errorTitle": "An error occurred",
             "pleaseShareError": "\n\nPlease share this error with the developer, contact information in the settings.",
-            "errorTitleUnkown": "an unknown error occurred"
+            "errorTitleUnkown": "an unknown error occurred",
+            "calculating": "Calculating...",
+            "done": "Done!"
           }
         },
         "CalendarCon": {

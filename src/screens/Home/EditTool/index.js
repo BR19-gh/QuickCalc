@@ -653,15 +653,12 @@ function EditTool({ theme, tools, route, dispatch }) {
                                     fontSize:
                                       newTool.operandNum > 3
                                         ? newTool.equation.operators[i]
-                                          ? selectedItem
-                                            ? 10
-                                            : 4
-                                          : 4
+                                          ? 10
+                                          : 5
                                         : newTool.equation.operators[i]
-                                        ? selectedItem
-                                          ? 20
-                                          : 8
+                                        ? 15
                                         : 8,
+
                                     color: "#283987",
                                     flex: 1,
                                     fontWeight: "bold",
@@ -670,9 +667,11 @@ function EditTool({ theme, tools, route, dispatch }) {
                                   }}
                                 >
                                   {newTool.equation.operators[i]
-                                    ? selectedItem
-                                      ? selectedItem
-                                      : t(text("operator"))
+                                    ? newTool.equation.operators[i] === "*"
+                                      ? "×"
+                                      : newTool.equation.operators[i] === "/"
+                                      ? "÷"
+                                      : newTool.equation.operators[i]
                                     : t(text("operator"))}
                                 </Text>
                               </View>
