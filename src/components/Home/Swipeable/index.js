@@ -58,7 +58,7 @@ class SwipeableRow extends Component {
 
     return (
       <RectButton
-        className="h-36 mb-1 mt-1 "
+        className="h-32 mb-3"
         style={stylesLeft.leftAction}
         onPress={() => {
           this.props.changeVis(this.props.tool.id);
@@ -86,7 +86,7 @@ class SwipeableRow extends Component {
         }}
       >
         <Animated.Text
-          className="text-center pt-10"
+          className="text-center pt-9"
           style={[
             stylesLeft.actionText,
             {
@@ -121,7 +121,7 @@ class SwipeableRow extends Component {
 
     return (
       <RectButton
-        className="h-36 mb-1 mt-1"
+        className="h-32 mb-3"
         style={[
           stylesRight.leftAction,
           {
@@ -168,7 +168,7 @@ class SwipeableRow extends Component {
         <Animated.Text
           className={
             "text-center text-base text-white pr-5" +
-            (this.props.tool.isFavorite ? " pt-10" : " pt-12")
+            (this.props.tool.isFavorite ? " pt-8" : " pt-10")
           }
           style={[]}
         >

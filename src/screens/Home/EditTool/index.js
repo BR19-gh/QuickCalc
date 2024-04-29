@@ -31,27 +31,15 @@ import { handleInitialData } from "../../../store/actions/shared";
 import { useToast } from "react-native-toast-notifications";
 import { useNavigation } from "@react-navigation/native";
 
-function NewTool({ theme, tools, dispatch }) {
+function EditTool({ theme, tools, route, dispatch }) {
   const { t } = useTranslation();
   const text = (text) => "screens.Home.NewTool.text." + text;
   const secondInput = useRef(null);
   const toast = useToast();
-  const [newTool, setNewTool] = useState({
-    id: uuid.v4(),
-    searchName: "",
-    name: "",
-    description: "",
-    icon: "",
-    colors: [],
-    link: "CreatedTool",
-    operandNum: "",
-    equation: {
-      operands: [],
-      operators: [],
-    },
-    isFavorite: false,
-    isHidden: false,
-  });
+
+  const { tool } = route.params;
+
+  const [newTool, setNewTool] = useState(tool);
 
   useEffect(() => {
     setNewTool({
@@ -115,7 +103,7 @@ function NewTool({ theme, tools, dispatch }) {
     },
   });
 
-  function saveNewTool(newTool) {
+  function editTool(newTool) {
     const operands = newTool.equation.operands;
     const operators = newTool.equation.operators;
 
@@ -150,33 +138,27 @@ function NewTool({ theme, tools, dispatch }) {
       isValidOperators
     ) {
       const oldTools = [...Object.values(tools)];
-      const newTools = [newTool, ...oldTools];
+      const newTools = [...oldTools];
+
+      const index = oldTools.findIndex((tool) => tool.id === newTool.id);
+
+      if (index !== -1) {
+        newTools[index] = newTool;
+      } else {
+        console.log("Tool not found with ID:", newTool.id);
+      }
+
       try {
-        let refreshToast = toast.show(t(text("addingNewTool")), {
+        let refreshToast = toast.show(t(text("editingTool")), {
           placement: "top",
           type: "normal",
         });
         dispatch(handleAddTool(newTools, oldTools));
         setTimeout(() => {
           Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
-          setNewTool({
-            id: uuid.v4(),
-            searchName: "",
-            name: "",
-            description: "",
-            icon: "",
-            colors: [],
-            link: "CreatedTool",
-            operandNum: "",
-            equation: {
-              operands: [],
-              operators: [],
-            },
-            isFavorite: false,
-            isHidden: false,
-          });
+
           dispatch(handleInitialData());
-          toast.update(refreshToast, t(text("toolAdded")), {
+          toast.update(refreshToast, t(text("toolEdited")), {
             type: "success",
             duration: 4000,
             placement: "top",
@@ -184,22 +166,7 @@ function NewTool({ theme, tools, dispatch }) {
           navigation.navigate("HomeNavi");
         }, 1000);
       } catch (error) {
-        setNewTool({
-          id: newTool.id,
-          searchName: "",
-          name: "",
-          description: "",
-          icon: "",
-          colors: [],
-          link: "CreatedTool",
-          operandNum: "",
-          equation: {
-            operands: [],
-            operators: [],
-          },
-          isFavorite: false,
-          isHidden: false,
-        });
+        setNewTool(tool);
         Alert.alert(
           t(text("errorTitle")),
           error.message + "\n\n" + t(text("pleaseShareError"))
@@ -685,11 +652,15 @@ function NewTool({ theme, tools, dispatch }) {
                                   style={{
                                     fontSize:
                                       newTool.operandNum > 3
-                                        ? selectedItem
-                                          ? 10
+                                        ? newTool.equation.operators[i]
+                                          ? selectedItem
+                                            ? 10
+                                            : 4
                                           : 4
-                                        : selectedItem
-                                        ? 20
+                                        : newTool.equation.operators[i]
+                                        ? selectedItem
+                                          ? 20
+                                          : 8
                                         : 8,
                                     color: "#283987",
                                     flex: 1,
@@ -698,8 +669,10 @@ function NewTool({ theme, tools, dispatch }) {
                                     textAlign: "center",
                                   }}
                                 >
-                                  {selectedItem
+                                  {newTool.equation.operators[i]
                                     ? selectedItem
+                                      ? selectedItem
+                                      : t(text("operator"))
                                     : t(text("operator"))}
                                 </Text>
                               </View>
@@ -762,7 +735,7 @@ function NewTool({ theme, tools, dispatch }) {
               className="w-11/12 h-16 bg-blue-700 rounded-full items-center justify-center"
               onPress={() => {
                 Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
-                saveNewTool(newTool);
+                editTool(newTool);
               }}
             >
               <Text className={"text-white text-3xl"}>{t(text("save"))}</Text>
@@ -781,4 +754,4 @@ const mapStateToProps = ({ tools }) => {
   };
 };
 
-export default connect(mapStateToProps)(NewTool);
+export default connect(mapStateToProps)(EditTool);

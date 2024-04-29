@@ -61,7 +61,7 @@ const Card = ({
         borderColor: theme === "dark" ? "gray" : "black",
         width: "92%",
       }}
-      className="mb-1 mt-1 h-36 rounded-lg"
+      className="mb-3 h-32 rounded-lg"
     >
       <TouchableOpacity
         key={tool.id}
@@ -71,6 +71,8 @@ const Card = ({
             changeVis(tool.id);
           } else if (isEditingFavorite) {
             handleFavorite(tool.id);
+          } else if (tool.link === "CreatedTool") {
+            navigation.navigate("CreatedTool", { tool });
           } else {
             navigation.navigate(tool.link);
           }
@@ -123,15 +125,6 @@ const Card = ({
         disabled={isActive}
       >
         <View className={"w-full justify-start flex-row-reverse"}>
-          {/* <MaterialCommunityIcons
-          className={styles.icon}
-          name={tool.icon}
-          size={24}
-          color="white"
-          style={{
-            width: "11%",
-          }}
-        /> */}
           <SweetSFSymbol
             name={tool.icon}
             size={24}
@@ -147,7 +140,11 @@ const Card = ({
               width: "80%",
             }}
           >
-            {lang === "en" ? tool.name.en : tool.name.ar}
+            {tool.name.en
+              ? lang === "en"
+                ? tool.name.en
+                : tool.name.ar
+              : tool.name}
           </Text>
         </View>
       </TouchableOpacity>

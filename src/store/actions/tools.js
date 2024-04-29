@@ -5,7 +5,8 @@ export const RECEIVE_TOOLS = "RECEIVE_TOOLS";
 export const REORDER_TOOLS = "REORDER_TOOLS";
 export const EDIT_VISIBILITY = "EDIT_VISIBILITY";
 export const FAVORITE_TOOLS = "FAVORITE_TOOLS";
-//export const DELETE_ACCOUNT = "DELETE_ACCOUNT";
+export const ADD_TOOL = "ADD_TOOL";
+export const DELETE_TOOL = "DELETE_TOOL";
 
 export function receiveTools(tools) {
   return {
@@ -32,6 +33,73 @@ export function editVis(tools) {
   return {
     type: EDIT_VISIBILITY,
     tools,
+  };
+}
+
+export function addTool(tools) {
+  return {
+    type: ADD_TOOL,
+    tools,
+  };
+}
+
+export function deleteTool(tools) {
+  return {
+    type: DELETE_TOOL,
+    tools,
+  };
+}
+
+export function handleDeleteTool(tools, oldTools) {
+  return (dispatch) => {
+    dispatch(deleteTool(tools));
+    try {
+      storeTools(JSON.stringify(tools), "deleteTool").then(() => {
+        dispatch(receiveTools(tools));
+      });
+    } catch {
+      (e) => {
+        dispatch(deleteTool(oldTools));
+        Alert.alert(
+          "Error: Unable to delete tool",
+          "Please connect with the developer, developer socials in the Settings",
+          [
+            {
+              text: "Will Do",
+              onPress: () => null,
+              style: "Ok",
+            },
+          ]
+        );
+        console.error("Error: deleteTool: ", e);
+      };
+    }
+  };
+}
+
+export function handleAddTool(tools, oldTools) {
+  console.log("Adding tool: ", tools);
+  return (dispatch) => {
+    dispatch(addTool(tools));
+    try {
+      storeTools(JSON.stringify(tools), "addTool").then(() => {});
+    } catch {
+      (e) => {
+        dispatch(addTool(oldTools));
+        Alert.alert(
+          "Error: Unable to add tool",
+          "Please connect with the developer, developer socials in the Settings",
+          [
+            {
+              text: "Will Do",
+              onPress: () => null,
+              style: "Ok",
+            },
+          ]
+        );
+        console.error("Error: addTool: ", e);
+      };
+    }
   };
 }
 

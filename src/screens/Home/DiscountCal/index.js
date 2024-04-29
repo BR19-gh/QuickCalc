@@ -20,7 +20,7 @@ import { useRef } from "react";
 
 import * as Haptics from "expo-haptics";
 
-function DiscountCal({ theme }) {
+function DiscountCal(props) {
   const { t } = useTranslation();
   const text = (text) => "screens.Home.DiscountCal.text." + text;
   const secondInput = useRef(null);
@@ -74,7 +74,7 @@ function DiscountCal({ theme }) {
     setPriceAfter("0");
   };
 
-  const isDark = (darkOp, lightp) => (theme === "dark" ? darkOp : lightp);
+  const isDark = (darkOp, lightp) => (props.theme === "dark" ? darkOp : lightp);
 
   return (
     <View>
@@ -224,10 +224,8 @@ function DiscountCal({ theme }) {
   );
 }
 
-const mapStateToProps = ({ tools }) => {
-  return {
-    tools,
-  };
+const mapStateToProps = ({}) => {
+  return {};
 };
 
 export default connect(mapStateToProps)(DiscountCal);

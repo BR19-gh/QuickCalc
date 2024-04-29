@@ -1,8 +1,8 @@
-import { Text, View, SafeAreaView } from "react-native";
+import { Text, View, SafeAreaView, RefreshControl } from "react-native";
 import Card from "../../components/Home/Card";
 import SwipeableRow from "../../components/Home/Swipeable";
 import { useNavigation } from "@react-navigation/native";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { handleInitialData } from "../../store/actions/shared";
 import {
   handleEditVisTools,
@@ -19,7 +19,6 @@ import {
 } from "react-native-draggable-flatlist";
 
 import { useTranslation } from "react-i18next";
-import { NativeModules } from "react-native";
 
 import ContextMenu from "react-native-context-menu-view";
 import { useToast } from "react-native-toast-notifications";
@@ -34,14 +33,15 @@ function Home(props) {
 
   const { t } = useTranslation();
   const text = (text) => "screens.Home.text." + text;
+  const [refreshing, setRefreshing] = useState(false);
 
   const toast = useToast();
 
   const navigation = useNavigation();
 
   const handleFavorite = (id) => {
-    const newData = [...Object.values(props.tools)];
-    const oldData = [...Object.values(props.tools)];
+    const newData = [...currentTools];
+    const oldData = [...currentTools];
     let changedIndex = -1;
 
     newData.forEach((item, index) => {
@@ -59,13 +59,13 @@ function Home(props) {
   };
 
   const handleReorder = (data) => {
-    const oldData = [...Object.values(props.tools)];
+    const oldData = [...currentTools];
     props.dispatch(handleReorderTools(data, oldData));
   };
 
   const changeVis = (id) => {
-    const newData = [...Object.values(props.tools)];
-    const oldData = [...Object.values(props.tools)];
+    const newData = [...currentTools];
+    const oldData = [...currentTools];
     let changedIndex = -1;
 
     newData.forEach((item, index) => {
@@ -91,6 +91,17 @@ function Home(props) {
     props.dispatch(handleEditVisTools(newData, oldData));
   };
 
+  const [currentTools, setCurrentTools] = useState([]);
+
+  useEffect(() => {
+    // Filter out duplicates based on tool id
+    const uniqueTools = [...Object.values(props.tools)].filter(
+      (tool, index, self) => index === self.findIndex((t) => t.id === tool.id)
+    );
+
+    setCurrentTools(uniqueTools);
+  }, [props.tools]);
+
   const renderItemContextMenu = ({ tool, getIndex, drag, isActive }) => {
     return (
       <ScaleDecorator>
@@ -113,22 +124,18 @@ function Home(props) {
                       title: tool.isFavorite
                         ? t(text("unfavorite2"))
                         : t(text("favorite")),
-                      systemIcon: tool.isFavorite
-                        ? "star.slash.fill"
-                        : "star.fill",
+                      systemIcon: tool.isFavorite ? "star.slash" : "star",
                     },
-                    { title: t(text("hide")), systemIcon: "eye.slash.fill" },
+                    { title: t(text("hide")), systemIcon: "eye.slash" },
                   ]
                 : [
                     {
                       title: tool.isFavorite
                         ? t(text("unfavorite2"))
                         : t(text("favorite")),
-                      systemIcon: tool.isFavorite
-                        ? "star.slash.fill"
-                        : "star.fill",
+                      systemIcon: tool.isFavorite ? "star.slash" : "star",
                     },
-                    { title: t(text("hide")), systemIcon: "eye.slash.fill" },
+                    { title: t(text("hide")), systemIcon: "eye.slash" },
                     {
                       title: t(text("move")),
                       systemIcon: "arrow.up.and.down.and.arrow.left.and.right",
@@ -270,7 +277,32 @@ function Home(props) {
 
   return (
     <SafeAreaView>
-      <NestableScrollContainer className="h-full">
+      <NestableScrollContainer
+        refreshControl={
+          <RefreshControl
+            refreshing={refreshing}
+            onRefresh={() => {
+              let refreshToast = toast.show(t(text("refreshing")), {
+                placement: "top",
+              });
+              props.dispatch(handleInitialData());
+              setRefreshing(true);
+              setTimeout(() => {
+                Haptics.notificationAsync(
+                  Haptics.NotificationFeedbackType.Success
+                );
+                toast.update(refreshToast, t(text("refreshComplated")), {
+                  type: "success",
+                  duration: 500,
+                  placement: "top",
+                });
+                setRefreshing(false);
+              }, 500);
+            }}
+          />
+        }
+        className="h-full"
+      >
         <Text
           className={styles.title + (props.theme === "dark" && " text-white")}
         >
@@ -280,9 +312,8 @@ function Home(props) {
         {
           //shown tools
           props.isShowedFavorite ? (
-            Object.values(props.tools).filter(
-              (tool) => tool.isFavorite === true
-            ).length === 0 ? (
+            currentTools.filter((tool) => tool.isFavorite === true).length ===
+            0 ? (
               <Text
                 className={
                   "text-xl m-4 mt-0 text-left " +
@@ -292,9 +323,8 @@ function Home(props) {
                 {t(text("noFavoredTools"))}
               </Text>
             ) : null
-          ) : Object.values(props.tools).filter(
-              (tool) => tool.isHidden === false
-            ).length === 0 ? (
+          ) : currentTools.filter((tool) => tool.isHidden === false).length ===
+            0 ? (
             <Text
               className={
                 "text-xl m-4 mt-0 text-left " +
@@ -307,36 +337,31 @@ function Home(props) {
         }
 
         <NestableDraggableFlatList
+          extraData={currentTools}
           contentInsetAdjustmentBehavior="automatic"
           data={
             props.searchText.length > 0
               ? props.isShowedFavorite
-                ? Object.values(props.tools).filter(
+                ? currentTools.filter(
                     (tool) =>
-                      tool.name[lang].includes(props.searchText) &&
+                      tool.searchName.includes(props.searchText) &&
                       tool.isFavorite === true
                   )
-                : Object.values(props.tools).filter(
+                : currentTools.filter(
                     (tool) =>
-                      tool.name[lang].includes(props.searchText) &&
+                      tool.searchName.includes(props.searchText) &&
                       tool.isHidden === false
                   )
               : props.isShowedFavorite
-              ? Object.values(props.tools).filter(
-                  (tool) => tool.isFavorite === true
-                )
-              : Object.values(props.tools).filter(
-                  (tool) => tool.isHidden === false
-                )
+              ? currentTools.filter((tool) => tool.isFavorite === true)
+              : currentTools.filter((tool) => tool.isHidden === false)
           }
           onDragEnd={({ data }) => {
             props.isShowedFavorite || props.searchText.length > 0
               ? null
               : handleReorder([
                   ...data,
-                  ...Object.values(props.tools).filter(
-                    (tool) => tool.isHidden === true
-                  ),
+                  ...currentTools.filter((tool) => tool.isHidden === true),
                 ]);
           }}
           className={
@@ -350,7 +375,7 @@ function Home(props) {
               return renderItemContextMenu({ tool, getIndex, drag, isActive });
             }
           }}
-          keyExtractor={(tool) => tool.id.toString()}
+          keyExtractor={(item, index) => String(index)}
         />
 
         {
@@ -374,15 +399,15 @@ function Home(props) {
                   ? t(text("unfavoredTools"))
                   : t(text("hiddenTools"))}
               </Text>
-              {Object.values(props.tools).filter((tool) =>
+              {currentTools.filter((tool) =>
                 props.isShowedFavorite
                   ? tool.isFavorite === false && tool.isHidden === false
                   : tool.isHidden === true
               ).length !== 0 ? (
-                Object.values(props.tools)
+                currentTools
                   .filter((tool) =>
                     props.searchText.length > 0
-                      ? tool.name[lang].includes(props.searchText) &&
+                      ? tool.searchName.includes(props.searchText) &&
                         (props.isShowedFavorite
                           ? tool.isFavorite === false && tool.isHidden === false
                           : tool.isHidden === true)

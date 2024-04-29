@@ -21,22 +21,22 @@ export const TOOL_COLORS = [
   },
   {
     name: "pink",
-    colors: ["#e83e8c", "#d32f6c", "#a21c51"],
+    colors: ["#d32f6c", "#b71f53", "#7e1d3d"],
   },
   {
     name: "yellow",
-    colors: ["#f1c40f", "#c19d0c", "#947506"],
+    colors: ["#c29f0c", "#9b740d", "#6d4a16"],
   },
   {
     name: "cyan",
-    colors: ["#59bfff", "#43a0ff", "#19458f"],
+    colors: ["#3298ff", "#1b79f5", "#174fb6"],
   },
   {
     name: "gray",
-    colors: ["#6b7280", "#4b5563", "#374151"],
+    colors: ["#454d59", "#3e444c", "#21242b"],
   },
   {
     name: "lime",
-    colors: ["#b1ff00", "#a0ee00", "#476c08"],
+    colors: ["#74b500", "#588902", "#3c5b0c"],
   },
 ];

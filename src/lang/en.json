@@ -52,25 +52,60 @@
           "toolHasbeenFavored": "Tool has been added to Favorite",
           "errorFavoriting": "There was an error while favoriting. Please contact the developer for help",
           "toolHasbeenUnFavored": "Tool has been removed from Favorite",
-          "errorHiding": "There was an error while hiding. Please contact the developer for help"
+          "errorHiding": "There was an error while hiding. Please contact the developer for help",
+          "errorDeleting": "There was an error while deleting. Please contact the developer for help",
+          "refreshing": "Refreshing...",
+          "refreshComplated": "Refresh complated!"
         },
         "NewTool": {
-          "title": "New Tool",
+          "title": "Create New Tool",
+          "titleEdit": "Edit Tool",
           "text": {
             "toolName": "Tool Name",
             "toolDescription": "Tool Description",
             "toolColor": "Tool Color",
             "operandNum": "Number of Operands",
             "operandNumPlaceholder": "Number",
-            "operandNumInfo": "This number will determine how many operands will be accepted by the tool. \n\nMinimum is 2\nMaximum is 5",
+            "operandNumInfo": "This number will determine how many operands(variables) will be accepted by the tool. \n\nMinimum is 2\nMaximum is 5",
             "equation": "Equation",
             "operand": "Operand",
             "operator": "Operator",
-            "equationInfo": "In the Operands field, put the names of the operands as a reference , and in the Operators field, put the mathematical operation you want to perform between the operands\n\nFrom left to right",
+            "equationInfo": "In the Operands field, put the names of the operands(variables) as a reference , and in the Operators field, put the mathematical operation you want to perform between the operands\n\nFrom left to right",
             "noOperands": "Equation must have from 2 to 5 operands",
             "save": "Save",
             "selectIcon": "Select Icon",
-            "searchIcon": "Search Icons"
+            "searchIcon": "Search Icons",
+            "addingNewTool": "Adding New Tool...",
+            "toolAdded": "Tool Added Successfully!",
+            "editingTool": "Editing Tool...",
+            "toolEdited": "Tool Edited Successfully!",
+            "emptyFeilds": "Empty Feilds",
+            "fillAllFields": "Please fill all fields before saving",
+            "errorTitle": "An error occurred",
+            "pleaseShareError": "\n\nPlease share this error with the developer, contact information in the settings.",
+            "errorTitleUnkown": "an unknown error occurred"
+          }
+        },
+        "CreatedTool": {
+          "title": "CreatedTool",
+          "text": {
+            "calculate": "Calculate",
+            "reset": "Reset",
+            "result": "Result",
+            "errorInValidInput": "Invalid Inputs",
+            "onlyNumbers": "Please enter numbers only"
+          },
+          "Header": {
+            "edit": "Edit",
+            "delete": "Delete",
+            "deletingTool": "Deleting Tool...",
+            "toolHasBeenDeleted": "Tool has been deleted",
+            "errorTitle": "An error occurred",
+            "pleaseShareError": "\n\nPlease share this error with the developer, contact information in the settings.",
+            "deleteConfirmTitle": "Confirm Delete",
+            "deleteConfirmMessage": "Are you sure you want to delete this tool? This action cannot be undone.",
+            "cancel": "Cancel",
+            "details": "Details"
           }
         },
         "DiscountCal": {

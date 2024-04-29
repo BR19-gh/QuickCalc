@@ -10,6 +10,7 @@ export const clearAsyncStorage = async () => {
 const TOOLS = [
   {
     id: 1,
+    searchName: "Discount Calculator حاسبة الخصومات",
     name: {
       en: "Discount Calculator",
       ar: "حاسبة الخصومات",
@@ -26,6 +27,7 @@ const TOOLS = [
   },
   {
     id: 2,
+    searchName: "Currency Converter محول العملات",
     name: {
       en: "Currency Converter",
       ar: "محول العملات",
@@ -42,6 +44,7 @@ const TOOLS = [
   },
   {
     id: 3,
+    searchName: "Units Converter محول الوحدات",
     name: {
       en: "Units Converter",
       ar: "محول الوحدات",
@@ -58,6 +61,7 @@ const TOOLS = [
   },
   {
     id: 4,
+    searchName: "Tip Calculator حاسبة البقشيش",
     name: {
       en: "Tip Calculator",
       ar: "حاسبة البقشيش",
@@ -74,6 +78,7 @@ const TOOLS = [
   },
   {
     id: 5,
+    searchName: "Calendar Converter محول التقويم",
     name: {
       en: "Calendar Converter",
       ar: "محول التقويم",
@@ -88,16 +93,6 @@ const TOOLS = [
     isFavorite: false,
     isHidden: false,
   },
-  // {
-  //   id: 5,
-  //   name: "Create Tool",
-  //   description: "Create your own custom tool",
-  //   icon: "plus",
-  //   color: "#8e2f9c",
-  //   link: "CustomTool",
-  //   isFavorite: null,
-  //   isHidden: null,
-  // },
 ];
 
 const BLUE = [
