@@ -41,12 +41,6 @@ function CreatedTool({ theme, setCurrentTool, route, dispatch, tools }) {
     console.log(toolProps);
   }, [toolProps]);
 
-  const focusOnSecondInput = () => {
-    if (secondInput && secondInput.current) {
-      secondInput.current.focus();
-    }
-  };
-
   const hideKeyboard = () => {
     Keyboard.dismiss();
   };
@@ -58,7 +52,9 @@ function CreatedTool({ theme, setCurrentTool, route, dispatch, tools }) {
   const calculate = () => {
     for (let i = 0; i < toolProps.inputs.length; i++) {
       if (toolProps.inputs[i] === "" || toolProps.inputs[i] === undefined) {
-        return;
+        if (isNaN(tool.equation.operands[i]) !== false) {
+          return;
+        }
       } else if (isNaN(a2e(toolProps.inputs[i]))) {
         Alert.alert(t(text("errorInValidInput")), t(text("onlyNumbers")));
         return;
@@ -78,14 +74,25 @@ function CreatedTool({ theme, setCurrentTool, route, dispatch, tools }) {
     };
 
     console.log(expression(tool.equation.operands.length));
+    console.log(expression(tool.equation.operands));
     setToolProps({
       ...toolProps,
       result: Parser.evaluate(expression(tool.equation.operands.length), {
-        a: toolProps.inputs[0],
-        b: toolProps.inputs[1],
-        c: toolProps.inputs[2],
-        d: toolProps.inputs[3],
-        e: toolProps.inputs[4],
+        a: isNaN(tool.equation.operands[0])
+          ? toolProps.inputs[0]
+          : tool.equation.operands[0],
+        b: isNaN(tool.equation.operands[1])
+          ? toolProps.inputs[1]
+          : tool.equation.operands[1],
+        c: isNaN(tool.equation.operands[2])
+          ? toolProps.inputs[2]
+          : tool.equation.operands[2],
+        d: isNaN(tool.equation.operands[3])
+          ? toolProps.inputs[3]
+          : tool.equation.operands[3],
+        e: isNaN(tool.equation.operands[4])
+          ? toolProps.inputs[4]
+          : tool.equation.operands[4],
       }),
     });
     Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
@@ -109,54 +116,59 @@ function CreatedTool({ theme, setCurrentTool, route, dispatch, tools }) {
       <ScrollView className="h-full">
         <View className={"mt-28 w-full items-center"}>
           <View className={"w-full flex-row justify-evenly flex-wrap"}>
-            {tool.equation.operands.map((operand, index) => (
-              <View key={index}>
-                <Text
-                  className={
-                    "p-4 text-center text-3xl font-semibold" +
-                    isDark(" text-blue-100", " text-blue-900")
-                  }
-                >
-                  {operand}
-                </Text>
-                <TextInput
-                  style={{
-                    backgroundColor: isDark("#CCCCCC", "#FFFFFF"),
-                    width: 150,
-                    height: 150,
-                    fontSize: toolProps.inputs[index] ? 40 : 20,
-                    textAlign: "center",
-                    color: isDark("#283dab", "#283987"),
-                    borderRadius: 10,
-                    borderWidth: 1,
-                    borderColor: "#283dab88",
-                  }}
-                  blurOnSubmit={false}
-                  returnKeyType={"done"}
-                  onSubmitEditing={focusOnSecondInput}
-                  value={toolProps.inputs[index]}
-                  onChangeText={(value) =>
-                    setToolProps((prev) => ({
-                      ...prev,
-                      inputs: prev.inputs.map((input, i) =>
-                        i === index ? a2e(value) : input
-                      ),
-                    }))
-                  }
-                  onFocus={() =>
-                    setToolProps((prev) => ({
-                      ...prev,
-                      inputs: prev.inputs.map((input, i) =>
-                        i === index ? "" : input
-                      ),
-                    }))
-                  }
-                  placeholderTextColor={isDark("#28398788", "#28398755")}
-                  placeholder={operand}
-                  keyboardType="numeric"
-                />
-              </View>
-            ))}
+            {tool.equation.operands.map((operand, index) => {
+              if (isNaN(operand) === false) {
+                return;
+              }
+              return (
+                <View key={index}>
+                  <Text
+                    className={
+                      "p-4 text-center text-3xl font-semibold" +
+                      isDark(" text-blue-100", " text-blue-900")
+                    }
+                  >
+                    {operand}
+                  </Text>
+                  <TextInput
+                    style={{
+                      backgroundColor: isDark("#CCCCCC", "#FFFFFF"),
+                      width: 150,
+                      height: 150,
+                      fontSize: toolProps.inputs[index] ? 40 : 20,
+                      textAlign: "center",
+                      color: isDark("#283dab", "#283987"),
+                      borderRadius: 10,
+                      borderWidth: 1,
+                      borderColor: "#283dab88",
+                    }}
+                    blurOnSubmit={false}
+                    returnKeyType={"done"}
+                    onSubmitEditing={hideKeyboard}
+                    value={toolProps.inputs[index]}
+                    onChangeText={(value) =>
+                      setToolProps((prev) => ({
+                        ...prev,
+                        inputs: prev.inputs.map((input, i) =>
+                          i === index ? a2e(value) : input
+                        ),
+                      }))
+                    }
+                    onFocus={() =>
+                      setToolProps((prev) => ({
+                        ...prev,
+                        inputs: prev.inputs.map((input, i) =>
+                          i === index ? "" : input
+                        ),
+                      }))
+                    }
+                    placeholderTextColor={isDark("#28398788", "#28398755")}
+                    placeholder={operand}
+                    keyboardType="numeric"
+                  />
+                </View>
+              );
+            })}
           </View>
 
           <View className={"items-center"}>

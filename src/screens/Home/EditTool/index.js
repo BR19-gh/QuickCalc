@@ -41,33 +41,33 @@ function EditTool({ theme, tools, route, dispatch }) {
 
   const [newTool, setNewTool] = useState(tool);
 
-  useEffect(() => {
-    setNewTool({
-      ...newTool,
-      equation: {
-        operands: Array(
-          Number(
-            newTool.operandNum === "1" ||
-              isNaN(newTool.operandNum) === true ||
-              newTool.operandNum === "0"
-              ? 0
-              : newTool.operandNum
-          )
-        ),
-        operators: Array(
-          Number(
-            newTool.operandNum === "1" ||
-              isNaN(newTool.operandNum) === true ||
-              newTool.operandNum === "0"
-              ? 0
-              : newTool.operandNum
-          ) === 0
-            ? 0
-            : newTool.operandNum - 1
-        ),
-      },
-    });
-  }, [newTool.operandNum]);
+  // useEffect(() => {
+  //   setNewTool({
+  //     ...newTool,
+  //     equation: {
+  //       operands: Array(
+  //         Number(
+  //           newTool.operandNum === "1" ||
+  //             isNaN(newTool.operandNum) === true ||
+  //             newTool.operandNum === "0"
+  //             ? 0
+  //             : newTool.operandNum
+  //         )
+  //       ),
+  //       operators: Array(
+  //         Number(
+  //           newTool.operandNum === "1" ||
+  //             isNaN(newTool.operandNum) === true ||
+  //             newTool.operandNum === "0"
+  //             ? 0
+  //             : newTool.operandNum
+  //         ) === 0
+  //           ? 0
+  //           : newTool.operandNum - 1
+  //       ),
+  //     },
+  //   });
+  // }, [newTool.operandNum]);
 
   useEffect(() => {
     console.log(newTool);
