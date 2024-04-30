@@ -14,7 +14,7 @@
   },
   {
     "key": 66,
-    "value": "alarm"
+    "value": "alarm.fill"
   },
   {
     "key": 67,
@@ -22,7 +22,7 @@
   },
   {
     "key": 68,
-    "value": "ant"
+    "value": "ant.fill"
   },
   {
     "key": 69,
@@ -30,19 +30,19 @@
   },
   {
     "key": 70,
-    "value": "app.badge"
+    "value": "app.badge.fill"
   },
   {
     "key": 71,
-    "value": "app"
+    "value": "app.fill"
   },
   {
     "key": 72,
-    "value": "app.gift"
+    "value": "app.gift.fill"
   },
   {
     "key": 73,
-    "value": "archivebox"
+    "value": "archivebox.fill"
   },
   {
     "key": 74,
@@ -70,7 +70,7 @@
   },
   {
     "key": 80,
-    "value": "arrow.clockwise.icloud"
+    "value": "arrow.clockwise.icloud.fill"
   },
   {
     "key": 81,
@@ -78,7 +78,7 @@
   },
   {
     "key": 82,
-    "value": "arrow.counterclockwise.icloud"
+    "value": "arrow.counterclockwise.icloud.fill"
   },
   {
     "key": 83,
@@ -86,7 +86,7 @@
   },
   {
     "key": 84,
-    "value": "arrow.down.doc"
+    "value": "arrow.down.doc.fill"
   },
   {
     "key": 85,
@@ -94,7 +94,7 @@
   },
   {
     "key": 86,
-    "value": "arrow.down.left.video"
+    "value": "arrow.down.left.video."
   },
   {
     "key": 87,
@@ -110,11 +110,11 @@
   },
   {
     "key": 90,
-    "value": "arrow.left.and.right"
+    "value": "arrow.left.and.right."
   },
   {
     "key": 91,
-    "value": "arrow.left"
+    "value": "arrow.left.fill"
   },
   {
     "key": 92,
@@ -218,7 +218,7 @@
   },
   {
     "key": 117,
-    "value": "arrow.upright"
+    "value": "arrow.up.right"
   },
   {
     "key": 118,
@@ -286,15 +286,15 @@
   },
   {
     "key": 134,
-    "value": "b"
+    "value": "bicycle"
   },
   {
     "key": 135,
-    "value": "backward.end"
+    "value": "backward.end.fill"
   },
   {
     "key": 136,
-    "value": "backward"
+    "value": "backward.fill"
   },
   {
     "key": 137,
@@ -302,15 +302,15 @@
   },
   {
     "key": 138,
-    "value": "bag.badge.minus"
+    "value": "bag.badge.minus.fill"
   },
   {
     "key": 139,
-    "value": "bag.badge.plus"
+    "value": "bag.badge.plus.fill"
   },
   {
     "key": 140,
-    "value": "bag"
+    "value": "bag.fill"
   },
   {
     "key": 141,
@@ -318,7 +318,7 @@
   },
   {
     "key": 142,
-    "value": "bandage"
+    "value": "bandage.fill"
   },
   {
     "key": 143,
@@ -342,7 +342,7 @@
   },
   {
     "key": 148,
-    "value": "bed.double"
+    "value": "bed.double.fill"
   },
   {
     "key": 149,
@@ -350,11 +350,11 @@
   },
   {
     "key": 150,
-    "value": "bell.slash"
+    "value": "bell.slash.fill"
   },
   {
     "key": 151,
-    "value": "bin.xmark"
+    "value": "bin.xmark.fill"
   },
   {
     "key": 152,
@@ -378,7 +378,7 @@
   },
   {
     "key": 157,
-    "value": "bolt"
+    "value": "bolt.fill"
   },
   {
     "key": 158,
@@ -386,43 +386,43 @@
   },
   {
     "key": 159,
-    "value": "bolt.horizontal.icloud"
+    "value": "bolt.horizontal.icloud.fill"
   },
   {
     "key": 160,
-    "value": "bolt.slash"
+    "value": "bolt.slash.fill"
   },
   {
     "key": 161,
-    "value": "book"
+    "value": "book.fill"
   },
   {
     "key": 162,
-    "value": "bookmark"
+    "value": "bookmark.fill"
   },
   {
     "key": 163,
-    "value": "briefcase"
+    "value": "briefcase.fill"
   },
   {
     "key": 164,
-    "value": "bubble.left.and.bubble.right"
+    "value": "bubble.left.and.bubble.right.fill"
   },
   {
     "key": 165,
-    "value": "bubble.left"
+    "value": "bubble.left.fill"
   },
   {
     "key": 166,
-    "value": "bubble.middle.bottom"
+    "value": "bubble.middle.bottom.fill"
   },
   {
     "key": 167,
-    "value": "bubble.middle.top"
+    "value": "bubble.middle.top.fill"
   },
   {
     "key": 168,
-    "value": "bubble.right"
+    "value": "bubble.right.fill"
   },
   {
     "key": 169,
@@ -430,7 +430,7 @@
   },
   {
     "key": 170,
-    "value": "burst"
+    "value": "burst.fill"
   },
   {
     "key": 172,
@@ -446,15 +446,15 @@
   },
   {
     "key": 175,
-    "value": "camera"
+    "value": "camera.fill"
   },
   {
     "key": 176,
-    "value": "camera.on.rectangle"
+    "value": "camera.on.rectangle.fill"
   },
   {
     "key": 177,
-    "value": "camera.rotate"
+    "value": "camera.rotate.fill"
   },
   {
     "key": 178,
@@ -462,15 +462,15 @@
   },
   {
     "key": 179,
-    "value": "capslock"
+    "value": "capslock.fill"
   },
   {
     "key": 180,
-    "value": "capsule"
+    "value": "capsule.fill"
   },
   {
     "key": 181,
-    "value": "captions.bubble"
+    "value": "captions.bubble.fill"
   },
   {
     "key": 182,
@@ -478,15 +478,15 @@
   },
   {
     "key": 183,
-    "value": "cart.badge.minus"
+    "value": "cart.badge.minus.fill"
   },
   {
     "key": 184,
-    "value": "cart.badge.plus"
+    "value": "cart.badge.plus.fill"
   },
   {
     "key": 185,
-    "value": "cart"
+    "value": "cart.fill"
   },
   {
     "key": 186,
@@ -502,7 +502,7 @@
   },
   {
     "key": 189,
-    "value": "chart.pie"
+    "value": "chart.pie.fill"
   },
   {
     "key": 190,
@@ -510,7 +510,7 @@
   },
   {
     "key": 191,
-    "value": "checkmark.rectangle"
+    "value": "checkmark.rectangle.fill"
   },
   {
     "key": 192,
@@ -518,7 +518,7 @@
   },
   {
     "key": 193,
-    "value": "checkmark.shield"
+    "value": "checkmark.shield.fill"
   },
   {
     "key": 194,
@@ -574,7 +574,7 @@
   },
   {
     "key": 207,
-    "value": "circle"
+    "value": "circle.fill"
   },
   {
     "key": 208,
@@ -582,7 +582,7 @@
   },
   {
     "key": 209,
-    "value": "circle.grid.hex"
+    "value": "circle.grid.hex.fill"
   },
 
   {
@@ -591,27 +591,27 @@
   },
   {
     "key": 213,
-    "value": "clock"
+    "value": "clock.fill"
   },
   {
     "key": 214,
-    "value": "cloud.bolt"
+    "value": "cloud.bolt.fill"
   },
   {
     "key": 215,
-    "value": "cloud.bolt.rain"
+    "value": "cloud.bolt.rain.fill"
   },
   {
     "key": 216,
-    "value": "cloud.drizzle"
+    "value": "cloud.drizzle.fill"
   },
   {
     "key": 217,
-    "value": "cloud"
+    "value": "cloud.fill"
   },
   {
     "key": 218,
-    "value": "cloud.fog"
+    "value": "cloud.fog.fill"
   },
   {
     "key": 219,
@@ -619,43 +619,43 @@
   },
   {
     "key": 220,
-    "value": "cloud.heavyrain"
+    "value": "cloud.heavyrain.fill"
   },
   {
     "key": 221,
-    "value": "cloud.moon.bolt"
+    "value": "cloud.moon.bolt.fill"
   },
   {
     "key": 222,
-    "value": "cloud.moon"
+    "value": "cloud.moon.fill"
   },
   {
     "key": 223,
-    "value": "cloud.moon.rain"
+    "value": "cloud.moon.rain.fill"
   },
   {
     "key": 224,
-    "value": "cloud.rain"
+    "value": "cloud.rain.fill"
   },
   {
     "key": 225,
-    "value": "cloud.sleet"
+    "value": "cloud.sleet.fill"
   },
   {
     "key": 226,
-    "value": "cloud.snow"
+    "value": "cloud.snow.fill"
   },
   {
     "key": 227,
-    "value": "cloud.sun.bolt"
+    "value": "cloud.sun.bolt.fill"
   },
   {
     "key": 228,
-    "value": "cloud.sun"
+    "value": "cloud.sun.fill"
   },
   {
     "key": 229,
-    "value": "cloud.sun.rain"
+    "value": "cloud.sun.rain.fill"
   },
   {
     "key": 230,
@@ -671,7 +671,7 @@
   },
   {
     "key": 233,
-    "value": "creditcard"
+    "value": "creditcard.fill"
   },
   {
     "key": 234,
@@ -687,11 +687,11 @@
   },
   {
     "key": 237,
-    "value": "cube.box"
+    "value": "cube.box.fill"
   },
   {
     "key": 238,
-    "value": "cube"
+    "value": "cube.fill"
   },
   {
     "key": 239,
@@ -703,11 +703,11 @@
   },
   {
     "key": 242,
-    "value": "delete.left"
+    "value": "delete.left.fill"
   },
   {
     "key": 243,
-    "value": "delete.right"
+    "value": "delete.right.fill"
   },
   {
     "key": 244,
@@ -723,31 +723,31 @@
   },
   {
     "key": 247,
-    "value": "doc.append"
+    "value": "doc.append.fill"
   },
   {
     "key": 248,
-    "value": "doc"
+    "value": "doc.fill"
   },
   {
     "key": 249,
-    "value": "doc.on.clipboard"
+    "value": "doc.on.clipboard.fill"
   },
   {
     "key": 250,
-    "value": "doc.on.doc"
+    "value": "doc.on.doc.fill"
   },
   {
     "key": 251,
-    "value": "doc.plaintext"
+    "value": "doc.plaintext.fill"
   },
   {
     "key": 252,
-    "value": "doc.richtext"
+    "value": "doc.richtext.fill"
   },
   {
     "key": 253,
-    "value": "doc.text"
+    "value": "doc.text.fill"
   },
   {
     "key": 254,
@@ -775,7 +775,7 @@
   },
   {
     "key": 261,
-    "value": "drop.triangle"
+    "value": "drop.triangle.fill"
   },
   {
     "key": 263,
@@ -783,11 +783,11 @@
   },
   {
     "key": 264,
-    "value": "eject"
+    "value": "eject.fill"
   },
   {
     "key": 265,
-    "value": "ellipses.bubble"
+    "value": "ellipses.bubble.fill"
   },
   {
     "key": 266,
@@ -795,15 +795,15 @@
   },
   {
     "key": 267,
-    "value": "envelope.badge"
+    "value": "envelope.badge.fill"
   },
   {
     "key": 268,
-    "value": "envelope"
+    "value": "envelope.fill"
   },
   {
     "key": 269,
-    "value": "envelope.open"
+    "value": "envelope.open.fill"
   },
   {
     "key": 270,
@@ -819,7 +819,7 @@
   },
   {
     "key": 273,
-    "value": "exclamationmark.bubble"
+    "value": "exclamationmark.bubble.fill"
   },
   {
     "key": 274,
@@ -827,27 +827,27 @@
   },
   {
     "key": 275,
-    "value": "exclamationmark.icloud"
+    "value": "exclamationmark.icloud.fill"
   },
   {
     "key": 276,
-    "value": "exclamationmark.octagon"
+    "value": "exclamationmark.octagon.fill"
   },
   {
     "key": 277,
-    "value": "exclamationmark.shield"
+    "value": "exclamationmark.shield.fill"
   },
   {
     "key": 278,
-    "value": "exclamationmark.triangle"
+    "value": "exclamationmark.triangle.fill"
   },
   {
     "key": 279,
-    "value": "eye"
+    "value": "eye.fill"
   },
   {
     "key": 280,
-    "value": "eye.slash"
+    "value": "eye.slash.fill"
   },
   {
     "key": 281,
@@ -867,7 +867,7 @@
   },
   {
     "key": 285,
-    "value": "f"
+    "value": "film.fill"
   },
   {
     "key": 286,
@@ -879,19 +879,19 @@
   },
   {
     "key": 288,
-    "value": "film"
+    "value": "film.fill"
   },
   {
     "key": 289,
-    "value": "flag"
+    "value": "flag.fill"
   },
   {
     "key": 290,
-    "value": "flag.slash"
+    "value": "flag.slash.fill"
   },
   {
     "key": 291,
-    "value": "flame"
+    "value": "flame.fill"
   },
   {
     "key": 292,
@@ -899,19 +899,19 @@
   },
   {
     "key": 293,
-    "value": "flowchart"
+    "value": "flowchart.fill"
   },
   {
     "key": 294,
-    "value": "folder.badge.minus"
+    "value": "folder.badge.minus.fill"
   },
   {
     "key": 295,
-    "value": "folder.badge.person.crop"
+    "value": "folder.badge.person.crop.fill"
   },
   {
     "key": 296,
-    "value": "folder.badge.plus"
+    "value": "folder.badge.plus.fill"
   },
   {
     "key": 297,
@@ -919,11 +919,11 @@
   },
   {
     "key": 298,
-    "value": "forward.end"
+    "value": "forward.end.fill"
   },
   {
     "key": 299,
-    "value": "forward"
+    "value": "forward.fill"
   },
   {
     "key": 300,
@@ -2521,7 +2521,7 @@
   },
   {
     "key": 742,
-    "value": "xmark.shield"
+    "value": "xmark.shield.fill"
   },
   {
     "key": 744,

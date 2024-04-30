@@ -55,7 +55,9 @@
           "errorHiding": "There was an error while hiding. Please contact the developer for help",
           "errorDeleting": "There was an error while deleting. Please contact the developer for help",
           "refreshing": "Refreshing...",
-          "refreshComplated": "Refresh complated!"
+          "refreshComplated": "Refresh complated!",
+          "allTools": "All Tools",
+          "yourTools": "Your Tools"
         },
         "NewTool": {
           "title": "Create New Tool",

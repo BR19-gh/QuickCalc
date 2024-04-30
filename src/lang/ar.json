@@ -56,7 +56,9 @@
           "errorHiding": "حدث خطأ أثناء الاخفاء، تواصل مع المطور للمساعدة",
           "errorDeleting": "حدث خطأ أثناء الحذف، تواصل مع المطور للمساعدة",
           "refreshing": "جار التحديث...",
-          "refreshComplated": "اكتمل التحديث!"
+          "refreshComplated": "اكتمل التحديث!",
+          "allTools": "جميع الأدوات",
+          "yourTools": "أدواتك"
         },
         "NewTool": {
           "title": "إنشاء أداة جديدة",
