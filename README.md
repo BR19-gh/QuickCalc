@@ -43,7 +43,7 @@ iOS app built using React Native, Redux and Expo, it gathers simple tools for yo
 - `src/lang`: Contains language configurations,
 - `src/navigation`: Contains navigation configurations,
 - `src/store`: Contains Redux configurations,
-- `_DATA.js`: Contains functions which deals with a AsyncStorage
+- `_DATA.js`: Contains functions which deals with AsyncStorage
 
 ## Screenshots
 
