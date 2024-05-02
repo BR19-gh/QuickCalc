@@ -147,8 +147,6 @@ function UnitsCon({ theme, dispatch, unitResult }) {
       backgroundColor: theme === "dark" ? "#555555" : "#E9ECEF",
       height: 40,
       width: 160,
-      borderColor: "#283dab88",
-      borderWidth: 0.5,
       borderRadius: 8,
       paddingHorizontal: 10,
       marginBottom: 10,
@@ -168,15 +166,11 @@ function UnitsCon({ theme, dispatch, unitResult }) {
               color: theme === "dark" ? "#fff" : "#151E26",
             }}
             containerStyle={{
-              borderColor: theme === "dark" ? "#555555" : "#E9ECEF",
-              borderRadius: 8,
               backgroundColor: theme === "dark" ? "#555555" : "#E9ECEF",
               paddingBottom: 5,
+              borderRadius: 8,
             }}
-            style={[
-              stylesDropdown.dropdown,
-              isFocus && { borderColor: "blue" },
-            ]}
+            style={[stylesDropdown.dropdown]}
             placeholderStyle={{
               fontSize: 14,
               fontWeight: "bold",
@@ -249,15 +243,13 @@ function UnitsCon({ theme, dispatch, unitResult }) {
               />
               <TextInput
                 style={{
-                  backgroundColor: isDark("#CCCCCC", "#FFFFFF"),
+                  backgroundColor: isDark("#2C2C2D", "#FFFFFF"),
                   width: 150,
                   height: 150,
                   fontSize: fromUnitValue ? 40 : 20,
                   textAlign: "center",
-                  color: isDark("#283dab", "#283987"),
+                  color: isDark("#DBEAFE", "#283987"),
                   borderRadius: 10,
-                  borderWidth: 1,
-                  borderColor: "#283dab88",
                 }}
                 blurOnSubmit={false}
                 returnKeyType={"done"}
@@ -267,7 +259,7 @@ function UnitsCon({ theme, dispatch, unitResult }) {
                 value={fromUnitValue}
                 onChangeText={(value) => setFromUnitValue(value)}
                 onFocus={() => setFromUnitValue("")}
-                placeholderTextColor={isDark("#28398788", "#28398755")}
+                placeholderTextColor={isDark("#DBEAFE88", "#28398755")}
                 placeholder={t(text("from"))}
                 keyboardType="numeric"
               />
@@ -300,15 +292,13 @@ function UnitsCon({ theme, dispatch, unitResult }) {
                 selectTextOnFocus={false}
                 ref={secondInput}
                 style={{
-                  backgroundColor: isDark("#888888", "#CCCCCC"),
+                  backgroundColor: isDark("#2C2C2D99", "#CCCCCC"),
                   width: 150,
                   height: 150,
                   fontSize: unitResult.result ? 40 : 20,
                   textAlign: "center",
-                  color: isDark("#283dab", "#283987"),
+                  color: isDark("#DBEAFE", "#283987"),
                   borderRadius: 10,
-                  borderWidth: 1,
-                  borderColor: "#283dab88",
                 }}
                 returnKeyType="done"
                 keyboardType="decimal-pad"
@@ -317,7 +307,7 @@ function UnitsCon({ theme, dispatch, unitResult }) {
                 }
                 onFocus={() => setToUnitValue("")}
                 onChangeText={(value) => setToUnitValue(value)}
-                placeholderTextColor={isDark("#28398788", "#28398755")}
+                placeholderTextColor={isDark("#DBEAFE88", "#28398755")}
                 placeholder={t(text("to"))}
               />
             </View>

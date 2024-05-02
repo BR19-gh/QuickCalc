@@ -92,11 +92,10 @@ function EditTool({ theme, tools, route, dispatch }) {
       backgroundColor: "transparent",
     },
     dropdown: {
-      backgroundColor: isDark("#CCCCCC", "#FFFFFF"),
+      backgroundColor: isDark("#2C2C2D", "#FFFFFF"),
       height: 40,
       width: 200,
-      borderColor: "#283dab88",
-      borderWidth: 0.5,
+
       borderRadius: 8,
       paddingHorizontal: 10,
       marginBottom: 10,
@@ -192,15 +191,13 @@ function EditTool({ theme, tools, route, dispatch }) {
             </Text>
             <TextInput
               style={{
-                backgroundColor: isDark("#CCCCCC", "#FFFFFF"),
+                backgroundColor: isDark("#2C2C2D", "#FFFFFF"),
                 width: 200,
                 height: 80,
                 fontSize: 20,
                 textAlign: "center",
-                color: isDark("#283dab", "#283987"),
+                color: isDark("#DBEAFE", "#283987"),
                 borderRadius: 10,
-                borderWidth: 1,
-                borderColor: "#283dab88",
               }}
               maxLength={20}
               blurOnSubmit={false}
@@ -237,15 +234,14 @@ function EditTool({ theme, tools, route, dispatch }) {
             </Text>
             <TextInput
               style={{
-                backgroundColor: isDark("#CCCCCC", "#FFFFFF"),
+                backgroundColor: isDark("#2C2C2D", "#FFFFFF"),
                 width: 200,
                 height: 100,
                 fontSize: 20,
                 textAlign: newTool.description ? "auto" : "center",
-                color: isDark("#283dab", "#283987"),
+                color: isDark("#DBEAFE", "#283987"),
                 borderRadius: 10,
-                borderWidth: 1,
-                borderColor: "#283dab88",
+
                 paddingTop: newTool.description ? 10 : 35,
                 padding: 10,
               }}
@@ -293,32 +289,31 @@ function EditTool({ theme, tools, route, dispatch }) {
             <Dropdown
               activeColor={theme === "dark" ? "#999999" : "#DDDDDD"}
               itemContainerStyle={{
-                backgroundColor: isDark("#CCCCCC", "#FFFFFF"),
+                backgroundColor: isDark("#2C2C2D", "#FFFFFF"),
+                borderWidth: 0,
               }}
               itemTextStyle={{
-                color: isDark("#283dab", "#283987"),
+                color: isDark("#DBEAFE", "#283987"),
               }}
               containerStyle={{
-                borderColor: "#283dab88",
                 borderRadius: 8,
-                backgroundColor: isDark("#CCCCCC", "#FFFFFF"),
+                borderWidth: 0,
+                backgroundColor: isDark("#2C2C2D", "#FFFFFF"),
                 paddingBottom: 5,
               }}
-              style={[styles.dropdown, isFocus && { borderColor: "blue" }]}
+              style={[styles.dropdown]}
               placeholderStyle={{
-                fontSize: 14,
-                fontWeight: "bold",
-                color: isDark("#28398788", "#28398755"),
+                fontSize: 18,
+                color: isDark("#DBEAFE88", "#28398755"),
               }}
               selectedTextStyle={{
-                fontSize: 14,
-                fontWeight: "bold",
-                color: isDark("#283dab", "#283987"),
+                fontSize: 18,
+                color: isDark("#DBEAFE", "#283987"),
               }}
               inputSearchStyle={{
                 height: 40,
                 fontSize: 14,
-                color: isDark("#283dab", "#283987"),
+                color: isDark("#DBEAFE", "#283987"),
               }}
               data={[...ICONS]}
               search
@@ -326,22 +321,36 @@ function EditTool({ theme, tools, route, dispatch }) {
               valueField="value"
               labelField="value"
               autoScroll={false}
-              renderItem={(item) => (
-                <View className="w-full flex-row justify-around items-center mb-3 mt-3">
+              renderItem={(item, selected) => (
+                <View
+                  className={
+                    "w-full flex-row justify-around items-center pb-3 pt-3" +
+                    (selected
+                      ? theme === "dark"
+                        ? " bg-neutral-900"
+                        : ""
+                      : " ")
+                  }
+                >
                   {lang === "ar" ? (
-                    <Text className="text-2xl font-semibold">
+                    <Text
+                      className={
+                        "text-2xl font-semibold " +
+                        isDark("text-white", "text-black")
+                      }
+                    >
                       رقم {item.key}:
                     </Text>
                   ) : (
-                    <Text className="text-2xl font-semibold">
+                    <Text className={"text-2xl font-semibold"}>
                       Id. {item.key}:
                     </Text>
                   )}
                   <SweetSFSymbol
                     name={item.value}
-                    weight="semibold"
+                    weight="normal"
                     size={40}
-                    colors={"black"}
+                    colors={isDark("white", "black")}
                   />
                 </View>
               )}
@@ -358,7 +367,7 @@ function EditTool({ theme, tools, route, dispatch }) {
                     }}
                     name={isFocus ? "chevron.down" : "chevron.up"}
                     size={10}
-                    colors={"#151E26"}
+                    colors={isDark("#ffffff99", "#151E26")}
                   />
                 )
               }
@@ -370,7 +379,7 @@ function EditTool({ theme, tools, route, dispatch }) {
                     }}
                     name={isFocus ? "chevron.down" : "chevron.up"}
                     size={10}
-                    colors={"#151E26"}
+                    colors={isDark("#ffffff99", "#151E26")}
                   />
                 ) : null
               }
@@ -383,7 +392,7 @@ function EditTool({ theme, tools, route, dispatch }) {
                   ...newTool,
                   icon: item.value,
                 });
-                //
+
                 setIsFocus(false);
               }}
             />
@@ -468,15 +477,13 @@ function EditTool({ theme, tools, route, dispatch }) {
             </View>
             <TextInput
               style={{
-                backgroundColor: isDark("#CCCCCC", "#FFFFFF"),
+                backgroundColor: isDark("#2C2C2D", "#FFFFFF"),
                 width: 80,
                 height: 80,
                 fontSize: newTool.operandNum ? 40 : 20,
                 textAlign: "center",
-                color: isDark("#283dab", "#283987"),
+                color: isDark("#DBEAFE", "#283987"),
                 borderRadius: 10,
-                borderWidth: 1,
-                borderColor: "#283dab88",
               }}
               blurOnSubmit={false}
               returnKeyType={"done"}
@@ -563,15 +570,13 @@ function EditTool({ theme, tools, route, dispatch }) {
                       <TextInput
                         maxLength={20}
                         style={{
-                          backgroundColor: isDark("#CCCCCC", "#FFFFFF"),
+                          backgroundColor: isDark("#2C2C2D", "#FFFFFF"),
                           width: newTool.operandNum > 3 ? 40 : 80,
                           height: newTool.operandNum > 3 ? 40 : 80,
                           fontSize: newTool.operandNum > 3 ? 7 : 18,
                           textAlign: "center",
-                          color: isDark("#283dab", "#283987"),
+                          color: isDark("#DBEAFE", "#283987"),
                           borderRadius: newTool.operandNum > 3 ? 5 : 10,
-                          borderWidth: 1,
-                          borderColor: "#283dab88",
                         }}
                         blurOnSubmit={false}
                         returnKeyType={"done"}
@@ -639,10 +644,9 @@ function EditTool({ theme, tools, route, dispatch }) {
                                   marginTop: newTool.operandNum > 3 ? 10 : 20,
                                   width: newTool.operandNum > 3 ? 26 : 47,
                                   height: newTool.operandNum > 3 ? 17 : 35,
-                                  backgroundColor: isDark("#CCCCCC", "#FFFFFF"),
+                                  backgroundColor: isDark("#2C2C2D", "#FFFFFF"),
                                   borderRadius: newTool.operandNum > 3 ? 5 : 10,
-                                  borderWidth: 1,
-                                  borderColor: "#283dab88",
+
                                   flexDirection: "row",
                                   justifyContent: "center",
                                   alignItems: "center",
@@ -659,7 +663,7 @@ function EditTool({ theme, tools, route, dispatch }) {
                                         ? 15
                                         : 8,
 
-                                    color: "#283987",
+                                    color: isDark("#DBEAFE", "#283987"),
                                     flex: 1,
                                     fontWeight: "bold",
 
@@ -704,7 +708,7 @@ function EditTool({ theme, tools, route, dispatch }) {
                                     flex: 1,
                                     fontSize: newTool.operandNum > 3 ? 10 : 20,
                                     fontWeight: "bold",
-                                    color: "#283987",
+                                    color: isDark("#DBEAFE", "#283987"),
                                   }}
                                 >
                                   {item}
@@ -714,12 +718,10 @@ function EditTool({ theme, tools, route, dispatch }) {
                           }}
                           showsVerticalScrollIndicator={false}
                           dropdownStyle={{
-                            backgroundColor: isDark("#CCCCCC", "#FFFFFF"),
+                            backgroundColor: isDark("#2C2C2D", "#FFFFFF"),
                             fontSize: newTool.operandNum > 3 ? 9 : 18,
-                            color: "#283987",
+                            color: isDark("#DBEAFE", "#283987"),
                             borderRadius: newTool.operandNum > 3 ? 5 : 10,
-                            borderWidth: 1,
-                            borderColor: "#283dab88",
                           }}
                         />
                       )}

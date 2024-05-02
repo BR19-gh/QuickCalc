@@ -22,8 +22,6 @@ const DropdownComponent = ({ theme, text, t, setCurrency, currency }) => {
     dropdown: {
       backgroundColor: theme === "dark" ? "#555555" : "#E9ECEF",
       height: 40,
-      borderColor: "#283dab88",
-      borderWidth: 0.5,
       borderRadius: 8,
       paddingHorizontal: 10,
       marginBottom: 10,

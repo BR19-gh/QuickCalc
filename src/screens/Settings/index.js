@@ -147,6 +147,7 @@ function Settings({ theme, isThemeChanged, setIsThemeChanged, dispatch }) {
                           t(text("dark")),
                           t(text("light")),
                         ]}
+                        defaultValue={isAuto ? t(text("auto")) : theme}
                         onSelect={(selectedItem, index) => {
                           Haptics.impactAsync(
                             Haptics.ImpactFeedbackStyle.Heavy
@@ -231,13 +232,8 @@ function Settings({ theme, isThemeChanged, setIsThemeChanged, dispatch }) {
                                   width: "100%",
                                   flexDirection: "row",
                                   paddingHorizontal: 12,
-
                                   paddingVertical: 8,
                                 },
-                                ...(isSelected && {
-                                  backgroundColor:
-                                    theme === "dark" ? "#333333" : "#D2D9DF",
-                                }),
                               }}
                             >
                               <Text
@@ -245,8 +241,11 @@ function Settings({ theme, isThemeChanged, setIsThemeChanged, dispatch }) {
                                 style={{
                                   flex: 1,
                                   fontSize: 18,
-                                  fontWeight: "500",
+                                  fontWeight: "300",
                                   color: theme === "dark" ? "#fff" : "#151E26",
+                                  ...(isSelected && {
+                                    fontWeight: "bold",
+                                  }),
                                 }}
                               >
                                 {item}
@@ -257,7 +256,7 @@ function Settings({ theme, isThemeChanged, setIsThemeChanged, dispatch }) {
                         showsVerticalScrollIndicator={false}
                         dropdownStyle={{
                           backgroundColor:
-                            theme === "dark" ? "#555555" : "#E9ECEF",
+                            theme === "dark" ? "#2C2C2F" : "#E7E7E8",
                           borderRadius: 8,
                         }}
                       />

@@ -73,8 +73,6 @@ function CreatedTool({ theme, setCurrentTool, route, dispatch, tools }) {
       return expr;
     };
 
-    console.log(expression(tool.equation.operands.length));
-    console.log(expression(tool.equation.operands));
     setToolProps({
       ...toolProps,
       result: Parser.evaluate(expression(tool.equation.operands.length), {
@@ -132,15 +130,13 @@ function CreatedTool({ theme, setCurrentTool, route, dispatch, tools }) {
                   </Text>
                   <TextInput
                     style={{
-                      backgroundColor: isDark("#CCCCCC", "#FFFFFF"),
+                      backgroundColor: isDark("#2C2C2D", "#FFFFFF"),
                       width: 150,
                       height: 150,
                       fontSize: toolProps.inputs[index] ? 40 : 20,
                       textAlign: "center",
-                      color: isDark("#283dab", "#283987"),
+                      color: isDark("#DBEAFE", "#283987"),
                       borderRadius: 10,
-                      borderWidth: 1,
-                      borderColor: "#283dab88",
                     }}
                     blurOnSubmit={false}
                     returnKeyType={"done"}
@@ -162,7 +158,7 @@ function CreatedTool({ theme, setCurrentTool, route, dispatch, tools }) {
                         ),
                       }))
                     }
-                    placeholderTextColor={isDark("#28398788", "#28398755")}
+                    placeholderTextColor={isDark("#DBEAFE88", "#28398755")}
                     placeholder={operand}
                     keyboardType="numeric"
                   />

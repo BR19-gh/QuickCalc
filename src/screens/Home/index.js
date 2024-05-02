@@ -98,7 +98,6 @@ function Home(props) {
   const [currentTools, setCurrentTools] = useState([]);
 
   useEffect(() => {
-    // Filter out duplicates based on tool id
     const uniqueTools = [...Object.values(props.tools)].filter(
       (tool, index, self) => index === self.findIndex((t) => t.id === tool.id)
     );
@@ -279,86 +278,118 @@ function Home(props) {
     );
   };
 
+  useEffect(() => {
+    if (props.searchText.length > 0 || props.isEditing === true) {
+      setYourToolsDisplayes(false);
+    }
+  }, [props.isEditing, props.searchText]);
+
   return (
     <SafeAreaView>
       <View className="items-center">
-        <SelectDropdown
-          data={[t(text("allTools")), t(text("yourTools"))]}
-          onSelect={(selectedItem, index) => {
-            Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Heavy);
-            if (index === 0) {
-              setYourToolsDisplayes(false);
-            } else if (index === 1) {
-              setYourToolsDisplayes(true);
-            }
-          }}
-          renderButton={(selectedItem, isOpened) => {
-            return (
-              <View
-                style={{
-                  width: 130,
-                  height: 30,
-                  marginBottom: 10,
-                  marginTop: 10,
-                  backgroundColor:
-                    props.theme === "dark" ? "#555555" : "#E7E7E8",
-                  borderRadius: 8,
-                  flexDirection: "row",
-                  justifyContent: "center",
-                  alignItems: "center",
-                }}
-              >
-                <Text
+        {props.searchText.length > 0 || props.isEditing === true ? (
+          <View
+            style={{
+              width: 130,
+              height: 30,
+              marginBottom: 10,
+              marginTop: 10,
+              backgroundColor: props.theme === "dark" ? "#2C2C2F" : "#E7E7E8",
+              borderRadius: 8,
+              flexDirection: "row",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <Text
+              style={{
+                color: props.theme === "dark" ? "#ffffffAA" : "#00000088",
+              }}
+            >
+              {t(text("filterIsDisabled"))}
+            </Text>
+          </View>
+        ) : (
+          <SelectDropdown
+            disabled={props.searchText.length > 0 || props.isEditing === true}
+            data={[t(text("allTools")), t(text("yourTools"))]}
+            defaultValue={t(text("allTools"))}
+            onSelect={(selectedItem, index) => {
+              Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Heavy);
+              if (index === 0) {
+                setYourToolsDisplayes(false);
+              } else if (index === 1) {
+                setYourToolsDisplayes(true);
+              }
+            }}
+            renderButton={(selectedItem, isOpened) => {
+              return (
+                <View
                   style={{
-                    color: props.theme === "dark" ? "#fff" : "#151E26",
-                    flex: 1,
-                    fontSize: 18,
-                    fontWeight: "500",
-                    textAlign: "center",
-                  }}
-                >
-                  {selectedItem ? selectedItem : t(text("allTools"))}
-                </Text>
-              </View>
-            );
-          }}
-          renderItem={(item, index, isSelected) => {
-            return (
-              <View
-                style={{
-                  ...{
-                    width: "100%",
-                    flexDirection: "row",
-                    paddingHorizontal: 12,
-
-                    paddingVertical: 8,
-                  },
-                  ...(isSelected && {
+                    width: 130,
+                    height: 30,
+                    marginBottom: 10,
+                    marginTop: 10,
                     backgroundColor:
-                      props.theme === "dark" ? "#333333" : "#E7E7E8",
-                  }),
-                }}
-              >
-                <Text
-                  className="text-center"
-                  style={{
-                    flex: 1,
-                    fontSize: 18,
-                    fontWeight: "500",
-                    color: props.theme === "dark" ? "#fff" : "#151E26",
+                      props.theme === "dark" ? "#2C2C2F" : "#E7E7E8",
+                    borderRadius: 8,
+                    flexDirection: "row",
+                    justifyContent: "center",
+                    alignItems: "center",
                   }}
                 >
-                  {item}
-                </Text>
-              </View>
-            );
-          }}
-          showsVerticalScrollIndicator={false}
-          dropdownStyle={{
-            backgroundColor: props.theme === "dark" ? "#555555" : "#E9ECEF",
-            borderRadius: 8,
-          }}
-        />
+                  <Text
+                    style={{
+                      color: props.theme === "dark" ? "#fff" : "#151E26",
+                      flex: 1,
+                      fontSize: 18,
+                      fontWeight: "400",
+                      textAlign: "center",
+                    }}
+                  >
+                    {selectedItem}
+                  </Text>
+                </View>
+              );
+            }}
+            renderItem={(item, index, isSelected) => {
+              return (
+                <View
+                  style={{
+                    ...{
+                      width: "100%",
+                      flexDirection: "row",
+                      paddingHorizontal: 12,
+                      paddingVertical: 8,
+                    },
+                  }}
+                >
+                  <Text
+                    className="text-center"
+                    style={{
+                      flex: 1,
+                      fontSize: 18,
+                      fontWeight: "300",
+                      color: props.theme === "dark" ? "#fff" : "#151E26",
+                      ...(isSelected && {
+                        fontWeight: "bold",
+                        fontSize: 18,
+                      }),
+                    }}
+                  >
+                    {item}
+                  </Text>
+                </View>
+              );
+            }}
+            showsVerticalScrollIndicator={false}
+            dropdownStyle={{
+              backgroundColor: props.theme === "dark" ? "#2C2C2F" : "#E7E7E8",
+              borderRadius: 8,
+            }}
+          />
+        )}
+
         <NestableScrollContainer
           style={{ width: "100%", height: "91.5%" }}
           refreshControl={
@@ -384,7 +415,6 @@ function Home(props) {
               }}
             />
           }
-          className="h-full"
         >
           <Text
             className={styles.title + (props.theme === "dark" && " text-white")}
@@ -418,6 +448,19 @@ function Home(props) {
               >
                 {t(text("noTools"))}
               </Text>
+            ) : currentTools.filter((tool) =>
+                yourToolsDisplayes
+                  ? tool.link === "CreatedTool" && tool.isHidden === false
+                  : true
+              ).length === 0 ? (
+              <Text
+                className={
+                  "text-xl m-4 mt-0 text-left " +
+                  (props.theme === "dark" && " text-white")
+                }
+              >
+                {t(text("noFilteredTools"))}
+              </Text>
             ) : null
           }
 
@@ -427,19 +470,15 @@ function Home(props) {
             data={
               props.searchText.length > 0
                 ? props.isShowedFavorite
-                  ? currentTools.filter((tool) =>
-                      yourToolsDisplayes
-                        ? tool.link === "CreatedTool"
-                        : true &&
-                          tool.searchName.includes(props.searchText) &&
-                          tool.isFavorite === true
+                  ? currentTools.filter(
+                      (tool) =>
+                        tool.searchName.includes(props.searchText) &&
+                        tool.isFavorite === true
                     )
-                  : currentTools.filter((tool) =>
-                      yourToolsDisplayes
-                        ? tool.link === "CreatedTool"
-                        : true &&
-                          tool.searchName.includes(props.searchText) &&
-                          tool.isHidden === false
+                  : currentTools.filter(
+                      (tool) =>
+                        tool.searchName.includes(props.searchText) &&
+                        tool.isHidden === false
                     )
                 : props.isShowedFavorite
                 ? currentTools.filter((tool) =>
@@ -512,17 +551,14 @@ function Home(props) {
                           (props.isShowedFavorite
                             ? tool.isFavorite === false &&
                               tool.isHidden === false
-                            : tool.isHidden === true) &&
+                            : tool.isHidden === true)
+                        : props.isShowedFavorite
+                        ? tool.isFavorite === false &&
+                          tool.isHidden === false &&
                           (yourToolsDisplayes
                             ? tool.link === "CreatedTool"
                             : true)
-                        : (props.isShowedFavorite
-                            ? tool.isFavorite === false &&
-                              tool.isHidden === false
-                            : tool.isHidden === true) &&
-                          (yourToolsDisplayes
-                            ? tool.link === "CreatedTool"
-                            : true)
+                        : tool.isHidden === true
                     )
                     .map((tool) => (
                       <Card

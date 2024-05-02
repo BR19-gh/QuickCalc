@@ -141,15 +141,13 @@ function CurrencyCon({ theme, dispatch, currResult }) {
               />
               <TextInput
                 style={{
-                  backgroundColor: isDark("#CCCCCC", "#FFFFFF"),
+                  backgroundColor: isDark("#2C2C2D", "#FFFFFF"),
                   width: 150,
                   height: 150,
                   fontSize: fromCurrencyValue ? 40 : 20,
                   textAlign: "center",
-                  color: isDark("#283dab", "#283987"),
+                  color: isDark("#DBEAFE", "#283987"),
                   borderRadius: 10,
-                  borderWidth: 1,
-                  borderColor: "#283dab88",
                 }}
                 blurOnSubmit={false}
                 returnKeyType={"done"}
@@ -159,7 +157,7 @@ function CurrencyCon({ theme, dispatch, currResult }) {
                 value={fromCurrencyValue}
                 onChangeText={(value) => setFromCurrencyValue(value)}
                 onFocus={() => setFromCurrencyValue("")}
-                placeholderTextColor={isDark("#28398788", "#28398755")}
+                placeholderTextColor={isDark("#DBEAFE88", "#28398755")}
                 placeholder={t(text("from"))}
                 keyboardType="numeric"
               />
@@ -191,15 +189,13 @@ function CurrencyCon({ theme, dispatch, currResult }) {
                 selectTextOnFocus={false}
                 ref={secondInput}
                 style={{
-                  backgroundColor: isDark("#888888", "#CCCCCC"),
+                  backgroundColor: isDark("#2C2C2D99", "#CCCCCC"),
                   width: 150,
                   height: 150,
                   fontSize: currResult.result ? 40 : 20,
                   textAlign: "center",
-                  color: isDark("#283dab", "#283987"),
+                  color: isDark("#DBEAFE", "#283987"),
                   borderRadius: 10,
-                  borderWidth: 1,
-                  borderColor: "#283dab88",
                 }}
                 returnKeyType="done"
                 keyboardType="decimal-pad"
@@ -208,7 +204,7 @@ function CurrencyCon({ theme, dispatch, currResult }) {
                 }
                 onFocus={() => setToCurrencyValue("")}
                 onChangeText={(value) => setToCurrencyValue(value)}
-                placeholderTextColor={isDark("#28398788", "#28398755")}
+                placeholderTextColor={isDark("#DBEAFE88", "#28398755")}
                 placeholder={t(text("to"))}
               />
             </View>

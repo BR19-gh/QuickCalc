@@ -1,4 +1,4 @@
-import { Animated } from "react-native";
+import { Animated, Touchable, TouchableOpacity } from "react-native";
 import { RectButton } from "react-native-gesture-handler";
 import Swipeable from "react-native-gesture-handler/Swipeable";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
@@ -56,53 +56,51 @@ class SwipeableRow extends Component {
     const text = (text) => "screens.Home.text." + text;
     const { toast, t } = this.props;
 
+    const handleHide = () => {
+      this.props.changeVis(this.props.tool.id);
+      if (this.props.tool.isHidden) {
+        Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
+        toast.show(t(text("toolHasBeenHidden")), {
+          type: "success",
+          placement: "top",
+          duration: 1000,
+          offset: 20,
+          animationType: "zoom-in",
+        });
+        this.closeRow(this.props.index, true);
+      } else {
+        Haptics.notificationAsync(Haptics.NotificationFeedbackType.Error);
+        toast.show(t(text("errorHiding")), {
+          type: "warning",
+          placement: "top",
+          duration: 4000,
+          offset: 20,
+          animationType: "zoom-in",
+        });
+        this.closeRow(this.props.index, true);
+      }
+    };
+
     return (
       <RectButton
         className="h-32 mb-3"
         style={stylesLeft.leftAction}
-        onPress={() => {
-          this.props.changeVis(this.props.tool.id);
-          if (this.props.tool.isHidden) {
-            Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
-            toast.show(t(text("toolHasBeenHidden")), {
-              type: "success",
-              placement: "top",
-              duration: 1000,
-              offset: 20,
-              animationType: "zoom-in",
-            });
-            this.closeRow(this.props.index, true);
-          } else {
-            Haptics.notificationAsync(Haptics.NotificationFeedbackType.Error);
-            toast.show(t(text("errorHiding")), {
-              type: "warning",
-              placement: "top",
-              duration: 4000,
-              offset: 20,
-              animationType: "zoom-in",
-            });
-            this.closeRow(this.props.index, true);
-          }
-        }}
+        onPress={handleHide}
       >
-        <Animated.Text
-          className="text-center pt-9"
-          style={[
-            stylesLeft.actionText,
-            {
-              transform: [{ translateX: trans }],
-            },
-          ]}
-        >
-          <MaterialCommunityIcons name={"eye-off"} size={35} color="white" />
-          {/* <SweetSFSymbol
-          name={isShowedFavorite ? "star.fill" : "star"}
-          size={22}
-          colors={["#3B82F6"]}
-          style={{ marginTop: 2 }}
-        /> */}
-          <Text className="w-full"> {this.props.t(text("hide"))}</Text>
-        </Animated.Text>
+        <View className="text-center flex-row flex-wrap ml-10 mt-9">
+          <View style={{ width: "100%" }}>
+            <TouchableOpacity activeOpacity={1} onPress={handleHide}>
+              <SweetSFSymbol
+                name={"eye.slash.fill"}
+                size={30}
+                colors={["white"]}
+              />
+            </TouchableOpacity>
+          </View>
+          <Text className="text-white w-full mt-2 ">
+            {this.props.t(text("hide"))}
+          </Text>
+        </View>
       </RectButton>
     );
   };
@@ -119,6 +117,41 @@ class SwipeableRow extends Component {
     const text = (text) => "screens.Home.text." + text;
     const { toast, t } = this.props;
 
+    const handleFavorite = () => {
+      this.props.handleFavorite(this.props.tool.id);
+      if (this.props.tool.isFavorite) {
+        Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
+        toast.show(t(text("toolHasbeenFavored")), {
+          type: "success",
+          placement: "top",
+          duration: 1000,
+          offset: 20,
+          animationType: "zoom-in",
+        });
+        this.closeRow(this.props.index, true);
+      } else if (!this.props.tool.isFavorite) {
+        Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
+        toast.show(t(text("toolHasbeenUnFavored")), {
+          type: "success",
+          placement: "top",
+          duration: 1000,
+          offset: 20,
+          animationType: "zoom-in",
+        });
+        this.closeRow(this.props.index, true);
+      } else {
+        Haptics.notificationAsync(Haptics.NotificationFeedbackType.Error);
+        toast.show(t(text("errorFavoriting")), {
+          type: "warning",
+          placement: "top",
+          duration: 4000,
+          offset: 20,
+          animationType: "zoom-in",
+        });
+        this.closeRow(this.props.index, true);
+      }
+    };
+
     return (
       <RectButton
         className="h-32 mb-3"
@@ -130,58 +163,24 @@ class SwipeableRow extends Component {
               : "darkorchid",
           },
         ]}
-        onPress={() => {
-          this.props.handleFavorite(this.props.tool.id);
-          if (this.props.tool.isFavorite) {
-            Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
-            toast.show(t(text("toolHasbeenFavored")), {
-              type: "success",
-              placement: "top",
-              duration: 1000,
-              offset: 20,
-              animationType: "zoom-in",
-            });
-            this.closeRow(this.props.index, true);
-          } else if (!this.props.tool.isFavorite) {
-            Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
-            toast.show(t(text("toolHasbeenUnFavored")), {
-              type: "success",
-              placement: "top",
-              duration: 1000,
-              offset: 20,
-              animationType: "zoom-in",
-            });
-            this.closeRow(this.props.index, true);
-          } else {
-            Haptics.notificationAsync(Haptics.NotificationFeedbackType.Error);
-            toast.show(t(text("errorFavoriting")), {
-              type: "warning",
-              placement: "top",
-              duration: 4000,
-              offset: 20,
-              animationType: "zoom-in",
-            });
-            this.closeRow(this.props.index, true);
-          }
-        }}
+        onPress={handleFavorite}
       >
-        <Animated.Text
-          className={
-            "text-center text-base text-white pr-5" +
-            (this.props.tool.isFavorite ? " pt-8" : " pt-10")
-          }
-          style={[]}
-        >
-          <MaterialCommunityIcons
-            name={this.props.tool.isFavorite ? "star-minus" : "star-plus"}
-            size={35}
-            color="white"
-          />
-          {"\n"}
-          {this.props.tool.isFavorite
-            ? this.props.t(text("unfavorite"))
-            : this.props.t(text("favorite"))}
-        </Animated.Text>
+        <View className="text-center flex-row flex-wrap ml-5 mt-9">
+          <View style={{ width: "100%" }}>
+            <TouchableOpacity activeOpacity={1} onPress={handleFavorite}>
+              <SweetSFSymbol
+                name={this.props.tool.isFavorite ? "star.slash" : "star.fill"}
+                size={30}
+                colors={["white"]}
+              />
+            </TouchableOpacity>
+          </View>
+          <Text className="text-white w-full -ml-5 mt-2 text-center">
+            {this.props.tool.isFavorite
+              ? t(text("unfavorite"))
+              : t(text("favorite"))}
+          </Text>
+        </View>
       </RectButton>
     );
   };

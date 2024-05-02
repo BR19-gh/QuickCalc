@@ -22,17 +22,16 @@ const DateInput = ({
     maxLength={maxLength}
     editable={isEditable}
     style={{
+      margin: 1,
       backgroundColor: isEditable
-        ? isDark("#CCCCCC", "#FFFFFF")
-        : isDark("#888888", "#CCCCCC"),
+        ? isDark("#2C2C2D", "#FFFFFF")
+        : isDark("#2C2C2D99", "#CCCCCC"),
       width: 150,
       height: 50,
       fontSize: calendarValue[date] ? 40 : 20,
       textAlign: "center",
-      color: isDark("#283dab", "#283987"),
+      color: isDark("#DBEAFE", "#283987"),
       borderRadius: 10,
-      borderWidth: 1,
-      borderColor: "#283dab88",
     }}
     blurOnSubmit={false}
     returnKeyType={"done"}
@@ -76,7 +75,7 @@ const DateInput = ({
         });
       }
     }}
-    placeholderTextColor={isDark("#28398788", "#28398755")}
+    placeholderTextColor={isDark("#DBEAFE88", "#28398755")}
     placeholder={t(text(date))}
     keyboardType="number-pad"
   />

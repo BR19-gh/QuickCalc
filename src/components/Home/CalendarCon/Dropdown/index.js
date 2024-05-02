@@ -31,8 +31,7 @@ const DropdownComponent = ({
     dropdown: {
       backgroundColor: theme === "dark" ? "#555555" : "#E9ECEF",
       height: 40,
-      borderColor: "#283dab88",
-      borderWidth: 0.5,
+
       borderRadius: 8,
       paddingHorizontal: 10,
       marginBottom: 10,
@@ -49,12 +48,11 @@ const DropdownComponent = ({
         color: theme === "dark" ? "#fff" : "#151E26",
       }}
       containerStyle={{
-        borderColor: theme === "dark" ? "#555555" : "#E9ECEF",
         borderRadius: 8,
         backgroundColor: theme === "dark" ? "#555555" : "#E9ECEF",
         paddingBottom: 5,
       }}
-      style={[styles.dropdown, isFocus && { borderColor: "blue" }]}
+      style={[styles.dropdown]}
       placeholderStyle={{
         fontSize: 14,
         fontWeight: "bold",
