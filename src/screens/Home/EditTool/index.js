@@ -272,7 +272,7 @@ function EditTool({ theme, tools, route, dispatch }) {
             style={{
               marginTop: 10,
               marginBottom: 10,
-              borderBottomColor: isDark("#CCCCCC44", "#283dab88"),
+              borderBottomColor: isDark("#333333", "#CCCCCC"),
               borderBottomWidth: StyleSheet.hairlineWidth,
               alignSelf: "stretch",
             }}
@@ -442,7 +442,7 @@ function EditTool({ theme, tools, route, dispatch }) {
             style={{
               marginTop: 10,
               marginBottom: 10,
-              borderBottomColor: isDark("#CCCCCC44", "#283dab88"),
+              borderBottomColor: isDark("#333333", "#CCCCCC"),
               borderBottomWidth: StyleSheet.hairlineWidth,
               alignSelf: "stretch",
             }}

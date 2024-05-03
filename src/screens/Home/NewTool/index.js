@@ -306,7 +306,7 @@ function NewTool({ theme, tools, dispatch }) {
             style={{
               marginTop: 10,
               marginBottom: 10,
-              borderBottomColor: isDark("#2C2C2D44", "#DBEAFE88"),
+              borderBottomColor: isDark("#333333", "#CCCCCC"),
               borderBottomWidth: StyleSheet.hairlineWidth,
               alignSelf: "stretch",
             }}
@@ -476,7 +476,7 @@ function NewTool({ theme, tools, dispatch }) {
             style={{
               marginTop: 10,
               marginBottom: 10,
-              borderBottomColor: isDark("#2C2C2D44", "#DBEAFE88"),
+              borderBottomColor: isDark("#333333", "#CCCCCC"),
               borderBottomWidth: StyleSheet.hairlineWidth,
               alignSelf: "stretch",
             }}

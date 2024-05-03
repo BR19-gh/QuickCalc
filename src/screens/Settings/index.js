@@ -16,7 +16,6 @@ import {
 } from "react-native-settings-ui";
 import SettingsButton from "../../components/Settings/Button";
 import styles, { stylesSettings } from "./styles";
-import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import SweetSFSymbol from "sweet-sfsymbols";
 import { useColorScheme } from "react-native";
 import { useEffect, useState, useRef } from "react";
@@ -268,6 +267,11 @@ function Settings({ theme, isThemeChanged, setIsThemeChanged, dispatch }) {
                   title={t(text("language"))}
                   type="newpage"
                   onPress={() => openAppPref(t, text)}
+                />
+                <SettingsButton
+                  title={t(text("walkThrough"))}
+                  type="newpage"
+                  onPress={() => null}
                 />
               </SettingsGroup>
             </View>

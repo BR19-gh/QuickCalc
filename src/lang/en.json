@@ -203,6 +203,9 @@
             "errorUnacceptableInputMsg2": "Make sure gregorian year is a number and is above 0",
             "errorNoCalendarsSelected": "Select calendars first",
             "errorNoCalendarsSelectedMsg": "Select calendars from and to before convertion",
+            "errorCalculating": "An error occurred while convertion",
+            "errorInvalidIslamicDate": "Islamic date entered is invalid. Try decrementing the day",
+            "pleaseShareError": "Please share this error with the developer, contact information in the settings.",
             "monthsName": {
               "islamicLunar": {
                 "1": "Moharram",
@@ -300,7 +303,8 @@
           "thisWillDeleteAllData": "This will delete all your created tools, favorites and settings.",
           "delete": "Delete",
           "deleting": "Deleting...",
-          "deleteCompeleted": "Delete complated! Refresh to see the changes"
+          "deleteCompeleted": "Delete complated! Refresh to see the changes",
+          "walkThrough": "Walk Through"
         }
       }
     }

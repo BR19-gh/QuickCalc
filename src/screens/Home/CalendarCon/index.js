@@ -433,7 +433,26 @@ function CalendarCon({ theme }) {
                 "rounded-lg w-48 h-20 mt-14 flex-row items-center justify-evenly" +
                 isDark(" bg-blue-900 ", " bg-blue-500 ")
               }
-              onPress={calculate}
+              onPress={() => {
+                try {
+                  calculate();
+                } catch (err) {
+                  Haptics.notificationAsync(
+                    Haptics.NotificationFeedbackType.Error
+                  );
+                  if (err.message.includes("Invalid islamic-umalqura date!")) {
+                    Alert.alert(
+                      t(text("errorCalculating")),
+                      t(text("errorInvalidIslamicDate"))
+                    );
+                  } else {
+                    Alert.alert(
+                      t(text("errorCalculating")),
+                      err.message + "\n\n" + t(text("pleaseShareError"))
+                    );
+                  }
+                }
+              }}
             >
               <Text className={styles.btnText}>{t(text("calculate"))}</Text>
               <SweetSFSymbol

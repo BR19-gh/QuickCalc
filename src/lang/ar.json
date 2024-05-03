@@ -204,6 +204,9 @@
             "errorUnacceptableInputMsg2": "يجب أن تكون السنة الميلادية رقما وأعلى من 0",
             "errorNoCalendarsSelected": "اختر تقويم أولا",
             "errorNoCalendarsSelectedMsg": "اختر تقويم من وإلى قبل التحويل",
+            "errorCalculating": "حدث خطأ أثناء التحويل",
+            "errorInvalidIslamicDate": "التاريخ الهجري المدخل غير صالح، جرب انقاص اليوم",
+            "pleaseShareError": "الرجاء مشاركة هذا الخطأ مع المطور، معلومات التواصل في الإعدادات",
             "monthsName": {
               "islamicLunar": {
                 "1": "محرم",
@@ -301,7 +304,8 @@
           "thisWillDeleteAllData": "هذا الإجراء سيحذف جميع أدواتك المنشئة، ومفضلاتك، وإعداداتك السابقة",
           "delete": "حذف",
           "deleting": "جار الحذف...",
-          "deleteCompeleted": "اكتمل الحذف! حدث لترى التغييرات"
+          "deleteCompeleted": "اكتمل الحذف! حدث لترى التغييرات",
+          "walkThrough": "الجولة التوجيهية"
         }
       }
     }

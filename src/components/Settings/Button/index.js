@@ -1,16 +1,10 @@
 import React, { useContext } from "react";
-import {
-  Text,
-  StyleProp,
-  TextStyle,
-  TouchableOpacity,
-  NativeModules,
-} from "react-native";
+import { Text, TouchableOpacity, NativeModules } from "react-native";
 
 import createStyles from "../../../../node_modules/react-native-settings-ui/src/components/SettingsButton/settingsbutton.style";
 import { SettingsContext } from "../../../../node_modules/react-native-settings-ui/src/contexts/SettingsContext";
 
-import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
+import SweetSFSymbol from "sweet-sfsymbols";
 
 const SettingsButton = ({
   title,
@@ -49,20 +43,22 @@ const SettingsButton = ({
         <>
           {lang === "ar" ? (
             <Text style={[styles.arrow, arrow]}>
-              <MaterialCommunityIcons
-                name={"chevron-left"}
-                size={22}
-                color="gray"
+              <SweetSFSymbol
+                name={"chevron.left"}
+                size={14}
+                weight="semibold"
+                colors="gray"
               />
               {` ${statusText}`}
             </Text>
           ) : (
             <Text style={[styles.arrow, arrow]}>
               {`${statusText} `}
-              <MaterialCommunityIcons
-                name={"chevron-right"}
-                size={24}
-                color="gray"
+              <SweetSFSymbol
+                name={"chevron.right"}
+                size={14}
+                weight="semibold"
+                colors="gray"
               />
             </Text>
           )}
