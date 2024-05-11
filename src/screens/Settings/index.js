@@ -6,13 +6,12 @@ import {
   SafeAreaView,
   Alert,
   TouchableOpacity,
-  StyleSheet,
+  Platform,
 } from "react-native";
 import {
   SettingsProvider,
   SettingsGroup,
   SettingsInfoDisplay,
-  SettingsToggle,
 } from "react-native-settings-ui";
 import SettingsButton from "../../components/Settings/Button";
 import styles, { stylesSettings } from "./styles";
@@ -31,6 +30,7 @@ import { useToast } from "react-native-toast-notifications";
 import { connect } from "react-redux";
 import { handleInitialData } from "../../store/actions/shared";
 import * as Haptics from "expo-haptics";
+import { useNavigation } from "@react-navigation/native";
 
 const openAppPref = (t, text) => {
   if (Platform.OS === "ios") {
@@ -119,6 +119,8 @@ function Settings({ theme, isThemeChanged, setIsThemeChanged, dispatch }) {
 
   const isDarkTextColor = () =>
     theme === "dark" ? "text-white" : "text-black";
+
+  const navigation = useNavigation();
 
   return (
     <SafeAreaView className={styles.container}>
@@ -268,11 +270,6 @@ function Settings({ theme, isThemeChanged, setIsThemeChanged, dispatch }) {
                   type="newpage"
                   onPress={() => openAppPref(t, text)}
                 />
-                <SettingsButton
-                  title={t(text("walkThrough"))}
-                  type="newpage"
-                  onPress={() => null}
-                />
               </SettingsGroup>
             </View>
 
@@ -333,6 +330,11 @@ function Settings({ theme, isThemeChanged, setIsThemeChanged, dispatch }) {
             <View>
               <Text style={stylesSettings.groupTitle}>{t(text("app"))}</Text>
               <SettingsGroup>
+                <SettingsButton
+                  title={t(text("walkThrough"))}
+                  type="newpage"
+                  onPress={() => navigation.navigate("WalkThrough")}
+                />
                 <SettingsInfoDisplay
                   title={t(text("version"))}
                   status={"1.0.0.0"}

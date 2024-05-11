@@ -1,4 +1,10 @@
-import { Text, View, SafeAreaView, RefreshControl } from "react-native";
+import {
+  Text,
+  View,
+  SafeAreaView,
+  RefreshControl,
+  Dimensions,
+} from "react-native";
 import Card from "../../components/Home/Card";
 import SwipeableRow from "../../components/Home/Swipeable";
 import { useNavigation } from "@react-navigation/native";
@@ -17,7 +23,6 @@ import {
   NestableScrollContainer,
   NestableDraggableFlatList,
 } from "react-native-draggable-flatlist";
-import { BlurView } from "expo-blur";
 
 import { useTranslation } from "react-i18next";
 
@@ -218,6 +223,7 @@ function Home(props) {
                   props.setSearchText("");
                   props.searchBarRef.current.clearText();
                   props.searchBarRef.current.blur();
+                  props.setMoving(true);
                 }
               }
             }}
@@ -237,6 +243,7 @@ function Home(props) {
               isActive={isActive}
               t={t}
               text={text}
+              moving={props.moving}
             />
           </ContextMenu>
         </SwipeableRow>
@@ -272,6 +279,7 @@ function Home(props) {
             isActive={isActive}
             t={t}
             text={text}
+            moving={props.moving}
           />
         </SwipeableRow>
       </ScaleDecorator>
@@ -283,6 +291,8 @@ function Home(props) {
       setYourToolsDisplayes(false);
     }
   }, [props.isEditing, props.searchText]);
+
+  const windowHight = Dimensions.get("window").height;
 
   return (
     <SafeAreaView>
@@ -391,7 +401,7 @@ function Home(props) {
         )}
 
         <NestableScrollContainer
-          style={{ width: "100%", height: "91.5%" }}
+          style={{ width: "100%", height: windowHight > 667 ? "91.5%" : "89%" }}
           refreshControl={
             <RefreshControl
               refreshing={refreshing}

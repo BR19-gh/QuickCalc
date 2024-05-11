@@ -40,7 +40,7 @@ const DropdownComponent = ({
 
   return (
     <Dropdown
-      activeColor={theme === "dark" ? "#2F2F2F" : "#D2D2D2"}
+      activeColor={theme === "dark" ? "#444444" : "#D2D2D2"}
       itemContainerStyle={{
         backgroundColor: theme === "dark" ? "#555555" : "#E9ECEF",
       }}
@@ -51,6 +51,7 @@ const DropdownComponent = ({
         borderRadius: 8,
         backgroundColor: theme === "dark" ? "#555555" : "#E9ECEF",
         paddingBottom: 5,
+        borderColor: theme === "dark" ? "#555555" : "#E9ECEF",
       }}
       style={[styles.dropdown]}
       placeholderStyle={{

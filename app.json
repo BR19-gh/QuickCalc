@@ -40,14 +40,13 @@
     "web": {
       "favicon": "./assets/favicon.png"
     },
-    "plugins": [
-      "expo-localization"
-    ],
     "extra": {
-      "supportsRTL": true,
       "eas": {
         "projectId": "32bfd484-ec95-4109-9cd6-23789ab08f7d"
       }
-    }
+    },
+    "plugins": [
+      "expo-localization"
+    ]
   }
 }

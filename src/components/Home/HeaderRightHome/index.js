@@ -1,10 +1,10 @@
 import { Text, View, TouchableOpacity } from "react-native";
 import SweetSFSymbol from "sweet-sfsymbols";
-import { NativeModules } from "react-native";
 import i18n from "../../../lang/i18n";
 import { lang } from "../../../helpers";
 import * as Haptics from "expo-haptics";
 import { useNavigation } from "@react-navigation/native";
+import { useEffect } from "react";
 
 const Header = ({
   setIsEditing,
@@ -12,11 +12,18 @@ const Header = ({
   seIsEditingFavorite,
   isEditingFavorite,
   isShowedFavorite,
+  moving,
+  setMoving,
 }) => {
   const { t } = i18n;
   const text = (text) => "screens.Navi.text." + text;
 
   const navigation = useNavigation();
+
+  useEffect(() => {
+    if (isEditing === false) setMoving(false);
+    else setMoving(true);
+  }, [isEditing]);
 
   return (
     <View

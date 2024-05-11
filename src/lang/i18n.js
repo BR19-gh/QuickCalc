@@ -1,4 +1,4 @@
-import { Alert, NativeModules } from "react-native";
+import { NativeModules, Platform } from "react-native";
 import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
 import en from "./en.json";

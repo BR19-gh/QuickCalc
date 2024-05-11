@@ -3,12 +3,9 @@ import {
   Text,
   View,
   TouchableOpacity,
-  FlatList,
   ScrollView,
   Keyboard,
   TextInput,
-  KeyboardAvoidingView,
-  Alert,
   StyleSheet,
 } from "react-native";
 import styles from "./styles";
@@ -158,7 +155,7 @@ function UnitsCon({ theme, dispatch, unitResult }) {
       <ScrollView className="h-full">
         <View className={"w-full mt-32 items-center"}>
           <Dropdown
-            activeColor={theme === "dark" ? "#2F2F2F" : "#D2D2D2"}
+            activeColor={theme === "dark" ? "#444444" : "#D2D2D2"}
             itemContainerStyle={{
               backgroundColor: theme === "dark" ? "#555555" : "#E9ECEF",
             }}
@@ -169,6 +166,7 @@ function UnitsCon({ theme, dispatch, unitResult }) {
               backgroundColor: theme === "dark" ? "#555555" : "#E9ECEF",
               paddingBottom: 5,
               borderRadius: 8,
+              borderColor: theme === "dark" ? "#555555" : "#E9ECEF",
             }}
             style={[stylesDropdown.dropdown]}
             placeholderStyle={{
@@ -349,7 +347,7 @@ function UnitsCon({ theme, dispatch, unitResult }) {
             <View className="w-full flex-row p-2 text-left">
               <Text
                 className={
-                  "text-2xl" + isDark(" text-blue-100", " text-blue-900")
+                  "text-xl" + isDark(" text-blue-100", " text-blue-900")
                 }
               >
                 {t(text("from"))}
@@ -357,7 +355,7 @@ function UnitsCon({ theme, dispatch, unitResult }) {
               </Text>
               <Text
                 className={
-                  "text-3xl font-semibold" +
+                  "text-2xl font-semibold" +
                   isDark(" text-blue-100", " text-blue-900")
                 }
               >
@@ -369,7 +367,7 @@ function UnitsCon({ theme, dispatch, unitResult }) {
             <View className="w-full flex-row p-2 text-left">
               <Text
                 className={
-                  "text-2xl" + isDark(" text-blue-100", " text-blue-900")
+                  "text-xl" + isDark(" text-blue-100", " text-blue-900")
                 }
               >
                 {t(text("to"))}
@@ -377,7 +375,7 @@ function UnitsCon({ theme, dispatch, unitResult }) {
               </Text>
               <Text
                 className={
-                  "text-3xl font-semibold" +
+                  "text-2xl font-semibold" +
                   isDark(" text-blue-100", " text-blue-900")
                 }
               >

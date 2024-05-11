@@ -1,5 +1,4 @@
-import { Text, View, TouchableOpacity } from "react-native";
-import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
+import { TouchableOpacity } from "react-native";
 import SweetSFSymbol from "sweet-sfsymbols";
 import { useToast } from "react-native-toast-notifications";
 // import { useTranslation } from "react-i18next";
@@ -14,6 +13,7 @@ const Header = ({
   setIsShowedFavorite,
   seIsEditingFavorite,
   setIsEditing,
+  isEditing,
   dispatch,
 }) => {
   const navigation = useNavigation();
@@ -57,11 +57,13 @@ const Header = ({
           setIsEditing(false);
         }}
       >
-        <SweetSFSymbol
-          name={isShowedFavorite ? "star.fill" : "star"}
-          size={22}
-          colors={["#3B82F6"]}
-        />
+        {isEditing ? null : (
+          <SweetSFSymbol
+            name={isShowedFavorite ? "star.fill" : "star"}
+            size={22}
+            colors={["#3B82F6"]}
+          />
+        )}
       </TouchableOpacity>
     </>
   );

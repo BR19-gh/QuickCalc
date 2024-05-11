@@ -28,13 +28,13 @@ const HomeNavi = ({ isEditing, setIsEditing, theme }) => {
   const UnitsConText = (text) => "screens.Home.UnitsCon." + text;
   const CalendarConText = (text) => "screens.Home.CalendarCon." + text;
   const NewTooltext = (text) => "screens.Home.NewTool." + text;
-  const CreatedToolText = (text) => "screens.Home.CreatedTool." + text;
 
   const [currentTool, setCurrentTool] = useState({});
   const searchBarRef = useRef(null);
   const [isShowedFavorite, setIsShowedFavorite] = useState(false);
   const [isEditingFavorite, seIsEditingFavorite] = useState(false);
   const [searchText, setSearchText] = useState("");
+  const [moving, setMoving] = useState(false);
 
   return (
     <Stack.Navigator
@@ -53,6 +53,8 @@ const HomeNavi = ({ isEditing, setIsEditing, theme }) => {
               isShowedFavorite={isShowedFavorite}
               isEditing={isEditing}
               setIsEditing={setIsEditing}
+              setMoving={setMoving}
+              moving={moving}
             />
           ),
           headerLeft: () => (
@@ -60,6 +62,7 @@ const HomeNavi = ({ isEditing, setIsEditing, theme }) => {
               setIsEditing={setIsEditing}
               seIsEditingFavorite={seIsEditingFavorite}
               isShowedFavorite={isShowedFavorite}
+              isEditing={isEditing}
               setIsShowedFavorite={setIsShowedFavorite}
             />
           ),
@@ -93,9 +96,12 @@ const HomeNavi = ({ isEditing, setIsEditing, theme }) => {
             isShowedFavorite={isShowedFavorite}
             setIsEditing={setIsEditing}
             isEditing={isEditing}
+            moving={moving}
+            setMoving={setMoving}
           />
         )}
       />
+
       <Stack.Screen
         options={{
           title: t(NewTooltext("title")),
@@ -110,7 +116,6 @@ const HomeNavi = ({ isEditing, setIsEditing, theme }) => {
         name="EditTool"
         children={(props) => <EditTool {...props} theme={theme} />}
       />
-
       <Stack.Screen
         options={{
           title: currentTool.name,

@@ -4,6 +4,8 @@ import { Text, TouchableOpacity, NativeModules } from "react-native";
 import createStyles from "../../../../node_modules/react-native-settings-ui/src/components/SettingsButton/settingsbutton.style";
 import { SettingsContext } from "../../../../node_modules/react-native-settings-ui/src/contexts/SettingsContext";
 
+import { lang } from "../../../helpers";
+
 import SweetSFSymbol from "sweet-sfsymbols";
 
 const SettingsButton = ({
@@ -16,21 +18,6 @@ const SettingsButton = ({
 }) => {
   const { theme } = useContext(SettingsContext);
   const styles = createStyles(theme);
-
-  const deviceLanguage =
-    Platform.OS === "ios"
-      ? NativeModules.SettingsManager.settings.AppleLocale ||
-        NativeModules.SettingsManager.settings.AppleLanguages[0] // iOS 13
-      : NativeModules.I18nManager.localeIdentifier;
-
-  let lang;
-  let str = deviceLanguage;
-  let match = str.match(/^([a-z]{2})/i);
-  if (match) {
-    lang = match[0];
-  } else {
-    lang = "en";
-  }
 
   return (
     <TouchableOpacity

@@ -1,4 +1,4 @@
-import { NativeModules } from "react-native";
+import { NativeModules, Platform } from "react-native";
 
 export function formatDate(timestamp) {
   const date = new Date(timestamp);

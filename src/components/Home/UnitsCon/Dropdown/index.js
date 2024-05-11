@@ -38,7 +38,7 @@ const DropdownComponent = ({ theme, text, t, setUnit, unit, measurement }) => {
 
   return (
     <Dropdown
-      activeColor={theme === "dark" ? "#2F2F2F" : "#D2D2D2"}
+      activeColor={theme === "dark" ? "#444444" : "#D2D2D2"}
       itemContainerStyle={{
         backgroundColor: theme === "dark" ? "#555555" : "#E9ECEF",
       }}

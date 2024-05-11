@@ -1,31 +1,15 @@
-import { Animated, Touchable, TouchableOpacity } from "react-native";
+import { TouchableOpacity } from "react-native";
 import { RectButton } from "react-native-gesture-handler";
 import Swipeable from "react-native-gesture-handler/Swipeable";
-import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import SweetSFSymbol from "sweet-sfsymbols";
 import React, { Component, createRef } from "react";
-import { Text, View, SafeAreaView, StyleSheet } from "react-native";
+import { Text, View, StyleSheet } from "react-native";
 
 import { useToast } from "react-native-toast-notifications";
 
-import { NativeModules } from "react-native";
+import { lang } from "../../../helpers";
 
 import * as Haptics from "expo-haptics";
-
-const deviceLanguage =
-  Platform.OS === "ios"
-    ? NativeModules.SettingsManager.settings.AppleLocale ||
-      NativeModules.SettingsManager.settings.AppleLanguages[0] // iOS 13
-    : NativeModules.I18nManager.localeIdentifier;
-
-let lang;
-let str = deviceLanguage;
-let match = str.match(/^([a-z]{2})/i);
-if (match) {
-  lang = match[0];
-} else {
-  lang = "en";
-}
 
 let row = [];
 let prevOpenedRow;

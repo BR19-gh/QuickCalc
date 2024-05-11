@@ -246,7 +246,7 @@ function CurrencyCon({ theme, dispatch, currResult }) {
             <View className="w-full flex-row p-2 text-left">
               <Text
                 className={
-                  "text-2xl" + isDark(" text-blue-100", " text-blue-900")
+                  "text-xl" + isDark(" text-blue-100", " text-blue-900")
                 }
               >
                 {t(text("from"))}
@@ -254,7 +254,7 @@ function CurrencyCon({ theme, dispatch, currResult }) {
               </Text>
               <Text
                 className={
-                  "text-3xl font-semibold" +
+                  "text-2xl font-semibold" +
                   isDark(" text-blue-100", " text-blue-900")
                 }
               >
@@ -266,7 +266,7 @@ function CurrencyCon({ theme, dispatch, currResult }) {
             <View className="w-full flex-row p-2 text-left">
               <Text
                 className={
-                  "text-2xl" + isDark(" text-blue-100", " text-blue-900")
+                  "text-xl" + isDark(" text-blue-100", " text-blue-900")
                 }
               >
                 {t(text("to"))}
@@ -274,7 +274,7 @@ function CurrencyCon({ theme, dispatch, currResult }) {
               </Text>
               <Text
                 className={
-                  "text-3xl font-semibold" +
+                  "text-2xl font-semibold" +
                   isDark(" text-blue-100", " text-blue-900")
                 }
               >

@@ -714,30 +714,29 @@ function NewTool({ theme, tools, dispatch }) {
                             return (
                               <View
                                 style={{
-                                  ...{
-                                    width: "100%",
-                                    flexDirection: "row",
-                                    paddingHorizontal:
-                                      newTool.operandNum > 3 ? 6 : 12,
+                                  width: "100%",
+                                  flexDirection: "row",
+                                  paddingHorizontal:
+                                    newTool.operandNum > 3 ? 6 : 12,
 
-                                    paddingVertical:
-                                      newTool.operandNum > 3 ? 4 : 8,
-                                  },
-                                  ...(isSelected && {
-                                    backgroundColor: isDark(
-                                      "#999999",
-                                      "#D2D9DF"
-                                    ),
-                                  }),
+                                  paddingVertical:
+                                    newTool.operandNum > 3 ? 4 : 8,
                                 }}
                               >
                                 <Text
                                   className="text-center"
                                   style={{
-                                    flex: 1,
-                                    fontSize: newTool.operandNum > 3 ? 10 : 20,
-                                    fontWeight: "bold",
-                                    color: isDark("#DBEAFE", "#283987"),
+                                    ...{
+                                      flex: 1,
+                                      fontSize:
+                                        newTool.operandNum > 3 ? 10 : 20,
+                                      fontWeight: "bold",
+                                      color: isDark("#DBEAFE", "#283987"),
+                                      fontWeight: "200",
+                                    },
+                                    ...(isSelected && {
+                                      fontWeight: "bold",
+                                    }),
                                   }}
                                 >
                                   {item}

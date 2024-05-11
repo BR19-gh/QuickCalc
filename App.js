@@ -3,8 +3,8 @@ import { Provider } from "react-redux";
 import middleware from "./src/store/middleware";
 import reducer from "./src/store/reducers";
 import Navigation from "./src/navigation/";
+import NavigationWelcome from "./src/navigation/NavigationWelcome";
 import { createStore } from "redux";
-import Welcome from "./src/screens/Welcome";
 import { useState } from "react";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { ToastProvider } from "react-native-toast-notifications";
@@ -26,7 +26,7 @@ const App = () => {
               setIsThemeChanged={setIsThemeChanged}
             />
           ) : (
-            <Welcome
+            <NavigationWelcome
               isThemeChanged={isThemeChanged}
               setIsThemeChanged={setIsThemeChanged}
               theme={theme}

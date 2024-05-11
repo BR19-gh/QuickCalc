@@ -84,7 +84,7 @@ function DiscountCal(props) {
             <View>
               <Text
                 className={
-                  "text-center p-4 text-3xl font-semibold" +
+                  "text-center p-4 text-2xl font-semibold" +
                   isDark(" text-blue-100", " text-blue-900")
                 }
               >
@@ -114,7 +114,7 @@ function DiscountCal(props) {
             <View>
               <Text
                 className={
-                  "text-center p-4 font-semibold text-3xl" +
+                  "text-center p-4 font-semibold text-2xl" +
                   isDark(" text-blue-100", " text-blue-900")
                 }
               >
@@ -181,14 +181,14 @@ function DiscountCal(props) {
             <View className="w-full flex-row p-2 text-left">
               <Text
                 className={
-                  "text-2xl" + isDark(" text-blue-100", " text-blue-900")
+                  "text-xl" + isDark(" text-blue-100", " text-blue-900")
                 }
               >
                 {t(text("priceAfter"))}
               </Text>
               <Text
                 className={
-                  "text-3xl font-semibold" +
+                  "text-2xl font-semibold" +
                   isDark(" text-blue-100", " text-blue-900")
                 }
               >
@@ -198,14 +198,14 @@ function DiscountCal(props) {
             <View className="flex-row p-2">
               <Text
                 className={
-                  "text-2xl" + isDark(" text-blue-100", " text-blue-900")
+                  "text-xl" + isDark(" text-blue-100", " text-blue-900")
                 }
               >
                 {t(text("discountAmount"))}
               </Text>
               <Text
                 className={
-                  "text-3xl font-semibold" +
+                  "text-2xl font-semibold" +
                   isDark(" text-blue-100", " text-blue-900")
                 }
               >

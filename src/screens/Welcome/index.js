@@ -1,14 +1,16 @@
 import { StatusBar } from "expo-status-bar";
-import { Text, View, TouchableOpacity } from "react-native";
+import { Text, View, TouchableOpacity, Dimensions } from "react-native";
 import styles from "./styles";
 import SweetSFSymbol from "sweet-sfsymbols";
 import { useTranslation } from "react-i18next";
 import { useColorScheme } from "react-native";
 import { useEffect } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useNavigation } from "@react-navigation/native";
 
 function Welcome(props) {
   const auto = useColorScheme();
+  const navigation = useNavigation();
 
   useEffect(() => {
     const getTheme = async () => {
@@ -30,11 +32,14 @@ function Welcome(props) {
 
   const { t } = useTranslation();
   const text = (text) => "screens.Welcome.text." + text;
-
+  const windowHight = Dimensions.get("window").height;
   return (
     <View
+      style={{
+        marginTop: windowHight > 667 ? "60%" : "40%",
+      }}
       className={
-        "pt-60 items-center flex-1" + (props.theme === "dark" && " bg-black")
+        "h-full items-center flex-1" + (props.theme === "dark" && " bg-black")
       }
     >
       <Text
@@ -60,7 +65,12 @@ function Welcome(props) {
       >
         <Text className={styles.btnText}>{t(text("btnText1"))}</Text>
       </TouchableOpacity>
-      <TouchableOpacity className={styles.button2}>
+      <TouchableOpacity
+        className={styles.button2}
+        onPress={() => {
+          navigation.navigate("WalkThrough");
+        }}
+      >
         <Text className={styles.btnText}>{t(text("btnText2"))}</Text>
       </TouchableOpacity>
       <StatusBar style="auto" />

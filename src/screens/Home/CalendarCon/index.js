@@ -20,9 +20,10 @@ import {
   toGregorian,
   toPersian,
   toHebrew,
+  calculateTimeSince,
 } from "../../../helpers/Home/CalendarCon";
 import { toSolarHijri, toGregorian as toGregorianSolar } from "solarhijri-js";
-import { lang, CALENDAR_INFO } from "../../../helpers";
+import { lang } from "../../../helpers";
 
 function CalendarCon({ theme }) {
   const { t } = useTranslation();
@@ -41,6 +42,7 @@ function CalendarCon({ theme }) {
     year: "",
     month: "",
     day: "",
+    timeSince: null,
   });
 
   const switchCur = () => {
@@ -105,6 +107,7 @@ function CalendarCon({ theme }) {
               year: preResult.hy,
               month: preResult.hm,
               day: preResult.hd,
+              timeSince: preResult.timeSince,
             };
           } else if (toCalendar.value === "islamicSolar") {
             if (fromCalendarValue.year < 1) {
@@ -126,6 +129,13 @@ function CalendarCon({ theme }) {
               year: preResult.hy,
               month: preResult.hm,
               day: preResult.hd,
+              timeSince: calculateTimeSince(
+                new Date(
+                  Number(fromCalendarValue.year),
+                  Number(fromCalendarValue.month) - 1,
+                  Number(fromCalendarValue.day)
+                )
+              ),
             };
           } else if (toCalendar.value === "persian") {
             if (fromCalendarValue.year < 100) {
@@ -164,6 +174,15 @@ function CalendarCon({ theme }) {
               year: Number(fromCalendarValue.year),
               month: Number(fromCalendarValue.month),
               day: Number(fromCalendarValue.day),
+              timeSince: calculateTimeSince(
+                new Date(
+                  Number(fromCalendarValue.year),
+                  Number(fromCalendarValue.month) - 1,
+                  Number(fromCalendarValue.day)
+                )
+                  .toISOString()
+                  .split("T")[0]
+              ),
             };
           }
         } else if (fromCalendar.value === "islamicLunar") {
@@ -191,6 +210,7 @@ function CalendarCon({ theme }) {
               year: preResult.gy,
               month: preResult.gm,
               day: preResult.gd,
+              timeSince: preResult.timeSince,
             };
           } else if (toCalendar.value === "islamicSolar") {
             let preResult = toGregorian(
@@ -208,12 +228,27 @@ function CalendarCon({ theme }) {
               year: preResult2.hy,
               month: preResult2.hm,
               day: preResult2.hd,
+              timeSince: {
+                days: preResult.timeSince.days,
+                months: preResult.timeSince.months,
+                years: preResult.timeSince.years,
+              },
             };
           } else {
+            let preResult = toGregorian(
+              Number(fromCalendarValue.year),
+              Number(fromCalendarValue.month),
+              Number(fromCalendarValue.day)
+            );
             result = {
               year: Number(fromCalendarValue.year),
               month: Number(fromCalendarValue.month),
               day: Number(fromCalendarValue.day),
+              timeSince: {
+                days: preResult.timeSince.days,
+                months: preResult.timeSince.months,
+                years: preResult.timeSince.years,
+              },
             };
           }
         } else if (fromCalendar.value === "islamicSolar") {
@@ -241,6 +276,13 @@ function CalendarCon({ theme }) {
               year: preResult.gy,
               month: preResult.gm,
               day: preResult.gd,
+              timeSince: calculateTimeSince(
+                new Date(
+                  Number(preResult.gy),
+                  Number(preResult.gm) - 1,
+                  Number(preResult.gd)
+                )
+              ),
             };
           } else if (toCalendar.value === "islamicLunar") {
             let preResult = toGregorianSolar(
@@ -253,23 +295,40 @@ function CalendarCon({ theme }) {
               year: preResult2.hy,
               month: preResult2.hm,
               day: preResult2.hd,
+              timeSince: calculateTimeSince(
+                new Date(
+                  Number(preResult.gy),
+                  Number(preResult.gm) - 1,
+                  Number(preResult.gd) - 1
+                )
+              ),
             };
           } else {
+            let preResult = toGregorianSolar(
+              Number(fromCalendarValue.year),
+              Number(fromCalendarValue.month),
+              Number(fromCalendarValue.day)
+            );
             result = {
               year: Number(fromCalendarValue.year),
               month: Number(fromCalendarValue.month),
               day: Number(fromCalendarValue.day),
+              timeSince: {
+                days: preResult.gd,
+                months: preResult.gm,
+                years: preResult.gy,
+              },
             };
           }
         }
         setFromText(
           fromCalendar[lang] &&
-            `${fromCalendarValue.day} ${t(
+            `${Number(fromCalendarValue.day)} ${t(
               text(
                 "monthsName." +
                   fromCalendar.value +
                   "." +
-                  fromCalendarValue.month
+                  Number(fromCalendarValue.month)
               )
             )} ${fromCalendarValue.year} ${fromCalendar["short"][lang]}`
         );
@@ -278,6 +337,7 @@ function CalendarCon({ theme }) {
           year: `${result.year}`,
           month: `${result.month}`,
           day: `${result.day}`,
+          timeSince: result.timeSince,
         });
       } else {
         Haptics.notificationAsync(Haptics.NotificationFeedbackType.Warning);
@@ -312,6 +372,7 @@ function CalendarCon({ theme }) {
       year: "",
       month: "",
       day: "",
+      timeSince: null,
     });
   };
 
@@ -320,11 +381,14 @@ function CalendarCon({ theme }) {
       year: "",
       month: "",
       day: "",
+      timeSince: null,
     });
   }, [fromCalendar, toCalendar]);
 
   const isDark = (darkOp, lightp) => (theme === "dark" ? darkOp : lightp);
-
+  useEffect(() => {
+    console.log(toCalendarValue);
+  }, [toCalendarValue]);
   return (
     <View>
       <ScrollView className="h-full">
@@ -482,7 +546,7 @@ function CalendarCon({ theme }) {
             <View className="w-full flex-row p-2 text-left">
               <Text
                 className={
-                  "text-2xl" + isDark(" text-blue-100", " text-blue-900")
+                  "text-xl" + isDark(" text-blue-100", " text-blue-900")
                 }
               >
                 {t(text("from"))}
@@ -490,7 +554,7 @@ function CalendarCon({ theme }) {
               </Text>
               <Text
                 className={
-                  "text-2xl font-semibold" +
+                  "text-xl font-semibold" +
                   isDark(" text-blue-100", " text-blue-900")
                 }
               >
@@ -501,7 +565,7 @@ function CalendarCon({ theme }) {
             <View className="w-full flex-row p-2 text-left">
               <Text
                 className={
-                  "text-2xl" + isDark(" text-blue-100", " text-blue-900")
+                  "text-xl" + isDark(" text-blue-100", " text-blue-900")
                 }
               >
                 {t(text("to"))}
@@ -509,7 +573,7 @@ function CalendarCon({ theme }) {
               </Text>
               <Text
                 className={
-                  "text-2xl font-semibold" +
+                  "text-xl font-semibold" +
                   isDark(" text-blue-100", " text-blue-900")
                 }
               >
@@ -525,6 +589,56 @@ function CalendarCon({ theme }) {
                           toCalendarValue.month
                       )
                     )} ${toCalendarValue.year} ${toCalendar["short"][lang]}`
+                  : ""}
+              </Text>
+            </View>
+            <View className="w-full flex-row p-2 text-left">
+              <Text
+                className={
+                  "text-xl" + isDark(" text-blue-100", " text-blue-900")
+                }
+              >
+                {toCalendar[lang] &&
+                toCalendarValue.day !== "" &&
+                toCalendarValue.month !== "" &&
+                toCalendarValue.year !== "" &&
+                toCalendarValue.timeSince.days > 0
+                  ? t(text("elapsed")) + ":  "
+                  : ""}
+              </Text>
+              <Text
+                className={
+                  "text-xl font-semibold" +
+                  isDark(" text-blue-100", " text-blue-900")
+                }
+              >
+                {toCalendarValue.timeSince !== null
+                  ? `${
+                      toCalendarValue.timeSince.years > 0
+                        ? toCalendarValue.timeSince.years +
+                          " " +
+                          (toCalendarValue.timeSince.years === 1
+                            ? t(text("1year"))
+                            : t(text("years")))
+                        : ""
+                    }${
+                      toCalendarValue.timeSince.months > 0
+                        ? toCalendarValue.timeSince.months +
+                          " " +
+                          (toCalendarValue.timeSince.months === 1
+                            ? t(text("1month"))
+                            : t(text("months")))
+                        : ""
+                    }${
+                      toCalendarValue.timeSince.days > 0
+                        ? " " +
+                          toCalendarValue.timeSince.days +
+                          " " +
+                          (toCalendarValue.timeSince.days === 1
+                            ? t(text("1day"))
+                            : t(text("days")))
+                        : ""
+                    }`
                   : ""}
               </Text>
             </View>

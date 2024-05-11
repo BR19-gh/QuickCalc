@@ -1,29 +1,13 @@
 import { Text, View, TouchableOpacity, Alert } from "react-native";
 import styles from "./styles";
-import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
+
+import { useState } from "react";
 
 import { LinearGradient } from "expo-linear-gradient";
-
-import { NativeModules } from "react-native";
 
 import SweetSFSymbol from "sweet-sfsymbols";
 
 import * as Haptics from "expo-haptics";
-
-const deviceLanguage =
-  Platform.OS === "ios"
-    ? NativeModules.SettingsManager.settings.AppleLocale ||
-      NativeModules.SettingsManager.settings.AppleLanguages[0] // iOS 13
-    : NativeModules.I18nManager.localeIdentifier;
-
-let lang;
-let str = deviceLanguage;
-let match = str.match(/^([a-z]{2})/i);
-if (match) {
-  lang = match[0];
-} else {
-  lang = "en";
-}
 
 const Card = ({
   tool,
@@ -40,6 +24,7 @@ const Card = ({
   isShowedFavorite,
   isEditingFavorite,
   searchTextLength,
+  moving,
 }) => {
   return (
     <LinearGradient
@@ -117,7 +102,7 @@ const Card = ({
                 },
               ]
             );
-          } else {
+          } else if (moving) {
             Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
             drag();
           }

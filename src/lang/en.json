@@ -206,6 +206,16 @@
             "errorCalculating": "An error occurred while convertion",
             "errorInvalidIslamicDate": "Islamic date entered is invalid. Try decrementing the day",
             "pleaseShareError": "Please share this error with the developer, contact information in the settings.",
+            "elapsed": "Elapsed",
+            "days": "days",
+            "1day": "day",
+            "2days": "days",
+            "years": "years",
+            "1year": "year",
+            "2years": "years",
+            "months": "months",
+            "1month": "1month",
+            "2months": "months",
             "monthsName": {
               "islamicLunar": {
                 "1": "Moharram",

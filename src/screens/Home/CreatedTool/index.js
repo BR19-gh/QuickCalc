@@ -122,7 +122,7 @@ function CreatedTool({ theme, setCurrentTool, route, dispatch, tools }) {
                 <View key={index}>
                   <Text
                     className={
-                      "p-4 text-center text-3xl font-semibold" +
+                      "p-4 text-center text-2xl font-semibold" +
                       isDark(" text-blue-100", " text-blue-900")
                     }
                   >
@@ -203,14 +203,14 @@ function CreatedTool({ theme, setCurrentTool, route, dispatch, tools }) {
             <View className="flex-row p-2">
               <Text
                 className={
-                  "text-2xl" + isDark(" text-blue-100", " text-blue-900")
+                  "text-xl" + isDark(" text-blue-100", " text-blue-900")
                 }
               >
                 {t(text("result"))}:{"  "}
               </Text>
               <Text
                 className={
-                  "text-3xl font-semibold" +
+                  "text-2xl font-semibold" +
                   isDark(" text-blue-100", " text-blue-900")
                 }
               >

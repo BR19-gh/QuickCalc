@@ -207,6 +207,16 @@
             "errorCalculating": "حدث خطأ أثناء التحويل",
             "errorInvalidIslamicDate": "التاريخ الهجري المدخل غير صالح، جرب انقاص اليوم",
             "pleaseShareError": "الرجاء مشاركة هذا الخطأ مع المطور، معلومات التواصل في الإعدادات",
+            "elapsed": "مضى",
+            "days": "يوم",
+            "2days": "يومين",
+            "1day": "يوم",
+            "years": "سنة",
+            "2years": "سنتين",
+            "1year": "سنة",
+            "months": "شهر",
+            "2months": "شهرين",
+            "1month": "شهر",
             "monthsName": {
               "islamicLunar": {
                 "1": "محرم",

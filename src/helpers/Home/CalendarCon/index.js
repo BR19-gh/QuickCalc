@@ -97,7 +97,38 @@ const monthsNameHebrew = [
   "Elul",
 ];
 
+export function calculateTimeSince(dateString) {
+  const providedDate = new Date(dateString);
+
+  const currentDate = new Date();
+
+  const differenceInMillis = currentDate - providedDate;
+
+  const millisecondsInDay = 1000 * 60 * 60 * 24;
+  const millisecondsInMonth = millisecondsInDay * 30.44;
+  const millisecondsInYear = millisecondsInDay * 365.25;
+
+  const yearsDifference = Math.floor(differenceInMillis / millisecondsInYear);
+  const monthsDifference = Math.floor(
+    (differenceInMillis % millisecondsInYear) / millisecondsInMonth
+  );
+  const daysDifference = Math.floor(
+    ((differenceInMillis % millisecondsInYear) % millisecondsInMonth) /
+      millisecondsInDay
+  );
+
+  return {
+    years: yearsDifference,
+    months: monthsDifference,
+    days: daysDifference - 1,
+  };
+}
+
 export const toHijri = (gy, gm, gd) => {
+  let timeSince = calculateTimeSince(
+    new Date(gy, gm - 1, gd).toISOString().split("T")[0]
+  );
+
   let hijriDateString = new Date(gy, gm - 1, gd).toLocaleDateString("ar-SA", {
     year: "numeric",
     month: "long",
@@ -119,9 +150,13 @@ export const toHijri = (gy, gm, gd) => {
     hy: a2e(hijriDateParts[2]),
     hm: monthIndex + 1,
     hd: a2e(hijriDateParts[0]),
+    timeSince,
   };
 };
 export const toPersian = (gy, gm, gd) => {
+  let timeSince = calculateTimeSince(
+    new Date(gy, gm, gd).toISOString().split("T")[0]
+  );
   let dateSrting = new Date(gy, gm - 1, gd).toLocaleDateString("fa-IR", {
     year: "numeric",
     month: "long",
@@ -134,10 +169,14 @@ export const toPersian = (gy, gm, gd) => {
     day: dateParts[0],
     month: monthsNamePersian.indexOf(dateParts[1].trim()) + 1,
     year: dateParts[2],
+    timeSince,
   };
 };
 
 export const toHebrew = (gy, gm, gd) => {
+  let timeSince = calculateTimeSince(
+    new Date(gy, gm, gd).toISOString().split("T")[0]
+  );
   let dateSrting = new Date(gy, gm - 1, gd).toLocaleDateString(
     "en-u-ca-hebrew",
     {
@@ -146,13 +185,26 @@ export const toHebrew = (gy, gm, gd) => {
       day: "numeric",
     }
   );
+  console.log(dateSrting);
   let dateParts = dateSrting.split(" ").map((part) => part.trim());
-  dateParts[1] = dateParts[1].replace(",", "");
-  return {
-    day: dateParts[1],
-    month: monthsNameHebrew.indexOf(dateParts[0].trim()) + 1,
-    year: dateParts[2],
-  };
+  console.log(dateParts);
+  if (dateParts[1].includes("I")) {
+    dateParts[2] = dateParts[2].replace(",", "");
+    return {
+      day: dateParts[2],
+      month: 6,
+      year: dateParts[3],
+      timeSince,
+    };
+  } else {
+    dateParts[1] = dateParts[1].replace(",", "");
+    return {
+      day: dateParts[1],
+      month: monthsNameHebrew.indexOf(dateParts[0].trim()) + 1,
+      year: dateParts[2],
+      timeSince,
+    };
+  }
 };
 
 export const toGregorian = (hy, hm, hd) => {
@@ -163,10 +215,13 @@ export const toGregorian = (hy, hm, hd) => {
   const year = date.getUTCFullYear();
   const month = date.getUTCMonth() + 1; // Month is zero-indexed, so add 1
   const day = date.getUTCDate();
-
+  let timeSince = calculateTimeSince(
+    new Date(year, month - 1, day).toISOString().split("T")[0]
+  );
   return {
     gy: year,
     gm: month,
     gd: day,
+    timeSince,
   };
 };
