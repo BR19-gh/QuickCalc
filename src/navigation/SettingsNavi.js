@@ -2,6 +2,8 @@ import Settings from "../screens/Settings";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { useTranslation } from "react-i18next";
 
+import { useState } from "react";
+
 import WalkThrough from "../screens/Welcome/WalkThrough";
 
 const Stack = createNativeStackNavigator();
@@ -14,7 +16,18 @@ const SettingsNavi = ({
 }) => {
   const { t } = useTranslation();
   const text = (text) => "screens.Navi.text." + text;
-  const WalkThroughText = (text) => "screens.Home.WalkThrough." + text;
+  const WalkThroughText = (text) => "screens.Welcome.text." + text;
+
+  const [currentTitles, setCurrentTitles] = useState(0);
+
+  let titles = [
+    t(WalkThroughText("homePage")),
+    t(WalkThroughText("contextMenu")),
+    t(WalkThroughText("editYourTools")),
+    t(WalkThroughText("hiddenTools")),
+    t(WalkThroughText("swipeAction")),
+    t(WalkThroughText("settingsPage")),
+  ];
 
   return (
     <Stack.Navigator
@@ -40,10 +53,12 @@ const SettingsNavi = ({
       />
       <Stack.Screen
         options={{
-          title: t(WalkThroughText("WalkThrough")),
+          title: titles[currentTitles],
         }}
         name="WalkThrough"
-        children={() => <WalkThrough theme={theme} />}
+        children={() => (
+          <WalkThrough setCurrentTitles={setCurrentTitles} theme={theme} />
+        )}
       />
     </Stack.Navigator>
   );

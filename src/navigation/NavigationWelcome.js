@@ -1,6 +1,6 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 import WalkThrough from "../screens/Welcome/WalkThrough";
 import Welcome from "../screens/Welcome";
@@ -22,7 +22,18 @@ const Navigation = ({
   const auto = useColorScheme();
   const { t } = useTranslation();
 
-  const WalkThroughText = (text) => "screens.Home.WalkThrough." + text;
+  const [currentTitles, setCurrentTitles] = useState(0);
+
+  const WalkThroughText = (text) => "screens.Welcome.text." + text;
+
+  let titles = [
+    t(WalkThroughText("homePage")),
+    t(WalkThroughText("contextMenu")),
+    t(WalkThroughText("editYourTools")),
+    t(WalkThroughText("hiddenTools")),
+    t(WalkThroughText("swipeAction")),
+    t(WalkThroughText("settingsPage")),
+  ];
 
   useEffect(() => {
     const getTheme = async () => {
@@ -64,10 +75,12 @@ const Navigation = ({
 
         <Stack.Screen
           options={{
-            title: t(WalkThroughText("WalkThrough")),
+            title: titles[currentTitles],
           }}
           name="WalkThrough"
-          children={() => <WalkThrough theme={theme} />}
+          children={() => (
+            <WalkThrough setCurrentTitles={setCurrentTitles} theme={theme} />
+          )}
         />
       </Stack.Navigator>
     </NavigationContainer>

@@ -7,7 +7,14 @@
           "introText": "Welcome to",
           "introParagraph": "Simple tools for your \n daily calcuations",
           "btnText1": "Get Started",
-          "btnText2": "Walk Through"
+          "btnText2": "Walk Through",
+          "homePage": "Home Page",
+          "contextMenu": "Context Menu",
+          "editYourTools": "Edit Your Tools",
+          "hiddenTools": "Hidden Tools",
+          "swipeAction": "Swipe Action",
+          "newPage": "New Tools Page",
+          "settingsPage": "Settings Page"
         }
       },
       "Navi": {

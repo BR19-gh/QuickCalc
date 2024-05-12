@@ -7,7 +7,14 @@
           "introText": "مرحبا بكم في",
           "introParagraph": "أدوات بسيطة لحساباتك اليومية",
           "btnText1": "إبدأ",
-          "btnText2": "جولة توجيهية"
+          "btnText2": "جولة توجيهية",
+          "homePage": "الصفحة الرئيسية",
+          "contextMenu": "قائمة الخيارات",
+          "editYourTools": "تعديل أدواتك",
+          "hiddenTools": "الأدوات المخفية",
+          "swipeAction": "التمرير للتعديل",
+          "newPage": "صفحة إضافة الأدوات",
+          "settingsPage": "صفحة الإعدادات"
         }
       },
       "Navi": {
