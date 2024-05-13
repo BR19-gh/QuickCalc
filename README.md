@@ -1,5 +1,5 @@
 
-# myTools
+# QuickCalc
 
 ## Overview
 
@@ -10,13 +10,13 @@ iOS app built using React Native, Redux and Expo, it gathers simple tools for yo
 1. Clone the repository to your local machine:
 
    ```bash
-   git clone https://github.com/BR19-gh/myTools.git
+   git clone https://github.com/BR19-gh/QuickCalc.git
    ```
 
 2. Navigate to the project directory:
 
    ```bash
-   cd myTools
+   cd QuickCalc
    ```
 
 3. Install dependencies:
