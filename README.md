@@ -53,9 +53,9 @@ iOS app built using React Native, Redux and Expo, it gathers simple tools for yo
 <img src="https://github.com/BR19-gh/QuickCalc/blob/master/walkthro_en/welcome.png" width="160.5" hight="347.25" alt="welcome">
 <img src="https://github.com/BR19-gh/QuickCalc/blob/master/walkthro_en/home.png" width="160.5" hight="347.25" alt="home page">
 <img src="https://github.com/BR19-gh/QuickCalc/blob/master/walkthro_en/home_menu.png" width="160.5" hight="347.25" alt="menu">
-<img src="https://github.com/BR19-gh/QuickCalc/blob/master/walkthro_en/edit.gif" width="16%" hight="16%" alt="edit page">
+<img src="https://github.com/BR19-gh/QuickCalc/blob/master/walkthro_en/edit.gif" width="20%" hight="20%" alt="edit page">
 <img src="https://github.com/BR19-gh/QuickCalc/blob/master/walkthro_en/hidden.png" width="160.5" hight="347.25" alt="hidden list">
-<img src="https://github.com/BR19-gh/QuickCalc/blob/master/walkthro_en/home_swipe.gif" width="16%" hight="16%" alt="swipe action">
+<img src="https://github.com/BR19-gh/QuickCalc/blob/master/walkthro_en/home_swipe.gif" width="20%" hight="20%" alt="swipe action">
 <img src="https://github.com/BR19-gh/QuickCalc/blob/master/walkthro_en/settings.png" width="160.5" hight="347.25" alt="settings page">
 </div>
 
