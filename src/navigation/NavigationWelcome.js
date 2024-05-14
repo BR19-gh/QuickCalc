@@ -27,6 +27,7 @@ const Navigation = ({
   const WalkThroughText = (text) => "screens.Welcome.text." + text;
 
   let titles = [
+    t(WalkThroughText("welcome")),
     t(WalkThroughText("homePage")),
     t(WalkThroughText("contextMenu")),
     t(WalkThroughText("editYourTools")),

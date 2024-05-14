@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "myTools",
-    "slug": "myTools",
+    "name": "QuickCalc",
+    "slug": "QuickCalc",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -11,9 +11,7 @@
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "locales": {
       "en": "./locale/en.json",
       "ar": "./locale/ar.json"
@@ -22,31 +20,17 @@
       "supportsTablet": true,
       "infoPlist": {
         "CFBundleAllowMixedLocalizations": true,
-        "CFBundleLocalizations": [
-          "en",
-          "ar"
-        ],
+        "CFBundleLocalizations": ["en", "ar"],
         "CFBundleDevelopmentRegion": "en",
         "ExpoLocalization_supportsRTL": true
       },
-      "bundleIdentifier": "me.br19.myTools"
-    },
-    "android": {
-      "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
-      }
-    },
-    "web": {
-      "favicon": "./assets/favicon.png"
+      "bundleIdentifier": "me.br19.QuickCalc"
     },
     "extra": {
       "eas": {
-        "projectId": "32bfd484-ec95-4109-9cd6-23789ab08f7d"
+        "projectId": "0dcd864d-7de0-4db7-ba1d-50790c12a613"
       }
     },
-    "plugins": [
-      "expo-localization"
-    ]
+    "plugins": ["expo-localization"]
   }
 }

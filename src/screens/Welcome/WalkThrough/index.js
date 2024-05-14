@@ -4,6 +4,7 @@ import SweetSFSymbol from "sweet-sfsymbols";
 import { useState, useEffect } from "react";
 import { lang } from "../../../helpers";
 import { Image } from "expo-image";
+import * as Haptics from "expo-haptics";
 
 function WalkThrough(props) {
   const [currentImage, setCurrentImage] = useState(0);
@@ -15,6 +16,7 @@ function WalkThrough(props) {
   const IMGS =
     lang === "ar"
       ? [
+          require(`../../../../walkthro_ar/welcome.png`),
           require(`../../../../walkthro_ar/home.png`),
           require(`../../../../walkthro_ar/home_menu.png`),
           require(`../../../../walkthro_ar/edit.gif`),
@@ -23,6 +25,7 @@ function WalkThrough(props) {
           require(`../../../../walkthro_ar/settings.png`),
         ]
       : [
+          require(`../../../../walkthro_en/welcome.png`),
           require(`../../../../walkthro_en/home.png`),
           require(`../../../../walkthro_en/home_menu.png`),
           require(`../../../../walkthro_en/edit.gif`),
@@ -52,7 +55,10 @@ function WalkThrough(props) {
         <View className={"flex-row-reverse items-center justify-around mt-5"}>
           <TouchableOpacity
             disabled={currentImage === IMGS.length - 1}
-            onPress={() => selectImg("next")}
+            onPress={() => {
+              selectImg("next");
+              Haptics.selectionAsync();
+            }}
           >
             <SweetSFSymbol
               name={lang === "ar" ? "chevron.left" : "chevron.right"}
@@ -67,7 +73,10 @@ function WalkThrough(props) {
           </Text>
           <TouchableOpacity
             disabled={currentImage === 0}
-            onPress={() => selectImg("prev")}
+            onPress={() => {
+              selectImg("prev");
+              Haptics.selectionAsync();
+            }}
           >
             <SweetSFSymbol
               name={lang === "ar" ? "chevron.right" : "chevron.left"}

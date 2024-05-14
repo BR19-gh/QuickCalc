@@ -1,4 +1,4 @@
-export const GET_RESULT = "GET_RESULT";
+export const GET_RESULT_CURR = "GET_RESULT_CURR";
 import { Alert } from "react-native";
 import { lang } from "../../helpers";
 import * as Haptics from "expo-haptics";
@@ -6,7 +6,7 @@ import * as Haptics from "expo-haptics";
 export function receiveCurrResult(result) {
   console.log("receiveCurrResult", result);
   return {
-    type: GET_RESULT,
+    type: GET_RESULT_CURR,
     result,
   };
 }

@@ -1,5 +1,5 @@
 {
-  "name": "myTools",
+  "name": "QuickCalc",
   "version": "1.0.0",
   "scripts": {
     "start": "expo start --tunnel -c",

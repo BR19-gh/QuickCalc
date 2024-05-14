@@ -45,6 +45,7 @@ function Home(props) {
   const toast = useToast();
 
   const [yourToolsDisplayes, setYourToolsDisplayes] = useState(false);
+  const [builtinToolsDisplayes, setBuiltinToolsDisplayes] = useState(false);
 
   const navigation = useNavigation();
 
@@ -289,6 +290,7 @@ function Home(props) {
   useEffect(() => {
     if (props.searchText.length > 0 || props.isEditing === true) {
       setYourToolsDisplayes(false);
+      setBuiltinToolsDisplayes(false);
     }
   }, [props.isEditing, props.searchText]);
 
@@ -322,14 +324,23 @@ function Home(props) {
         ) : (
           <SelectDropdown
             disabled={props.searchText.length > 0 || props.isEditing === true}
-            data={[t(text("allTools")), t(text("yourTools"))]}
+            data={[
+              t(text("allTools")),
+              t(text("yourTools")),
+              t(text("builtinTools")),
+            ]}
             defaultValue={t(text("allTools"))}
             onSelect={(selectedItem, index) => {
               Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Heavy);
               if (index === 0) {
                 setYourToolsDisplayes(false);
+                setBuiltinToolsDisplayes(false);
               } else if (index === 1) {
                 setYourToolsDisplayes(true);
+                setBuiltinToolsDisplayes(false);
+              } else if (index === 2) {
+                setYourToolsDisplayes(false);
+                setBuiltinToolsDisplayes(true);
               }
             }}
             renderButton={(selectedItem, isOpened) => {
@@ -461,6 +472,8 @@ function Home(props) {
             ) : currentTools.filter((tool) =>
                 yourToolsDisplayes
                   ? tool.link === "CreatedTool" && tool.isHidden === false
+                  : builtinToolsDisplayes
+                  ? tool.link !== "CreatedTool" && tool.isHidden === false
                   : true
               ).length === 0 ? (
               <Text
@@ -494,12 +507,20 @@ function Home(props) {
                 ? currentTools.filter((tool) =>
                     yourToolsDisplayes
                       ? tool.link === "CreatedTool" && tool.isFavorite === true
-                      : true && tool.isFavorite === true
+                      : (builtinToolsDisplayes
+                          ? tool.link !== "CreatedTool" &&
+                            tool.isFavorite === true
+                          : true && tool.isFavorite === true) &&
+                        tool.isFavorite === true
                   )
                 : currentTools.filter((tool) =>
                     yourToolsDisplayes
                       ? tool.link === "CreatedTool" && tool.isHidden === false
-                      : true && tool.isHidden === false
+                      : (builtinToolsDisplayes
+                          ? tool.link !== "CreatedTool" &&
+                            tool.isHidden === false
+                          : true && tool.isHidden === false) &&
+                        tool.isHidden === false
                   )
             }
             onDragEnd={({ data }) => {
@@ -567,6 +588,8 @@ function Home(props) {
                           tool.isHidden === false &&
                           (yourToolsDisplayes
                             ? tool.link === "CreatedTool"
+                            : builtinToolsDisplayes
+                            ? tool.link !== "CreatedTool"
                             : true)
                         : tool.isHidden === true
                     )

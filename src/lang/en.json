@@ -14,7 +14,8 @@
           "hiddenTools": "Hidden Tools",
           "swipeAction": "Swipe Action",
           "newPage": "New Tools Page",
-          "settingsPage": "Settings Page"
+          "settingsPage": "Settings Page",
+          "welcome": "Welcome"
         }
       },
       "Navi": {
@@ -65,6 +66,7 @@
           "refreshComplated": "Refresh complated!",
           "allTools": "All Tools",
           "yourTools": "Your Tools",
+          "builtinTools": "Built-in Tools",
           "filterIsDisabled": "Filter is disabled",
           "noFilteredTools": "No tools match the filter, refresh to check or check hidden tools"
         },
@@ -185,7 +187,8 @@
             "pleaseShareError": "\n\nPlease share this error with the developer, contact information in the settings.",
             "errorTitleUnkown": "an unknown error occurred",
             "calculating": "Calculating...",
-            "done": "Done!"
+            "done": "Done!",
+            "noUnitFound": "No unit found."
           }
         },
         "CalendarCon": {

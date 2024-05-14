@@ -69,7 +69,6 @@ const DropdownComponent = ({ theme, text, t, setUnit, unit, measurement }) => {
       }}
       iconStyle={styles.iconStyle}
       data={[...filteredUnits[0].units]}
-      search
       maxHeight={300}
       labelField={lang === "ar" ? "ar" : "en"}
       valueField="code"

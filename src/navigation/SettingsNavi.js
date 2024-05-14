@@ -21,6 +21,7 @@ const SettingsNavi = ({
   const [currentTitles, setCurrentTitles] = useState(0);
 
   let titles = [
+    t(WalkThroughText("welcome")),
     t(WalkThroughText("homePage")),
     t(WalkThroughText("contextMenu")),
     t(WalkThroughText("editYourTools")),

@@ -1,12 +1,12 @@
 import { StatusBar } from "expo-status-bar";
 import { Text, View, TouchableOpacity, Dimensions } from "react-native";
 import styles from "./styles";
-import SweetSFSymbol from "sweet-sfsymbols";
 import { useTranslation } from "react-i18next";
 import { useColorScheme } from "react-native";
 import { useEffect } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useNavigation } from "@react-navigation/native";
+import { Image } from "expo-image";
 
 function Welcome(props) {
   const auto = useColorScheme();
@@ -36,7 +36,7 @@ function Welcome(props) {
   return (
     <View
       style={{
-        marginTop: windowHight > 667 ? "60%" : "40%",
+        marginTop: windowHight > 667 ? "45%" : "25%",
       }}
       className={
         "h-full items-center flex-1" + (props.theme === "dark" && " bg-black")
@@ -45,13 +45,22 @@ function Welcome(props) {
       <Text
         className={styles.icon + (props.theme === "dark" && " text-blue-500")}
       >
-        myTools
-        {/* <SweetSFSymbol
-          name="wrench.and.screwdriver"
-          size={45}
-          color={props.theme ? "#2d5ba0" : "#294d7f"}
-        /> */}
+        QuickCalc
       </Text>
+      <View
+        style={{
+          width: 128,
+          height: 128,
+        }}
+      >
+        <Image
+          source={require("../../../assets/symbol.png")}
+          style={{
+            width: "100%",
+            height: "100%",
+          }}
+        />
+      </View>
       <Text
         className={styles.paragraph + (props.theme === "dark" && " text-white")}
       >

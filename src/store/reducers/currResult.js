@@ -1,9 +1,9 @@
 /* eslint-disable no-empty */
-import { GET_RESULT } from "../actions/currResult.js";
+import { GET_RESULT_CURR } from "../actions/currResult.js";
 
 export default function currResult(state = {}, action) {
   switch (action.type) {
-    case GET_RESULT:
+    case GET_RESULT_CURR:
       return {
         ...state,
         ...action.result,
