@@ -1,5 +1,6 @@
 
 # QuickCalc
+<img src="https://github.com/BR19-gh/QuickCalc/blob/master/assets/symbol.png" alt="Icon" width="128" height="128">
 
 ## Overview
 
@@ -46,6 +47,17 @@ iOS app built using React Native, Redux and Expo, it gathers simple tools for yo
 - `_DATA.js`: Contains functions which deals with AsyncStorage
 
 ## Screenshots
+<div
+   style="display: flex;"
+   >
+<img src="https://github.com/BR19-gh/QuickCalc/blob/master/walkthro_en/welcome.png" width="160.5" hight="347.25" alt="welcome">
+<img src="https://github.com/BR19-gh/QuickCalc/blob/master/walkthro_en/home.png" width="160.5" hight="347.25" alt="home page">
+<img src="https://github.com/BR19-gh/QuickCalc/blob/master/walkthro_en/home_menu.png" width="160.5" hight="347.25" alt="menu">
+<img src="https://github.com/BR19-gh/QuickCalc/blob/master/walkthro_en/edit.gif" width="16%" hight="16%" alt="edit page">
+<img src="https://github.com/BR19-gh/QuickCalc/blob/master/walkthro_en/hidden.png" width="160.5" hight="347.25" alt="hidden list">
+<img src="https://github.com/BR19-gh/QuickCalc/blob/master/walkthro_en/home_swipe.gif" width="16%" hight="16%" alt="swipe action">
+<img src="https://github.com/BR19-gh/QuickCalc/blob/master/walkthro_en/settings.png" width="160.5" hight="347.25" alt="settings page">
+</div>
 
-...soon
+
 
