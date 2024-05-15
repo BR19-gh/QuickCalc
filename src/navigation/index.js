@@ -32,7 +32,7 @@ const Navigation = ({ theme, setTheme, isThemeChanged, setIsThemeChanged }) => {
       }
       return <SweetSFSymbol name={iconName} size={size} colors={[color]} />;
     },
-    tabBarActiveTintColor: "#5450D4", //bg-blue-500
+    tabBarActiveTintColor: "#3B82F6", //bg-blue-500
     tabBarInactiveTintColor: "gray",
     headerShown: false,
   });

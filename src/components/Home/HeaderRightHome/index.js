@@ -44,10 +44,10 @@ const Header = ({
           >
             <Text
               className={
-                isEditingFavorite ? " font-semibold text-lg" : " text-lg"
+                "text-blue-500" +
+                (isEditingFavorite ? " font-semibold text-lg" : " text-lg")
               }
               style={{
-                color: "#5450D4",
                 paddingEnd: 8.5,
               }}
             >
@@ -64,9 +64,11 @@ const Header = ({
             }}
           >
             <Text
-              className={isEditing ? " font-semibold text-lg" : " text-lg"}
+              className={
+                "text-blue-500" +
+                (isEditing ? " font-semibold text-lg" : " text-lg")
+              }
               style={{
-                color: "#5450D4",
                 paddingStart: isEditing ? (lang === "ar" ? 55 : 36) : 0,
               }}
             >
@@ -83,7 +85,7 @@ const Header = ({
                 navigation.navigate("NewTool");
               }}
             >
-              <SweetSFSymbol name={"plus"} size={22} colors={["#5450D4"]} />
+              <SweetSFSymbol name={"plus"} size={22} colors={["#3B82F6"]} />
             </TouchableOpacity>
           )}
         </>

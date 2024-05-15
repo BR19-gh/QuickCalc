@@ -45,25 +45,13 @@ function EditTool({ theme, tools, route, dispatch }) {
     setNewTool({
       ...newTool,
       equation: {
-        operands: Array(
-          Number(
-            newTool.operandNum === "1" ||
-              isNaN(newTool.operandNum) === true ||
-              newTool.operandNum === "0"
-              ? 0
-              : newTool.operandNum
-          )
+        operands: newTool.equation.operands.slice(
+          0,
+          Number(newTool.operandNum)
         ),
-        operators: Array(
-          Number(
-            newTool.operandNum === "1" ||
-              isNaN(newTool.operandNum) === true ||
-              newTool.operandNum === "0"
-              ? 0
-              : newTool.operandNum
-          ) === 0
-            ? 0
-            : newTool.operandNum - 1
+        operators: newTool.equation.operators.slice(
+          0,
+          Number(newTool.operandNum) - 1
         ),
       },
     });
@@ -495,12 +483,12 @@ function EditTool({ theme, tools, route, dispatch }) {
                   operandNum: a2e(value),
                 });
               }}
-              onFocus={() =>
-                setNewTool({
-                  ...newTool,
-                  operandNum: "",
-                })
-              }
+              // onFocus={() =>
+              //   setNewTool({
+              //     ...newTool,
+              //     operandNum: "",
+              //   })
+              // }
               placeholderTextColor={isDark("#28398788", "#28398755")}
               placeholder={t(text("operandNumPlaceholder"))}
               keyboardType="numeric"

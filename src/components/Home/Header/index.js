@@ -35,7 +35,7 @@ const Header = ({ currentTool, t, tools, dispatch }) => {
         }}
         ß
       >
-        <SweetSFSymbol name="info.circle" size={22} colors={["#5450D4"]} />
+        <SweetSFSymbol name="info.circle" size={22} colors={["#3B82F6"]} />
       </TouchableOpacity>
     </View>
   );

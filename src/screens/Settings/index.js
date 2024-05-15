@@ -31,6 +31,7 @@ import { connect } from "react-redux";
 import { handleInitialData } from "../../store/actions/shared";
 import * as Haptics from "expo-haptics";
 import { useNavigation } from "@react-navigation/native";
+import { lang } from "../../helpers";
 
 const openAppPref = (t, text) => {
   if (Platform.OS === "ios") {
@@ -298,12 +299,23 @@ function Settings({ theme, isThemeChanged, setIsThemeChanged, dispatch }) {
                       ["Ibrahim-abdalaziz@hotmail.com"],
                       null,
                       null,
-                      "My Feedback",
+                      lang === "ar"
+                        ? "اكتب عنوانا يختصر ملاحظاتك"
+                        : "Write a subject that summarizes your feedback",
+                      lang === "ar"
+                        ? `
+                      Model: ${DeviceInfo.getModel()}
+                      Brand: ${DeviceInfo.getBrand()}
+                      OS: ${DeviceInfo.getSystemName()} ${DeviceInfo.getSystemVersion()}
+                      App Version: 1.0.0
+                      ----------------------------------------\n
+                      ((اكتب ملاحظاتك هنا...))
                       `
-                      Model: ${DeviceInfo.getModel()}\n
-                      Brand: ${DeviceInfo.getBrand()}\n
-                      OS: ${DeviceInfo.getSystemName()} ${DeviceInfo.getSystemVersion()}\n
-                      App Version: 1.0.0\n
+                        : `
+                      Model: ${DeviceInfo.getModel()}
+                      Brand: ${DeviceInfo.getBrand()}
+                      OS: ${DeviceInfo.getSystemName()} ${DeviceInfo.getSystemVersion()}
+                      App Version: 1.0.0
                       ----------------------------------------\n
                       ((write your feedback here...)
                       `
@@ -324,6 +336,25 @@ function Settings({ theme, isThemeChanged, setIsThemeChanged, dispatch }) {
                   }
                   type="newpage"
                   onPress={() => Communications.web("https://br19.me")}
+                />
+                <SettingsButton
+                  title={
+                    <View className="flex-row-reverse justify-end items-center">
+                      <Text className={isDarkTextColor()}>
+                        {t(text("coffee"))}
+                      </Text>
+                      <Text>{"   "}</Text>
+                      <SweetSFSymbol
+                        name={"mug.fill"}
+                        size={20}
+                        colors={["gray"]}
+                      />
+                    </View>
+                  }
+                  type="newpage"
+                  onPress={() =>
+                    Communications.web("https://buymeacoffee.com/br19")
+                  }
                 />
               </SettingsGroup>
             </View>

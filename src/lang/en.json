@@ -325,7 +325,8 @@
           "delete": "Delete",
           "deleting": "Deleting...",
           "deleteCompeleted": "Delete complated! Refresh to see the changes",
-          "walkThrough": "Walk Through"
+          "walkThrough": "Walk Through",
+          "coffee": "Buy me a cup of coffee!"
         }
       }
     }

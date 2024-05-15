@@ -100,7 +100,7 @@ const Header = ({ currentTool, t, tools, dispatch }) => {
           }
         }}
       >
-        <SweetSFSymbol name="ellipsis.circle" size={22} colors={["#5450D4"]} />
+        <SweetSFSymbol name="ellipsis.circle" size={22} colors={["#3B82F6"]} />
       </ContextMenu>
     </View>
   );
