@@ -446,7 +446,7 @@ function CalendarCon({ theme }) {
                 }}
                 name={"arrow.left.arrow.right"}
                 size={25}
-                colors={[isDark("#0082F6", "#1E3A8A")]}
+                colors={[isDark("#5450D4", "#38377C")]}
               />
             </TouchableOpacity>
             <View>
@@ -494,9 +494,9 @@ function CalendarCon({ theme }) {
           <View className={"items-center"}>
             <TouchableOpacity
               className={
-                "rounded-lg w-48 h-20 mt-14 flex-row items-center justify-evenly" +
-                isDark(" bg-blue-900 ", " bg-blue-500 ")
+                "rounded-lg w-48 h-20 mt-14 flex-row items-center justify-evenly"
               }
+              style={{ backgroundColor: "#38377C" }}
               onPress={() => {
                 try {
                   calculate();
@@ -527,8 +527,9 @@ function CalendarCon({ theme }) {
             </TouchableOpacity>
             <TouchableOpacity
               className={
-                "rounded-md w-36 h-14 mt-2.5 flex-row items-center justify-evenly bg-blue-700"
+                "rounded-md w-36 h-14 mt-2.5 flex-row items-center justify-evenly"
               }
+              style={{ backgroundColor: "#5450D4" }}
               onPress={reset}
             >
               <Text className={"text-xl text-white text-center"}>

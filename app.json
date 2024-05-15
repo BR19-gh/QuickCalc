@@ -13,10 +13,11 @@
     },
     "assetBundlePatterns": ["**/*"],
     "locales": {
-      "en": "./locale/en.json",
-      "ar": "./locale/ar.json"
+      "en": "src/lang/en.json",
+      "ar": "src/lang/ar.json"
     },
     "ios": {
+      "buildNumber": "1.6.0",
       "supportsTablet": true,
       "infoPlist": {
         "CFBundleAllowMixedLocalizations": true,

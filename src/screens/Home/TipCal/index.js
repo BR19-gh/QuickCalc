@@ -192,9 +192,9 @@ function TipCal({ theme }) {
           <View className={"items-center"}>
             <TouchableOpacity
               className={
-                "rounded-lg w-48 h-20 mt-10 flex-row items-center justify-evenly" +
-                isDark(" bg-blue-900 ", " bg-blue-500 ")
+                "rounded-lg w-48 h-20 mt-10 flex-row items-center justify-evenly"
               }
+              style={{ backgroundColor: "#38377C" }}
               onPress={calculate}
             >
               <Text className={styles.btnText}>{t(text("calculate"))}</Text>
@@ -206,8 +206,9 @@ function TipCal({ theme }) {
             </TouchableOpacity>
             <TouchableOpacity
               className={
-                "rounded-md w-36 h-14 mt-2.5 flex-row items-center justify-evenly bg-blue-700"
+                "rounded-md w-36 h-14 mt-2.5 flex-row items-center justify-evenly"
               }
+              style={{ backgroundColor: "#5450D4" }}
               onPress={reset}
             >
               <Text className={"text-xl text-white text-center"}>

@@ -170,9 +170,9 @@ function CreatedTool({ theme, setCurrentTool, route, dispatch, tools }) {
           <View className={"items-center"}>
             <TouchableOpacity
               className={
-                "mt-14 h-20 w-48 flex-row items-center justify-evenly rounded-lg" +
-                isDark(" bg-blue-900 ", " bg-blue-500 ")
+                "mt-14 h-20 w-48 flex-row items-center justify-evenly rounded-lg"
               }
+              style={{ backgroundColor: "#38377C" }}
               onPress={calculate}
             >
               <Text className={styles.btnText}>{t(text("calculate"))}</Text>
@@ -184,8 +184,9 @@ function CreatedTool({ theme, setCurrentTool, route, dispatch, tools }) {
             </TouchableOpacity>
             <TouchableOpacity
               className={
-                "mt-2.5 h-14 w-36 flex-row items-center justify-evenly rounded-md bg-blue-700"
+                "mt-2.5 h-14 w-36 flex-row items-center justify-evenly rounded-md"
               }
+              style={{ backgroundColor: "#5450D4" }}
               onPress={reset}
             >
               <Text className={"text-center text-xl text-white"}>

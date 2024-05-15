@@ -36,14 +36,17 @@ function Welcome(props) {
   return (
     <View
       style={{
-        marginTop: windowHight > 667 ? "45%" : "25%",
+        marginTop: windowHight > 667 ? "40%" : "20%",
       }}
       className={
         "h-full items-center flex-1" + (props.theme === "dark" && " bg-black")
       }
     >
       <Text
-        className={styles.icon + (props.theme === "dark" && " text-blue-500")}
+        className={"text-6xl mb-4 font-normal font-sans"}
+        style={{
+          color: "#4844B2",
+        }}
       >
         QuickCalc
       </Text>
@@ -68,6 +71,9 @@ function Welcome(props) {
       </Text>
       <TouchableOpacity
         className={styles.button1}
+        style={{
+          backgroundColor: "#4844B2",
+        }}
         onPress={() => {
           props.setGetStartedBtnPressed(true);
         }}
@@ -76,6 +82,9 @@ function Welcome(props) {
       </TouchableOpacity>
       <TouchableOpacity
         className={styles.button2}
+        style={{
+          backgroundColor: "#38377C",
+        }}
         onPress={() => {
           navigation.navigate("WalkThrough");
         }}

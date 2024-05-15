@@ -458,6 +458,25 @@ function Home(props) {
                 >
                   {t(text("noFavoredTools"))}
                 </Text>
+              ) : currentTools.filter((tool) =>
+                  yourToolsDisplayes
+                    ? tool.link === "CreatedTool" &&
+                      tool.isHidden === false &&
+                      tool.isFavorite === true
+                    : builtinToolsDisplayes
+                    ? tool.link !== "CreatedTool" &&
+                      tool.isHidden === false &&
+                      tool.isFavorite === true
+                    : true
+                ).length === 0 ? (
+                <Text
+                  className={
+                    "text-xl m-4 mt-0 text-left " +
+                    (props.theme === "dark" && " text-white")
+                  }
+                >
+                  {t(text("noFilteredFavoredTools"))}
+                </Text>
               ) : null
             ) : currentTools.filter((tool) => tool.isHidden === false)
                 .length === 0 ? (

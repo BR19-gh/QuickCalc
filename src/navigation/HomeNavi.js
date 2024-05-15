@@ -66,6 +66,7 @@ const HomeNavi = ({ isEditing, setIsEditing, theme }) => {
               setIsShowedFavorite={setIsShowedFavorite}
             />
           ),
+
           title: isShowedFavorite
             ? isEditingFavorite
               ? t(text("selectToFavor"))
@@ -104,6 +105,10 @@ const HomeNavi = ({ isEditing, setIsEditing, theme }) => {
 
       <Stack.Screen
         options={{
+          headerTitleStyle: {
+            color: theme === "dark" ? "white" : "black",
+          },
+          headerTintColor: "#5450D4",
           title: t(NewTooltext("title")),
         }}
         name="NewTool"
@@ -111,6 +116,10 @@ const HomeNavi = ({ isEditing, setIsEditing, theme }) => {
       />
       <Stack.Screen
         options={{
+          headerTitleStyle: {
+            color: theme === "dark" ? "white" : "black",
+          },
+          headerTintColor: "#5450D4",
           title: t(NewTooltext("titleEdit")),
         }}
         name="EditTool"
@@ -118,6 +127,10 @@ const HomeNavi = ({ isEditing, setIsEditing, theme }) => {
       />
       <Stack.Screen
         options={{
+          headerTitleStyle: {
+            color: theme === "dark" ? "white" : "black",
+          },
+          headerTintColor: "#5450D4",
           title: currentTool.name,
           headerRight: () => <Header currentTool={currentTool} t={t} />,
         }}
@@ -132,6 +145,10 @@ const HomeNavi = ({ isEditing, setIsEditing, theme }) => {
       />
       <Stack.Screen
         options={{
+          headerTitleStyle: {
+            color: theme === "dark" ? "white" : "black",
+          },
+          headerTintColor: "#5450D4",
           title: t(DiscountCaltext("title")),
           headerRight: () => <HeaderTools currentTool={"DiscountCal"} t={t} />,
         }}
@@ -140,6 +157,10 @@ const HomeNavi = ({ isEditing, setIsEditing, theme }) => {
       />
       <Stack.Screen
         options={{
+          headerTitleStyle: {
+            color: theme === "dark" ? "white" : "black",
+          },
+          headerTintColor: "#5450D4",
           title: t(UnitsConText("title")),
           headerRight: () => <HeaderTools currentTool={"UnitsCon"} t={t} />,
         }}
@@ -148,6 +169,10 @@ const HomeNavi = ({ isEditing, setIsEditing, theme }) => {
       />
       <Stack.Screen
         options={{
+          headerTitleStyle: {
+            color: theme === "dark" ? "white" : "black",
+          },
+          headerTintColor: "#5450D4",
           title: t(TipCaltext("title")),
           headerRight: () => <HeaderTools currentTool={"TipCal"} t={t} />,
         }}
@@ -156,6 +181,10 @@ const HomeNavi = ({ isEditing, setIsEditing, theme }) => {
       />
       <Stack.Screen
         options={{
+          headerTitleStyle: {
+            color: theme === "dark" ? "white" : "black",
+          },
+          headerTintColor: "#5450D4",
           title: t(CurrencyConText("title")),
           headerRight: () => <HeaderTools currentTool={"CurrencyCon"} t={t} />,
         }}
@@ -164,6 +193,10 @@ const HomeNavi = ({ isEditing, setIsEditing, theme }) => {
       />
       <Stack.Screen
         options={{
+          headerTitleStyle: {
+            color: theme === "dark" ? "white" : "black",
+          },
+          headerTintColor: "#5450D4",
           title: t(CalendarConText("title")),
           headerRight: () => <HeaderTools currentTool={"CalendarCon"} t={t} />,
         }}

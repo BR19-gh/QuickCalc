@@ -7,6 +7,7 @@ import {
   Keyboard,
   TextInput,
   StyleSheet,
+  Alert,
 } from "react-native";
 import styles from "./styles";
 import SweetSFSymbol from "sweet-sfsymbols";
@@ -29,7 +30,7 @@ import { lang, UNIT_INFO } from "../../../helpers";
 import * as Haptics from "expo-haptics";
 
 import { useToast } from "react-native-toast-notifications";
-//import { useNetInfo } from "@react-native-community/netinfo";
+import { useNetInfo } from "@react-native-community/netinfo";
 
 function UnitsCon({ theme, dispatch, unitResult }) {
   const { t } = useTranslation();
@@ -40,28 +41,22 @@ function UnitsCon({ theme, dispatch, unitResult }) {
   const [toUnit, setToUnit] = useState("");
   const [fromUnitValue, setFromUnitValue] = useState("");
   const [toUnitValue, setToUnitValue] = useState("");
-  // const netInfo = useNetInfo();
-  // useEffect(() => {
-  //   if (netInfo.isConnected === false) {
-  //     Alert.alert(
-  //       t(text("connectionErrorTitle")),
-  //       t(text("connectionErrorMsg")),
-  //       [
-  //         {
-  //           text: t(text("gotIt")),
-  //           onPress: () => null,
-  //           style: "default",
-  //         },
-  //       ]
-  //     );
-  //   }
-  // }, [netInfo.isConnected]);
-
-  // const focusOnSecondInput = () => {
-  //   if (secondInput && secondInput.current) {
-  //     secondInput.current.focus();
-  //   }
-  // };
+  const netInfo = useNetInfo();
+  useEffect(() => {
+    if (netInfo.isConnected === false) {
+      Alert.alert(
+        t(text("connectionErrorTitle")),
+        t(text("connectionErrorMsg")),
+        [
+          {
+            text: t(text("gotIt")),
+            onPress: () => null,
+            style: "default",
+          },
+        ]
+      );
+    }
+  }, [netInfo.isConnected]);
 
   const hideKeyboard = () => {
     Keyboard.dismiss();
@@ -273,7 +268,7 @@ function UnitsCon({ theme, dispatch, unitResult }) {
                 }}
                 name={"arrow.left.arrow.right"}
                 size={25}
-                colors={[isDark("#0082F6", "#1E3A8A")]}
+                colors={[isDark("#5450D4", "#38377C")]}
               />
             </TouchableOpacity>
             <View>
@@ -314,9 +309,9 @@ function UnitsCon({ theme, dispatch, unitResult }) {
           <View className={"items-center"}>
             <TouchableOpacity
               className={
-                "rounded-lg w-48 h-20 mt-14 flex-row items-center justify-evenly" +
-                isDark(" bg-blue-900 ", " bg-blue-500 ")
+                "rounded-lg w-48 h-20 mt-14 flex-row items-center justify-evenly"
               }
+              style={{ backgroundColor: "#38377C" }}
               onPress={calculate}
             >
               <Text className={styles.btnText}>{t(text("calculate"))}</Text>
@@ -328,8 +323,9 @@ function UnitsCon({ theme, dispatch, unitResult }) {
             </TouchableOpacity>
             <TouchableOpacity
               className={
-                "rounded-md w-36 h-14 mt-2.5 flex-row items-center justify-evenly bg-blue-700"
+                "rounded-md w-36 h-14 mt-2.5 flex-row items-center justify-evenly"
               }
+              style={{ backgroundColor: "#5450D4" }}
               onPress={reset}
             >
               <Text className={"text-xl text-white text-center"}>

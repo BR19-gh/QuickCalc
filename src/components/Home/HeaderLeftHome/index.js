@@ -46,7 +46,7 @@ const Header = ({
         <SweetSFSymbol
           name={"arrow.clockwise"}
           size={22}
-          colors={["#3B82F6"]}
+          colors={["#5450D4"]}
         />
       </TouchableOpacity>
       <TouchableOpacity
@@ -61,7 +61,7 @@ const Header = ({
           <SweetSFSymbol
             name={isShowedFavorite ? "star.fill" : "star"}
             size={22}
-            colors={["#3B82F6"]}
+            colors={["#5450D4"]}
           />
         )}
       </TouchableOpacity>

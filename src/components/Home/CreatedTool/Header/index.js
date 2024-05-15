@@ -5,10 +5,7 @@ import * as Haptics from "expo-haptics";
 import { useNavigation } from "@react-navigation/native";
 import ContextMenu from "react-native-context-menu-view";
 
-import {
-  handleDeleteTool,
-  handleReorderTools,
-} from "../../../../store/actions/tools";
+import { handleDeleteTool } from "../../../../store/actions/tools";
 
 import { connect } from "react-redux";
 
@@ -103,7 +100,7 @@ const Header = ({ currentTool, t, tools, dispatch }) => {
           }
         }}
       >
-        <SweetSFSymbol name="ellipsis.circle" size={22} colors={["#3B82F6"]} />
+        <SweetSFSymbol name="ellipsis.circle" size={22} colors={["#5450D4"]} />
       </ContextMenu>
     </View>
   );

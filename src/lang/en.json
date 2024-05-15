@@ -68,7 +68,8 @@
           "yourTools": "Your Tools",
           "builtinTools": "Built-in Tools",
           "filterIsDisabled": "Filter is disabled",
-          "noFilteredTools": "No tools match the filter, refresh to check or check hidden tools"
+          "noFilteredTools": "No tools match the filter, refresh to check or check hidden tools",
+          "noFilteredFavoredTools": "No tools match the filter, refresh to check or check unfavored tools"
         },
         "NewTool": {
           "title": "Create New Tool",

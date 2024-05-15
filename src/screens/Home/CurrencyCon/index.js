@@ -6,6 +6,7 @@ import {
   ScrollView,
   Keyboard,
   TextInput,
+  Alert,
 } from "react-native";
 import styles from "./styles";
 import SweetSFSymbol from "sweet-sfsymbols";
@@ -25,7 +26,7 @@ import Dropdown from "../../../components/Home/CurrencyCon/Dropdown";
 import * as Haptics from "expo-haptics";
 
 import { useToast } from "react-native-toast-notifications";
-//import { useNetInfo } from "@react-native-community/netinfo";
+import { useNetInfo } from "@react-native-community/netinfo";
 
 function CurrencyCon({ theme, dispatch, currResult }) {
   const { t } = useTranslation();
@@ -35,28 +36,22 @@ function CurrencyCon({ theme, dispatch, currResult }) {
   const [toCurrency, setToCurrency] = useState("");
   const [fromCurrencyValue, setFromCurrencyValue] = useState("");
   const [toCurrencyValue, setToCurrencyValue] = useState("");
-  // const netInfo = useNetInfo();
-  // useEffect(() => {
-  //   if (netInfo.isConnected === false) {
-  //     Alert.alert(
-  //       t(text("connectionErrorTitle")),
-  //       t(text("connectionErrorMsg")),
-  //       [
-  //         {
-  //           text: t(text("gotIt")),
-  //           onPress: () => null,
-  //           style: "default",
-  //         },
-  //       ]
-  //     );
-  //   }
-  // }, [netInfo.isConnected]);
-
-  // const focusOnSecondInput = () => {
-  //   if (secondInput && secondInput.current) {
-  //     secondInput.current.focus();
-  //   }
-  // };
+  const netInfo = useNetInfo();
+  useEffect(() => {
+    if (netInfo.isConnected === false) {
+      Alert.alert(
+        t(text("connectionErrorTitle")),
+        t(text("connectionErrorMsg")),
+        [
+          {
+            text: t(text("gotIt")),
+            onPress: () => null,
+            style: "default",
+          },
+        ]
+      );
+    }
+  }, [netInfo.isConnected]);
 
   const hideKeyboard = () => {
     Keyboard.dismiss();
@@ -173,7 +168,7 @@ function CurrencyCon({ theme, dispatch, currResult }) {
                 }}
                 name={"arrow.left.arrow.right"}
                 size={25}
-                colors={[isDark("#0082F6", "#1E3A8A")]}
+                colors={[isDark("#5450D4", "#38377C")]}
               />
             </TouchableOpacity>
             <View>
@@ -213,9 +208,9 @@ function CurrencyCon({ theme, dispatch, currResult }) {
           <View className={"items-center"}>
             <TouchableOpacity
               className={
-                "rounded-lg w-48 h-20 mt-14 flex-row items-center justify-evenly" +
-                isDark(" bg-blue-900 ", " bg-blue-500 ")
+                "rounded-lg w-48 h-20 mt-14 flex-row items-center justify-evenly"
               }
+              style={{ backgroundColor: "#38377C" }}
               onPress={calculate}
             >
               <Text className={styles.btnText}>{t(text("calculate"))}</Text>
@@ -227,8 +222,9 @@ function CurrencyCon({ theme, dispatch, currResult }) {
             </TouchableOpacity>
             <TouchableOpacity
               className={
-                "rounded-md w-36 h-14 mt-2.5 flex-row items-center justify-evenly bg-blue-700"
+                "rounded-md w-36 h-14 mt-2.5 flex-row items-center justify-evenly"
               }
+              style={{ backgroundColor: "#5450D4" }}
               onPress={reset}
             >
               <Text className={"text-xl text-white text-center"}>

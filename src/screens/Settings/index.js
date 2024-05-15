@@ -295,7 +295,7 @@ function Settings({ theme, isThemeChanged, setIsThemeChanged, dispatch }) {
                   type="newpage"
                   onPress={() =>
                     Communications.email(
-                      "Ibrahim-abdalaziz@hotmail.com",
+                      ["Ibrahim-abdalaziz@hotmail.com"],
                       null,
                       null,
                       "My Feedback",

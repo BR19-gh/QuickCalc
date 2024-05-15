@@ -41,33 +41,33 @@ function EditTool({ theme, tools, route, dispatch }) {
 
   const [newTool, setNewTool] = useState(tool);
 
-  // useEffect(() => {
-  //   setNewTool({
-  //     ...newTool,
-  //     equation: {
-  //       operands: Array(
-  //         Number(
-  //           newTool.operandNum === "1" ||
-  //             isNaN(newTool.operandNum) === true ||
-  //             newTool.operandNum === "0"
-  //             ? 0
-  //             : newTool.operandNum
-  //         )
-  //       ),
-  //       operators: Array(
-  //         Number(
-  //           newTool.operandNum === "1" ||
-  //             isNaN(newTool.operandNum) === true ||
-  //             newTool.operandNum === "0"
-  //             ? 0
-  //             : newTool.operandNum
-  //         ) === 0
-  //           ? 0
-  //           : newTool.operandNum - 1
-  //       ),
-  //     },
-  //   });
-  // }, [newTool.operandNum]);
+  useEffect(() => {
+    setNewTool({
+      ...newTool,
+      equation: {
+        operands: Array(
+          Number(
+            newTool.operandNum === "1" ||
+              isNaN(newTool.operandNum) === true ||
+              newTool.operandNum === "0"
+              ? 0
+              : newTool.operandNum
+          )
+        ),
+        operators: Array(
+          Number(
+            newTool.operandNum === "1" ||
+              isNaN(newTool.operandNum) === true ||
+              newTool.operandNum === "0"
+              ? 0
+              : newTool.operandNum
+          ) === 0
+            ? 0
+            : newTool.operandNum - 1
+        ),
+      },
+    });
+  }, [newTool.operandNum]);
 
   useEffect(() => {
     console.log(newTool);
@@ -732,7 +732,10 @@ function EditTool({ theme, tools, route, dispatch }) {
           </View>
           <View className="flex flex-row w-11/12 justify-center mt-5 mb-5">
             <TouchableOpacity
-              className="w-11/12 h-16 bg-blue-700 rounded-full items-center justify-center"
+              className="w-11/12 h-16 rounded-full items-center justify-center"
+              style={{
+                backgroundColor: isDark("#5450D4", "#38377C"),
+              }}
               onPress={() => {
                 Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
                 editTool(newTool);

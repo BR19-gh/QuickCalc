@@ -761,7 +761,8 @@ function NewTool({ theme, tools, dispatch }) {
           </View>
           <View className="flex flex-row w-11/12 justify-center mt-5 mb-5">
             <TouchableOpacity
-              className="w-11/12 h-16 bg-blue-700 rounded-full items-center justify-center"
+              className="w-11/12 h-16 rounded-full items-center justify-center"
+              style={{ backgroundColor: isDark("#5450D4", "#38377C") }}
               onPress={() => {
                 Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
                 saveNewTool(newTool);
