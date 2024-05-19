@@ -15,14 +15,30 @@ function WalkThrough(props) {
 
   const IMGS =
     lang === "ar"
+      ? Platform.OS === "macos"
+        ? [
+            require(`../../../../walkthro_ar/welcome.png`),
+            require(`../../../../walkthro_ar/home.png`),
+            require(`../../../../walkthro_ar/edit.gif`),
+            require(`../../../../walkthro_ar/hidden.png`),
+            require(`../../../../walkthro_ar/settings.png`),
+          ]
+        : [
+            require(`../../../../walkthro_ar/welcome.png`),
+            require(`../../../../walkthro_ar/home.png`),
+            require(`../../../../walkthro_ar/home_menu.png`),
+            require(`../../../../walkthro_ar/edit.gif`),
+            require(`../../../../walkthro_ar/hidden.png`),
+            require(`../../../../walkthro_ar/home_swipe.gif`),
+            require(`../../../../walkthro_ar/settings.png`),
+          ]
+      : Platform.OS === "macos"
       ? [
-          require(`../../../../walkthro_ar/welcome.png`),
-          require(`../../../../walkthro_ar/home.png`),
-          require(`../../../../walkthro_ar/home_menu.png`),
-          require(`../../../../walkthro_ar/edit.gif`),
-          require(`../../../../walkthro_ar/hidden.png`),
-          require(`../../../../walkthro_ar/home_swipe.gif`),
-          require(`../../../../walkthro_ar/settings.png`),
+          require(`../../../../walkthro_en/welcome.png`),
+          require(`../../../../walkthro_en/home.png`),
+          require(`../../../../walkthro_en/edit.gif`),
+          require(`../../../../walkthro_en/hidden.png`),
+          require(`../../../../walkthro_en/settings.png`),
         ]
       : [
           require(`../../../../walkthro_en/welcome.png`),

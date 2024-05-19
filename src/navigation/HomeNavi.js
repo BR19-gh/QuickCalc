@@ -119,7 +119,9 @@ const HomeNavi = ({ isEditing, setIsEditing, theme }) => {
       <Stack.Screen
         options={{
           title: currentTool.name,
-          headerRight: () => <Header currentTool={currentTool} t={t} />,
+          headerRight: () => (
+            <Header theme={theme} currentTool={currentTool} t={t} />
+          ),
         }}
         name="CreatedTool"
         children={(props) => (

@@ -80,6 +80,20 @@ function UnitsCon({ theme, dispatch, unitResult }) {
 
   const calculate = () => {
     if (fromUnitValue && fromUnit && toUnit) {
+      if (isNaN(fromUnitValue)) {
+        Alert.alert(
+          t(text("errorInValidInput")),
+          t(text("onlyNumbers")),
+          [
+            {
+              text: t(text("gotIt")),
+              style: "cancel",
+            },
+          ],
+          { cancelable: false }
+        );
+        return;
+      }
       Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
 
       let refreshToast = toast.show(t(text("calculating")), {

@@ -6,6 +6,7 @@ import {
   ScrollView,
   Keyboard,
   TextInput,
+  Alert,
 } from "react-native";
 import styles from "./styles";
 import SweetSFSymbol from "sweet-sfsymbols";
@@ -46,6 +47,20 @@ function DiscountCal(props) {
 
   const calculate = () => {
     if (price && discount) {
+      if (isNaN(price) || isNaN(discount)) {
+        Alert.alert(
+          t(text("errorInValidInput")),
+          t(text("onlyNumbers")),
+          [
+            {
+              text: t(text("gotIt")),
+              style: "cancel",
+            },
+          ],
+          { cancelable: false }
+        );
+        return;
+      }
       Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
       let priceInEn = a2e(price);
       let discountInEn = a2e(discount);

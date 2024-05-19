@@ -113,7 +113,6 @@ export const UNIT_INFO = [
         ar: "فهرنهايت",
         code: "Fahrenheit",
       },
-      // { meausrement: "Temperature", en: "Kelvin", ar: "كلفن", code: "Kelvin" },
     ],
   },
   {
@@ -152,32 +151,12 @@ export const UNIT_INFO = [
     ],
   },
   {
-    en: "Energy",
-    ar: "الطاقة",
-
-    units: [
-      { meausrement: "Energy", en: "Joule", ar: "جول", code: "Joule" },
-      { meausrement: "Energy", en: "Watt-hour", ar: "واط-ساعة", code: "Watt" },
-    ],
-  },
-  {
     en: "Angle",
     ar: "الزاوية",
 
     units: [
       { meausrement: "Angle", en: "Degree", ar: "درجة", code: "Degree" },
       { meausrement: "Angle", en: "Radian", ar: "راديان", code: "Radian" },
-    ],
-  },
-  {
-    en: "Electric",
-    ar: "الكهرباء",
-
-    units: [
-      { meausrement: "Electric", en: "Ampere", ar: "أمبير", code: "Amp" },
-      { meausrement: "Electric", en: "Volt", ar: "فولت", code: "Volt" },
-      { meausrement: "Electric", en: "Ohm", ar: "أوم", code: "Ohm" },
-      { meausrement: "Electric", en: "Pascal", ar: "باسكال", code: "Pascal" },
     ],
   },
   {
@@ -188,12 +167,6 @@ export const UNIT_INFO = [
       { meausrement: "Data", en: "Bit", ar: "بت", code: "Bit" },
       { meausrement: "Data", en: "Byte", ar: "بايت", code: "Byte" },
     ],
-  },
-  {
-    en: "Substance",
-    ar: "المادة",
-
-    units: [{ meausrement: "Substance", en: "Mole", ar: "مول", code: "Mole" }],
   },
 ];
 

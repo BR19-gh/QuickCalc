@@ -624,7 +624,8 @@ function CalendarCon({ theme }) {
                         : ""
                     }${
                       toCalendarValue.timeSince.months > 0
-                        ? toCalendarValue.timeSince.months +
+                        ? " " +
+                          toCalendarValue.timeSince.months +
                           " " +
                           (toCalendarValue.timeSince.months === 1
                             ? t(text("1month"))

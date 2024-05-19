@@ -11,7 +11,7 @@ import {
 import styles from "./styles";
 import SweetSFSymbol from "sweet-sfsymbols";
 
-import { useState, useRef, useEffect } from "react";
+import { useState, useEffect } from "react";
 
 import { connect } from "react-redux";
 
@@ -21,10 +21,9 @@ import * as Haptics from "expo-haptics";
 
 import { Parser } from "expr-eval";
 
-function CreatedTool({ theme, setCurrentTool, route, dispatch, tools }) {
+function CreatedTool({ theme, setCurrentTool, route }) {
   const { t } = useTranslation();
   const text = (text) => "screens.Home.CreatedTool.text." + text;
-  const secondInput = useRef(null);
 
   const { tool } = route.params;
 
@@ -77,20 +76,20 @@ function CreatedTool({ theme, setCurrentTool, route, dispatch, tools }) {
       ...toolProps,
       result: Parser.evaluate(expression(tool.equation.operands.length), {
         a: isNaN(tool.equation.operands[0])
-          ? toolProps.inputs[0]
-          : tool.equation.operands[0],
+          ? Math.pow(toolProps.inputs[0], tool.equation.exponents[0])
+          : Math.pow(tool.equation.operands[0], tool.equation.exponents[0]),
         b: isNaN(tool.equation.operands[1])
-          ? toolProps.inputs[1]
-          : tool.equation.operands[1],
+          ? Math.pow(toolProps.inputs[1], tool.equation.exponents[1])
+          : Math.pow(tool.equation.operands[1], tool.equation.exponents[1]),
         c: isNaN(tool.equation.operands[2])
-          ? toolProps.inputs[2]
-          : tool.equation.operands[2],
+          ? Math.pow(toolProps.inputs[2], tool.equation.exponents[2])
+          : Math.pow(tool.equation.operands[2], tool.equation.exponents[2]),
         d: isNaN(tool.equation.operands[3])
-          ? toolProps.inputs[3]
-          : tool.equation.operands[3],
+          ? Math.pow(toolProps.inputs[3], tool.equation.exponents[3])
+          : Math.pow(tool.equation.operands[3], tool.equation.exponents[3]),
         e: isNaN(tool.equation.operands[4])
-          ? toolProps.inputs[4]
-          : tool.equation.operands[4],
+          ? Math.pow(toolProps.inputs[4], tool.equation.exponents[4])
+          : Math.pow(tool.equation.operands[4], tool.equation.exponents[4]),
       }),
     });
     Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);

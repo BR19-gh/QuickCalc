@@ -36,7 +36,7 @@ function Welcome(props) {
   return (
     <View
       style={{
-        marginTop: windowHight > 667 ? "40%" : "20%",
+        marginTop: windowHight > 667 ? 170 : 85,
       }}
       className={
         "h-full items-center flex-1" + (props.theme === "dark" && " bg-black")

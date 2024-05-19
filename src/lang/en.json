@@ -97,7 +97,8 @@
             "fillAllFields": "Please fill all fields before saving",
             "errorTitle": "An error occurred",
             "pleaseShareError": "\n\nPlease share this error with the developer, contact information in the settings.",
-            "errorTitleUnkown": "An unknown error occurred"
+            "errorTitleUnkown": "An unknown error occurred",
+            "powerOf": "Power of"
           }
         },
         "CreatedTool": {
@@ -131,7 +132,10 @@
             "calculate": "Calculate",
             "priceAfter": "Price After: ",
             "discountAmount": "Discount Amount: ",
-            "reset": "Reset"
+            "reset": "Reset",
+            "errorInValidInput": "Invalid Inputs",
+            "onlyNumbers": "Please enter numbers only",
+            "gotIt": "Got it"
           }
         },
         "TipCal": {
@@ -144,7 +148,10 @@
             "tipAmount": "Every person will tip: ",
             "numberOfPpl": "Number of People",
             "number": "Number",
-            "reset": "Reset"
+            "reset": "Reset",
+            "errorInValidInput": "Invalid Inputs",
+            "onlyNumbers": "Please enter numbers only",
+            "gotIt": "Got it"
           }
         },
         "CurrencyCon": {
@@ -165,7 +172,9 @@
             "pleaseShareError": "\n\nPlease share this error with the developer, contact information in the settings.",
             "errorTitleUnkown": "an unknown error occurred",
             "calculating": "Calculating...",
-            "done": "Done!"
+            "done": "Done!",
+            "errorInValidInput": "Invalid Inputs",
+            "onlyNumbers": "Please enter numbers only"
           }
         },
         "UnitsCon": {
@@ -189,7 +198,8 @@
             "errorTitleUnkown": "an unknown error occurred",
             "calculating": "Calculating...",
             "done": "Done!",
-            "noUnitFound": "No unit found."
+            "errorInValidInput": "Invalid Inputs",
+            "onlyNumbers": "Please enter numbers only"
           }
         },
         "CalendarCon": {
@@ -326,7 +336,10 @@
           "deleting": "Deleting...",
           "deleteCompeleted": "Delete complated! Refresh to see the changes",
           "walkThrough": "Walk Through",
-          "coffee": "Buy me a cup of coffee!"
+          "ok": "OK!",
+          "coffee": "Buy me a cup of coffee!",
+          "coffeeAlert": "Buy Me a Coffee and Support the App ☕️!",
+          "coffeeAlertMsg": "Hey there! Noticed there are no annoying ads in this app 😉? If you’re enjoying it, how about buying me a coffee ☕️? You can support me with a tiny donation, equivalent to buying me a coffee, your support helps me improve the app and add cool features without showing any kind of ads. Plus, coffee keeps my headaches away while coding 😵‍💫. Thanks for your support! 🫶"
         }
       }
     }

@@ -6,6 +6,7 @@ import {
   ScrollView,
   Keyboard,
   TextInput,
+  Alert,
 } from "react-native";
 import styles from "./styles";
 import SweetSFSymbol from "sweet-sfsymbols";
@@ -54,6 +55,16 @@ function TipCal({ theme }) {
 
   const calculate = () => {
     if (price && tip && numberOfPpl) {
+      if (isNaN(price) || isNaN(tip) || isNaN(numberOfPpl)) {
+        Alert.alert(t(text("errorInValidInput")), t(text("onlyNumbers")), [
+          {
+            text: t(text("gotIt")),
+            onPress: () => null,
+            style: "default",
+          },
+        ]);
+        return;
+      }
       Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
       let priceInEn = a2e(price);
       let tipInEn = a2e(tip);

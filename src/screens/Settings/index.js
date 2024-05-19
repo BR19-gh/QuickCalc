@@ -353,7 +353,24 @@ function Settings({ theme, isThemeChanged, setIsThemeChanged, dispatch }) {
                   }
                   type="newpage"
                   onPress={() =>
-                    Communications.web("https://buymeacoffee.com/br19")
+                    Alert.alert(
+                      t(text("coffeeAlert")),
+                      t(text("coffeeAlertMsg")),
+                      [
+                        {
+                          text: t(text("ok")),
+                          onPress: () => {
+                            Communications.web("https://buymeacoffee.com/br19");
+                          },
+                          style: "default",
+                        },
+                        {
+                          text: t(text("cancel")),
+                          onPress: () => {},
+                          style: "destructive",
+                        },
+                      ]
+                    )
                   }
                 />
               </SettingsGroup>

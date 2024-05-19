@@ -11,7 +11,14 @@ import { connect } from "react-redux";
 
 import { useToast } from "react-native-toast-notifications";
 
-const Header = ({ currentTool, t, tools, dispatch }) => {
+import {
+  Menu,
+  MenuOptions,
+  MenuOption,
+  MenuTrigger,
+} from "react-native-popup-menu";
+
+const Header = ({ currentTool, t, tools, dispatch, theme }) => {
   const text = (text) => "screens.Home.CreatedTool.Header." + text;
 
   const toast = useToast();
@@ -57,51 +64,167 @@ const Header = ({ currentTool, t, tools, dispatch }) => {
 
   return (
     <View>
-      <ContextMenu
-        dropdownMenuMode={true}
-        actions={[
-          {
-            title: t(text("details")),
-            systemIcon: "info.circle",
-          },
-          {
-            title: t(text("edit")),
-            systemIcon: "square.and.pencil",
-          },
-          { title: t(text("delete")), systemIcon: "trash", destructive: true },
-        ]}
-        onPress={(e) => {
-          if (e.nativeEvent.name === t(text("details"))) {
-            Haptics.selectionAsync();
-            Alert.alert(currentTool.name, currentTool.description);
-          } else if (e.nativeEvent.name === t(text("edit"))) {
-            Haptics.selectionAsync();
-            navigation.navigate("EditTool", {
-              tool: currentTool,
-            });
-          } else if (e.nativeEvent.name === t(text("delete"))) {
-            Haptics.notificationAsync(Haptics.NotificationFeedbackType.Warning);
-            Alert.alert(
-              t(text("deleteConfirmTitle")),
-              t(text("deleteConfirmMessage"), currentTool.name),
-              [
-                {
-                  text: t(text("cancel")),
-                  style: "cancel",
-                  onPress: () => null,
-                },
-                {
-                  text: t(text("delete")),
-                  style: "destructive",
-                  onPress: () => handleDelete(currentTool.id),
-                },
-              ]
-            );
-          }
-        }}
-      >
-        <SweetSFSymbol name="ellipsis.circle" size={22} colors={["#3B82F6"]} />
-      </ContextMenu>
+      {Platform.OS === "macos" ? (
+        <Menu onSelect={(value) => alert(`Selected number: ${value}`)}>
+          <MenuTrigger
+            children={
+              <SweetSFSymbol
+                name="ellipsis.circle"
+                size={22}
+                colors={["#3B82F6"]}
+              />
+            }
+          />
+          <MenuOptions
+            customStyles={{
+              optionsWrapper: {
+                backgroundColor: "transparent",
+              },
+              optionsContainer: {
+                backgroundColor: theme === "dark" ? "#555555" : "#E9ECEF",
+              },
+            }}
+          >
+            <MenuOption
+              onSelect={() => {
+                Haptics.selectionAsync();
+                Alert.alert(currentTool.name, currentTool.description);
+              }}
+              value={1}
+            >
+              <View className="flex-row justify-between">
+                <Text
+                  style={{
+                    color: theme === "dark" ? "#fff" : "#151E26",
+                  }}
+                >
+                  {t(text("details"))}
+                </Text>
+                <SweetSFSymbol
+                  name="info.circle"
+                  size={18}
+                  colors={[theme === "dark" ? "#fff" : "#151E26"]}
+                />
+              </View>
+            </MenuOption>
+            <MenuOption
+              onSelect={() => {
+                Haptics.selectionAsync();
+                navigation.navigate("EditTool", {
+                  tool: currentTool,
+                });
+              }}
+              value={2}
+            >
+              <View className="flex-row justify-between">
+                <Text
+                  style={{
+                    color: theme === "dark" ? "#fff" : "#151E26",
+                  }}
+                >
+                  {t(text("edit"))}
+                </Text>
+                <SweetSFSymbol
+                  name="square.and.pencil"
+                  size={18}
+                  colors={[theme === "dark" ? "#fff" : "#151E26"]}
+                />
+              </View>
+            </MenuOption>
+            <MenuOption
+              onSelect={() => {
+                Haptics.notificationAsync(
+                  Haptics.NotificationFeedbackType.Warning
+                );
+                Alert.alert(
+                  t(text("deleteConfirmTitle")),
+                  t(text("deleteConfirmMessage"), currentTool.name),
+                  [
+                    {
+                      text: t(text("cancel")),
+                      style: "cancel",
+                      onPress: () => null,
+                    },
+                    {
+                      text: t(text("delete")),
+                      style: "destructive",
+                      onPress: () => handleDelete(currentTool.id),
+                    },
+                  ]
+                );
+              }}
+              value={3}
+            >
+              <View className="flex-row justify-between">
+                <Text
+                  style={{
+                    color: "red",
+                  }}
+                >
+                  {t(text("delete"))}
+                </Text>
+                <SweetSFSymbol name="trash" size={18} colors={["red"]} />
+              </View>
+            </MenuOption>
+          </MenuOptions>
+        </Menu>
+      ) : (
+        <ContextMenu
+          dropdownMenuMode={true}
+          actions={[
+            {
+              title: t(text("details")),
+              systemIcon: "info.circle",
+            },
+            {
+              title: t(text("edit")),
+              systemIcon: "square.and.pencil",
+            },
+            {
+              title: t(text("delete")),
+              systemIcon: "trash",
+              destructive: true,
+            },
+          ]}
+          onPress={(e) => {
+            if (e.nativeEvent.name === t(text("details"))) {
+              Haptics.selectionAsync();
+              Alert.alert(currentTool.name, currentTool.description);
+            } else if (e.nativeEvent.name === t(text("edit"))) {
+              Haptics.selectionAsync();
+              navigation.navigate("EditTool", {
+                tool: currentTool,
+              });
+            } else if (e.nativeEvent.name === t(text("delete"))) {
+              Haptics.notificationAsync(
+                Haptics.NotificationFeedbackType.Warning
+              );
+              Alert.alert(
+                t(text("deleteConfirmTitle")),
+                t(text("deleteConfirmMessage"), currentTool.name),
+                [
+                  {
+                    text: t(text("cancel")),
+                    style: "cancel",
+                    onPress: () => null,
+                  },
+                  {
+                    text: t(text("delete")),
+                    style: "destructive",
+                    onPress: () => handleDelete(currentTool.id),
+                  },
+                ]
+              );
+            }
+          }}
+        >
+          <SweetSFSymbol
+            name="ellipsis.circle"
+            size={22}
+            colors={["#3B82F6"]}
+          />
+        </ContextMenu>
+      )}
     </View>
   );
 };

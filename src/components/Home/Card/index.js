@@ -1,7 +1,5 @@
-import { Text, View, TouchableOpacity, Alert } from "react-native";
+import { Text, View, TouchableOpacity, Alert, Platform } from "react-native";
 import styles from "./styles";
-
-import { useState } from "react";
 
 import { LinearGradient } from "expo-linear-gradient";
 

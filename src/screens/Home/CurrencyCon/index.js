@@ -73,6 +73,20 @@ function CurrencyCon({ theme, dispatch, currResult }) {
 
   const calculate = () => {
     if (fromCurrencyValue && fromCurrency && toCurrency) {
+      if (isNaN(fromCurrencyValue)) {
+        Alert.alert(
+          t(text("errorInValidInput")),
+          t(text("onlyNumbers")),
+          [
+            {
+              text: t(text("gotIt")),
+              style: "cancel",
+            },
+          ],
+          { cancelable: false }
+        );
+        return;
+      }
       Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
 
       let refreshToast = toast.show(t(text("calculating")), {

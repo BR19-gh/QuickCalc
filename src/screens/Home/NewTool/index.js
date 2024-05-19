@@ -46,6 +46,7 @@ function NewTool({ theme, tools, dispatch }) {
     link: "CreatedTool",
     operandNum: "",
     equation: {
+      exponents: [],
       operands: [],
       operators: [],
     },
@@ -57,6 +58,15 @@ function NewTool({ theme, tools, dispatch }) {
     setNewTool({
       ...newTool,
       equation: {
+        exponents: Array(
+          Number(
+            newTool.operandNum === "1" ||
+              isNaN(newTool.operandNum) === true ||
+              newTool.operandNum === "0"
+              ? 0
+              : newTool.operandNum
+          )
+        ),
         operands: Array(
           Number(
             newTool.operandNum === "1" ||
@@ -116,15 +126,23 @@ function NewTool({ theme, tools, dispatch }) {
   });
 
   function saveNewTool(newTool) {
+    const exponents = newTool.equation.exponents;
     const operands = newTool.equation.operands;
     const operators = newTool.equation.operators;
 
+    const covertUndefinedExponents = (exponents) => {
+      for (let i = 0; i < exponents.length; i++) {
+        if (exponents[i] === undefined) {
+          exponents[i] = 1;
+        }
+      }
+      return exponents;
+    };
+
     const isValidItem = (item) => {
-      return (
-        typeof item !== "undefined" &&
-        typeof item === "string" &&
-        item.trim() !== ""
-      );
+      return typeof item !== "undefined" && isNaN(item)
+        ? item.trim() !== ""
+        : item !== 0;
     };
 
     const isValidArray = (arr, minItems) => {
@@ -135,7 +153,10 @@ function NewTool({ theme, tools, dispatch }) {
         Array.isArray(arr) && arr.length >= minItems && arr.every(isValidItem)
       );
     };
-
+    const isValidExponents = isValidArray(
+      covertUndefinedExponents(exponents),
+      2
+    );
     const isValidOperands = isValidArray(operands, 2);
     const isValidOperators = isValidArray(operators, 1);
 
@@ -147,7 +168,8 @@ function NewTool({ theme, tools, dispatch }) {
       newTool.link &&
       newTool.operandNum &&
       isValidOperands &&
-      isValidOperators
+      isValidOperators &&
+      isValidExponents
     ) {
       const oldTools = [...Object.values(tools)];
       const newTools = [newTool, ...oldTools];
@@ -169,6 +191,7 @@ function NewTool({ theme, tools, dispatch }) {
             link: "CreatedTool",
             operandNum: "",
             equation: {
+              exponents: [],
               operands: [],
               operators: [],
             },
@@ -194,6 +217,7 @@ function NewTool({ theme, tools, dispatch }) {
           link: "CreatedTool",
           operandNum: "",
           equation: {
+            exponent: [],
             operands: [],
             operators: [],
           },
@@ -600,73 +624,34 @@ function NewTool({ theme, tools, dispatch }) {
                     )
                   ),
                   (e, i) => (
-                    <View key={i} className="flex flex-row">
-                      <TextInput
-                        maxLength={20}
-                        style={{
-                          backgroundColor: isDark("#2C2C2D", "#FFFFFF"),
-                          width: newTool.operandNum > 3 ? 40 : 80,
-                          height: newTool.operandNum > 3 ? 40 : 80,
-                          fontSize: newTool.operandNum > 3 ? 7 : 18,
-                          textAlign: "center",
-                          color: isDark("#DBEAFE", "#283987"),
-                          borderRadius: newTool.operandNum > 3 ? 5 : 10,
-                        }}
-                        blurOnSubmit={false}
-                        returnKeyType={"done"}
-                        onSubmitEditing={hideKeyboard}
-                        value={newTool.equation.operands[i]}
-                        onChangeText={(value) => {
-                          const updatedOperands = [
-                            ...newTool.equation.operands,
-                          ];
-                          updatedOperands[i] = value;
-                          setNewTool({
-                            ...newTool,
-                            equation: {
-                              ...newTool.equation,
-                              operands: updatedOperands,
-                            },
-                          });
-                        }}
-                        onFocus={() => {
-                          const updatedOperands = [
-                            ...newTool.equation.operands,
-                          ];
-                          updatedOperands[i] = "";
-
-                          setNewTool({
-                            ...newTool,
-                            equation: {
-                              ...newTool.equation,
-                              operands: updatedOperands,
-                            },
-                          });
-                        }}
-                        placeholderTextColor={isDark("#DBEAFE88", "#28398755")}
-                        placeholder={t(text("operand"))}
-                        keyboardType="default"
-                      />
-                      {i < newTool.operandNum - 1 && (
+                    <View key={i} className="flex flex-row items-center">
+                      <View className="flex flex-col items-center">
                         <SelectDropdown
-                          data={["+", "-", "×", "÷"]}
+                          data={["⎔¹", "⎔²", "⎔³", "⎔⁴"]}
                           onSelect={(selectedItem, index) => {
                             Haptics.selectionAsync();
 
-                            const updatedOperators = [
-                              ...newTool.equation.operators,
+                            const updatedExponents = [
+                              ...newTool.equation.exponents,
                             ];
-                            updatedOperators[i] =
-                              selectedItem === "×"
-                                ? "*"
-                                : selectedItem === "÷"
-                                ? "/"
-                                : selectedItem;
+                            updatedExponents[i] =
+                              selectedItem === undefined
+                                ? 1
+                                : selectedItem === "⎔¹"
+                                ? 1
+                                : selectedItem === "⎔²"
+                                ? 2
+                                : selectedItem === "⎔³"
+                                ? 3
+                                : selectedItem === "⎔⁴"
+                                ? 4
+                                : 1;
+
                             setNewTool({
                               ...newTool,
                               equation: {
                                 ...newTool.equation,
-                                operators: updatedOperators,
+                                exponents: updatedExponents,
                               },
                             });
                           }}
@@ -674,13 +659,11 @@ function NewTool({ theme, tools, dispatch }) {
                             return (
                               <View
                                 style={{
-                                  margin: 10,
-                                  marginTop: newTool.operandNum > 3 ? 10 : 20,
+                                  marginBottom: 5,
                                   width: newTool.operandNum > 3 ? 26 : 47,
                                   height: newTool.operandNum > 3 ? 17 : 35,
                                   backgroundColor: isDark("#2C2C2D", "#FFFFFF"),
                                   borderRadius: newTool.operandNum > 3 ? 5 : 10,
-
                                   flexDirection: "row",
                                   justifyContent: "center",
                                   alignItems: "center",
@@ -705,7 +688,7 @@ function NewTool({ theme, tools, dispatch }) {
                                 >
                                   {selectedItem
                                     ? selectedItem
-                                    : t(text("operator"))}
+                                    : t(text("powerOf"))}
                                 </Text>
                               </View>
                             );
@@ -752,6 +735,168 @@ function NewTool({ theme, tools, dispatch }) {
                             borderRadius: newTool.operandNum > 3 ? 5 : 10,
                           }}
                         />
+                        <TextInput
+                          maxLength={20}
+                          style={{
+                            backgroundColor: isDark("#2C2C2D", "#FFFFFF"),
+                            width: newTool.operandNum > 3 ? 40 : 80,
+                            height: newTool.operandNum > 3 ? 40 : 80,
+                            fontSize: newTool.operandNum > 3 ? 7 : 18,
+                            textAlign: "center",
+                            color: isDark("#DBEAFE", "#283987"),
+                            borderRadius: newTool.operandNum > 3 ? 5 : 10,
+                          }}
+                          blurOnSubmit={false}
+                          returnKeyType={"done"}
+                          onSubmitEditing={hideKeyboard}
+                          value={newTool.equation.operands[i]}
+                          onChangeText={(value) => {
+                            const updatedOperands = [
+                              ...newTool.equation.operands,
+                            ];
+                            updatedOperands[i] = value;
+                            setNewTool({
+                              ...newTool,
+                              equation: {
+                                ...newTool.equation,
+                                operands: updatedOperands,
+                              },
+                            });
+                          }}
+                          onFocus={() => {
+                            const updatedOperands = [
+                              ...newTool.equation.operands,
+                            ];
+                            updatedOperands[i] = "";
+
+                            setNewTool({
+                              ...newTool,
+                              equation: {
+                                ...newTool.equation,
+                                operands: updatedOperands,
+                              },
+                            });
+                          }}
+                          placeholderTextColor={isDark(
+                            "#DBEAFE88",
+                            "#28398755"
+                          )}
+                          placeholder={t(text("operand"))}
+                          keyboardType="default"
+                        />
+                      </View>
+                      {i < newTool.operandNum - 1 && (
+                        <View
+                          className="flex-col"
+                          style={{
+                            marginTop: newTool.operandNum > 3 ? 20 : 40,
+                          }}
+                        >
+                          <SelectDropdown
+                            data={["+", "-", "×", "÷"]}
+                            onSelect={(selectedItem, index) => {
+                              Haptics.selectionAsync();
+
+                              const updatedOperators = [
+                                ...newTool.equation.operators,
+                              ];
+                              updatedOperators[i] =
+                                selectedItem === "×"
+                                  ? "*"
+                                  : selectedItem === "÷"
+                                  ? "/"
+                                  : selectedItem;
+                              setNewTool({
+                                ...newTool,
+                                equation: {
+                                  ...newTool.equation,
+                                  operators: updatedOperators,
+                                },
+                              });
+                            }}
+                            renderButton={(selectedItem, isOpened) => {
+                              return (
+                                <View
+                                  style={{
+                                    margin: 5,
+                                    width: newTool.operandNum > 3 ? 26 : 47,
+                                    height: newTool.operandNum > 3 ? 17 : 35,
+                                    backgroundColor: isDark(
+                                      "#2C2C2D",
+                                      "#FFFFFF"
+                                    ),
+                                    borderRadius:
+                                      newTool.operandNum > 3 ? 5 : 10,
+                                    flexDirection: "row",
+                                    justifyContent: "center",
+                                    alignItems: "center",
+                                  }}
+                                >
+                                  <Text
+                                    style={{
+                                      fontSize:
+                                        newTool.operandNum > 3
+                                          ? selectedItem
+                                            ? 10
+                                            : 4
+                                          : selectedItem
+                                          ? 20
+                                          : 8,
+                                      color: isDark("#DBEAFE", "#283987"),
+                                      flex: 1,
+                                      fontWeight: "bold",
+
+                                      textAlign: "center",
+                                    }}
+                                  >
+                                    {selectedItem
+                                      ? selectedItem
+                                      : t(text("operator"))}
+                                  </Text>
+                                </View>
+                              );
+                            }}
+                            renderItem={(item, index, isSelected) => {
+                              return (
+                                <View
+                                  style={{
+                                    width: "100%",
+                                    flexDirection: "row",
+                                    paddingHorizontal: 6,
+
+                                    paddingVertical: 8,
+                                  }}
+                                >
+                                  <Text
+                                    className="text-center"
+                                    style={{
+                                      ...{
+                                        flex: 1,
+                                        fontSize:
+                                          newTool.operandNum > 3 ? 10 : 20,
+                                        fontWeight: "bold",
+                                        color: isDark("#DBEAFE", "#283987"),
+                                        fontWeight: "200",
+                                      },
+                                      ...(isSelected && {
+                                        fontWeight: "bold",
+                                      }),
+                                    }}
+                                  >
+                                    {item}
+                                  </Text>
+                                </View>
+                              );
+                            }}
+                            showsVerticalScrollIndicator={false}
+                            dropdownStyle={{
+                              backgroundColor: isDark("#2C2C2D", "#FFFFFF"),
+                              fontSize: newTool.operandNum > 3 ? 9 : 18,
+                              color: isDark("#DBEAFE", "#283987"),
+                              borderRadius: newTool.operandNum > 3 ? 5 : 10,
+                            }}
+                          />
+                        </View>
                       )}
                     </View>
                   )
