@@ -54,7 +54,7 @@ function CreatedTool({ theme, setCurrentTool, route }) {
   const toast = useToast();
 
   const copyToClipboard = (str) => {
-    console.log(str);
+    Haptics.selectionAsync();
     toast.show(t(text("copied")), {
       placement: "top",
       type: "normal",

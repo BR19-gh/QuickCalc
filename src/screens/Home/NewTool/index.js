@@ -704,7 +704,7 @@ function NewTool({ theme, tools, dispatch }) {
                                   width: "100%",
                                   flexDirection: "row",
                                   paddingHorizontal:
-                                    newTool.operandNum > 3 ? 6 : 12,
+                                    newTool.operandNum > 3 ? 3 : 6,
 
                                   paddingVertical:
                                     newTool.operandNum > 3 ? 4 : 8,
@@ -715,8 +715,7 @@ function NewTool({ theme, tools, dispatch }) {
                                   style={{
                                     ...{
                                       flex: 1,
-                                      fontSize:
-                                        newTool.operandNum > 3 ? 10 : 20,
+                                      fontSize: newTool.operandNum > 3 ? 7 : 17,
                                       fontWeight: "bold",
                                       color: isDark("#DBEAFE", "#283987"),
                                       fontWeight: "200",

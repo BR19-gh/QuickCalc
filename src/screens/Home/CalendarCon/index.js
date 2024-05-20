@@ -57,7 +57,7 @@ function CalendarCon({ theme }) {
   const toast = useToast();
 
   const copyToClipboard = (str) => {
-    console.log(str);
+    Haptics.selectionAsync();
     toast.show(t(text("copied")), {
       placement: "top",
       type: "normal",
@@ -686,7 +686,7 @@ function CalendarCon({ theme }) {
                   toCalendarValue.day !== "" &&
                   toCalendarValue.month !== "" &&
                   toCalendarValue.year !== "" &&
-                  toCalendarValue.timeSince.days > 0
+                  toCalendarValue.timeSince.days >= 0
                     ? t(text("elapsed")) + ":  "
                     : ""}
                 </Text>
