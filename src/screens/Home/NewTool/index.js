@@ -627,7 +627,11 @@ function NewTool({ theme, tools, dispatch }) {
                     <View key={i} className="flex flex-row items-center">
                       <View className="flex flex-col items-center">
                         <SelectDropdown
-                          data={["⎔¹", "⎔²", "⎔³", "⎔⁴"]}
+                          data={
+                            lang === "ar"
+                              ? ["س¹", "س²", "س³", "س⁴"]
+                              : ["x¹", "x²", "x³", "x⁴"]
+                          }
                           onSelect={(selectedItem, index) => {
                             Haptics.selectionAsync();
 
@@ -637,13 +641,13 @@ function NewTool({ theme, tools, dispatch }) {
                             updatedExponents[i] =
                               selectedItem === undefined
                                 ? 1
-                                : selectedItem === "⎔¹"
+                                : selectedItem.includes("¹")
                                 ? 1
-                                : selectedItem === "⎔²"
+                                : selectedItem.includes("²")
                                 ? 2
-                                : selectedItem === "⎔³"
+                                : selectedItem.includes("³")
                                 ? 3
-                                : selectedItem === "⎔⁴"
+                                : selectedItem.includes("⁴")
                                 ? 4
                                 : 1;
 
@@ -660,7 +664,7 @@ function NewTool({ theme, tools, dispatch }) {
                               <View
                                 style={{
                                   marginBottom: 5,
-                                  width: newTool.operandNum > 3 ? 26 : 47,
+                                  width: newTool.operandNum > 3 ? 31 : 51,
                                   height: newTool.operandNum > 3 ? 17 : 35,
                                   backgroundColor: isDark("#2C2C2D", "#FFFFFF"),
                                   borderRadius: newTool.operandNum > 3 ? 5 : 10,
@@ -819,7 +823,7 @@ function NewTool({ theme, tools, dispatch }) {
                                 <View
                                   style={{
                                     margin: 5,
-                                    width: newTool.operandNum > 3 ? 26 : 47,
+                                    width: newTool.operandNum > 3 ? 31 : 51,
                                     height: newTool.operandNum > 3 ? 17 : 35,
                                     backgroundColor: isDark(
                                       "#2C2C2D",

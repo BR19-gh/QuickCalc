@@ -7,6 +7,7 @@ import {
   Keyboard,
   TextInput,
   Alert,
+  Clipboard,
 } from "react-native";
 import styles from "./styles";
 import SweetSFSymbol from "sweet-sfsymbols";
@@ -16,6 +17,8 @@ import { useState, useEffect } from "react";
 import { connect } from "react-redux";
 
 import { useTranslation } from "react-i18next";
+
+import { useToast } from "react-native-toast-notifications";
 
 import * as Haptics from "expo-haptics";
 
@@ -46,6 +49,18 @@ function CreatedTool({ theme, setCurrentTool, route }) {
 
   const a2e = (s) => {
     if (s) return s.replace(/[٠-٩]/g, (d) => "٠١٢٣٤٥٦٧٨٩".indexOf(d));
+  };
+
+  const toast = useToast();
+
+  const copyToClipboard = (str) => {
+    console.log(str);
+    toast.show(t(text("copied")), {
+      placement: "top",
+      type: "normal",
+      duration: 800,
+    });
+    Clipboard.setString(str);
   };
 
   const calculate = () => {
@@ -121,7 +136,7 @@ function CreatedTool({ theme, setCurrentTool, route }) {
                 <View key={index}>
                   <Text
                     className={
-                      "p-4 text-center text-2xl font-semibold" +
+                      "p-4 text-center text-xl font-semibold" +
                       isDark(" text-blue-100", " text-blue-900")
                     }
                   >
@@ -201,21 +216,36 @@ function CreatedTool({ theme, setCurrentTool, route }) {
 
           <View className="w-full flex-row flex-wrap mt-14">
             <View className="flex-row p-2">
-              <Text
-                className={
-                  "text-xl" + isDark(" text-blue-100", " text-blue-900")
-                }
-              >
-                {t(text("result"))}:{"  "}
-              </Text>
-              <Text
-                className={
-                  "text-2xl font-semibold" +
-                  isDark(" text-blue-100", " text-blue-900")
-                }
-              >
-                {toolProps.result ? toolProps.result.toFixed(2) : ""}
-              </Text>
+              <>
+                <Text
+                  className={
+                    "text-xl" + isDark(" text-blue-100", " text-blue-900")
+                  }
+                >
+                  {t(text("result"))}:{"  "}
+                </Text>
+                <Text
+                  className={
+                    "text-xl font-semibold" +
+                    isDark(" text-blue-100", " text-blue-900")
+                  }
+                >
+                  {toolProps.result ? toolProps.result.toFixed(2) : ""}
+                </Text>
+                <Text>{"   "}</Text>
+              </>
+              {(toolProps.result ? toolProps.result.toFixed(2) : "") ? (
+                <TouchableOpacity
+                  className="pt-1"
+                  onPress={() => copyToClipboard(toolProps.result.toFixed(2))}
+                >
+                  <SweetSFSymbol
+                    name="doc.on.doc"
+                    size={20}
+                    colors={[isDark("#DBEAFE", "#1E3A8A")]}
+                  />
+                </TouchableOpacity>
+              ) : null}
             </View>
           </View>
         </View>

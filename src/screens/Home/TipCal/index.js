@@ -7,6 +7,7 @@ import {
   Keyboard,
   TextInput,
   Alert,
+  Clipboard,
 } from "react-native";
 import styles from "./styles";
 import SweetSFSymbol from "sweet-sfsymbols";
@@ -16,6 +17,7 @@ import { useState, useRef } from "react";
 import { connect } from "react-redux";
 
 import { useTranslation } from "react-i18next";
+import { useToast } from "react-native-toast-notifications";
 import { lang } from "../../../helpers";
 
 import * as Haptics from "expo-haptics";
@@ -53,9 +55,21 @@ function TipCal({ theme }) {
     scrollViewRef.current?.scrollTo({ y: height, animated: true });
   }
 
+  const toast = useToast();
+
+  const copyToClipboard = (str) => {
+    console.log(str);
+    toast.show(t(text("copied")), {
+      placement: "top",
+      type: "normal",
+      duration: 800,
+    });
+    Clipboard.setString(str);
+  };
+
   const calculate = () => {
     if (price && tip && numberOfPpl) {
-      if (isNaN(price) || isNaN(tip) || isNaN(numberOfPpl)) {
+      if (isNaN(a2e(price)) || isNaN(a2e(tip)) || isNaN(a2e(numberOfPpl))) {
         Alert.alert(t(text("errorInValidInput")), t(text("onlyNumbers")), [
           {
             text: t(text("gotIt")),
@@ -108,7 +122,7 @@ function TipCal({ theme }) {
             <View>
               <Text
                 className={
-                  "text-center p-4 text-2xl font-semibold" +
+                  "text-center p-4 text-xl font-semibold" +
                   isDark(" text-blue-100", " text-blue-900")
                 }
               >
@@ -138,7 +152,7 @@ function TipCal({ theme }) {
             <View>
               <Text
                 className={
-                  "text-center p-4 text-2xl font-semibold" +
+                  "text-center p-4 text-xl font-semibold" +
                   isDark(" text-blue-100", " text-blue-900")
                 }
               >
@@ -169,7 +183,7 @@ function TipCal({ theme }) {
             <View>
               <Text
                 className={
-                  "text-center p-4 text-2xl font-semibold" +
+                  "text-center p-4 text-xl font-semibold" +
                   isDark(" text-blue-100", " text-blue-900")
                 }
               >
@@ -235,21 +249,38 @@ function TipCal({ theme }) {
 
           <View className="w-full flex-row flex-wrap">
             <View className="w-full flex-row p-2 mt-14 mb-2.5 text-left">
-              <Text
-                className={
-                  "text-xl" + isDark(" text-blue-100", " text-blue-900")
-                }
-              >
-                {t(text("tipAmount"))}
-              </Text>
-              <Text
-                className={
-                  "text-2xl font-semibold" +
-                  isDark(" text-blue-100", " text-blue-900")
-                }
-              >
-                {tipAmount}
-              </Text>
+              <>
+                <Text
+                  className={
+                    "text-xl" + isDark(" text-blue-100", " text-blue-900")
+                  }
+                >
+                  {t(text("tipAmount"))}
+                </Text>
+                <Text
+                  className={
+                    "text-xl font-semibold" +
+                    isDark(" text-blue-100", " text-blue-900")
+                  }
+                >
+                  {tipAmount !== "0" ? `${tipAmount}` : ""}
+                </Text>
+                <Text>{"   "}</Text>
+              </>
+              {tipAmount !== "0" ? (
+                <TouchableOpacity
+                  className="pt-1"
+                  onPress={() =>
+                    copyToClipboard(tipAmount !== "0" ? `${tipAmount}` : "")
+                  }
+                >
+                  <SweetSFSymbol
+                    name="doc.on.doc"
+                    size={20}
+                    colors={[isDark("#DBEAFE", "#1E3A8A")]}
+                  />
+                </TouchableOpacity>
+              ) : null}
             </View>
           </View>
         </View>

@@ -6,6 +6,8 @@ import { useState } from "react";
 
 import WalkThrough from "../screens/Welcome/WalkThrough";
 
+import { Platform } from "react-native";
+
 const Stack = createNativeStackNavigator();
 
 const SettingsNavi = ({
@@ -25,6 +27,15 @@ const SettingsNavi = ({
       ? [
           t(WalkThroughText("welcome")),
           t(WalkThroughText("homePage")),
+          t(WalkThroughText("editYourTools")),
+          t(WalkThroughText("hiddenTools")),
+          t(WalkThroughText("settingsPage")),
+        ]
+      : Platform.isPad
+      ? [
+          t(WalkThroughText("welcome")),
+          t(WalkThroughText("homePage")),
+          t(WalkThroughText("contextMenu")),
           t(WalkThroughText("editYourTools")),
           t(WalkThroughText("hiddenTools")),
           t(WalkThroughText("settingsPage")),

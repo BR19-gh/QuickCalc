@@ -91,6 +91,9 @@ function Welcome(props) {
       >
         <Text className={styles.btnText}>{t(text("btnText2"))}</Text>
       </TouchableOpacity>
+      <Text className="text-center text-gray-500 text-sm mt-5">
+        {t("screens.versionNum")}
+      </Text>
       <StatusBar style="auto" />
     </View>
   );

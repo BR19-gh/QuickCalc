@@ -303,22 +303,20 @@ function Settings({ theme, isThemeChanged, setIsThemeChanged, dispatch }) {
                         ? "اكتب عنوانا يختصر ملاحظاتك"
                         : "Write a subject that summarizes your feedback",
                       lang === "ar"
-                        ? `
-                      Model: ${DeviceInfo.getModel()}
-                      Brand: ${DeviceInfo.getBrand()}
-                      OS: ${DeviceInfo.getSystemName()} ${DeviceInfo.getSystemVersion()}
-                      App Version: 1.0.0
-                      ----------------------------------------\n
-                      ((اكتب ملاحظاتك هنا...))
-                      `
+                        ? `الجهاز: ${DeviceInfo.getModel()}
+                        الطراز: ${DeviceInfo.getBrand()}
+                        إصدار التطبيق: ${t("screens.versionNum")}
+                        ----------------------------------------\n
+                        ((اكتب ملاحظاتك هنا...))
+                        `
                         : `
-                      Model: ${DeviceInfo.getModel()}
-                      Brand: ${DeviceInfo.getBrand()}
-                      OS: ${DeviceInfo.getSystemName()} ${DeviceInfo.getSystemVersion()}
-                      App Version: 1.0.0
-                      ----------------------------------------\n
-                      ((write your feedback here...)
-                      `
+                        Model: ${DeviceInfo.getModel()}
+                        Brand: ${DeviceInfo.getBrand()}
+                        OS: ${DeviceInfo.getSystemName()} ${DeviceInfo.getSystemVersion()}
+                        App Version: ${t("screens.versionNum")}
+                        ----------------------------------------\n
+                        ((write your feedback here...)
+                        `
                     )
                   }
                 />
@@ -352,7 +350,10 @@ function Settings({ theme, isThemeChanged, setIsThemeChanged, dispatch }) {
                     </View>
                   }
                   type="newpage"
-                  onPress={() =>
+                  onPress={() => {
+                    Haptics.notificationAsync(
+                      Haptics.NotificationFeedbackType.Warning
+                    );
                     Alert.alert(
                       t(text("coffeeAlert")),
                       t(text("coffeeAlertMsg")),
@@ -370,8 +371,8 @@ function Settings({ theme, isThemeChanged, setIsThemeChanged, dispatch }) {
                           style: "destructive",
                         },
                       ]
-                    )
-                  }
+                    );
+                  }}
                 />
               </SettingsGroup>
             </View>
@@ -385,7 +386,7 @@ function Settings({ theme, isThemeChanged, setIsThemeChanged, dispatch }) {
                 />
                 <SettingsInfoDisplay
                   title={t(text("version"))}
-                  status={"1.0.0.0"}
+                  status={t("screens.versionNum")}
                   type="custom"
                 />
                 <TouchableOpacity

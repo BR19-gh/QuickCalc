@@ -559,23 +559,27 @@ function EditTool({ theme, tools, route, dispatch }) {
                     <View key={i} className="flex flex-row items-center">
                       <View className="flex flex-col items-center">
                         <SelectDropdown
-                          data={["⎔¹", "⎔²", "⎔³", "⎔⁴"]}
+                          data={
+                            lang === "ar"
+                              ? ["س¹", "س²", "س³", "س⁴"]
+                              : ["x¹", "x²", "x³", "x⁴"]
+                          }
                           onSelect={(selectedItem, index) => {
                             Haptics.selectionAsync();
 
                             const updatedExponents = [
                               ...newTool.equation.exponents,
                             ];
-                            updatedExponents[i] =
-                              selectedItem === "⎔¹"
-                                ? 1
-                                : selectedItem === "⎔²"
-                                ? 2
-                                : selectedItem === "⎔³"
-                                ? 3
-                                : selectedItem === "⎔⁴"
-                                ? 4
-                                : 1;
+                            updatedExponents[i] = selectedItem.includes("¹")
+                              ? 1
+                              : selectedItem.includes("²")
+                              ? 2
+                              : selectedItem.includes("³")
+                              ? 3
+                              : selectedItem.includes("⁴")
+                              ? 4
+                              : 1;
+
                             setNewTool({
                               ...newTool,
                               equation: {
@@ -589,7 +593,7 @@ function EditTool({ theme, tools, route, dispatch }) {
                               <View
                                 style={{
                                   marginBottom: 5,
-                                  width: newTool.operandNum > 3 ? 26 : 47,
+                                  width: newTool.operandNum > 3 ? 31 : 51,
                                   height: newTool.operandNum > 3 ? 17 : 35,
                                   backgroundColor: isDark("#2C2C2D", "#FFFFFF"),
                                   borderRadius: newTool.operandNum > 3 ? 5 : 10,
@@ -616,13 +620,21 @@ function EditTool({ theme, tools, route, dispatch }) {
                                 >
                                   {newTool.equation.exponents[i]
                                     ? newTool.equation.exponents[i] === 1
-                                      ? "⎔¹"
+                                      ? lang === "ar"
+                                        ? "س¹"
+                                        : "x¹"
                                       : newTool.equation.exponents[i] === 2
-                                      ? "⎔²"
+                                      ? lang === "ar"
+                                        ? "س²"
+                                        : "x²"
                                       : newTool.equation.exponents[i] === 3
-                                      ? "⎔³"
+                                      ? lang === "ar"
+                                        ? "س³"
+                                        : "x³"
                                       : newTool.equation.exponents[i] === 4
-                                      ? "⎔⁴"
+                                      ? lang === "ar"
+                                        ? "س⁴"
+                                        : "x⁴"
                                       : t(text("powerOf"))
                                     : t(text("powerOf"))}
                                 </Text>
@@ -755,7 +767,7 @@ function EditTool({ theme, tools, route, dispatch }) {
                                 <View
                                   style={{
                                     margin: 5,
-                                    width: newTool.operandNum > 3 ? 26 : 47,
+                                    width: newTool.operandNum > 3 ? 31 : 51,
                                     height: newTool.operandNum > 3 ? 17 : 35,
                                     backgroundColor: isDark(
                                       "#2C2C2D",

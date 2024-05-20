@@ -1,5 +1,12 @@
 import { StatusBar } from "expo-status-bar";
-import { Text, View, TouchableOpacity, ScrollView, Alert } from "react-native";
+import {
+  Text,
+  View,
+  TouchableOpacity,
+  ScrollView,
+  Alert,
+  Clipboard,
+} from "react-native";
 import styles from "./styles";
 import SweetSFSymbol from "sweet-sfsymbols";
 
@@ -25,6 +32,8 @@ import {
 import { toSolarHijri, toGregorian as toGregorianSolar } from "solarhijri-js";
 import { lang } from "../../../helpers";
 
+import { useToast } from "react-native-toast-notifications";
+
 function CalendarCon({ theme }) {
   const { t } = useTranslation();
   const text = (text) => "screens.Home.CalendarCon.text." + text;
@@ -44,6 +53,18 @@ function CalendarCon({ theme }) {
     day: "",
     timeSince: null,
   });
+
+  const toast = useToast();
+
+  const copyToClipboard = (str) => {
+    console.log(str);
+    toast.show(t(text("copied")), {
+      placement: "top",
+      type: "normal",
+      duration: 800,
+    });
+    Clipboard.setString(str);
+  };
 
   const switchCur = () => {
     const temp = fromCalendar;
@@ -545,40 +566,73 @@ function CalendarCon({ theme }) {
 
           <View className="w-full flex-row flex-wrap mt-10">
             <View className="w-full flex-row p-2 text-left">
-              <Text
-                className={
-                  "text-xl" + isDark(" text-blue-100", " text-blue-900")
-                }
-              >
-                {t(text("from"))}
-                {":  "}
-              </Text>
-              <Text
-                className={
-                  "text-xl font-semibold" +
-                  isDark(" text-blue-100", " text-blue-900")
-                }
-              >
-                {fromText}
-              </Text>
+              <>
+                <Text
+                  className={
+                    "text-xl" + isDark(" text-blue-100", " text-blue-900")
+                  }
+                >
+                  {t(text("from"))}
+                  {":  "}
+                </Text>
+                <Text
+                  className={
+                    "text-xl font-semibold" +
+                    isDark(" text-blue-100", " text-blue-900")
+                  }
+                >
+                  {fromText}
+                </Text>
+                <Text>{"   "}</Text>
+              </>
+              {fromText ? (
+                <TouchableOpacity
+                  className="pt-1"
+                  onPress={() => copyToClipboard(fromText)}
+                >
+                  <SweetSFSymbol
+                    name="doc.on.doc"
+                    size={20}
+                    colors={[isDark("#DBEAFE", "#1E3A8A")]}
+                  />
+                </TouchableOpacity>
+              ) : null}
             </View>
 
             <View className="w-full flex-row p-2 text-left">
-              <Text
-                className={
-                  "text-xl" + isDark(" text-blue-100", " text-blue-900")
-                }
-              >
-                {t(text("to"))}
-                {":  "}
-              </Text>
-              <Text
-                className={
-                  "text-xl font-semibold" +
-                  isDark(" text-blue-100", " text-blue-900")
-                }
-              >
-                {toCalendar[lang] &&
+              <>
+                <Text
+                  className={
+                    "text-xl" + isDark(" text-blue-100", " text-blue-900")
+                  }
+                >
+                  {t(text("to"))}
+                  {":  "}
+                </Text>
+                <Text
+                  className={
+                    "text-xl font-semibold" +
+                    isDark(" text-blue-100", " text-blue-900")
+                  }
+                >
+                  {toCalendar[lang] &&
+                  toCalendarValue.day !== "" &&
+                  toCalendarValue.month !== "" &&
+                  toCalendarValue.year !== ""
+                    ? `${toCalendarValue.day} ${t(
+                        text(
+                          "monthsName." +
+                            toCalendar.value +
+                            "." +
+                            toCalendarValue.month
+                        )
+                      )} ${toCalendarValue.year} ${toCalendar["short"][lang]}`
+                    : ""}
+                </Text>
+                <Text>{"   "}</Text>
+              </>
+              {(
+                toCalendar[lang] &&
                 toCalendarValue.day !== "" &&
                 toCalendarValue.month !== "" &&
                 toCalendarValue.year !== ""
@@ -590,30 +644,92 @@ function CalendarCon({ theme }) {
                           toCalendarValue.month
                       )
                     )} ${toCalendarValue.year} ${toCalendar["short"][lang]}`
-                  : ""}
-              </Text>
+                  : ""
+              ) ? (
+                <TouchableOpacity
+                  className="pt-1"
+                  onPress={() =>
+                    copyToClipboard(
+                      toCalendarValue.day +
+                        " " +
+                        t(
+                          text(
+                            "monthsName." +
+                              toCalendar.value +
+                              "." +
+                              toCalendarValue.month
+                          )
+                        ) +
+                        " " +
+                        toCalendarValue.year +
+                        " " +
+                        toCalendar["short"][lang]
+                    )
+                  }
+                >
+                  <SweetSFSymbol
+                    name="doc.on.doc"
+                    size={20}
+                    colors={[isDark("#DBEAFE", "#1E3A8A")]}
+                  />
+                </TouchableOpacity>
+              ) : null}
             </View>
             <View className="w-full flex-row p-2 text-left">
-              <Text
-                className={
-                  "text-xl" + isDark(" text-blue-100", " text-blue-900")
-                }
-              >
-                {toCalendar[lang] &&
-                toCalendarValue.day !== "" &&
-                toCalendarValue.month !== "" &&
-                toCalendarValue.year !== "" &&
-                toCalendarValue.timeSince.days > 0
-                  ? t(text("elapsed")) + ":  "
-                  : ""}
-              </Text>
-              <Text
-                className={
-                  "text-xl font-semibold" +
-                  isDark(" text-blue-100", " text-blue-900")
-                }
-              >
-                {toCalendarValue.timeSince !== null
+              <>
+                <Text
+                  className={
+                    "text-xl" + isDark(" text-blue-100", " text-blue-900")
+                  }
+                >
+                  {toCalendar[lang] &&
+                  toCalendarValue.day !== "" &&
+                  toCalendarValue.month !== "" &&
+                  toCalendarValue.year !== "" &&
+                  toCalendarValue.timeSince.days > 0
+                    ? t(text("elapsed")) + ":  "
+                    : ""}
+                </Text>
+                <Text
+                  className={
+                    "text-xl font-semibold" +
+                    isDark(" text-blue-100", " text-blue-900")
+                  }
+                >
+                  {toCalendarValue.timeSince !== null
+                    ? `${
+                        toCalendarValue.timeSince.years > 0
+                          ? toCalendarValue.timeSince.years +
+                            " " +
+                            (toCalendarValue.timeSince.years === 1
+                              ? t(text("1year"))
+                              : t(text("years")))
+                          : ""
+                      }${
+                        toCalendarValue.timeSince.months > 0
+                          ? " " +
+                            toCalendarValue.timeSince.months +
+                            " " +
+                            (toCalendarValue.timeSince.months === 1
+                              ? t(text("1month"))
+                              : t(text("months")))
+                          : ""
+                      }${
+                        toCalendarValue.timeSince.days > 0
+                          ? " " +
+                            toCalendarValue.timeSince.days +
+                            " " +
+                            (toCalendarValue.timeSince.days === 1
+                              ? t(text("1day"))
+                              : t(text("days")))
+                          : ""
+                      }`
+                    : ""}
+                </Text>
+                <Text>{"   "}</Text>
+              </>
+              {(
+                toCalendarValue.timeSince !== null
                   ? `${
                       toCalendarValue.timeSince.years > 0
                         ? toCalendarValue.timeSince.years +
@@ -641,8 +757,51 @@ function CalendarCon({ theme }) {
                             : t(text("days")))
                         : ""
                     }`
-                  : ""}
-              </Text>
+                  : ""
+              ) ? (
+                <TouchableOpacity
+                  className="pt-1"
+                  onPress={() =>
+                    copyToClipboard(
+                      toCalendarValue.timeSince !== null
+                        ? `${
+                            toCalendarValue.timeSince.years > 0
+                              ? toCalendarValue.timeSince.years +
+                                " " +
+                                (toCalendarValue.timeSince.years === 1
+                                  ? t(text("1year"))
+                                  : t(text("years")))
+                              : ""
+                          }${
+                            toCalendarValue.timeSince.months > 0
+                              ? " " +
+                                toCalendarValue.timeSince.months +
+                                " " +
+                                (toCalendarValue.timeSince.months === 1
+                                  ? t(text("1month"))
+                                  : t(text("months")))
+                              : ""
+                          }${
+                            toCalendarValue.timeSince.days > 0
+                              ? " " +
+                                toCalendarValue.timeSince.days +
+                                " " +
+                                (toCalendarValue.timeSince.days === 1
+                                  ? t(text("1day"))
+                                  : t(text("days")))
+                              : ""
+                          }`
+                        : ""
+                    )
+                  }
+                >
+                  <SweetSFSymbol
+                    name="doc.on.doc"
+                    size={20}
+                    colors={[isDark("#DBEAFE", "#1E3A8A")]}
+                  />
+                </TouchableOpacity>
+              ) : null}
             </View>
           </View>
         </View>

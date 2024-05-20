@@ -1,5 +1,11 @@
 import { StatusBar } from "expo-status-bar";
-import { View, TouchableOpacity, SafeAreaView, Text } from "react-native";
+import {
+  View,
+  TouchableOpacity,
+  SafeAreaView,
+  Text,
+  Platform,
+} from "react-native";
 import SweetSFSymbol from "sweet-sfsymbols";
 import { useState, useEffect } from "react";
 import { lang } from "../../../helpers";
@@ -23,6 +29,15 @@ function WalkThrough(props) {
             require(`../../../../walkthro_ar/hidden.png`),
             require(`../../../../walkthro_ar/settings.png`),
           ]
+        : Platform.isPad
+        ? [
+            require(`../../../../walkthro_ar/welcome.png`),
+            require(`../../../../walkthro_ar/home.png`),
+            require(`../../../../walkthro_ar/home_menu.png`),
+            require(`../../../../walkthro_ar/edit.gif`),
+            require(`../../../../walkthro_ar/hidden.png`),
+            require(`../../../../walkthro_ar/settings.png`),
+          ]
         : [
             require(`../../../../walkthro_ar/welcome.png`),
             require(`../../../../walkthro_ar/home.png`),
@@ -36,6 +51,15 @@ function WalkThrough(props) {
       ? [
           require(`../../../../walkthro_en/welcome.png`),
           require(`../../../../walkthro_en/home.png`),
+          require(`../../../../walkthro_en/edit.gif`),
+          require(`../../../../walkthro_en/hidden.png`),
+          require(`../../../../walkthro_en/settings.png`),
+        ]
+      : Platform.isPad
+      ? [
+          require(`../../../../walkthro_en/welcome.png`),
+          require(`../../../../walkthro_en/home.png`),
+          require(`../../../../walkthro_en/home_menu.png`),
           require(`../../../../walkthro_en/edit.gif`),
           require(`../../../../walkthro_en/hidden.png`),
           require(`../../../../walkthro_en/settings.png`),

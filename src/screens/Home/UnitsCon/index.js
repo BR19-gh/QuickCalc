@@ -8,6 +8,7 @@ import {
   TextInput,
   StyleSheet,
   Alert,
+  Clipboard,
 } from "react-native";
 import styles from "./styles";
 import SweetSFSymbol from "sweet-sfsymbols";
@@ -78,9 +79,19 @@ function UnitsCon({ theme, dispatch, unitResult }) {
 
   const toast = useToast();
 
+  const copyToClipboard = (str) => {
+    console.log(str);
+    toast.show(t(text("copied")), {
+      placement: "top",
+      type: "normal",
+      duration: 800,
+    });
+    Clipboard.setString(str);
+  };
+
   const calculate = () => {
     if (fromUnitValue && fromUnit && toUnit) {
-      if (isNaN(fromUnitValue)) {
+      if (isNaN(a2e(fromUnitValue))) {
         Alert.alert(
           t(text("errorInValidInput")),
           t(text("onlyNumbers")),
@@ -355,46 +366,84 @@ function UnitsCon({ theme, dispatch, unitResult }) {
 
           <View className="w-full flex-row flex-wrap mt-10">
             <View className="w-full flex-row p-2 text-left">
-              <Text
-                className={
-                  "text-xl" + isDark(" text-blue-100", " text-blue-900")
-                }
-              >
-                {t(text("from"))}
-                {":  "}
-              </Text>
-              <Text
-                className={
-                  "text-2xl font-semibold" +
-                  isDark(" text-blue-100", " text-blue-900")
-                }
-              >
-                {(unitResult["from-value"] ? unitResult["from-value"] : "") +
-                  " " +
-                  (unitResult["from-type"] ? fromUnit[lang] : "")}
-              </Text>
+              <>
+                <Text
+                  className={
+                    "text-xl" + isDark(" text-blue-100", " text-blue-900")
+                  }
+                >
+                  {t(text("from"))}
+                  {":  "}
+                </Text>
+                <Text
+                  className={
+                    "text-2xl font-semibold" +
+                    isDark(" text-blue-100", " text-blue-900")
+                  }
+                >
+                  {(unitResult["from-value"] ? unitResult["from-value"] : "") +
+                    " " +
+                    (unitResult["from-type"] ? fromUnit[lang] : "")}
+                </Text>
+                <Text>{"   "}</Text>
+              </>
+              {unitResult["from-value"] ? (
+                <TouchableOpacity
+                  className="pt-1"
+                  onPress={() =>
+                    copyToClipboard(
+                      unitResult["from-value"] + " " + fromUnit[lang]
+                    )
+                  }
+                >
+                  <SweetSFSymbol
+                    name="doc.on.doc"
+                    size={20}
+                    colors={[isDark("#DBEAFE", "#1E3A8A")]}
+                  />
+                </TouchableOpacity>
+              ) : null}
             </View>
             <View className="w-full flex-row p-2 text-left">
-              <Text
-                className={
-                  "text-xl" + isDark(" text-blue-100", " text-blue-900")
-                }
-              >
-                {t(text("to"))}
-                {":  "}
-              </Text>
-              <Text
-                className={
-                  "text-2xl font-semibold" +
-                  isDark(" text-blue-100", " text-blue-900")
-                }
-              >
-                {(unitResult.result
-                  ? Number(unitResult.result).toFixed(4)
-                  : "") +
-                  " " +
-                  (unitResult["to-type"] ? toUnit[lang] : "")}
-              </Text>
+              <>
+                <Text
+                  className={
+                    "text-xl" + isDark(" text-blue-100", " text-blue-900")
+                  }
+                >
+                  {t(text("to"))}
+                  {":  "}
+                </Text>
+                <Text
+                  className={
+                    "text-2xl font-semibold" +
+                    isDark(" text-blue-100", " text-blue-900")
+                  }
+                >
+                  {(unitResult.result
+                    ? Number(unitResult.result).toFixed(4)
+                    : "") +
+                    " " +
+                    (unitResult["to-type"] ? toUnit[lang] : "")}
+                </Text>
+                <Text>{"   "}</Text>
+              </>
+              {unitResult.result ? (
+                <TouchableOpacity
+                  className="pt-1"
+                  onPress={() =>
+                    copyToClipboard(
+                      Number(unitResult.result).toFixed(4) + " " + toUnit[lang]
+                    )
+                  }
+                >
+                  <SweetSFSymbol
+                    name="doc.on.doc"
+                    size={20}
+                    colors={[isDark("#DBEAFE", "#1E3A8A")]}
+                  />
+                </TouchableOpacity>
+              ) : null}
             </View>
           </View>
         </View>

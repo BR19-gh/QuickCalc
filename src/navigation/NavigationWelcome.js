@@ -2,6 +2,8 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { useEffect, useState } from "react";
 
+import { Platform } from "react-native";
+
 import WalkThrough from "../screens/Welcome/WalkThrough";
 import Welcome from "../screens/Welcome";
 
@@ -31,6 +33,15 @@ const Navigation = ({
       ? [
           t(WalkThroughText("welcome")),
           t(WalkThroughText("homePage")),
+          t(WalkThroughText("editYourTools")),
+          t(WalkThroughText("hiddenTools")),
+          t(WalkThroughText("settingsPage")),
+        ]
+      : Platform.isPad
+      ? [
+          t(WalkThroughText("welcome")),
+          t(WalkThroughText("homePage")),
+          t(WalkThroughText("contextMenu")),
           t(WalkThroughText("editYourTools")),
           t(WalkThroughText("hiddenTools")),
           t(WalkThroughText("settingsPage")),

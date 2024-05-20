@@ -7,6 +7,7 @@ import {
   Keyboard,
   TextInput,
   Alert,
+  Clipboard,
 } from "react-native";
 import styles from "./styles";
 import SweetSFSymbol from "sweet-sfsymbols";
@@ -71,9 +72,19 @@ function CurrencyCon({ theme, dispatch, currResult }) {
 
   const toast = useToast();
 
+  const copyToClipboard = (str) => {
+    console.log(str);
+    toast.show(t(text("copied")), {
+      placement: "top",
+      type: "normal",
+      duration: 800,
+    });
+    Clipboard.setString(str);
+  };
+
   const calculate = () => {
     if (fromCurrencyValue && fromCurrency && toCurrency) {
-      if (isNaN(fromCurrencyValue)) {
+      if (isNaN(a2e(fromCurrencyValue))) {
         Alert.alert(
           t(text("errorInValidInput")),
           t(text("onlyNumbers")),
@@ -254,46 +265,86 @@ function CurrencyCon({ theme, dispatch, currResult }) {
 
           <View className="w-full flex-row flex-wrap mt-10">
             <View className="w-full flex-row p-2 text-left">
-              <Text
-                className={
-                  "text-xl" + isDark(" text-blue-100", " text-blue-900")
-                }
-              >
-                {t(text("from"))}
-                {":  "}
-              </Text>
-              <Text
-                className={
-                  "text-2xl font-semibold" +
-                  isDark(" text-blue-100", " text-blue-900")
-                }
-              >
-                {(currResult["from-value"] ? currResult["from-value"] : "") +
-                  " " +
-                  (currResult["from-type"] ? currResult["from-type"] : "")}
-              </Text>
+              <>
+                <Text
+                  className={
+                    "text-xl" + isDark(" text-blue-100", " text-blue-900")
+                  }
+                >
+                  {t(text("from"))}
+                  {":  "}
+                </Text>
+                <Text
+                  className={
+                    "text-xl font-semibold" +
+                    isDark(" text-blue-100", " text-blue-900")
+                  }
+                >
+                  {(currResult["from-value"] ? currResult["from-value"] : "") +
+                    " " +
+                    (currResult["from-type"] ? currResult["from-type"] : "")}
+                </Text>
+                <Text>{"   "}</Text>
+              </>
+              {(currResult["from-value"] ? currResult["from-value"] : "") ? (
+                <TouchableOpacity
+                  className="pt-1"
+                  onPress={() =>
+                    copyToClipboard(
+                      currResult["from-value"] + " " + currResult["from-type"]
+                    )
+                  }
+                >
+                  <SweetSFSymbol
+                    name="doc.on.doc"
+                    size={20}
+                    colors={[isDark("#DBEAFE", "#1E3A8A")]}
+                  />
+                </TouchableOpacity>
+              ) : null}
             </View>
             <View className="w-full flex-row p-2 text-left">
-              <Text
-                className={
-                  "text-xl" + isDark(" text-blue-100", " text-blue-900")
-                }
-              >
-                {t(text("to"))}
-                {":  "}
-              </Text>
-              <Text
-                className={
-                  "text-2xl font-semibold" +
-                  isDark(" text-blue-100", " text-blue-900")
-                }
-              >
-                {(currResult.result
-                  ? Number(currResult.result).toFixed(4)
-                  : "") +
-                  " " +
-                  (currResult["to-type"] ? currResult["to-type"] : "")}
-              </Text>
+              <>
+                <Text
+                  className={
+                    "text-xl" + isDark(" text-blue-100", " text-blue-900")
+                  }
+                >
+                  {t(text("to"))}
+                  {":  "}
+                </Text>
+                <Text
+                  className={
+                    "text-xl font-semibold" +
+                    isDark(" text-blue-100", " text-blue-900")
+                  }
+                >
+                  {(currResult.result
+                    ? Number(currResult.result).toFixed(4)
+                    : "") +
+                    " " +
+                    (currResult["to-type"] ? currResult["to-type"] : "")}
+                </Text>
+                <Text>{"   "}</Text>
+              </>
+              {currResult.result ? (
+                <TouchableOpacity
+                  className="pt-1"
+                  onPress={() =>
+                    copyToClipboard(
+                      Number(currResult.result).toFixed(4) +
+                        " " +
+                        currResult["to-type"]
+                    )
+                  }
+                >
+                  <SweetSFSymbol
+                    name="doc.on.doc"
+                    size={20}
+                    colors={[isDark("#DBEAFE", "#1E3A8A")]}
+                  />
+                </TouchableOpacity>
+              ) : null}
             </View>
           </View>
         </View>

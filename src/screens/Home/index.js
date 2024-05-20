@@ -133,6 +133,130 @@ function Home(props) {
             text={text}
             moving={props.moving}
           />
+        ) : Platform.isPad ? (
+          <ContextMenu
+            dropdownMenuMode={false}
+            actions={
+              props.isShowedFavorite
+                ? [
+                    {
+                      title: tool.isFavorite
+                        ? t(text("unfavorite2"))
+                        : t(text("favorite")),
+                      systemIcon: tool.isFavorite ? "star.slash" : "star",
+                    },
+                    { title: t(text("hide")), systemIcon: "eye.slash" },
+                  ]
+                : [
+                    {
+                      title: tool.isFavorite
+                        ? t(text("unfavorite2"))
+                        : t(text("favorite")),
+                      systemIcon: tool.isFavorite ? "star.slash" : "star",
+                    },
+                    { title: t(text("hide")), systemIcon: "eye.slash" },
+                    {
+                      title: t(text("move")),
+                      systemIcon: "arrow.up.and.down.and.arrow.left.and.right",
+                    },
+                  ]
+            }
+            onPress={(e) => {
+              if (
+                e.nativeEvent.name === t(text("favorite")) ||
+                e.nativeEvent.name === t(text("unfavorite2"))
+              ) {
+                handleFavorite(tool.id);
+                if (tool.isFavorite) {
+                  Haptics.notificationAsync(
+                    Haptics.NotificationFeedbackType.Success
+                  );
+                  toast.show(t(text("toolHasbeenFavored")), {
+                    type: "success",
+                    placement: "top",
+                    duration: 1000,
+                    offset: 20,
+                    animationType: "zoom-in",
+                  });
+                } else if (!tool.isFavorite) {
+                  Haptics.notificationAsync(
+                    Haptics.NotificationFeedbackType.Success
+                  );
+                  toast.show(t(text("toolHasbeenUnFavored")), {
+                    type: "success",
+                    placement: "top",
+                    duration: 1000,
+                    offset: 20,
+                    animationType: "zoom-in",
+                  });
+                } else {
+                  Haptics.notificationAsync(
+                    Haptics.NotificationFeedbackType.Error
+                  );
+                  toast.show(t(text("errorFavoriting")), {
+                    type: "warning",
+                    placement: "top",
+                    duration: 4000,
+                    offset: 20,
+                    animationType: "zoom-in",
+                  });
+                }
+              } else if (e.nativeEvent.name === t(text("hide"))) {
+                changeVis(tool.id);
+                if (tool.isHidden) {
+                  Haptics.notificationAsync(
+                    Haptics.NotificationFeedbackType.Success
+                  );
+                  toast.show(t(text("toolHasBeenHidden")), {
+                    type: "success",
+                    placement: "top",
+                    duration: 1000,
+                    offset: 20,
+                    animationType: "zoom-in",
+                  });
+                } else {
+                  Haptics.notificationAsync(
+                    Haptics.NotificationFeedbackType.Error
+                  );
+                  toast.show(t(text("errorHiding")), {
+                    type: "warning",
+                    placement: "top",
+                    duration: 4000,
+                    offset: 20,
+                    animationType: "zoom-in",
+                  });
+                }
+              } else if (e.nativeEvent.name === t(text("move"))) {
+                if (props.isShowedFavorite) {
+                  null;
+                } else {
+                  props.setIsEditing(true);
+                  props.setSearchText("");
+                  props.searchBarRef.current.clearText();
+                  props.searchBarRef.current.blur();
+                  props.setMoving(true);
+                }
+              }
+            }}
+          >
+            <Card
+              isEditingFavorite={props.isEditingFavorite}
+              handleFavorite={handleFavorite}
+              isShowedFavorite={props.isShowedFavorite}
+              theme={props.theme}
+              lang={lang}
+              tool={tool}
+              key={tool.id}
+              changeVis={changeVis}
+              navigation={navigation}
+              isEditing={props.isEditing}
+              drag={drag}
+              isActive={isActive}
+              t={t}
+              text={text}
+              moving={props.moving}
+            />
+          </ContextMenu>
         ) : (
           <SwipeableRow
             index={getIndex()}

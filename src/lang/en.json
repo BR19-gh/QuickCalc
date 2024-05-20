@@ -1,6 +1,7 @@
 {
   "translation": {
     "screens": {
+      "versionNum": "1.0.0",
       "Welcome": {
         "title": null,
         "text": {
@@ -108,7 +109,8 @@
             "reset": "Reset",
             "result": "Result",
             "errorInValidInput": "Invalid Inputs",
-            "onlyNumbers": "Please enter numbers only"
+            "onlyNumbers": "Please enter numbers only",
+            "copied": "Copied!"
           },
           "Header": {
             "edit": "Edit",
@@ -135,7 +137,8 @@
             "reset": "Reset",
             "errorInValidInput": "Invalid Inputs",
             "onlyNumbers": "Please enter numbers only",
-            "gotIt": "Got it"
+            "gotIt": "Got it",
+            "copied": "Copied!"
           }
         },
         "TipCal": {
@@ -151,7 +154,8 @@
             "reset": "Reset",
             "errorInValidInput": "Invalid Inputs",
             "onlyNumbers": "Please enter numbers only",
-            "gotIt": "Got it"
+            "gotIt": "Got it",
+            "copied": "Copied!"
           }
         },
         "CurrencyCon": {
@@ -174,7 +178,8 @@
             "calculating": "Calculating...",
             "done": "Done!",
             "errorInValidInput": "Invalid Inputs",
-            "onlyNumbers": "Please enter numbers only"
+            "onlyNumbers": "Please enter numbers only",
+            "copied": "Copied!"
           }
         },
         "UnitsCon": {
@@ -199,7 +204,8 @@
             "calculating": "Calculating...",
             "done": "Done!",
             "errorInValidInput": "Invalid Inputs",
-            "onlyNumbers": "Please enter numbers only"
+            "onlyNumbers": "Please enter numbers only",
+            "copied": "Copied!"
           }
         },
         "CalendarCon": {
@@ -227,6 +233,7 @@
             "errorCalculating": "An error occurred while convertion",
             "errorInvalidIslamicDate": "Islamic date entered is invalid. Try decrementing the day",
             "pleaseShareError": "Please share this error with the developer, contact information in the settings.",
+            "copied": "Copied!",
             "elapsed": "Elapsed",
             "days": "days",
             "1day": "day",

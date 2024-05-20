@@ -7,6 +7,7 @@ import {
   Keyboard,
   TextInput,
   Alert,
+  Clipboard,
 } from "react-native";
 import styles from "./styles";
 import SweetSFSymbol from "sweet-sfsymbols";
@@ -16,6 +17,8 @@ import { useState } from "react";
 import { connect } from "react-redux";
 
 import { useTranslation } from "react-i18next";
+
+import { useToast } from "react-native-toast-notifications";
 
 import { useRef } from "react";
 
@@ -45,9 +48,21 @@ function DiscountCal(props) {
     if (s) return s.replace(/[٠-٩]/g, (d) => "٠١٢٣٤٥٦٧٨٩".indexOf(d));
   };
 
+  const toast = useToast();
+
+  const copyToClipboard = (str) => {
+    console.log(str);
+    toast.show(t(text("copied")), {
+      placement: "top",
+      type: "normal",
+      duration: 800,
+    });
+    Clipboard.setString(str);
+  };
+
   const calculate = () => {
     if (price && discount) {
-      if (isNaN(price) || isNaN(discount)) {
+      if (isNaN(a2e(price)) || isNaN(a2e(discount))) {
         Alert.alert(
           t(text("errorInValidInput")),
           t(text("onlyNumbers")),
@@ -195,38 +210,74 @@ function DiscountCal(props) {
 
           <View className="w-full flex-row flex-wrap mt-14">
             <View className="w-full flex-row p-2 text-left">
-              <Text
-                className={
-                  "text-xl" + isDark(" text-blue-100", " text-blue-900")
-                }
-              >
-                {t(text("priceAfter"))}
-              </Text>
-              <Text
-                className={
-                  "text-2xl font-semibold" +
-                  isDark(" text-blue-100", " text-blue-900")
-                }
-              >
-                {priceAfter}
-              </Text>
+              <>
+                <Text
+                  className={
+                    "text-xl" + isDark(" text-blue-100", " text-blue-900")
+                  }
+                >
+                  {t(text("priceAfter"))}
+                </Text>
+                <Text
+                  className={
+                    "text-xl font-semibold" +
+                    isDark(" text-blue-100", " text-blue-900")
+                  }
+                >
+                  {priceAfter !== "0" ? priceAfter : ""}
+                </Text>
+                <Text>{"   "}</Text>
+              </>
+              {priceAfter !== "0" ? (
+                <TouchableOpacity
+                  className="pt-1"
+                  onPress={() =>
+                    copyToClipboard(priceAfter !== "0" ? `${priceAfter}` : "")
+                  }
+                >
+                  <SweetSFSymbol
+                    name="doc.on.doc"
+                    size={20}
+                    colors={[isDark("#DBEAFE", "#1E3A8A")]}
+                  />
+                </TouchableOpacity>
+              ) : null}
             </View>
             <View className="flex-row p-2">
-              <Text
-                className={
-                  "text-xl" + isDark(" text-blue-100", " text-blue-900")
-                }
-              >
-                {t(text("discountAmount"))}
-              </Text>
-              <Text
-                className={
-                  "text-2xl font-semibold" +
-                  isDark(" text-blue-100", " text-blue-900")
-                }
-              >
-                {discountAmount}
-              </Text>
+              <>
+                <Text
+                  className={
+                    "text-xl" + isDark(" text-blue-100", " text-blue-900")
+                  }
+                >
+                  {t(text("discountAmount"))}
+                </Text>
+                <Text
+                  className={
+                    "text-xl font-semibold" +
+                    isDark(" text-blue-100", " text-blue-900")
+                  }
+                >
+                  {discountAmount !== "0" ? `${discountAmount}` : ""}
+                </Text>
+                <Text>{"   "}</Text>
+              </>
+              {discountAmount !== "0" ? (
+                <TouchableOpacity
+                  className="pt-1"
+                  onPress={() =>
+                    copyToClipboard(
+                      discountAmount !== "0" ? discountAmount : ""
+                    )
+                  }
+                >
+                  <SweetSFSymbol
+                    name="doc.on.doc"
+                    size={20}
+                    colors={[isDark("#DBEAFE", "#1E3A8A")]}
+                  />
+                </TouchableOpacity>
+              ) : null}
             </View>
           </View>
         </View>

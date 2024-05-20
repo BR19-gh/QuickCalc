@@ -1,6 +1,5 @@
-import { Text, View, TouchableOpacity, Alert } from "react-native";
+import { Text, View, Platform, Alert } from "react-native";
 import SweetSFSymbol from "sweet-sfsymbols";
-import { lang } from "../../../../helpers";
 import * as Haptics from "expo-haptics";
 import { useNavigation } from "@react-navigation/native";
 import ContextMenu from "react-native-context-menu-view";
