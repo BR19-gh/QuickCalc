@@ -17,7 +17,7 @@
       "ar": "src/lang/ar.json"
     },
     "ios": {
-      "buildNumber": "2.0.0",
+      "buildNumber": "2.0.5",
       "supportsTablet": true,
       "infoPlist": {
         "CFBundleAllowMixedLocalizations": true,
