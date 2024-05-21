@@ -5,7 +5,7 @@
 ## Overview
 
 iOS app built using React Native, Redux and Expo, it gathers simple tools for your daily calcuations, you can also create your own tools.
-
+To install the app in App store, follow [this link](https://apps.apple.com/sa/app/quickcalc/id6502615780?l=ar)
 ## Installation
 
 1. Clone the repository to your local machine:
