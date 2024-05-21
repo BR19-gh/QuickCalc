@@ -267,7 +267,7 @@ function DiscountCal(props) {
                   className="pt-1"
                   onPress={() =>
                     copyToClipboard(
-                      discountAmount !== "0" ? discountAmount : ""
+                      discountAmount !== "0" ? `${discountAmount}` : ""
                     )
                   }
                 >
