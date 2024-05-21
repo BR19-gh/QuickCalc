@@ -715,7 +715,8 @@ function NewTool({ theme, tools, dispatch }) {
                                   style={{
                                     ...{
                                       flex: 1,
-                                      fontSize: newTool.operandNum > 3 ? 7 : 17,
+                                      fontSize:
+                                        newTool.operandNum > 3 ? 10 : 17,
                                       fontWeight: "bold",
                                       color: isDark("#DBEAFE", "#283987"),
                                       fontWeight: "200",
