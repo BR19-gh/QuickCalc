@@ -24,6 +24,8 @@ import * as Haptics from "expo-haptics";
 
 import { Parser } from "expr-eval";
 
+import * as StoreReview from "expo-store-review";
+
 function CreatedTool({ theme, setCurrentTool, route }) {
   const { t } = useTranslation();
   const text = (text) => "screens.Home.CreatedTool.text." + text;
@@ -61,6 +63,9 @@ function CreatedTool({ theme, setCurrentTool, route }) {
       duration: 800,
     });
     Clipboard.setString(str);
+    setTimeout(() => {
+      StoreReview.requestReview();
+    }, 800);
   };
 
   const calculate = () => {

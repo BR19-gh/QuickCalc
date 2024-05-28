@@ -28,33 +28,23 @@ const Navigation = ({
 
   const WalkThroughText = (text) => "screens.Welcome.text." + text;
 
-  let titles =
-    Platform.OS === "macos"
-      ? [
-          t(WalkThroughText("welcome")),
-          t(WalkThroughText("homePage")),
-          t(WalkThroughText("editYourTools")),
-          t(WalkThroughText("hiddenTools")),
-          t(WalkThroughText("settingsPage")),
-        ]
-      : Platform.isPad
-      ? [
-          t(WalkThroughText("welcome")),
-          t(WalkThroughText("homePage")),
-          t(WalkThroughText("contextMenu")),
-          t(WalkThroughText("editYourTools")),
-          t(WalkThroughText("hiddenTools")),
-          t(WalkThroughText("settingsPage")),
-        ]
-      : [
-          t(WalkThroughText("welcome")),
-          t(WalkThroughText("homePage")),
-          t(WalkThroughText("contextMenu")),
-          t(WalkThroughText("editYourTools")),
-          t(WalkThroughText("hiddenTools")),
-          t(WalkThroughText("swipeAction")),
-          t(WalkThroughText("settingsPage")),
-        ];
+  let titles = Platform.isPad
+    ? [
+        t(WalkThroughText("welcome")),
+        t(WalkThroughText("homePage")),
+        t(WalkThroughText("editYourTools")),
+        t(WalkThroughText("hiddenTools")),
+        t(WalkThroughText("settingsPage")),
+      ]
+    : [
+        t(WalkThroughText("welcome")),
+        t(WalkThroughText("homePage")),
+        t(WalkThroughText("contextMenu")),
+        t(WalkThroughText("editYourTools")),
+        t(WalkThroughText("hiddenTools")),
+        t(WalkThroughText("swipeAction")),
+        t(WalkThroughText("settingsPage")),
+      ];
 
   useEffect(() => {
     const getTheme = async () => {
@@ -100,7 +90,11 @@ const Navigation = ({
           }}
           name="WalkThrough"
           children={() => (
-            <WalkThrough setCurrentTitles={setCurrentTitles} theme={theme} />
+            <WalkThrough
+              isFirstTimeLaunch={true}
+              setCurrentTitles={setCurrentTitles}
+              theme={theme}
+            />
           )}
         />
       </Stack.Navigator>

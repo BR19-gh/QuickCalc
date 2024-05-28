@@ -28,6 +28,9 @@ import * as Haptics from "expo-haptics";
 
 import { useToast } from "react-native-toast-notifications";
 import { useNetInfo } from "@react-native-community/netinfo";
+import { useNavigation } from "@react-navigation/native";
+
+import * as StoreReview from "expo-store-review";
 
 function CurrencyCon({ theme, dispatch, currResult }) {
   const { t } = useTranslation();
@@ -38,6 +41,7 @@ function CurrencyCon({ theme, dispatch, currResult }) {
   const [fromCurrencyValue, setFromCurrencyValue] = useState("");
   const [toCurrencyValue, setToCurrencyValue] = useState("");
   const netInfo = useNetInfo();
+  const navigation = useNavigation();
   useEffect(() => {
     if (netInfo.isConnected === false) {
       Alert.alert(
@@ -48,6 +52,7 @@ function CurrencyCon({ theme, dispatch, currResult }) {
             text: t(text("gotIt")),
             onPress: () => null,
             style: "default",
+            onPress: () => navigation.goBack(),
           },
         ]
       );
@@ -80,6 +85,9 @@ function CurrencyCon({ theme, dispatch, currResult }) {
       duration: 800,
     });
     Clipboard.setString(str);
+    setTimeout(() => {
+      StoreReview.requestReview();
+    }, 800);
   };
 
   const calculate = () => {
@@ -110,12 +118,13 @@ function CurrencyCon({ theme, dispatch, currResult }) {
           (fromValue = a2e(fromCurrencyValue)),
           (fromType = fromCurrency.code),
           (toType = toCurrency.code),
-          (updatedToast = () =>
+          (updatedToast = () => {
             toast.update(refreshToast, t(text("done")), {
               type: "success",
               duration: 2000,
               placement: "top",
-            }))
+            });
+          })
         )
       );
     } else {

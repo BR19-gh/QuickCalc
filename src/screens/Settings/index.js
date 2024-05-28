@@ -32,6 +32,7 @@ import { handleInitialData } from "../../store/actions/shared";
 import * as Haptics from "expo-haptics";
 import { useNavigation } from "@react-navigation/native";
 import { lang } from "../../helpers";
+import * as StoreReview from "expo-store-review";
 
 const openAppPref = (t, text) => {
   if (Platform.OS === "ios") {
@@ -79,6 +80,9 @@ const deleteData = (t, text, toast, dispatch) => {
               duration: 4000,
               placement: "top",
             });
+            setTimeout(() => {
+              StoreReview.requestReview();
+            }, 500);
           }, 1000);
         },
         style: "destructive",
@@ -386,7 +390,10 @@ function Settings({ theme, isThemeChanged, setIsThemeChanged, dispatch }) {
                 />
                 <SettingsInfoDisplay
                   title={t(text("version"))}
-                  status={t("screens.versionNum")}
+                  status={
+                    t("screens.versionNum") +
+                    (Platform.isPad ? "(desktop)" : "")
+                  }
                   type="custom"
                 />
                 <TouchableOpacity

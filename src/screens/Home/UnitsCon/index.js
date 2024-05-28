@@ -32,6 +32,9 @@ import * as Haptics from "expo-haptics";
 
 import { useToast } from "react-native-toast-notifications";
 import { useNetInfo } from "@react-native-community/netinfo";
+import { useNavigation } from "@react-navigation/native";
+
+import * as StoreReview from "expo-store-review";
 
 function UnitsCon({ theme, dispatch, unitResult }) {
   const { t } = useTranslation();
@@ -43,6 +46,7 @@ function UnitsCon({ theme, dispatch, unitResult }) {
   const [fromUnitValue, setFromUnitValue] = useState("");
   const [toUnitValue, setToUnitValue] = useState("");
   const netInfo = useNetInfo();
+  const navigation = useNavigation();
   useEffect(() => {
     if (netInfo.isConnected === false) {
       Alert.alert(
@@ -53,6 +57,7 @@ function UnitsCon({ theme, dispatch, unitResult }) {
             text: t(text("gotIt")),
             onPress: () => null,
             style: "default",
+            onPress: () => navigation.goBack(),
           },
         ]
       );
@@ -87,6 +92,9 @@ function UnitsCon({ theme, dispatch, unitResult }) {
       duration: 800,
     });
     Clipboard.setString(str);
+    setTimeout(() => {
+      StoreReview.requestReview();
+    }, 800);
   };
 
   const calculate = () => {
@@ -117,12 +125,13 @@ function UnitsCon({ theme, dispatch, unitResult }) {
           (fromValue = a2e(fromUnitValue)),
           (fromType = fromUnit.code),
           (toType = toUnit.code),
-          (updatedToast = () =>
+          (updatedToast = () => {
             toast.update(refreshToast, t(text("done")), {
               type: "success",
               duration: 2000,
               placement: "top",
-            }))
+            });
+          })
         )
       );
     } else {

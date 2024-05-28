@@ -1,4 +1,4 @@
-import { Text, View, Platform, Alert } from "react-native";
+import { Text, View, Platform, Alert, StyleSheet } from "react-native";
 import SweetSFSymbol from "sweet-sfsymbols";
 import * as Haptics from "expo-haptics";
 import { useNavigation } from "@react-navigation/native";
@@ -63,7 +63,7 @@ const Header = ({ currentTool, t, tools, dispatch, theme }) => {
 
   return (
     <View>
-      {Platform.OS === "macos" ? (
+      {Platform.isPad ? (
         <Menu onSelect={(value) => alert(`Selected number: ${value}`)}>
           <MenuTrigger
             children={
@@ -75,13 +75,19 @@ const Header = ({ currentTool, t, tools, dispatch, theme }) => {
             }
           />
           <MenuOptions
-            customStyles={{
-              optionsWrapper: {
-                backgroundColor: "transparent",
+            optionsContainerStyle={{
+              width: 250,
+              borderRadius: 10,
+              marginTop: 30,
+              marginEnd: 20,
+              backgroundColor: theme === "dark" ? "#555555" : "#E9ECEF",
+              shadowColor: "#000",
+              shadowOffset: {
+                width: 0,
+                height: 5,
               },
-              optionsContainer: {
-                backgroundColor: theme === "dark" ? "#555555" : "#E9ECEF",
-              },
+              shadowOpacity: 0.36,
+              shadowRadius: 6.68,
             }}
           >
             <MenuOption
@@ -91,7 +97,7 @@ const Header = ({ currentTool, t, tools, dispatch, theme }) => {
               }}
               value={1}
             >
-              <View className="flex-row justify-between">
+              <View className="flex-row justify-between p-1">
                 <Text
                   style={{
                     color: theme === "dark" ? "#fff" : "#151E26",
@@ -105,6 +111,14 @@ const Header = ({ currentTool, t, tools, dispatch, theme }) => {
                   colors={[theme === "dark" ? "#fff" : "#151E26"]}
                 />
               </View>
+              <View
+                style={{
+                  marginTop: 10,
+                  borderBottomColor: theme === "dark" ? "#333333" : "#CCCCCC",
+                  borderBottomWidth: StyleSheet.hairlineWidth,
+                  alignSelf: "stretch",
+                }}
+              />
             </MenuOption>
             <MenuOption
               onSelect={() => {
@@ -115,7 +129,7 @@ const Header = ({ currentTool, t, tools, dispatch, theme }) => {
               }}
               value={2}
             >
-              <View className="flex-row justify-between">
+              <View className="flex-row justify-between p-1">
                 <Text
                   style={{
                     color: theme === "dark" ? "#fff" : "#151E26",
@@ -129,6 +143,14 @@ const Header = ({ currentTool, t, tools, dispatch, theme }) => {
                   colors={[theme === "dark" ? "#fff" : "#151E26"]}
                 />
               </View>
+              <View
+                style={{
+                  marginTop: 10,
+                  borderBottomColor: theme === "dark" ? "#333333" : "#CCCCCC",
+                  borderBottomWidth: StyleSheet.hairlineWidth,
+                  alignSelf: "stretch",
+                }}
+              />
             </MenuOption>
             <MenuOption
               onSelect={() => {
@@ -154,7 +176,7 @@ const Header = ({ currentTool, t, tools, dispatch, theme }) => {
               }}
               value={3}
             >
-              <View className="flex-row justify-between">
+              <View className="flex-row justify-between p-1">
                 <Text
                   style={{
                     color: "red",

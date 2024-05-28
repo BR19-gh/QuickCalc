@@ -34,6 +34,8 @@ import { lang } from "../../../helpers";
 
 import { useToast } from "react-native-toast-notifications";
 
+import * as StoreReview from "expo-store-review";
+
 function CalendarCon({ theme }) {
   const { t } = useTranslation();
   const text = (text) => "screens.Home.CalendarCon.text." + text;
@@ -64,6 +66,9 @@ function CalendarCon({ theme }) {
       duration: 800,
     });
     Clipboard.setString(str);
+    setTimeout(() => {
+      StoreReview.requestReview();
+    }, 800);
   };
 
   const switchCur = () => {

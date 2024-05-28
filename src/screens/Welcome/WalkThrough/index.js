@@ -21,19 +21,10 @@ function WalkThrough(props) {
 
   const IMGS =
     lang === "ar"
-      ? Platform.OS === "macos"
+      ? Platform.isPad
         ? [
             require(`../../../../walkthro_ar/welcome.png`),
             require(`../../../../walkthro_ar/home.png`),
-            require(`../../../../walkthro_ar/edit.gif`),
-            require(`../../../../walkthro_ar/hidden.png`),
-            require(`../../../../walkthro_ar/settings.png`),
-          ]
-        : Platform.isPad
-        ? [
-            require(`../../../../walkthro_ar/welcome.png`),
-            require(`../../../../walkthro_ar/home.png`),
-            require(`../../../../walkthro_ar/home_menu.png`),
             require(`../../../../walkthro_ar/edit.gif`),
             require(`../../../../walkthro_ar/hidden.png`),
             require(`../../../../walkthro_ar/settings.png`),
@@ -47,19 +38,10 @@ function WalkThrough(props) {
             require(`../../../../walkthro_ar/home_swipe.gif`),
             require(`../../../../walkthro_ar/settings.png`),
           ]
-      : Platform.OS === "macos"
-      ? [
-          require(`../../../../walkthro_en/welcome.png`),
-          require(`../../../../walkthro_en/home.png`),
-          require(`../../../../walkthro_en/edit.gif`),
-          require(`../../../../walkthro_en/hidden.png`),
-          require(`../../../../walkthro_en/settings.png`),
-        ]
       : Platform.isPad
       ? [
           require(`../../../../walkthro_en/welcome.png`),
           require(`../../../../walkthro_en/home.png`),
-          require(`../../../../walkthro_en/home_menu.png`),
           require(`../../../../walkthro_en/edit.gif`),
           require(`../../../../walkthro_en/hidden.png`),
           require(`../../../../walkthro_en/settings.png`),
@@ -84,15 +66,26 @@ function WalkThrough(props) {
 
   return (
     <SafeAreaView className="items-center">
-      <View>
+      <View className={"w-full h-full items-center"}>
         <Image
           style={{
+            //Platform.isPad ? 435 :
             width: 290,
-            height: 613,
+            height: props.isFirstTimeLaunch
+              ? // Platform.isPad
+                //   ? 975
+                //   :
+                660
+              : //Platform.isPad
+                // ? 919.5
+                // :
+                613,
           }}
           source={IMGS[currentImage]}
         />
-        <View className={"flex-row-reverse items-center justify-around mt-5"}>
+        <View
+          className={"flex-row-reverse w-full items-center justify-around mt-5"}
+        >
           <TouchableOpacity
             disabled={currentImage === IMGS.length - 1}
             onPress={() => {

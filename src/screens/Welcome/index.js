@@ -1,5 +1,11 @@
 import { StatusBar } from "expo-status-bar";
-import { Text, View, TouchableOpacity, Dimensions } from "react-native";
+import {
+  Text,
+  View,
+  TouchableOpacity,
+  Dimensions,
+  Platform,
+} from "react-native";
 import styles from "./styles";
 import { useTranslation } from "react-i18next";
 import { useColorScheme } from "react-native";
@@ -7,6 +13,7 @@ import { useEffect } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useNavigation } from "@react-navigation/native";
 import { Image } from "expo-image";
+import { setFirstTimeLaunch } from "../../../_DATA";
 
 function Welcome(props) {
   const auto = useColorScheme();
@@ -74,8 +81,9 @@ function Welcome(props) {
         style={{
           backgroundColor: "#4844B2",
         }}
-        onPress={() => {
+        onPress={async () => {
           props.setGetStartedBtnPressed(true);
+          await setFirstTimeLaunch();
         }}
       >
         <Text className={styles.btnText}>{t(text("btnText1"))}</Text>
@@ -92,7 +100,7 @@ function Welcome(props) {
         <Text className={styles.btnText}>{t(text("btnText2"))}</Text>
       </TouchableOpacity>
       <Text className="text-center text-gray-500 text-sm mt-5">
-        {t("screens.versionNum")}
+        {t("screens.versionNum") + (Platform.isPad ? "(desktop)" : "")}
       </Text>
       <StatusBar style="auto" />
     </View>

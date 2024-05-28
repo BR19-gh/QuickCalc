@@ -22,33 +22,23 @@ const SettingsNavi = ({
 
   const [currentTitles, setCurrentTitles] = useState(0);
 
-  let titles =
-    Platform.OS === "macos"
-      ? [
-          t(WalkThroughText("welcome")),
-          t(WalkThroughText("homePage")),
-          t(WalkThroughText("editYourTools")),
-          t(WalkThroughText("hiddenTools")),
-          t(WalkThroughText("settingsPage")),
-        ]
-      : Platform.isPad
-      ? [
-          t(WalkThroughText("welcome")),
-          t(WalkThroughText("homePage")),
-          t(WalkThroughText("contextMenu")),
-          t(WalkThroughText("editYourTools")),
-          t(WalkThroughText("hiddenTools")),
-          t(WalkThroughText("settingsPage")),
-        ]
-      : [
-          t(WalkThroughText("welcome")),
-          t(WalkThroughText("homePage")),
-          t(WalkThroughText("contextMenu")),
-          t(WalkThroughText("editYourTools")),
-          t(WalkThroughText("hiddenTools")),
-          t(WalkThroughText("swipeAction")),
-          t(WalkThroughText("settingsPage")),
-        ];
+  let titles = Platform.isPad
+    ? [
+        t(WalkThroughText("welcome")),
+        t(WalkThroughText("homePage")),
+        t(WalkThroughText("editYourTools")),
+        t(WalkThroughText("hiddenTools")),
+        t(WalkThroughText("settingsPage")),
+      ]
+    : [
+        t(WalkThroughText("welcome")),
+        t(WalkThroughText("homePage")),
+        t(WalkThroughText("contextMenu")),
+        t(WalkThroughText("editYourTools")),
+        t(WalkThroughText("hiddenTools")),
+        t(WalkThroughText("swipeAction")),
+        t(WalkThroughText("settingsPage")),
+      ];
 
   return (
     <Stack.Navigator
@@ -78,7 +68,11 @@ const SettingsNavi = ({
         }}
         name="WalkThrough"
         children={() => (
-          <WalkThrough setCurrentTitles={setCurrentTitles} theme={theme} />
+          <WalkThrough
+            isFirstTimeLaunch={false}
+            setCurrentTitles={setCurrentTitles}
+            theme={theme}
+          />
         )}
       />
     </Stack.Navigator>

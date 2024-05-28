@@ -38,6 +38,7 @@ const DropdownComponent = ({ theme, text, t, setUnit, unit, measurement }) => {
 
   return (
     <Dropdown
+      disable={filteredUnits[0].units.length < 2}
       activeColor={theme === "dark" ? "#444444" : "#D2D2D2"}
       itemContainerStyle={{
         backgroundColor: theme === "dark" ? "#555555" : "#E9ECEF",

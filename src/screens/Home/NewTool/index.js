@@ -31,6 +31,8 @@ import { handleInitialData } from "../../../store/actions/shared";
 import { useToast } from "react-native-toast-notifications";
 import { useNavigation } from "@react-navigation/native";
 
+import * as StoreReview from "expo-store-review";
+
 function NewTool({ theme, tools, dispatch }) {
   const { t } = useTranslation();
   const text = (text) => "screens.Home.NewTool.text." + text;
@@ -131,20 +133,34 @@ function NewTool({ theme, tools, dispatch }) {
     const operators = newTool.equation.operators;
 
     const covertUndefinedExponents = (exponents) => {
-      for (let i = 0; i < exponents.length; i++) {
+      for (let i = 0; i < newTool.operandNum; i++) {
         if (exponents[i] === undefined) {
           exponents[i] = 1;
         }
       }
       return exponents;
     };
-
+    const covertUndefinedOperands = (operands) => {
+      for (let i = 0; i < newTool.operandNum; i++) {
+        if (operands[i] === undefined || operands[i] === "") {
+          return false;
+        }
+      }
+      return operands;
+    };
+    const covertUndefinedOperators = (operators) => {
+      for (let i = 0; i < newTool.operandNum - 1; i++) {
+        if (operators[i] === undefined) {
+          return false;
+        }
+      }
+      return operators;
+    };
     const isValidItem = (item) => {
       return typeof item !== "undefined" && isNaN(item)
         ? item.trim() !== ""
         : item !== 0;
     };
-
     const isValidArray = (arr, minItems) => {
       for (let i = 0; i < arr.length; i++) {
         if (arr[i] === undefined) return false;
@@ -153,13 +169,16 @@ function NewTool({ theme, tools, dispatch }) {
         Array.isArray(arr) && arr.length >= minItems && arr.every(isValidItem)
       );
     };
+
     const isValidExponents = isValidArray(
       covertUndefinedExponents(exponents),
       2
     );
-    const isValidOperands = isValidArray(operands, 2);
-    const isValidOperators = isValidArray(operators, 1);
-
+    const isValidOperands = isValidArray(covertUndefinedOperands(operands), 2);
+    const isValidOperators = isValidArray(
+      covertUndefinedOperators(operators),
+      1
+    );
     if (
       newTool.name &&
       newTool.description &&
@@ -205,6 +224,9 @@ function NewTool({ theme, tools, dispatch }) {
             placement: "top",
           });
           navigation.navigate("HomeNavi");
+          setTimeout(() => {
+            StoreReview.requestReview();
+          }, 500);
         }, 1000);
       } catch (error) {
         setNewTool({

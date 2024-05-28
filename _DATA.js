@@ -129,6 +129,46 @@ export const getTools = async () => {
   }
 };
 
+export const setFirstTimeLaunch = async () => {
+  try {
+    await AsyncStorage.setItem("FIRST_TIME_LAUNCH", JSON.stringify(false));
+  } catch (e) {
+    console.error("Error: setFirstTimeLaunch: ", e);
+    Alert.alert(
+      "Unable to set First Time Launch",
+      "Please contact with the developer, you van find developer socials in the Settings tab",
+      [
+        {
+          text: "Will Do",
+          onPress: () => null,
+          style: "Ok",
+        },
+      ]
+    );
+  }
+};
+
+export const isFirstTimeLaunch = async () => {
+  try {
+    const jsonValue = await AsyncStorage.getItem("FIRST_TIME_LAUNCH");
+    return jsonValue != null ? JSON.parse(jsonValue) : true;
+  } catch (e) {
+    console.error("Error: isFirstTimeLaunch: ", e);
+    Alert.alert(
+      "Unable to get First Time Launch",
+      "Please contact with the developer, you van find developer socials in the Settings tab",
+      [
+        {
+          text: "Will Do",
+          onPress: () => null,
+          style: "Ok",
+        },
+      ]
+    );
+    return true;
+  }
+};
+
 export const getToolsInitial = async () => {
   if ((await getTools()) === null) {
     try {

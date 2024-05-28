@@ -22,6 +22,8 @@ import { lang } from "../../../helpers";
 
 import * as Haptics from "expo-haptics";
 
+import * as StoreReview from "expo-store-review";
+
 function TipCal({ theme }) {
   const { t } = useTranslation();
   const text = (text) => "screens.Home.TipCal.text." + text;
@@ -65,6 +67,9 @@ function TipCal({ theme }) {
       duration: 800,
     });
     Clipboard.setString(str);
+    setTimeout(() => {
+      StoreReview.requestReview();
+    }, 800);
   };
 
   const calculate = () => {
