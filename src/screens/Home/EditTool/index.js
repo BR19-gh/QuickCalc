@@ -243,7 +243,7 @@ function EditTool({ theme, tools, route, dispatch }) {
                   searchName: "",
                 })
               }
-              placeholderTextColor={isDark("#28398788", "#28398755")}
+              placeholderTextColor={isDark("#DBEAFE88", "#28398755")}
               placeholder={t(text("toolName"))}
               keyboardType="default"
             />
@@ -288,7 +288,7 @@ function EditTool({ theme, tools, route, dispatch }) {
                   description: "",
                 })
               }
-              placeholderTextColor={isDark("#28398788", "#28398755")}
+              placeholderTextColor={isDark("#DBEAFE88", "#28398755")}
               placeholder={t(text("toolDescription"))}
               keyboardType="default"
             />
@@ -526,7 +526,7 @@ function EditTool({ theme, tools, route, dispatch }) {
               //     operandNum: "",
               //   })
               // }
-              placeholderTextColor={isDark("#28398788", "#28398755")}
+              placeholderTextColor={isDark("#DBEAFE88", "#28398755")}
               placeholder={t(text("operandNumPlaceholder"))}
               keyboardType="numeric"
             />
