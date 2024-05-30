@@ -5,6 +5,8 @@ import {
   RefreshControl,
   Dimensions,
   Platform,
+  Clipboard,
+  Alert,
 } from "react-native";
 import Card from "../../components/Home/Card";
 import SwipeableRow from "../../components/Home/Swipeable";
@@ -148,6 +150,31 @@ function Home(props) {
               dropdownMenuMode={false}
               actions={
                 props.isShowedFavorite
+                  ? tool.link === "CreatedTool"
+                    ? [
+                        {
+                          title: tool.isFavorite
+                            ? t(text("unfavorite2"))
+                            : t(text("favorite")),
+                          systemIcon: tool.isFavorite ? "star.slash" : "star",
+                        },
+
+                        { title: t(text("hide")), systemIcon: "eye.slash" },
+                        {
+                          title: t(text("share")),
+                          systemIcon: "square.and.arrow.up",
+                        },
+                      ]
+                    : [
+                        {
+                          title: tool.isFavorite
+                            ? t(text("unfavorite2"))
+                            : t(text("favorite")),
+                          systemIcon: tool.isFavorite ? "star.slash" : "star",
+                        },
+                        { title: t(text("hide")), systemIcon: "eye.slash" },
+                      ]
+                  : tool.link === "CreatedTool"
                   ? [
                       {
                         title: tool.isFavorite
@@ -155,7 +182,17 @@ function Home(props) {
                           : t(text("favorite")),
                         systemIcon: tool.isFavorite ? "star.slash" : "star",
                       },
+
                       { title: t(text("hide")), systemIcon: "eye.slash" },
+                      {
+                        title: t(text("move")),
+                        systemIcon:
+                          "arrow.up.and.down.and.arrow.left.and.right",
+                      },
+                      {
+                        title: t(text("share")),
+                        systemIcon: "square.and.arrow.up",
+                      },
                     ]
                   : [
                       {
@@ -247,6 +284,14 @@ function Home(props) {
                     props.searchBarRef.current.blur();
                     props.setMoving(true);
                   }
+                } else if (e.nativeEvent.name === t(text("share"))) {
+                  Haptics.selectionAsync();
+                  Clipboard.setString(JSON.stringify(tool));
+                  Alert.alert(
+                    `"${tool.name}" ${t(text("toolHasBeenShared"))}`,
+                    t(text("toolHasBeenSharedMsg")),
+                    [{ text: t(text("gotIt")), style: "default" }]
+                  );
                 }
               }}
             >

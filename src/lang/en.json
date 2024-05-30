@@ -33,7 +33,8 @@
           "refreshing": "Refreshing...",
           "refreshComplated": "Refresh complated!",
           "search": "Search Tools",
-          "searchFavorite": "Search Favored Tools"
+          "searchFavorite": "Search Favored Tools",
+          "useCode": "Use Code"
         }
       },
       "Home": {
@@ -46,6 +47,9 @@
           "unfavorite": "Un\nfavorite",
           "unfavorite2": "Unfavorite",
           "move": "Move",
+          "share": "Share",
+          "toolHasBeenShared": "has been shared",
+          "toolHasBeenSharedMsg": "The tool code has been successfully copied to the clipboard! Share the code with the person who needs the tool. Tell them to add the tool using the code by clicking on (+), then clicking on (Use Code). After that, they should paste the tool code in the (Tool Code) field. Finally, after clicking (Save), the tool will appear on the main page.",
           "noTools": "No tools, refresh to check",
           "hiddenTools": "Hidden Tools",
           "unfavoredTools": "Unfavored Tools",
@@ -74,8 +78,13 @@
         },
         "NewTool": {
           "title": "Create New Tool",
+          "title2": "Create Via Code",
           "titleEdit": "Edit Tool",
           "text": {
+            "toolCode": "Tool Code",
+            "pasteCode": "Paste Code",
+            "reset": "Reset Feild",
+            "enterToolCode": "ِEnter Tool Code here",
             "toolName": "Tool Name",
             "toolDescription": "Tool Description",
             "toolColor": "Tool Color",

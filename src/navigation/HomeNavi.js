@@ -1,5 +1,6 @@
 import Home from "../screens/Home";
 import HeaderRightHome from "../components/Home/HeaderRightHome";
+import HeaderRightNewTool from "../components/Home/HeaderRightNewTool";
 import HeaderLeftHome from "../components/Home/HeaderLeftHome";
 import DiscountCal from "../screens/Home/DiscountCal";
 import UnitsCon from "../screens/Home/UnitsCon";
@@ -7,6 +8,7 @@ import TipCal from "../screens/Home/TipCal";
 import CurrencyCon from "../screens/Home/CurrencyCon";
 import CalendarCon from "../screens/Home/CalendarCon";
 import NewTool from "../screens/Home/NewTool";
+import NewToolViaCode from "../screens/Home/NewToolViaCode";
 import EditTool from "../screens/Home/EditTool";
 
 import { useTranslation } from "react-i18next";
@@ -105,9 +107,17 @@ const HomeNavi = ({ isEditing, setIsEditing, theme }) => {
       <Stack.Screen
         options={{
           title: t(NewTooltext("title")),
+          headerRight: () => <HeaderRightNewTool />,
         }}
         name="NewTool"
         children={() => <NewTool theme={theme} />}
+      />
+      <Stack.Screen
+        options={{
+          title: t(NewTooltext("title2")),
+        }}
+        name="NewToolViaCode"
+        children={() => <NewToolViaCode theme={theme} />}
       />
       <Stack.Screen
         options={{
