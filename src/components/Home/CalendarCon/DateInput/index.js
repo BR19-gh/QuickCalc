@@ -30,7 +30,9 @@ const DateInput = ({
       height: 50,
       fontSize: calendarValue[date] ? 40 : 20,
       textAlign: "center",
-      color: isDark("#DBEAFE", "#283987"),
+      color: isEditable
+        ? isDark("#DBEAFE", "#283987")
+        : isDark("#C1D4F1", "#495A7C"),
       borderRadius: 10,
     }}
     blurOnSubmit={false}

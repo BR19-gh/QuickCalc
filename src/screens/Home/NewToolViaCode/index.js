@@ -305,7 +305,7 @@ function NewToolViaCode({ theme, tools, dispatch }) {
               backgroundColor:
                 errMsg === t(text("invalidCode"))
                   ? isDark("#2C2C2D", "#FFFFFF")
-                  : isDark("#3C3C3D", "#E0E0E0"),
+                  : isDark("#2C2C2D99", "#CCCCCC"),
               width: 350,
               height: 350,
               fontSize: 18,
@@ -356,6 +356,7 @@ function NewToolViaCode({ theme, tools, dispatch }) {
               backgroundColor: toolCode !== "" ? "#6C6BA6" : "#38377C",
             }}
             onPress={async () => {
+              Haptics.selectionAsync();
               setToolCode(await Clipboard.getString());
             }}
           >
@@ -378,7 +379,12 @@ function NewToolViaCode({ theme, tools, dispatch }) {
               "mt-2.5 h-14 w-36 flex-row items-center justify-evenly rounded-full"
             }
             style={{ backgroundColor: "#38377C" }}
-            onPress={() => setToolCode("")}
+            onPress={() => {
+              Haptics.notificationAsync(
+                Haptics.NotificationFeedbackType.Success
+              );
+              setToolCode("");
+            }}
           >
             <Text className={"text-center text-lg text-white"}>
               {t(text("reset"))}

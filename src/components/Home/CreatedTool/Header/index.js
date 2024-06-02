@@ -1,4 +1,11 @@
-import { Text, View, Platform, Alert, StyleSheet } from "react-native";
+import {
+  Text,
+  View,
+  Platform,
+  Alert,
+  StyleSheet,
+  Clipboard,
+} from "react-native";
 import SweetSFSymbol from "sweet-sfsymbols";
 import * as Haptics from "expo-haptics";
 import { useNavigation } from "@react-navigation/native";
@@ -139,6 +146,43 @@ const Header = ({ currentTool, t, tools, dispatch, theme }) => {
                 </Text>
                 <SweetSFSymbol
                   name="square.and.pencil"
+                  size={18}
+                  colors={[theme === "dark" ? "#fff" : "#151E26"]}
+                />
+              </View>
+              <View
+                style={{
+                  marginTop: 10,
+                  borderBottomColor: theme === "dark" ? "#333333" : "#CCCCCC",
+                  borderBottomWidth: StyleSheet.hairlineWidth,
+                  alignSelf: "stretch",
+                }}
+              />
+            </MenuOption>
+            <MenuOption
+              onSelect={() => {
+                {
+                  Haptics.selectionAsync();
+                  Clipboard.setString(JSON.stringify(currentTool));
+                  Alert.alert(
+                    `${t(text("toolHasBeenShared"))}`,
+                    t(text("toolHasBeenSharedMsg")),
+                    [{ text: t(text("gotIt")), style: "default" }]
+                  );
+                }
+              }}
+              value={2}
+            >
+              <View className="flex-row justify-between p-1">
+                <Text
+                  style={{
+                    color: theme === "dark" ? "#fff" : "#151E26",
+                  }}
+                >
+                  {t(text("share"))}
+                </Text>
+                <SweetSFSymbol
+                  name="square.and.arrow.up"
                   size={18}
                   colors={[theme === "dark" ? "#fff" : "#151E26"]}
                 />

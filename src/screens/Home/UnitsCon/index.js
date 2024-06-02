@@ -324,7 +324,7 @@ function UnitsCon({ theme, dispatch, unitResult }) {
                   height: 150,
                   fontSize: unitResult.result ? 40 : 20,
                   textAlign: "center",
-                  color: isDark("#DBEAFE", "#283987"),
+                  color: isDark("#C1D4F1", "#495A7C"),
                   borderRadius: 10,
                 }}
                 returnKeyType="done"
