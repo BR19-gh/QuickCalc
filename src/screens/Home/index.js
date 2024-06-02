@@ -288,7 +288,7 @@ function Home(props) {
                   Haptics.selectionAsync();
                   Clipboard.setString(JSON.stringify(tool));
                   Alert.alert(
-                    `"${tool.name}" ${t(text("toolHasBeenShared"))}`,
+                    `${t(text("toolHasBeenShared"))}`,
                     t(text("toolHasBeenSharedMsg")),
                     [{ text: t(text("gotIt")), style: "default" }]
                   );

@@ -10,10 +10,8 @@ import {
   Clipboard,
 } from "react-native";
 import SweetSFSymbol from "sweet-sfsymbols";
-import SelectDropdown from "react-native-select-dropdown";
-import { Dropdown } from "react-native-element-dropdown";
 
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 
 import uuid from "react-native-uuid";
 
@@ -23,19 +21,14 @@ import { useTranslation } from "react-i18next";
 
 import * as Haptics from "expo-haptics";
 
-import { TOOL_COLORS } from "../../../helpers/Home/NewTool";
-import { lang } from "../../../helpers";
-import ICONS from "../../../helpers/symbols.json";
 import { handleAddTool } from "../../../store/actions/tools";
 import { handleInitialData } from "../../../store/actions/shared";
 import { useToast } from "react-native-toast-notifications";
 import { useNavigation } from "@react-navigation/native";
 
-import * as StoreReview from "expo-store-review";
-
 function NewToolViaCode({ theme, tools, dispatch }) {
   const { t } = useTranslation();
-
+  const navigation = useNavigation();
   const toast = useToast();
 
   const isDark = (darkOp, lightp) => (theme === "dark" ? darkOp : lightp);
@@ -62,18 +55,122 @@ function NewToolViaCode({ theme, tools, dispatch }) {
       "isHidden",
     ];
     const hasRequiredProps = (obj, props) => {
+      if (Object.keys(obj).length !== props.length) {
+        return false;
+      }
       return props.every((prop) => obj.hasOwnProperty(prop));
     };
+    function validateTool(tool) {
+      const requiredProps = {
+        id: "string",
+        searchName: "string",
+        name: "string",
+        description: "string",
+        icon: "string",
+        colors: "array",
+        link: "string",
+        operandNum: "number",
+        equation: "object",
+        isFavorite: "boolean",
+        isHidden: "boolean",
+      };
+
+      const validateArray = (arr, type, name) =>
+        Array.isArray(arr) &&
+        arr.every((item) => {
+          if (name === "operands") {
+            if (arr.length < 2) {
+              return false;
+            }
+            return typeof item === type;
+          }
+          if (name === "exponents") {
+            if (item < 0 || item > 4) {
+              return false;
+            } else if (arr.length < 2) {
+              return false;
+            } else if (arr.length !== tool.equation.operands.length) {
+              return false;
+            }
+            return typeof item === type;
+          }
+          if (name === "operators") {
+            if (arr.length !== tool.equation.operands.length - 1) {
+              return false;
+            }
+            return typeof item === type;
+          }
+          if (type === "number") {
+            return !isNaN(Number(item));
+          }
+          if (name === "operators") {
+            if (item !== "+" && item !== "-" && item !== "*" && item !== "/") {
+              return false;
+            }
+          }
+          return typeof item === type;
+        });
+
+      const validateEquation = (equation) => {
+        if (typeof equation !== "object" || equation === null) return false;
+        const { exponents, operands, operators } = equation;
+        return (
+          validateArray(exponents, "number", "exponents") &&
+          validateArray(operands, "string", "operands") &&
+          validateArray(operators, "string", "operators")
+        );
+      };
+
+      for (let prop in requiredProps) {
+        if (!tool.hasOwnProperty(prop)) {
+          console.log(`Missing property: ${prop}`);
+          return false;
+        }
+
+        let value = tool[prop];
+        const type = requiredProps[prop];
+
+        if (type === "number" && typeof value === "string") {
+          value = Number(value);
+        }
+
+        if (type === "array" && !validateArray(value, "string")) {
+          console.log(
+            `Invalid type for property: ${prop}, expected array of strings`
+          );
+          return false;
+        } else if (type === "object" && !validateEquation(value)) {
+          console.log(
+            `Invalid type for property: ${prop}, expected object with correct structure`
+          );
+          return false;
+        } else if (
+          type !== "array" &&
+          type !== "object" &&
+          typeof value !== type
+        ) {
+          console.log(`Invalid type for property: ${prop}, expected ${type}`);
+          return false;
+        }
+      }
+
+      return true;
+    }
+
     try {
       tool = JSON.parse(`${toolCode}`);
 
       if (!hasRequiredProps(tool, requiredProps)) {
         throw new Error("Missing required properties");
       }
+      if (!validateTool(tool)) {
+        throw new Error("Invalid tool code");
+      }
 
-      console.log("Tool: ", tool);
+      console.log("vaild: ", tool);
       setErrorMsg(t(text("acceptedCode")));
     } catch (e) {
+      console.log("invalid: ", tool);
       setErrorMsg(t(text("invalidCode")));
       return;
     }
@@ -82,6 +179,103 @@ function NewToolViaCode({ theme, tools, dispatch }) {
   const hideKeyboard = () => {
     Keyboard.dismiss();
   };
+
+  function saveNewTool(newTool) {
+    const exponents = newTool.equation.exponents;
+    const operands = newTool.equation.operands;
+    const operators = newTool.equation.operators;
+
+    const covertUndefinedExponents = (exponents) => {
+      for (let i = 0; i < newTool.operandNum; i++) {
+        if (exponents[i] === undefined) {
+          exponents[i] = 1;
+        }
+      }
+      return exponents;
+    };
+    const covertUndefinedOperands = (operands) => {
+      for (let i = 0; i < newTool.operandNum; i++) {
+        if (operands[i] === undefined || operands[i] === "") {
+          return false;
+        }
+      }
+      return operands;
+    };
+    const covertUndefinedOperators = (operators) => {
+      for (let i = 0; i < newTool.operandNum - 1; i++) {
+        if (operators[i] === undefined) {
+          return false;
+        }
+      }
+      return operators;
+    };
+    const isValidItem = (item) => {
+      return typeof item !== "undefined" && isNaN(item)
+        ? item.trim() !== ""
+        : item !== 0;
+    };
+    const isValidArray = (arr, minItems) => {
+      for (let i = 0; i < arr.length; i++) {
+        if (arr[i] === undefined) return false;
+      }
+      return (
+        Array.isArray(arr) && arr.length >= minItems && arr.every(isValidItem)
+      );
+    };
+
+    const isValidExponents = isValidArray(
+      covertUndefinedExponents(exponents),
+      2
+    );
+    const isValidOperands = isValidArray(covertUndefinedOperands(operands), 2);
+    const isValidOperators = isValidArray(
+      covertUndefinedOperators(operators),
+      1
+    );
+    if (
+      newTool.name &&
+      newTool.description &&
+      newTool.icon &&
+      newTool.colors.length === 3 &&
+      newTool.link &&
+      newTool.operandNum &&
+      isValidOperands &&
+      isValidOperators &&
+      isValidExponents
+    ) {
+      newTool.id = uuid.v4();
+      newTool.operandNum = `${newTool.equation.operands.length}`;
+      newTool.isFavorite = false;
+      newTool.isHidden = false;
+      const oldTools = [...Object.values(tools)];
+      const newTools = [newTool, ...oldTools];
+      try {
+        let refreshToast = toast.show(t(text("addingNewTool")), {
+          placement: "top",
+          type: "normal",
+        });
+        dispatch(handleAddTool(newTools, oldTools));
+        setTimeout(() => {
+          Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
+          dispatch(handleInitialData());
+          toast.update(refreshToast, t(text("toolAdded")), {
+            type: "success",
+            duration: 4000,
+            placement: "top",
+          });
+          navigation.navigate("HomeNavi");
+        }, 1000);
+      } catch (error) {
+        Alert.alert(
+          t(text("errorTitle")),
+          error.message + "\n\n" + t(text("pleaseShareError"))
+        );
+      }
+    } else {
+      Alert.alert(t(text("emptyFeilds")), t(text("fillAllFields")));
+    }
+  }
+
   return (
     <ScrollView>
       <View className={"mt-28  w-full items-center"}>
@@ -95,16 +289,34 @@ function NewToolViaCode({ theme, tools, dispatch }) {
             {t(text("toolCode"))}
           </Text>
           <TextInput
+            editable={errMsg === t(text("invalidCode"))}
+            selectTextOnFocus={errMsg !== t(text("invalidCode"))}
+            className={
+              errMsg === t(text("invalidCode"))
+                ? toolCode === ""
+                  ? " "
+                  : "border-2 border-destructive"
+                : isDark(
+                    "border-2 border-emerald-400",
+                    "border-2 border-emerald-500"
+                  )
+            }
             style={{
-              backgroundColor: isDark("#2C2C2D", "#FFFFFF"),
+              backgroundColor:
+                errMsg === t(text("invalidCode"))
+                  ? isDark("#2C2C2D", "#FFFFFF")
+                  : isDark("#3C3C3D", "#E0E0E0"),
               width: 350,
               height: 350,
-              fontSize: 20,
+              fontSize: 18,
               textAlign: toolCode ? "left" : "center",
-              color: isDark("#DBEAFE", "#283987"),
+              color:
+                errMsg === t(text("invalidCode"))
+                  ? isDark("#DBEAFE", "#283987")
+                  : isDark("#C1D4F1", "#495A7C"),
               borderRadius: 10,
 
-              paddingTop: toolCode ? 10 : 160,
+              paddingTop: toolCode ? 10 : 145,
               padding: 10,
             }}
             multiline={true}
@@ -125,12 +337,12 @@ function NewToolViaCode({ theme, tools, dispatch }) {
         >
           <Text
             className={
-              "w-full text-center text-lg" +
+              "w-full text-center text-xs font-semibold p-3 pb-4" +
               (errMsg === t(text("invalidCode"))
                 ? toolCode === ""
                   ? " text-transparent"
                   : " text-destructive"
-                : isDark(" text-blue-100", " text-blue-900"))
+                : isDark(" text-emerald-400", " text-emerald-500"))
             }
           >
             {errMsg}
@@ -186,10 +398,10 @@ function NewToolViaCode({ theme, tools, dispatch }) {
               backgroundColor:
                 errMsg !== t(text("acceptedCode")) ? "#6C6BA6" : "#38377C",
             }}
-            // onPress={() => {
-            //   Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
-            //   saveNewTool(newTool);
-            // }}
+            onPress={() => {
+              Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
+              saveNewTool(JSON.parse(toolCode));
+            }}
           >
             <Text
               className={"text-3xl"}
