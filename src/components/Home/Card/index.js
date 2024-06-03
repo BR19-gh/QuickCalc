@@ -126,6 +126,8 @@ const Card = ({
             {tool.name.en
               ? lang === "en"
                 ? tool.name.en
+                : tool.name.ar === "حاسبة البقشيش"
+                ? "حاسبة القطة"
                 : tool.name.ar
               : tool.name}
           </Text>

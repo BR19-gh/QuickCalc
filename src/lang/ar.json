@@ -1,7 +1,7 @@
 {
   "translation": {
     "screens": {
-      "versionNum": "1.0.3",
+      "versionNum": "1.0.9",
       "Welcome": {
         "title": null,
         "text": {
@@ -158,7 +158,7 @@
           }
         },
         "TipCal": {
-          "title": "حاسبة البقشيش",
+          "title": "حاسبة القطة",
           "text": {
             "tip": "نسبة البقشيش",
             "precenatge": "النسبة",

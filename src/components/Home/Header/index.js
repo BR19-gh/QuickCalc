@@ -29,8 +29,16 @@ const Header = ({ currentTool, t, tools, dispatch }) => {
         onPress={() => {
           Haptics.selectionAsync();
           Alert.alert(
-            lang === "ar" ? tool.name.ar : tool.name.en,
-            lang === "ar" ? tool.description.ar : tool.description.en
+            lang === "ar"
+              ? tool.name.ar === "حاسبة البقشيش"
+                ? "حاسبة القطة"
+                : tool.name.ar
+              : tool.name.en,
+            lang === "ar"
+              ? tool.description.ar === "احسب بقشيش وجبتك"
+                ? "احسب قطة وجبتك"
+                : tool.description.ar
+              : tool.description.en
           );
         }}
         ß
