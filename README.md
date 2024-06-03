@@ -5,7 +5,7 @@
 
 ## Overview
 
-iOS app built using React Native, Redux and Expo, it gathers simple tools for your daily calcuations, you can also create your own tools.
+iOS, iPadOS, and MacOS app built using React Native, Redux and Expo, it gathers simple tools for your daily calcuations, you can also create your own tools.
 
 To install the app in App Store, follow [this link](https://apps.apple.com/app/id6502615780)
 ## Installation
