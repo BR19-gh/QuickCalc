@@ -90,12 +90,12 @@ function TipCal({ theme }) {
       let numberOfPplInEn = a2e(numberOfPpl);
 
       let totalTip = priceInEn * (tipInEn / 100);
-      let tipAmount = totalTip / numberOfPplInEn;
+      let Amount = totalTip / numberOfPplInEn + priceInEn / numberOfPplInEn;
 
-      if (tipAmount.toString().includes(".")) {
-        setTipAmount(tipAmount.toFixed(2));
+      if (Amount.toString().includes(".")) {
+        setTipAmount(Amount.toFixed(2));
       } else {
-        setTipAmount(tipAmount);
+        setTipAmount(Amount);
       }
 
       scrollViewSizeChanged(100);

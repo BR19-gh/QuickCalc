@@ -25,6 +25,7 @@ import { handleAddTool } from "../../../store/actions/tools";
 import { handleInitialData } from "../../../store/actions/shared";
 import { useToast } from "react-native-toast-notifications";
 import { useNavigation } from "@react-navigation/native";
+import { LinearGradient } from "expo-linear-gradient";
 
 function NewToolViaCode({ theme, tools, dispatch }) {
   const { t } = useTranslation();
@@ -279,65 +280,63 @@ function NewToolViaCode({ theme, tools, dispatch }) {
   return (
     <ScrollView>
       <View className={"mt-28  w-full items-center"}>
-        <View className={"mb-2"}>
-          <Text
-            className={
-              "mb-2 text-center text-2xl font-semibold" +
-              isDark(" text-blue-100", " text-blue-900")
-            }
-          >
-            {t(text("toolCode"))}
-          </Text>
-          <TextInput
-            editable={errMsg === t(text("invalidCode"))}
-            selectTextOnFocus={errMsg !== t(text("invalidCode"))}
-            className={
-              errMsg === t(text("invalidCode"))
-                ? toolCode === ""
-                  ? " "
-                  : "border-2 border-destructive"
-                : isDark(
-                    "border-2 border-emerald-400",
-                    "border-2 border-emerald-500"
-                  )
-            }
-            style={{
-              backgroundColor:
+        <View className={"items-center"}>
+          <View className={"mb-2"}>
+            <Text
+              className={
+                "mb-2 text-center text-2xl font-semibold" +
+                isDark(" text-blue-100", " text-blue-900")
+              }
+            >
+              {t(text("toolCode"))}
+            </Text>
+            <TextInput
+              editable={errMsg === t(text("invalidCode"))}
+              selectTextOnFocus={errMsg !== t(text("invalidCode"))}
+              className={
                 errMsg === t(text("invalidCode"))
-                  ? isDark("#2C2C2D", "#FFFFFF")
-                  : isDark("#2C2C2D99", "#CCCCCC"),
-              width: 350,
-              height: 350,
-              fontSize: 18,
-              textAlign: toolCode ? "left" : "center",
-              color:
-                errMsg === t(text("invalidCode"))
-                  ? isDark("#DBEAFE", "#283987")
-                  : isDark("#C1D4F1", "#495A7C"),
-              borderRadius: 10,
+                  ? toolCode === ""
+                    ? " "
+                    : "border-2 border-destructive"
+                  : isDark(
+                      "border-2 border-emerald-400",
+                      "border-2 border-emerald-500"
+                    )
+              }
+              style={{
+                backgroundColor:
+                  errMsg === t(text("invalidCode"))
+                    ? isDark("#2C2C2D", "#FFFFFF")
+                    : isDark("#2C2C2D99", "#CCCCCC"),
+                width: 350,
+                height: 250,
+                fontSize: 18,
+                textAlign: toolCode ? "left" : "center",
+                color:
+                  errMsg === t(text("invalidCode"))
+                    ? isDark("#DBEAFE", "#283987")
+                    : isDark("#C1D4F1", "#495A7C"),
+                borderRadius: 10,
 
-              paddingTop: toolCode ? 10 : 145,
-              padding: 10,
-            }}
-            multiline={true}
-            numberOfLines={3}
-            blurOnSubmit={false}
-            returnKeyType={"done"}
-            onSubmitEditing={hideKeyboard}
-            value={toolCode}
-            onChangeText={(value) => setToolCode(value)}
-            onFocus={() => setToolCode("")}
-            placeholderTextColor={isDark("#DBEAFE88", "#28398755")}
-            placeholder={t(text("enterToolCode"))}
-            keyboardType="ascii-capable"
-          />
-        </View>
-        <View
-          className={"w-full flex-row flex-wrap items-center justify-evenly"}
-        >
+                paddingTop: toolCode ? 10 : 80,
+                padding: 10,
+              }}
+              multiline={true}
+              numberOfLines={3}
+              blurOnSubmit={false}
+              returnKeyType={"done"}
+              onSubmitEditing={hideKeyboard}
+              value={toolCode}
+              onChangeText={(value) => setToolCode(value)}
+              onFocus={() => setToolCode("")}
+              placeholderTextColor={isDark("#DBEAFE88", "#28398755")}
+              placeholder={t(text("enterToolCode"))}
+              keyboardType="ascii-capable"
+            />
+          </View>
           <Text
             className={
-              "w-full text-center text-xs font-semibold p-3 pb-4" +
+              "w-full text-center text-xs font-semibold p-2 pb-3" +
               (errMsg === t(text("invalidCode"))
                 ? toolCode === ""
                   ? " text-transparent"
@@ -347,54 +346,139 @@ function NewToolViaCode({ theme, tools, dispatch }) {
           >
             {errMsg}
           </Text>
-          <TouchableOpacity
-            disabled={toolCode !== ""}
-            className={
-              "mt-2.5 h-14 w-36 flex-row items-center justify-evenly rounded-full"
-            }
-            style={{
-              backgroundColor: toolCode !== "" ? "#6C6BA6" : "#38377C",
-            }}
-            onPress={async () => {
-              Haptics.selectionAsync();
-              setToolCode(await Clipboard.getString());
-            }}
-          >
-            <Text
-              className={"text-center text-lg"}
+          <View className={"items-center"}>
+            <LinearGradient
+              key={
+                toolCode === "" || errMsg === t(text("invalidCode"))
+                  ? JSON.parse(
+                      `{"id":"1111","searchName":"----","name":"----","description":"----","icon":"rectangle.dashed","colors":["#454d59","#3e444c","#21242b"],"link":"CreatedTool","operandNum":"2","equation":{"exponents":[1,1],"operands":["1","1"],"operators":["*"]},"isFavorite":false,"isHidden":false}`
+                    ).id
+                  : JSON.parse(toolCode).id
+              }
+              colors={[
+                ...(toolCode === "" || errMsg === t(text("invalidCode"))
+                  ? JSON.parse(
+                      `{"id":"1111","searchName":"----","name":"----","description":"----","icon":"rectangle.dashed","colors":["#454d59","#3e444c","#21242b"],"link":"CreatedTool","operandNum":"2","equation":{"exponents":[1,1],"operands":["1","1"],"operators":["*"]},"isFavorite":false,"isHidden":false}`
+                    ).colors
+                  : JSON.parse(toolCode).colors),
+              ]}
               style={{
-                color: toolCode !== "" ? "#D3D3D3" : "#FFFFFF",
+                opacity: false
+                  ? !false
+                    ? 0.2
+                    : 0.7
+                  : false
+                  ? false
+                    ? 0.2
+                    : 0.7
+                  : 1,
+                borderWidth: false || false ? 3.5 : 0,
+                borderColor: theme === "dark" ? "gray" : "black",
+                width: "92%",
+              }}
+              className="mb-9 h-32 rounded-lg"
+            >
+              <TouchableOpacity
+                key={
+                  toolCode === "" || errMsg === t(text("invalidCode"))
+                    ? JSON.parse(
+                        `{"id":"1111","searchName":"----","name":"----","description":"----","icon":"rectangle.dashed","colors":["#454d59","#3e444c","#21242b"],"link":"CreatedTool","operandNum":"2","equation":{"exponents":[1,1],"operands":["1","1"],"operators":["*"]},"isFavorite":false,"isHidden":false}`
+                      ).id
+                    : JSON.parse(toolCode).id
+                }
+                className={"h-full w-full flex-row flex-wrap justify-center"}
+                onPress={() => null}
+                onLongPress={() => null}
+                disabled={false}
+              >
+                <View className={"w-full justify-start flex-row-reverse"}>
+                  <SweetSFSymbol
+                    name={
+                      toolCode === "" || errMsg === t(text("invalidCode"))
+                        ? JSON.parse(
+                            `{"id":"1111","searchName":"----","name":"----","description":"----","icon":"rectangle.dashed","colors":["#454d59","#3e444c","#21242b"],"link":"CreatedTool","operandNum":"2","equation":{"exponents":[1,1],"operands":["1","1"],"operators":["*"]},"isFavorite":false,"isHidden":false}`
+                          ).icon
+                        : JSON.parse(toolCode).icon
+                    }
+                    size={24}
+                    colors={["white"]}
+                    style={{
+                      margin: 16,
+                    }}
+                  />
+                  <Text
+                    className={"text-white text-2xl mt-3"}
+                    style={{
+                      width: "80%",
+                    }}
+                  >
+                    {toolCode === "" ||
+                    errMsg === t(text("invalidCode")) ||
+                    errMsg === t(text("invalidCode"))
+                      ? JSON.parse(
+                          `{"id":"1111","searchName":"----","name":"----","description":"----","icon":"rectangle.dashed","colors":["#454d59","#3e444c","#21242b"],"link":"CreatedTool","operandNum":"2","equation":{"exponents":[1,1],"operands":["1","1"],"operators":["*"]},"isFavorite":false,"isHidden":false}`
+                        ).name
+                      : JSON.parse(toolCode).name}
+                  </Text>
+                </View>
+              </TouchableOpacity>
+            </LinearGradient>
+          </View>
+          <View
+            className={"w-full flex-row flex-wrap items-center justify-evenly"}
+          ></View>
+          <View
+            className={"w-full flex-row flex-wrap items-center justify-evenly"}
+          >
+            <TouchableOpacity
+              disabled={toolCode !== ""}
+              className={
+                "mt-2.5 h-14 w-36 flex-row items-center justify-evenly rounded-full"
+              }
+              style={{
+                backgroundColor: toolCode !== "" ? "#6C6BA6" : "#38377C",
+              }}
+              onPress={async () => {
+                Haptics.selectionAsync();
+                setToolCode(await Clipboard.getString());
               }}
             >
-              {t(text("pasteCode"))}
-            </Text>
-            <SweetSFSymbol
-              name={"doc.on.clipboard.fill"}
-              size={18}
-              colors={[toolCode !== "" ? "#D3D3D3" : "#FFFFFF"]}
-            />
-          </TouchableOpacity>
-          <TouchableOpacity
-            className={
-              "mt-2.5 h-14 w-36 flex-row items-center justify-evenly rounded-full"
-            }
-            style={{ backgroundColor: "#38377C" }}
-            onPress={() => {
-              Haptics.notificationAsync(
-                Haptics.NotificationFeedbackType.Success
-              );
-              setToolCode("");
-            }}
-          >
-            <Text className={"text-center text-lg text-white"}>
-              {t(text("reset"))}
-            </Text>
-            <SweetSFSymbol
-              name={"arrow.counterclockwise.circle.fill"}
-              size={18}
-              colors={["white"]}
-            />
-          </TouchableOpacity>
+              <Text
+                className={"text-center text-lg"}
+                style={{
+                  color: toolCode !== "" ? "#D3D3D3" : "#FFFFFF",
+                }}
+              >
+                {t(text("pasteCode"))}
+              </Text>
+              <SweetSFSymbol
+                name={"doc.on.clipboard.fill"}
+                size={18}
+                colors={[toolCode !== "" ? "#D3D3D3" : "#FFFFFF"]}
+              />
+            </TouchableOpacity>
+            <TouchableOpacity
+              className={
+                "mt-2.5 h-14 w-36 flex-row items-center justify-evenly rounded-full"
+              }
+              style={{ backgroundColor: "#38377C" }}
+              onPress={() => {
+                Haptics.notificationAsync(
+                  Haptics.NotificationFeedbackType.Success
+                );
+                setToolCode("");
+              }}
+            >
+              <Text className={"text-center text-lg text-white"}>
+                {t(text("reset"))}
+              </Text>
+              <SweetSFSymbol
+                name={"arrow.counterclockwise.circle.fill"}
+                size={18}
+                colors={["white"]}
+              />
+            </TouchableOpacity>
+          </View>
         </View>
         <View className="mb-5 mt-5 flex w-11/12 flex-row justify-center">
           <TouchableOpacity

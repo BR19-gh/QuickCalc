@@ -422,7 +422,12 @@ function NewTool({ theme, tools, dispatch }) {
                       رقم {item.key}:
                     </Text>
                   ) : (
-                    <Text className={"text-2xl font-semibold"}>
+                    <Text
+                      className={
+                        "text-2xl font-semibold " +
+                        isDark("text-white", "text-black")
+                      }
+                    >
                       Id. {item.key}:
                     </Text>
                   )}

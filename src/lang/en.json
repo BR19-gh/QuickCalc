@@ -1,7 +1,7 @@
 {
   "translation": {
     "screens": {
-      "versionNum": "1.0.9",
+      "versionNum": "1.0.10",
       "Welcome": {
         "title": null,
         "text": {
@@ -163,7 +163,7 @@
             "precenatge": "Percent",
             "price": "Price",
             "calculate": "Calculate",
-            "tipAmount": "Every person will tip: ",
+            "tipAmount": "Every person will pay: ",
             "numberOfPpl": "Number of People",
             "number": "Number",
             "reset": "Reset",
