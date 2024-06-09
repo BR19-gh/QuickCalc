@@ -117,7 +117,7 @@ export const getTools = async () => {
     console.error("Error: getTools: ", e);
     Alert.alert(
       "Unable lood tools",
-      "Please contact with the developer, you van find developer socials in the Settings tab",
+      "Please contact with the developer, you can find developer socials in the Settings tab",
       [
         {
           text: "Will Do",
@@ -129,6 +129,47 @@ export const getTools = async () => {
   }
 };
 
+export const setDontShowAgain = async () => {
+  try {
+    await AsyncStorage.setItem("DONT_SHOW_AGAIN", JSON.stringify(false));
+  } catch (e) {
+    console.error("Error: setDontShowAgain: ", e);
+    Alert.alert(
+      "Unable to set Dont Show Again",
+      "Please contact with the developer, you can find developer socials in the Settings tab",
+      [
+        {
+          text: "Will Do",
+          onPress: () => null,
+          style: "Ok",
+        },
+      ]
+    );
+  }
+};
+
+export const isDontShowAgain = async () => {
+  try {
+    const jsonValue = await AsyncStorage.getItem("DONT_SHOW_AGAIN");
+    console.log("dont show again: " + jsonValue);
+    return jsonValue ? true : JSON.parse(jsonValue);
+  } catch (e) {
+    console.error("Error: isDontShowAgain: ", e);
+    Alert.alert(
+      "Unable to get Dont Show Again",
+      "Please contact with the developer, you can find developer socials in the Settings tab",
+      [
+        {
+          text: "Will Do",
+          onPress: () => null,
+          style: "Ok",
+        },
+      ]
+    );
+    return true;
+  }
+};
+
 export const setFirstTimeLaunch = async () => {
   try {
     await AsyncStorage.setItem("FIRST_TIME_LAUNCH", JSON.stringify(false));
@@ -136,7 +177,7 @@ export const setFirstTimeLaunch = async () => {
     console.error("Error: setFirstTimeLaunch: ", e);
     Alert.alert(
       "Unable to set First Time Launch",
-      "Please contact with the developer, you van find developer socials in the Settings tab",
+      "Please contact with the developer, you can find developer socials in the Settings tab",
       [
         {
           text: "Will Do",
@@ -156,7 +197,7 @@ export const isFirstTimeLaunch = async () => {
     console.error("Error: isFirstTimeLaunch: ", e);
     Alert.alert(
       "Unable to get First Time Launch",
-      "Please contact with the developer, you van find developer socials in the Settings tab",
+      "Please contact with the developer, you can find developer socials in the Settings tab",
       [
         {
           text: "Will Do",
@@ -178,7 +219,7 @@ export const getToolsInitial = async () => {
       console.error("Error: getToolsInitial: ", e);
       Alert.alert(
         "Unable to get Initial tools",
-        "Please contact with the developer, you van find developer socials in the Settings tab",
+        "Please contact with the developer, you can find developer socials in the Settings tab",
         [
           {
             text: "Will Do",
@@ -202,7 +243,7 @@ export const storeTools = async (value, actionType) => {
     console.error("Error: storeTools: ", e);
     Alert.alert(
       "Unable to store tools",
-      "Please contact with the developer, you van find developer socials in the Settings tab",
+      "Please contact with the developer, you can find developer socials in the Settings tab",
       [
         {
           text: "Will Do",

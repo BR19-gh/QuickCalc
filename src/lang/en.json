@@ -1,7 +1,7 @@
 {
   "translation": {
     "screens": {
-      "versionNum": "1.0.10",
+      "versionNum": "1.0.12",
       "Welcome": {
         "title": null,
         "text": {
@@ -48,8 +48,9 @@
           "unfavorite2": "Unfavorite",
           "move": "Move",
           "share": "Share",
-          "toolHasBeenShared": "ُTool code has been shared",
-          "toolHasBeenSharedMsg": "The tool code is copied in the clipboard! Share it with the person who needs the tool. They should add the tool by pressing (+), then (Use Code), paste the code in the (Tool Code) field, and press (Save). The tool will appear on Home page.",
+          "toolHasBeenShared": "Sharing Tool Code",
+          "toolHasBeenSharedMsg": "The tool's code will be shared with you. Share it with the person who needs the tool. They should add the tool by pressing (+), then (Use Code), paste the code in the (Tool Code) field, and press (Save). The tool will appear on Home page.",
+          "dontShowAgain": "Don't show again",
           "noTools": "No tools, refresh to check",
           "hiddenTools": "Hidden Tools",
           "unfavoredTools": "Unfavored Tools",
@@ -135,8 +136,9 @@
             "cancel": "Cancel",
             "details": "Details",
             "share": "Share",
-            "toolHasBeenShared": "ُTool code has been shared",
-            "toolHasBeenSharedMsg": "The tool code is copied in the clipboard! Share it with the person who needs the tool. They should add the tool by pressing (+), then (Use Code), paste the code in the (Tool Code) field, and press (Save). The tool will appear on Home page.",
+            "toolHasBeenShared": "Sharing Tool Code",
+            "toolHasBeenSharedMsg": "The tool's code will be shared with you. Share it with the person who needs the tool. They should add the tool by pressing (+), then (Use Code), paste the code in the (Tool Code) field, and press (Save). The tool will appear on Home page.",
+            "dontShowAgain": "Don't show again",
             "gotIt": "Got it"
           }
         },

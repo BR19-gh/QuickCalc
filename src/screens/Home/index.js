@@ -5,13 +5,13 @@ import {
   RefreshControl,
   Dimensions,
   Platform,
-  Clipboard,
   Alert,
+  Share,
 } from "react-native";
 import Card from "../../components/Home/Card";
 import SwipeableRow from "../../components/Home/Swipeable";
 import { useNavigation } from "@react-navigation/native";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { handleInitialData } from "../../store/actions/shared";
 import {
   handleEditVisTools,
@@ -35,6 +35,8 @@ import { useToast } from "react-native-toast-notifications";
 import * as Haptics from "expo-haptics";
 
 import { lang } from "../../helpers";
+
+import { isDontShowAgain, setDontShowAgain } from "../../../_DATA";
 
 function Home(props) {
   useEffect(() => {
@@ -113,6 +115,46 @@ function Home(props) {
 
     setCurrentTools(uniqueTools);
   }, [props.tools]);
+
+  const shareText = async (code) => {
+    if (await isDontShowAgain()) {
+      try {
+        await Share.share({
+          message: code,
+        });
+      } catch (error) {
+        alert("Error while sharing: " + error.message);
+      }
+    } else {
+      Alert.alert(
+        `${t(text("toolHasBeenShared"))}`,
+        t(text("toolHasBeenSharedMsg")),
+        [
+          {
+            text: t(text("gotIt")),
+            style: "default",
+            onPress: async () => {
+              try {
+                await Share.share({
+                  message: code,
+                });
+              } catch (error) {
+                alert("Error while sharing: " + error.message);
+              }
+            },
+          },
+          {
+            text: t(text("dontShowAgain")),
+            style: "cancel",
+            onPress: async () => {
+              await setDontShowAgain();
+              shareText(code);
+            },
+          },
+        ]
+      );
+    }
+  };
 
   const renderItemContextMenu = ({ tool, getIndex, drag, isActive }) => {
     return (
@@ -286,12 +328,8 @@ function Home(props) {
                   }
                 } else if (e.nativeEvent.name === t(text("share"))) {
                   Haptics.selectionAsync();
-                  Clipboard.setString(JSON.stringify(tool));
-                  Alert.alert(
-                    `${t(text("toolHasBeenShared"))}`,
-                    t(text("toolHasBeenSharedMsg")),
-                    [{ text: t(text("gotIt")), style: "default" }]
-                  );
+
+                  shareText(JSON.stringify(tool));
                 }
               }}
             >
