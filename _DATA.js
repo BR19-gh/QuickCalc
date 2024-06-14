@@ -129,6 +129,46 @@ export const getTools = async () => {
   }
 };
 
+export const setQuickAccessToolId = async (id) => {
+  try {
+    await AsyncStorage.setItem("quickAccessToolId", `${id}`);
+  } catch (e) {
+    console.error("Error: setQuickAccessToolId: ", e);
+    Alert.alert(
+      "Unable to set quickAccessToolId",
+      "Please contact with the developer, you can find developer socials in the Settings tab",
+      [
+        {
+          text: "Will Do",
+          onPress: () => null,
+          style: "Ok",
+        },
+      ]
+    );
+  }
+};
+
+export const getQuickAccessToolId = async () => {
+  try {
+    const value = await AsyncStorage.getItem("quickAccessToolId");
+    return value ? value : null;
+  } catch (e) {
+    console.error("Error: getQuickAccessToolId: ", e);
+    Alert.alert(
+      "Unable to get quickAccessToolId",
+      "Please contact with the developer, you can find developer socials in the Settings tab",
+      [
+        {
+          text: "Will Do",
+          onPress: () => null,
+          style: "Ok",
+        },
+      ]
+    );
+    return true;
+  }
+};
+
 export const setDontShowAgain = async () => {
   try {
     await AsyncStorage.setItem("DONT_SHOW_AGAIN", JSON.stringify(false));

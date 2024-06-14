@@ -13,17 +13,27 @@ import EditTool from "../screens/Home/EditTool";
 
 import { useTranslation } from "react-i18next";
 import { useState, useRef } from "react";
+import { connect } from "react-redux";
 
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import CreatedTool from "../screens/Home/CreatedTool";
 import Header from "../components/Home/CreatedTool/Header";
 import HeaderTools from "../components/Home/Header";
 
+import { useNavigation } from "@react-navigation/native";
+import { useQuickActionCallback } from "expo-quick-actions/hooks";
+
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { setQuickAccessToolId, getQuickAccessToolId } from "../../_DATA";
+import { Alert } from "react-native";
+
 const Stack = createNativeStackNavigator();
 
-const HomeNavi = ({ isEditing, setIsEditing, theme }) => {
+const HomeNavi = ({ isEditing, setIsEditing, theme, tools }) => {
+  console.log("HomeNavi tools: ", tools);
   const { t } = useTranslation();
   const text = (text) => "screens.Navi.text." + text;
+  const textQA = (text) => "screens.QuickAction." + text;
   const DiscountCaltext = (text) => "screens.Home.DiscountCal." + text;
   const TipCaltext = (text) => "screens.Home.TipCal." + text;
   const CurrencyConText = (text) => "screens.Home.CurrencyCon." + text;
@@ -34,9 +44,67 @@ const HomeNavi = ({ isEditing, setIsEditing, theme }) => {
   const [currentTool, setCurrentTool] = useState({});
   const searchBarRef = useRef(null);
   const [isShowedFavorite, setIsShowedFavorite] = useState(false);
-  const [isEditingFavorite, seIsEditingFavorite] = useState(false);
+  const [isEditingFavorite, setIsEditingFavorite] = useState(false);
   const [searchText, setSearchText] = useState("");
   const [moving, setMoving] = useState(false);
+
+  const navigation = useNavigation();
+
+  useQuickActionCallback(async (action) => {
+    navigation.navigate("HomeNavi");
+    if (action.id === "search") {
+      setTimeout(() => {
+        searchBarRef.current.clearText();
+        searchBarRef.current.blur();
+        searchBarRef.current.focus();
+      }, 1000);
+    }
+
+    if (action.id === "createTool") {
+      setIsEditing(false);
+      setIsEditingFavorite(false);
+      setIsShowedFavorite(false);
+
+      navigation.navigate("NewTool");
+    }
+
+    if (action.id === "favorite") {
+      setIsEditing(false);
+      setIsEditingFavorite(false);
+      setIsShowedFavorite(true);
+    }
+
+    if (action.id === "quickAccess") {
+      const toolId = await getQuickAccessToolId();
+      console.log("quickAccess toolId: ", toolId);
+      if (toolId === null) {
+        Alert.alert(
+          t(textQA("quickAccessAlertTitle")),
+          t(textQA("quickAccessAlertMsg")),
+          [
+            {
+              text: t(text("gotIt")),
+              style: "cancel",
+            },
+          ],
+          { cancelable: false }
+        );
+      } else {
+        let tool = {};
+        for (let key in tools) {
+          if (tools[key].id == toolId) {
+            tool = tools[key];
+          }
+        }
+        console.log("quickAccess tool: ", tool);
+        if (tool.link === "CreatedTool") {
+          navigation.navigate("CreatedTool", { tool });
+        } else {
+          navigation.navigate(tool.link);
+        }
+      }
+    }
+  });
 
   return (
     <Stack.Navigator
@@ -50,7 +118,7 @@ const HomeNavi = ({ isEditing, setIsEditing, theme }) => {
           headerLargeTitle: true,
           headerRight: () => (
             <HeaderRightHome
-              seIsEditingFavorite={seIsEditingFavorite}
+              setIsEditingFavorite={setIsEditingFavorite}
               isEditingFavorite={isEditingFavorite}
               isShowedFavorite={isShowedFavorite}
               isEditing={isEditing}
@@ -62,7 +130,7 @@ const HomeNavi = ({ isEditing, setIsEditing, theme }) => {
           headerLeft: () => (
             <HeaderLeftHome
               setIsEditing={setIsEditing}
-              seIsEditingFavorite={seIsEditingFavorite}
+              setIsEditingFavorite={setIsEditingFavorite}
               isShowedFavorite={isShowedFavorite}
               isEditing={isEditing}
               setIsShowedFavorite={setIsShowedFavorite}
@@ -96,6 +164,7 @@ const HomeNavi = ({ isEditing, setIsEditing, theme }) => {
             theme={theme}
             isEditingFavorite={isEditingFavorite}
             isShowedFavorite={isShowedFavorite}
+            setIsShowedFavorite={setIsShowedFavorite}
             setIsEditing={setIsEditing}
             isEditing={isEditing}
             moving={moving}
@@ -185,4 +254,10 @@ const HomeNavi = ({ isEditing, setIsEditing, theme }) => {
     </Stack.Navigator>
   );
 };
-export default HomeNavi;
+const mapStateToProps = ({ tools }) => {
+  return {
+    tools,
+  };
+};
+
+export default connect(mapStateToProps)(HomeNavi);

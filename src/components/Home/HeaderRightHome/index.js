@@ -9,7 +9,7 @@ import { useEffect } from "react";
 const Header = ({
   setIsEditing,
   isEditing,
-  seIsEditingFavorite,
+  setIsEditingFavorite,
   isEditingFavorite,
   isShowedFavorite,
   moving,
@@ -39,7 +39,7 @@ const Header = ({
           <TouchableOpacity
             onPress={() => {
               Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
-              seIsEditingFavorite(!isEditingFavorite);
+              setIsEditingFavorite(!isEditingFavorite);
             }}
           >
             <Text

@@ -1,7 +1,16 @@
 {
   "translation": {
     "screens": {
-      "versionNum": "1.0.12",
+      "versionNum": "1.0.14",
+      "QuickAction": {
+        "search": "Search",
+        "createTool": "Create Tool",
+        "favorite": "Favorite",
+        "quickAccess": "Quick Access",
+        "quickAccessSub": "To a tool you choose",
+        "quickAccessAlertTitle": "Enabling Quick Access",
+        "quickAccessAlertMsg": "Please select a tool first before using Quick Access, long press the tool you want to access quickly then select (enable Quick Access)."
+      },
       "Welcome": {
         "title": null,
         "text": {
@@ -34,7 +43,8 @@
           "refreshComplated": "Refresh complated!",
           "search": "Search Tools",
           "searchFavorite": "Search Favored Tools",
-          "useCode": "Use Code"
+          "useCode": "Use Code",
+          "gotIt": "Got It"
         }
       },
       "Home": {
@@ -48,6 +58,8 @@
           "unfavorite2": "Unfavorite",
           "move": "Move",
           "share": "Share",
+          "enableQuickAccess": "Enable Quick Access",
+          "toolAssigned": "Tool assigned!",
           "toolHasBeenShared": "Sharing Tool Code",
           "toolHasBeenSharedMsg": "The tool's code will be shared with you. Share it with the person who needs the tool. They should add the tool by pressing (+), then (Use Code), paste the code in the (Tool Code) field, and press (Save). The tool will appear on Home page.",
           "dontShowAgain": "Don't show again",

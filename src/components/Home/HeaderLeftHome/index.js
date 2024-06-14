@@ -11,7 +11,7 @@ import * as Haptics from "expo-haptics";
 const Header = ({
   isShowedFavorite,
   setIsShowedFavorite,
-  seIsEditingFavorite,
+  setIsEditingFavorite,
   setIsEditing,
   isEditing,
   dispatch,
@@ -53,7 +53,7 @@ const Header = ({
         onPress={() => {
           Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
           setIsShowedFavorite(!isShowedFavorite);
-          seIsEditingFavorite(false);
+          setIsEditingFavorite(false);
           setIsEditing(false);
         }}
       >

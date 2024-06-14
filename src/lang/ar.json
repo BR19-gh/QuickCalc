@@ -1,7 +1,16 @@
 {
   "translation": {
     "screens": {
-      "versionNum": "1.0.12",
+      "versionNum": "1.0.14",
+      "QuickAction": {
+        "search": "بحث",
+        "createTool": "إنشاء أداة",
+        "favorite": "المفضلة",
+        "quickAccess": "وصول سريع",
+        "quickAccessSub": "إلى أداة تحددها بنفسك",
+        "quickAccessAlertTitle": "تفعيل الوصول السريع",
+        "quickAccessAlertMsg": "الرجاء اختيار أداة أولاً قبل استخدام الوصول السريع، اضغط مطولًا على الأداة التي تريد الوصول لها سريعًا ثم أختر (تفعيل الوصول السريع)."
+      },
       "Welcome": {
         "title": null,
         "text": {
@@ -34,7 +43,8 @@
           "refreshComplated": "اكتمل التحديث!",
           "search": "بحث في الأدوات",
           "searchFavorite": "البحث في الأدوات المفضلة",
-          "useCode": "استعمل كود"
+          "useCode": "استعمل كود",
+          "gotIt": "فهمت"
         }
       },
       "Home": {
@@ -48,6 +58,8 @@
           "unfavorite2": "إلغاء التفضيل",
           "move": "نقل",
           "share": "مشاركة",
+          "enableQuickAccess": "تفعيل الوصول السريع",
+          "toolAssigned": "تم تعيين الأداة!",
           "toolHasBeenShared": "مشاركة كود الأداة",
           "toolHasBeenSharedMsg": "سيتم مشاركة كود الأداة معك، شارك الكود مع الشخص الذي يحتاج الأداة. أخبره بإضافة الأداة بالضغط على (+) ثم (استعمل كود)، بعدها يلصق الكود في خانة (كود الأداة) ثم يضغط (حفظ). ستظهر الأداة في الصفحة الرئيسية.",
           "dontShowAgain": "لا تظهر مجددًا",

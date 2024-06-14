@@ -36,7 +36,12 @@ import * as Haptics from "expo-haptics";
 
 import { lang } from "../../helpers";
 
-import { isDontShowAgain, setDontShowAgain } from "../../../_DATA";
+import {
+  isDontShowAgain,
+  setDontShowAgain,
+  setQuickAccessToolId,
+} from "../../../_DATA";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 function Home(props) {
   useEffect(() => {
@@ -156,6 +161,15 @@ function Home(props) {
     }
   };
 
+  const changeQuickAccess = async (id) => {
+    await setQuickAccessToolId(id);
+    toast.show(t(text("toolAssigned")), {
+      duration: 1000,
+      type: "success",
+      placement: "top",
+    });
+  };
+
   const renderItemContextMenu = ({ tool, getIndex, drag, isActive }) => {
     return (
       <ScaleDecorator>
@@ -206,6 +220,10 @@ function Home(props) {
                           title: t(text("share")),
                           systemIcon: "square.and.arrow.up",
                         },
+                        {
+                          title: t(text("enableQuickAccess")),
+                          systemIcon: "rectangle.portrait.and.arrow.right",
+                        },
                       ]
                     : [
                         {
@@ -215,6 +233,10 @@ function Home(props) {
                           systemIcon: tool.isFavorite ? "star.slash" : "star",
                         },
                         { title: t(text("hide")), systemIcon: "eye.slash" },
+                        {
+                          title: t(text("enableQuickAccess")),
+                          systemIcon: "rectangle.portrait.and.arrow.right",
+                        },
                       ]
                   : tool.link === "CreatedTool"
                   ? [
@@ -235,6 +257,10 @@ function Home(props) {
                         title: t(text("share")),
                         systemIcon: "square.and.arrow.up",
                       },
+                      {
+                        title: t(text("enableQuickAccess")),
+                        systemIcon: "rectangle.portrait.and.arrow.right",
+                      },
                     ]
                   : [
                       {
@@ -248,6 +274,10 @@ function Home(props) {
                         title: t(text("move")),
                         systemIcon:
                           "arrow.up.and.down.and.arrow.left.and.right",
+                      },
+                      {
+                        title: t(text("enableQuickAccess")),
+                        systemIcon: "rectangle.portrait.and.arrow.right",
                       },
                     ]
               }
@@ -330,6 +360,11 @@ function Home(props) {
                   Haptics.selectionAsync();
 
                   shareText(JSON.stringify(tool));
+                } else if (
+                  e.nativeEvent.name === t(text("enableQuickAccess"))
+                ) {
+                  Haptics.selectionAsync();
+                  changeQuickAccess(tool.id);
                 }
               }}
             >
@@ -407,7 +442,7 @@ function Home(props) {
         {props.searchText.length > 0 || props.isEditing === true ? (
           <View
             style={{
-              width: 130,
+              width: 150,
               height: 30,
               marginBottom: 10,
               marginTop: 10,
@@ -452,7 +487,7 @@ function Home(props) {
               return (
                 <View
                   style={{
-                    width: 130,
+                    width: 150,
                     height: 30,
                     marginBottom: 10,
                     marginTop: 10,

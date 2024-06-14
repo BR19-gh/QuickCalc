@@ -10,6 +10,8 @@ import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { ToastProvider } from "react-native-toast-notifications";
 import { MenuProvider } from "react-native-popup-menu";
 import { isFirstTimeLaunch } from "./_DATA";
+import * as QuickActions from "expo-quick-actions";
+import { useTranslation } from "react-i18next";
 
 const App = () => {
   const store = createStore(reducer, middleware);
@@ -17,6 +19,9 @@ const App = () => {
   const [isFirstTimeState, setIsFirstTimeState] = useState(false);
   const [theme, setTheme] = useState(null);
   const [isThemeChanged, setIsThemeChanged] = useState(false);
+
+  const { t } = useTranslation();
+  const text = (text) => "screens.QuickAction." + text;
 
   useEffect(() => {
     const checkFirstTimeLaunch = async () => {
@@ -27,6 +32,33 @@ const App = () => {
     };
     checkFirstTimeLaunch();
   }, []);
+
+  useEffect(() => {
+    QuickActions.setItems([
+      {
+        title: t(text("search")),
+        icon: "symbol:magnifyingglass",
+        id: "search",
+      },
+      {
+        title: t(text("createTool")),
+        icon: "symbol:plus",
+        id: "createTool",
+      },
+      {
+        title: t(text("favorite")),
+        icon: "symbol:star",
+        id: "favorite",
+      },
+      {
+        title: t(text("quickAccess")),
+        subtitle: t(text("quickAccessSub")),
+        icon: "symbol:rectangle.portrait.and.arrow.right",
+        id: "quickAccess",
+      },
+    ]);
+  }, []);
+
   return (
     <MenuProvider>
       <ToastProvider>

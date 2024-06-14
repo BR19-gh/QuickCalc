@@ -2,7 +2,7 @@
   "expo": {
     "name": "QuickCalc",
     "slug": "QuickCalc",
-    "version": "1.0.12",
+    "version": "1.0.14",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "automatic",
@@ -17,7 +17,7 @@
       "ar": "src/lang/ar.json"
     },
     "ios": {
-      "buildNumber": "2.1.12",
+      "buildNumber": "2.1.14",
       "supportsTablet": true,
       "infoPlist": {
         "CFBundleAllowMixedLocalizations": true,
@@ -32,6 +32,22 @@
         "projectId": "0dcd864d-7de0-4db7-ba1d-50790c12a613"
       }
     },
-    "plugins": ["expo-localization"]
+    "plugins": [
+      "expo-localization",
+      "expo-quick-actions",
+      [
+        "expo-build-properties",
+        {
+          "android": {
+            "compileSdkVersion": 34,
+            "targetSdkVersion": 34,
+            "buildToolsVersion": "34.0.0"
+          },
+          "ios": {
+            "deploymentTarget": "13.4"
+          }
+        }
+      ]
+    ]
   }
 }
