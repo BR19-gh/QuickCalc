@@ -41,7 +41,6 @@ import {
   setDontShowAgain,
   setQuickAccessToolId,
 } from "../../../_DATA";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 
 function Home(props) {
   useEffect(() => {
@@ -118,6 +117,9 @@ function Home(props) {
       (tool, index, self) => index === self.findIndex((t) => t.id === tool.id)
     );
 
+    if (Object.keys(props.tools).length !== 0) {
+      props.setCurrentTools(props.tools);
+    }
     setCurrentTools(uniqueTools);
   }, [props.tools]);
 

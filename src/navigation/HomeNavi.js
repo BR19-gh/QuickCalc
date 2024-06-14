@@ -23,14 +23,12 @@ import HeaderTools from "../components/Home/Header";
 import { useNavigation } from "@react-navigation/native";
 import { useQuickActionCallback } from "expo-quick-actions/hooks";
 
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import { setQuickAccessToolId, getQuickAccessToolId } from "../../_DATA";
+import { getQuickAccessToolId } from "../../_DATA";
 import { Alert } from "react-native";
 
 const Stack = createNativeStackNavigator();
 
 const HomeNavi = ({ isEditing, setIsEditing, theme, tools }) => {
-  console.log("HomeNavi tools: ", tools);
   const { t } = useTranslation();
   const text = (text) => "screens.Navi.text." + text;
   const textQA = (text) => "screens.QuickAction." + text;
@@ -47,6 +45,7 @@ const HomeNavi = ({ isEditing, setIsEditing, theme, tools }) => {
   const [isEditingFavorite, setIsEditingFavorite] = useState(false);
   const [searchText, setSearchText] = useState("");
   const [moving, setMoving] = useState(false);
+  const [currentTools, setCurrentTools] = useState([]);
 
   const navigation = useNavigation();
 
@@ -76,7 +75,6 @@ const HomeNavi = ({ isEditing, setIsEditing, theme, tools }) => {
 
     if (action.id === "quickAccess") {
       const toolId = await getQuickAccessToolId();
-      console.log("quickAccess toolId: ", toolId);
       if (toolId === null) {
         Alert.alert(
           t(textQA("quickAccessAlertTitle")),
@@ -91,12 +89,12 @@ const HomeNavi = ({ isEditing, setIsEditing, theme, tools }) => {
         );
       } else {
         let tool = {};
-        for (let key in tools) {
-          if (tools[key].id == toolId) {
-            tool = tools[key];
+        for (let key in currentTools) {
+          if (currentTools[key].id == toolId) {
+            tool = currentTools[key];
           }
         }
-        console.log("quickAccess tool: ", tool);
+
         if (tool.link === "CreatedTool") {
           navigation.navigate("CreatedTool", { tool });
         } else {
@@ -158,6 +156,8 @@ const HomeNavi = ({ isEditing, setIsEditing, theme, tools }) => {
         name="HomeNavi"
         children={() => (
           <Home
+            currentTools={currentTools}
+            setCurrentTools={setCurrentTools}
             searchBarRef={searchBarRef}
             setSearchText={setSearchText}
             searchText={searchText}
