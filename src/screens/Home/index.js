@@ -224,7 +224,7 @@ function Home(props) {
                         },
                         {
                           title: t(text("enableQuickAccess")),
-                          systemIcon: "rectangle.portrait.and.arrow.right",
+                          systemIcon: "arrow.forward.to.line.circle",
                         },
                       ]
                     : [
@@ -237,7 +237,7 @@ function Home(props) {
                         { title: t(text("hide")), systemIcon: "eye.slash" },
                         {
                           title: t(text("enableQuickAccess")),
-                          systemIcon: "rectangle.portrait.and.arrow.right",
+                          systemIcon: "arrow.forward.to.line.circle",
                         },
                       ]
                   : tool.link === "CreatedTool"
@@ -261,7 +261,7 @@ function Home(props) {
                       },
                       {
                         title: t(text("enableQuickAccess")),
-                        systemIcon: "rectangle.portrait.and.arrow.right",
+                        systemIcon: "arrow.forward.to.line.circle",
                       },
                     ]
                   : [
@@ -279,7 +279,7 @@ function Home(props) {
                       },
                       {
                         title: t(text("enableQuickAccess")),
-                        systemIcon: "rectangle.portrait.and.arrow.right",
+                        systemIcon: "arrow.forward.to.line.circle",
                       },
                     ]
               }
@@ -442,19 +442,7 @@ function Home(props) {
     <SafeAreaView>
       <View className="items-center">
         {props.searchText.length > 0 || props.isEditing === true ? (
-          <View
-            style={{
-              width: 150,
-              height: 30,
-              marginBottom: 10,
-              marginTop: 10,
-              backgroundColor: props.theme === "dark" ? "#2C2C2F" : "#E7E7E8",
-              borderRadius: 8,
-              flexDirection: "row",
-              justifyContent: "center",
-              alignItems: "center",
-            }}
-          >
+          <View>
             <Text
               style={{
                 color: props.theme === "dark" ? "#ffffffAA" : "#00000088",
@@ -489,7 +477,7 @@ function Home(props) {
               return (
                 <View
                   style={{
-                    width: 150,
+                    width: 135,
                     height: 30,
                     marginBottom: 10,
                     marginTop: 10,
@@ -519,12 +507,8 @@ function Home(props) {
               return (
                 <View
                   style={{
-                    ...{
-                      width: "100%",
-                      flexDirection: "row",
-                      paddingHorizontal: 12,
-                      paddingVertical: 8,
-                    },
+                    paddingHorizontal: 12,
+                    paddingVertical: 8,
                   }}
                 >
                   <Text
@@ -547,8 +531,11 @@ function Home(props) {
             }}
             showsVerticalScrollIndicator={false}
             dropdownStyle={{
+              marginStart: -7,
+              marginEnd: -7,
               backgroundColor: props.theme === "dark" ? "#2C2C2F" : "#E7E7E8",
               borderRadius: 8,
+              width: 150,
             }}
           />
         )}

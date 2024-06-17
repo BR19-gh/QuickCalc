@@ -53,7 +53,7 @@ const App = () => {
       {
         title: t(text("quickAccess")),
         subtitle: t(text("quickAccessSub")),
-        icon: "symbol:rectangle.portrait.and.arrow.right",
+        icon: "symbol:arrow.forward.to.line.circle",
         id: "quickAccess",
       },
     ]);

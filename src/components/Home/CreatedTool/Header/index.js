@@ -17,7 +17,11 @@ import {
   MenuTrigger,
 } from "react-native-popup-menu";
 
-import { isDontShowAgain, setDontShowAgain } from "../../../../../_DATA";
+import {
+  isDontShowAgain,
+  setDontShowAgain,
+  setQuickAccessToolId,
+} from "../../../../../_DATA";
 
 const Header = ({ currentTool, t, tools, dispatch, theme }) => {
   const text = (text) => "screens.Home.CreatedTool.Header." + text;
@@ -103,15 +107,25 @@ const Header = ({ currentTool, t, tools, dispatch, theme }) => {
     }
   };
 
+  const changeQuickAccess = async (id) => {
+    await setQuickAccessToolId(id);
+    toast.show(t(text("toolAssigned")), {
+      duration: 1000,
+      type: "success",
+      placement: "top",
+    });
+  };
+
   return (
     <View>
       {Platform.isPad ? (
-        <Menu onSelect={(value) => alert(`Selected number: ${value}`)}>
+        <Menu>
           <MenuTrigger
             children={
               <SweetSFSymbol
                 name="ellipsis.circle"
                 size={22}
+                variableValue={100}
                 colors={["#3B82F6"]}
               />
             }
@@ -228,6 +242,38 @@ const Header = ({ currentTool, t, tools, dispatch, theme }) => {
             </MenuOption>
             <MenuOption
               onSelect={() => {
+                {
+                  Haptics.selectionAsync();
+                  changeQuickAccess(currentTool.id);
+                }
+              }}
+              value={2}
+            >
+              <View className="flex-row justify-between p-1">
+                <Text
+                  style={{
+                    color: theme === "dark" ? "#fff" : "#151E26",
+                  }}
+                >
+                  {t(text("enableQuickAccess"))}
+                </Text>
+                <SweetSFSymbol
+                  name="arrow.forward.to.line.circle"
+                  size={18}
+                  colors={[theme === "dark" ? "#fff" : "#151E26"]}
+                />
+              </View>
+              <View
+                style={{
+                  marginTop: 10,
+                  borderBottomColor: theme === "dark" ? "#333333" : "#CCCCCC",
+                  borderBottomWidth: StyleSheet.hairlineWidth,
+                  alignSelf: "stretch",
+                }}
+              />
+            </MenuOption>
+            <MenuOption
+              onSelect={() => {
                 Haptics.notificationAsync(
                   Haptics.NotificationFeedbackType.Warning
                 );
@@ -316,6 +362,7 @@ const Header = ({ currentTool, t, tools, dispatch, theme }) => {
           <SweetSFSymbol
             name="ellipsis.circle"
             size={22}
+            variableValue={100}
             colors={["#3B82F6"]}
           />
         </ContextMenu>

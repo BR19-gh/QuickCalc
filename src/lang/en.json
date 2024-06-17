@@ -151,7 +151,9 @@
             "toolHasBeenShared": "Sharing Tool Code",
             "toolHasBeenSharedMsg": "The tool's code will be shared with you. Share it with the person who needs the tool. They should add the tool by pressing (+), then (Use Code), paste the code in the (Tool Code) field, and press (Save). The tool will appear on Home page.",
             "dontShowAgain": "Don't show again",
-            "gotIt": "Got it"
+            "gotIt": "Got it",
+            "enableQuickAccess": "Enable Quick Access",
+            "toolAssigned": "Tool assigned!"
           }
         },
         "DiscountCal": {

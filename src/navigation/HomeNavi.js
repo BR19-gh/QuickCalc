@@ -214,7 +214,9 @@ const HomeNavi = ({ isEditing, setIsEditing, theme, tools }) => {
       <Stack.Screen
         options={{
           title: t(DiscountCaltext("title")),
-          headerRight: () => <HeaderTools currentTool={"DiscountCal"} t={t} />,
+          headerRight: () => (
+            <HeaderTools theme={theme} currentTool={"DiscountCal"} t={t} />
+          ),
         }}
         name="DiscountCal"
         children={() => <DiscountCal theme={theme} />}
@@ -230,7 +232,9 @@ const HomeNavi = ({ isEditing, setIsEditing, theme, tools }) => {
       <Stack.Screen
         options={{
           title: t(TipCaltext("title")),
-          headerRight: () => <HeaderTools currentTool={"TipCal"} t={t} />,
+          headerRight: () => (
+            <HeaderTools theme={theme} currentTool={"TipCal"} t={t} />
+          ),
         }}
         name="TipCal"
         children={() => <TipCal theme={theme} />}
@@ -238,7 +242,9 @@ const HomeNavi = ({ isEditing, setIsEditing, theme, tools }) => {
       <Stack.Screen
         options={{
           title: t(CurrencyConText("title")),
-          headerRight: () => <HeaderTools currentTool={"CurrencyCon"} t={t} />,
+          headerRight: () => (
+            <HeaderTools theme={theme} currentTool={"CurrencyCon"} t={t} />
+          ),
         }}
         name="CurrencyCon"
         children={() => <CurrencyCon theme={theme} />}
@@ -246,7 +252,9 @@ const HomeNavi = ({ isEditing, setIsEditing, theme, tools }) => {
       <Stack.Screen
         options={{
           title: t(CalendarConText("title")),
-          headerRight: () => <HeaderTools currentTool={"CalendarCon"} t={t} />,
+          headerRight: () => (
+            <HeaderTools theme={theme} currentTool={"CalendarCon"} t={t} />
+          ),
         }}
         name="CalendarCon"
         children={() => <CalendarCon theme={theme} />}
