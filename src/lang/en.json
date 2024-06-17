@@ -9,7 +9,8 @@
         "quickAccess": "Quick Access",
         "quickAccessSub": "To a tool you choose",
         "quickAccessAlertTitle": "Enabling Quick Access",
-        "quickAccessAlertMsg": "Please select a tool first before using Quick Access, long press the tool you want to access quickly then select (Enable Quick Access)."
+        "quickAccessAlertMsg": "Please select a tool first before using Quick Access, long press the tool you want to access quickly then select (Enable Quick Access).",
+        "quickAccessAlertMsgDisktop": "Please select a tool first before using Quick Access, press the ellipsis (...) in the tool's header you want to access quickly then select (Enable Quick Access)."
       },
       "Welcome": {
         "title": null,
