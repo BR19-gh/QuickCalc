@@ -22,12 +22,12 @@
       "distribution": "internal"
     },
     "production": {
-           "ios": {
+      "ios": {
         "image": "latest"
       }
     }
   },
   "submit": {
-    "production": {  }
+    "production": {}
   }
 }
