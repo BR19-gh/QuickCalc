@@ -24,7 +24,7 @@ import { useNavigation } from "@react-navigation/native";
 import { useQuickActionCallback } from "expo-quick-actions/hooks";
 
 import { getQuickAccessToolId } from "../../_DATA";
-import { Alert } from "react-native";
+import { Alert, Platform } from "react-native";
 
 const Stack = createNativeStackNavigator();
 
@@ -78,7 +78,7 @@ const HomeNavi = ({ isEditing, setIsEditing, theme, tools }) => {
       if (toolId === null) {
         Alert.alert(
           t(textQA("quickAccessAlertTitle")),
-          t(textQA("quickAccessAlertMsg")),
+          Platform.isPad? t(textQA("quickAccessAlertMsgDisktop")) : t(textQA("quickAccessAlertMsg")),
           [
             {
               text: t(text("gotIt")),
