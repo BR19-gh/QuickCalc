@@ -28,8 +28,6 @@
     }
   },
   "submit": {
-    "production": {      "ios": {
-        "image": "latest"
-      } }
+    "production": {  }
   }
 }
