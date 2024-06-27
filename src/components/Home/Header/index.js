@@ -19,11 +19,18 @@ import {
   MenuTrigger,
 } from "react-native-popup-menu";
 
+import { useNavigation } from "@react-navigation/native";
+
 import { setQuickAccessToolId } from "../../../../_DATA";
+
+import { useRevenueCat } from "../../../providers/RevenueCatProvider";
 
 const Header = ({ currentTool, t, tools, theme }) => {
   const toast = useToast();
   const text = (text) => "screens.Home.CreatedTool.Header." + text;
+
+  const { user } = useRevenueCat();
+  const navigation = useNavigation();
 
   function getToolByName(link) {
     for (const toolId in tools) {
@@ -123,8 +130,12 @@ const Header = ({ currentTool, t, tools, theme }) => {
             <MenuOption
               onSelect={() => {
                 {
-                  Haptics.selectionAsync();
-                  changeQuickAccess(tool.id);
+                  if (user.golden) {
+                    Haptics.selectionAsync();
+                    changeQuickAccess(tool.id);
+                  } else {
+                    navigation.navigate("Paywall");
+                  }
                 }
               }}
               value={2}
