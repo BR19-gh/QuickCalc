@@ -16,11 +16,6 @@ import mobileAds from "react-native-google-mobile-ads";
 import { requestTrackingPermissionsAsync } from "expo-tracking-transparency";
 import { setTrackingStat } from "./_DATA";
 import { RevenueCatProvider } from "./src/providers/RevenueCatProvider";
-// import Purchases, { PurchasesOffering } from "react-native-purchases";
-
-// const APIKeys = {
-//   apple: "appl_nNlwpoegqhBIBGqaalmaafwblsc",
-// };
 
 const App = () => {
   const store = createStore(reducer, middleware);
