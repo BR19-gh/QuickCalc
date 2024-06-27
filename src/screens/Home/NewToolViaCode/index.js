@@ -8,6 +8,7 @@ import {
   TextInput,
   Alert,
   Clipboard,
+  Dimensions,
 } from "react-native";
 import SweetSFSymbol from "sweet-sfsymbols";
 
@@ -279,9 +280,15 @@ function NewToolViaCode({ theme, tools, dispatch }) {
 
   return (
     <ScrollView>
-      <View className={"mt-28  w-full items-center"}>
+      <View
+        className={
+          "w-full " +
+          (Dimensions.get("window").height > 667 ? "mt-28" : "mt-16") +
+          " items-center"
+        }
+      >
         <View className={"items-center"}>
-          <View className={"mb-2"}>
+          <View className={"mb-1"}>
             <Text
               className={
                 "mb-2 text-center text-2xl font-semibold" +
@@ -336,7 +343,7 @@ function NewToolViaCode({ theme, tools, dispatch }) {
           </View>
           <Text
             className={
-              "w-full text-center text-xs font-semibold p-2 pb-3" +
+              "w-full text-center text-xs font-semibold p-2 pb-2" +
               (errMsg === t(text("invalidCode"))
                 ? toolCode === ""
                   ? " text-transparent"
@@ -376,7 +383,7 @@ function NewToolViaCode({ theme, tools, dispatch }) {
                 borderColor: theme === "dark" ? "gray" : "black",
                 width: "92%",
               }}
-              className="mb-9 h-32 rounded-lg"
+              className="mb-2.5 h-32 rounded-lg"
             >
               <TouchableOpacity
                 key={
@@ -433,7 +440,7 @@ function NewToolViaCode({ theme, tools, dispatch }) {
             <TouchableOpacity
               disabled={toolCode !== ""}
               className={
-                "mt-2.5 h-14 w-36 flex-row items-center justify-evenly rounded-full"
+                "mt-5 h-14 w-36 flex-row items-center justify-evenly rounded-full"
               }
               style={{
                 backgroundColor: toolCode !== "" ? "#6C6BA6" : "#38377C",
@@ -480,7 +487,7 @@ function NewToolViaCode({ theme, tools, dispatch }) {
             </TouchableOpacity>
           </View>
         </View>
-        <View className="mb-5 mt-5 flex w-11/12 flex-row justify-center">
+        <View className="mb-2.5 mt-2.5 flex w-11/12 flex-row justify-center">
           <TouchableOpacity
             disabled={errMsg !== t(text("acceptedCode"))}
             className="h-16 w-11/12 items-center justify-center rounded-full"

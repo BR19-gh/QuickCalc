@@ -45,7 +45,11 @@
           "search": "Search Tools",
           "searchFavorite": "Search Favored Tools",
           "useCode": "Use Code",
-          "gotIt": "Got It"
+          "gotIt": "Got It",
+          "termsOfUse": "Terms of Use",
+          "currentPlan": "Current Plan",
+          "maxToolsAlertTitle": "Max number of tools exceeded",
+          "maxToolsAlert": "You have reached the maximum number of tools available. You can create more tools after subscribing to the Golden Version 👑."
         }
       },
       "Home": {
@@ -363,7 +367,7 @@
           "dark": "Dark",
           "light": "Light",
           "changeLanguageAlertTitle": "Changing the Language",
-          "changeLanguageAlertBody": "You have to change the language in the phone settings. The app will automatically reflect the change here.",
+          "changeLanguageAlertBody": "You have to change the language in the device settings. The app will automatically reflect the change here.",
           "goToSettings": "Go to Settings",
           "cancel": "Cancel",
           "app": "App",
@@ -378,7 +382,32 @@
           "ok": "OK!",
           "coffee": "Buy me a cup of coffee!",
           "coffeeAlert": "Buy Me a Coffee and Support the App ☕️!",
-          "coffeeAlertMsg": "Hey there! Noticed there are no annoying ads in this app 😉? If you’re enjoying it, how about buying me a coffee ☕️? You can support me with a tiny donation, equivalent to buying me a coffee, your support helps me improve the app and add cool features without showing any kind of ads. Plus, coffee keeps my headaches away while coding 😵‍💫. Thanks for your support! 🫶"
+          "coffeeAlertMsg": "Hey there! Noticed there are no annoying ads in this app 😉? If you’re enjoying it, how about buying me a coffee ☕️? You can support me with a tiny donation, equivalent to buying me a coffee, your support helps me improve the app and add cool features without showing any kind of ads. Plus, coffee keeps my headaches away while coding 😵‍💫. Thanks for your support! 🫶",
+          "goldenVersion": "Golden Version"
+        },
+        "Paywall": {
+          "title": "Golden Version",
+          "restore": "Restore Purchase",
+          "promocode": "Promo Code",
+          "description": "You can cancel at any time\n7 days free trial when subscribing for first time",
+          "privacy": "Privacy Policy",
+          "termsOfUse": "Terms of Use",
+          "currentPlan": "Current Plan",
+          "features": {
+            "1": "Remove Annoying Ads",
+            "2": "Create Unlimited Tools",
+            "3": "Enable Quick Access",
+            "4": "Support Your Favorite App",
+            "5": "And More Other Features"
+          },
+          "subscribed": "You are subscribed",
+          "notSubscribed": "You are not subscribed",
+          "paywall": "Paywall",
+          "oneMonth": "Subscribtion Period: One month",
+          "oneYear": "Subscribtion Period: One year",
+          "subStartDate": "Start Date",
+          "subEndDate": "End Date",
+          "trial": "You are in Trial Mode"
         }
       }
     }

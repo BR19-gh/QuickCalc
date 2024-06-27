@@ -6,17 +6,16 @@ import {
   ScrollView,
   Alert,
   Clipboard,
+  Dimensions,
 } from "react-native";
 import styles from "./styles";
 import SweetSFSymbol from "sweet-sfsymbols";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 
 import { connect } from "react-redux";
 
 import { useTranslation } from "react-i18next";
-
-import { useRef } from "react";
 
 import * as Haptics from "expo-haptics";
 
@@ -35,6 +34,8 @@ import { lang } from "../../../helpers";
 import { useToast } from "react-native-toast-notifications";
 
 import * as StoreReview from "expo-store-review";
+import InlineAd from "../../../components/InlineAd/InlineAd";
+import { useRevenueCat } from "../../../providers/RevenueCatProvider";
 
 function CalendarCon({ theme }) {
   const { t } = useTranslation();
@@ -382,6 +383,7 @@ function CalendarCon({ theme }) {
         t(text("errorNoCalendarsSelectedMsg"))
       );
     }
+    scrollViewSizeChanged(300);
   };
 
   const reset = () => {
@@ -415,10 +417,35 @@ function CalendarCon({ theme }) {
   useEffect(() => {
     console.log(toCalendarValue);
   }, [toCalendarValue]);
+
+  const scrollViewRef = useRef(null);
+
+  function scrollViewSizeChanged(height) {
+    // y since we want to scroll vertically, use x and the width-value if you want to scroll horizontally
+    scrollViewRef.current?.scrollTo({ y: height, animated: true });
+  }
+
+  const { user } = useRevenueCat();
+
   return (
     <View>
-      <ScrollView className="h-full">
-        <View className={"w-full mt-32 items-center"}>
+      <ScrollView
+        style={{
+          height: user.golden
+            ? "100%"
+            : Dimensions.get("window").height > 667
+            ? "93%"
+            : "91%",
+        }}
+        ref={scrollViewRef}
+      >
+        <View
+          className={
+            "w-full " +
+            (Dimensions.get("window").height > 667 ? "mt-28" : "mt-20") +
+            " items-center"
+          }
+        >
           <View className={"w-full flex-row justify-evenly"}>
             <View>
               <DropdownComponent
@@ -812,6 +839,7 @@ function CalendarCon({ theme }) {
         </View>
       </ScrollView>
       <StatusBar style="auto" />
+      {user.golden ? null : <InlineAd />}
     </View>
   );
 }

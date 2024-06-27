@@ -1,4 +1,5 @@
 import { NativeModules, Platform } from "react-native";
+import { getLocales } from "expo-localization";
 
 export function formatDate(timestamp) {
   const date = new Date(timestamp);
@@ -12,22 +13,9 @@ export function formatDate(timestamp) {
   });
 }
 
-const deviceLanguage =
-  Platform.OS === "ios"
-    ? NativeModules.SettingsManager.settings.AppleLocale ||
-      NativeModules.SettingsManager.settings.AppleLanguages[0] // iOS 13
-    : NativeModules.I18nManager.localeIdentifier;
+const deviceLanguage = getLocales()[0].languageCode;
 
-let lan;
-let str = deviceLanguage;
-let match = str.match(/^([a-z]{2})/i);
-if (match) {
-  lan = match[0];
-} else {
-  lan = "en";
-}
-
-export const lang = lan;
+export const lang = deviceLanguage;
 
 export const CALENDAR_INFO = [
   {

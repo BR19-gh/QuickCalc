@@ -7,6 +7,9 @@ import { useState } from "react";
 import WalkThrough from "../screens/Welcome/WalkThrough";
 
 import { Platform } from "react-native";
+import Paywall from "../screens/Settings/Paywall";
+import { TermsOfUse } from "../screens/Settings/Paywall/TermsOfUse";
+import User from "../components/Settings/User";
 
 const Stack = createNativeStackNavigator();
 
@@ -74,6 +77,30 @@ const SettingsNavi = ({
             theme={theme}
           />
         )}
+      />
+      <Stack.Screen
+        options={{
+          presentation: "modal",
+          header: () => null,
+        }}
+        name="Paywall"
+        children={() => <Paywall theme={theme} />}
+      />
+      <Stack.Screen
+        options={{
+          presentation: "modal",
+          headerTitle: t(text("termsOfUse")),
+        }}
+        name="termsOfUse"
+        children={() => <TermsOfUse theme={theme} />}
+      />
+      <Stack.Screen
+        options={{
+          presentation: "modal",
+          headerTitle: t(text("currentPlan")),
+        }}
+        name="user"
+        children={() => <User theme={theme} />}
       />
     </Stack.Navigator>
   );

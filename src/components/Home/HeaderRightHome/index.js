@@ -1,10 +1,12 @@
-import { Text, View, TouchableOpacity } from "react-native";
+import { Text, View, TouchableOpacity, Alert } from "react-native";
 import SweetSFSymbol from "sweet-sfsymbols";
 import i18n from "../../../lang/i18n";
 import { lang } from "../../../helpers";
 import * as Haptics from "expo-haptics";
 import { useNavigation } from "@react-navigation/native";
 import { useEffect } from "react";
+import { connect } from "react-redux";
+import { useRevenueCat } from "../../../providers/RevenueCatProvider";
 
 const Header = ({
   setIsEditing,
@@ -12,8 +14,8 @@ const Header = ({
   setIsEditingFavorite,
   isEditingFavorite,
   isShowedFavorite,
-  moving,
   setMoving,
+  tools,
 }) => {
   const { t } = i18n;
   const text = (text) => "screens.Navi.text." + text;
@@ -24,6 +26,8 @@ const Header = ({
     if (isEditing === false) setMoving(false);
     else setMoving(true);
   }, [isEditing]);
+
+  const { user } = useRevenueCat();
 
   return (
     <View
@@ -82,6 +86,27 @@ const Header = ({
             <TouchableOpacity
               onPress={() => {
                 Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+                if (
+                  Object.values(tools).filter(
+                    (tool) => tool.link === "CreatedTool"
+                  ).length >= 2 &&
+                  user.golden === false
+                ) {
+                  return Alert.alert(
+                    t(text("maxToolsAlertTitle")),
+                    t(text("maxToolsAlert")),
+                    [
+                      {
+                        text: t(text("gotIt")),
+                        style: "default",
+                        onPress: () => {
+                          navigation.navigate("Paywall");
+                        },
+                      },
+                    ]
+                  );
+                }
+
                 navigation.navigate("NewTool");
               }}
             >
@@ -94,4 +119,10 @@ const Header = ({
   );
 };
 
-export default Header;
+const mapStateToProps = ({ tools }) => {
+  return {
+    tools,
+  };
+};
+
+export default connect(mapStateToProps)(Header);

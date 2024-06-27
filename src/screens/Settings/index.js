@@ -33,6 +33,7 @@ import * as Haptics from "expo-haptics";
 import { useNavigation } from "@react-navigation/native";
 import { lang } from "../../helpers";
 import * as StoreReview from "expo-store-review";
+import { useRevenueCat } from "../../providers/RevenueCatProvider";
 
 const openAppPref = (t, text) => {
   if (Platform.OS === "ios") {
@@ -97,6 +98,8 @@ const deleteData = (t, text, toast, dispatch) => {
 };
 
 function Settings({ theme, isThemeChanged, setIsThemeChanged, dispatch }) {
+  const { user } = useRevenueCat();
+
   const [isAuto, setIsAuto] = useState(false);
   const auto = useColorScheme();
   const dropdownRef = useRef(null);
@@ -339,50 +342,20 @@ function Settings({ theme, isThemeChanged, setIsThemeChanged, dispatch }) {
                   type="newpage"
                   onPress={() => Communications.web("https://br19.me")}
                 />
-                <SettingsButton
-                  title={
-                    <View className="flex-row-reverse justify-end items-center">
-                      <Text className={isDarkTextColor()}>
-                        {t(text("coffee"))}
-                      </Text>
-                      <Text>{"   "}</Text>
-                      <SweetSFSymbol
-                        name={"mug.fill"}
-                        size={20}
-                        colors={["gray"]}
-                      />
-                    </View>
-                  }
-                  type="newpage"
-                  onPress={() => {
-                    Haptics.notificationAsync(
-                      Haptics.NotificationFeedbackType.Warning
-                    );
-                    Alert.alert(
-                      t(text("coffeeAlert")),
-                      t(text("coffeeAlertMsg")),
-                      [
-                        {
-                          text: t(text("ok")),
-                          onPress: () => {
-                            Communications.web("https://buymeacoffee.com/br19");
-                          },
-                          style: "default",
-                        },
-                        {
-                          text: t(text("cancel")),
-                          onPress: () => {},
-                          style: "destructive",
-                        },
-                      ]
-                    );
-                  }}
-                />
               </SettingsGroup>
             </View>
             <View>
               <Text style={stylesSettings.groupTitle}>{t(text("app"))}</Text>
               <SettingsGroup>
+                <SettingsButton
+                  title={t(text("goldenVersion"))}
+                  type="newpage"
+                  onPress={() => {
+                    user.golden
+                      ? navigation.navigate("user")
+                      : navigation.navigate("Paywall");
+                  }}
+                />
                 <SettingsButton
                   title={t(text("walkThrough"))}
                   type="newpage"

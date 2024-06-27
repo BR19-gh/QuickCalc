@@ -9,17 +9,16 @@ import {
   StyleSheet,
   Alert,
   Clipboard,
+  Dimensions,
 } from "react-native";
 import styles from "./styles";
 import SweetSFSymbol from "sweet-sfsymbols";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 
 import { connect } from "react-redux";
 
 import { useTranslation } from "react-i18next";
-
-import { useRef } from "react";
 
 import { handleUnitConversion } from "../../../store/actions/unitResult";
 
@@ -36,6 +35,9 @@ import { useNavigation } from "@react-navigation/native";
 
 import * as StoreReview from "expo-store-review";
 
+import InlineAd from "../../../components/InlineAd/InlineAd";
+import { useRevenueCat } from "../../../providers/RevenueCatProvider";
+
 function UnitsCon({ theme, dispatch, unitResult }) {
   const { t } = useTranslation();
   const text = (text) => "screens.Home.UnitsCon.text." + text;
@@ -47,6 +49,8 @@ function UnitsCon({ theme, dispatch, unitResult }) {
   const [toUnitValue, setToUnitValue] = useState("");
   const netInfo = useNetInfo();
   const navigation = useNavigation();
+  const { user } = useRevenueCat();
+
   useEffect(() => {
     if (netInfo.isConnected === false) {
       Alert.alert(
@@ -137,6 +141,7 @@ function UnitsCon({ theme, dispatch, unitResult }) {
     } else {
       return null;
     }
+    scrollViewSizeChanged(300);
   };
 
   useEffect(() => {
@@ -179,10 +184,32 @@ function UnitsCon({ theme, dispatch, unitResult }) {
     },
   });
 
+  const scrollViewRef = useRef(null);
+
+  function scrollViewSizeChanged(height) {
+    // y since we want to scroll vertically, use x and the width-value if you want to scroll horizontally
+    scrollViewRef.current?.scrollTo({ y: height, animated: true });
+  }
+
   return (
     <View>
-      <ScrollView className="h-full">
-        <View className={"w-full mt-32 items-center"}>
+      <ScrollView
+        style={{
+          height: user.golden
+            ? "100%"
+            : Dimensions.get("window").height > 667
+            ? "93%"
+            : "91%",
+        }}
+        ref={scrollViewRef}
+      >
+        <View
+          className={
+            "w-full " +
+            (Dimensions.get("window").height > 667 ? "mt-28" : "mt-20") +
+            " items-center"
+          }
+        >
           <Dropdown
             activeColor={theme === "dark" ? "#444444" : "#D2D2D2"}
             itemContainerStyle={{
@@ -458,6 +485,7 @@ function UnitsCon({ theme, dispatch, unitResult }) {
         </View>
       </ScrollView>
       <StatusBar style="auto" />
+      {user.golden ? null : <InlineAd />}
     </View>
   );
 }

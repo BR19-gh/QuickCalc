@@ -20,11 +20,17 @@ import CreatedTool from "../screens/Home/CreatedTool";
 import Header from "../components/Home/CreatedTool/Header";
 import HeaderTools from "../components/Home/Header";
 
+import Paywall from "../screens/Settings/Paywall";
+import { TermsOfUse } from "../screens/Settings/Paywall/TermsOfUse";
+import User from "../components/Settings/User";
+
 import { useNavigation } from "@react-navigation/native";
 import { useQuickActionCallback } from "expo-quick-actions/hooks";
 
 import { getQuickAccessToolId } from "../../_DATA";
 import { Alert, Platform } from "react-native";
+
+import Purchases from "react-native-purchases";
 
 const Stack = createNativeStackNavigator();
 
@@ -74,11 +80,18 @@ const HomeNavi = ({ isEditing, setIsEditing, theme, tools }) => {
     }
 
     if (action.id === "quickAccess") {
+      const customerInfo = await Purchases.getCustomerInfo();
+      if (customerInfo?.entitlements.active["Golden Version"] === undefined) {
+        navigation.navigate("Paywall");
+        return;
+      }
       const toolId = await getQuickAccessToolId();
       if (toolId === null) {
         Alert.alert(
           t(textQA("quickAccessAlertTitle")),
-          Platform.isPad? t(textQA("quickAccessAlertMsgDisktop")) : t(textQA("quickAccessAlertMsg")),
+          Platform.isPad
+            ? t(textQA("quickAccessAlertMsgDisktop"))
+            : t(textQA("quickAccessAlertMsg")),
           [
             {
               text: t(text("gotIt")),
@@ -258,6 +271,31 @@ const HomeNavi = ({ isEditing, setIsEditing, theme, tools }) => {
         }}
         name="CalendarCon"
         children={() => <CalendarCon theme={theme} />}
+      />
+      <Stack.Screen
+        options={{
+          presentation: "modal",
+          header: () => null,
+        }}
+        name="Paywall"
+        children={() => <Paywall theme={theme} />}
+      />
+      <Stack.Screen
+        options={{
+          presentation: "modal",
+          headerTitle: t(text("termsOfUse")),
+        }}
+        name="termsOfUse"
+        children={() => <TermsOfUse theme={theme} />}
+      />
+
+      <Stack.Screen
+        options={{
+          presentation: "modal",
+          headerTitle: t(text("currentPlan")),
+        }}
+        name="user"
+        children={() => <User theme={theme} />}
       />
     </Stack.Navigator>
   );

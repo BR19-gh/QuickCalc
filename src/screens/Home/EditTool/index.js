@@ -8,6 +8,7 @@ import {
   TextInput,
   Alert,
   StyleSheet,
+  Dimensions,
 } from "react-native";
 import SweetSFSymbol from "sweet-sfsymbols";
 import SelectDropdown from "react-native-select-dropdown";
@@ -204,7 +205,13 @@ function EditTool({ theme, tools, route, dispatch }) {
   return (
     <View>
       <ScrollView className="h-full" automaticallyAdjustKeyboardInsets={true}>
-        <View className={"w-full  mt-28 items-center"}>
+        <View
+          className={
+            "w-full " +
+            (Dimensions.get("window").height > 667 ? "mt-28" : "mt-16") +
+            " items-center"
+          }
+        >
           <View className={"mb-2"}>
             <Text
               className={

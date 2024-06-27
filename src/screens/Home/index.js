@@ -7,6 +7,7 @@ import {
   Platform,
   Alert,
   Share,
+  StatusBar,
 } from "react-native";
 import Card from "../../components/Home/Card";
 import SwipeableRow from "../../components/Home/Swipeable";
@@ -41,8 +42,17 @@ import {
   setDontShowAgain,
   setQuickAccessToolId,
 } from "../../../_DATA";
+import InlineAd from "../../components/InlineAd/InlineAd";
+import { showAd, loadAd } from "../../components/InterstitialAd";
+import { useRevenueCat } from "../../providers/RevenueCatProvider";
+
+import { storeTools } from "../../../_DATA";
 
 function Home(props) {
+  useEffect(() => {
+    loadAd(); // Load the ad when the component mounts
+  }, []);
+
   useEffect(() => {
     props.dispatch(handleInitialData());
   }, [props.theme]);
@@ -365,8 +375,12 @@ function Home(props) {
                 } else if (
                   e.nativeEvent.name === t(text("enableQuickAccess"))
                 ) {
-                  Haptics.selectionAsync();
-                  changeQuickAccess(tool.id);
+                  if (user.golden) {
+                    Haptics.selectionAsync();
+                    changeQuickAccess(tool.id);
+                  } else {
+                    navigation.navigate("Paywall");
+                  }
                 }
               }}
             >
@@ -438,11 +452,42 @@ function Home(props) {
 
   const windowHight = Dimensions.get("window").height;
 
+  const { user } = useRevenueCat();
+
+  //show ads
+  const handleAdClosed = () => {
+    setTimeout(() => {
+      showAd(handleAdClosed);
+    }, 60000 * 3);
+  };
+
+  useEffect(() => {
+    setTimeout(() => {
+      try {
+        showAd(handleAdClosed);
+      } catch (e) {
+        console.log(e);
+      }
+    }, 30000);
+  }, []);
+
   return (
     <SafeAreaView>
       <View className="items-center">
         {props.searchText.length > 0 || props.isEditing === true ? (
-          <View>
+          <View
+            style={{
+              width: 135,
+              height: 30,
+              marginBottom: 10,
+              marginTop: 10,
+              backgroundColor: props.theme === "dark" ? "#2C2C2F" : "#E7E7E8",
+              borderRadius: 8,
+              flexDirection: "row",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
             <Text
               style={{
                 color: props.theme === "dark" ? "#ffffffAA" : "#00000088",
@@ -541,7 +586,20 @@ function Home(props) {
         )}
 
         <NestableScrollContainer
-          style={{ width: "100%", height: windowHight > 667 ? "91.5%" : "89%" }}
+          style={{
+            width: "100%",
+            height: user.golden
+              ? windowHight > 667
+                ? windowHight > 852
+                  ? "95%"
+                  : "91.5%"
+                : "89.5%"
+              : windowHight > 667
+              ? windowHight > 852
+                ? "86%"
+                : "79.5%"
+              : "76.5%",
+          }}
           refreshControl={
             <RefreshControl
               refreshing={refreshing}
@@ -774,6 +832,8 @@ function Home(props) {
           }
         </NestableScrollContainer>
       </View>
+      <StatusBar style="auto" />
+      {user.golden ? null : <InlineAd />}
     </SafeAreaView>
   );
 }

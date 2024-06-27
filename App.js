@@ -12,6 +12,15 @@ import { MenuProvider } from "react-native-popup-menu";
 import { isFirstTimeLaunch } from "./_DATA";
 import * as QuickActions from "expo-quick-actions";
 import { useTranslation } from "react-i18next";
+import mobileAds from "react-native-google-mobile-ads";
+import { requestTrackingPermissionsAsync } from "expo-tracking-transparency";
+import { setTrackingStat } from "./_DATA";
+import { RevenueCatProvider } from "./src/providers/RevenueCatProvider";
+// import Purchases, { PurchasesOffering } from "react-native-purchases";
+
+// const APIKeys = {
+//   apple: "appl_nNlwpoegqhBIBGqaalmaafwblsc",
+// };
 
 const App = () => {
   const store = createStore(reducer, middleware);
@@ -22,6 +31,23 @@ const App = () => {
 
   const { t } = useTranslation();
   const text = (text) => "screens.QuickAction." + text;
+
+  useEffect(() => {
+    (async () => {
+      // Google AdMob will show any messages here that you just set up on the AdMob Privacy & Messaging page
+      const {
+        status: trackingStatus,
+      } = await requestTrackingPermissionsAsync();
+      if (trackingStatus !== "granted") {
+        await setTrackingStat(false);
+      } else {
+        await setTrackingStat(true);
+      }
+
+      // Initialize the ads
+      await mobileAds().initialize();
+    })();
+  }, []);
 
   useEffect(() => {
     const checkFirstTimeLaunch = async () => {
@@ -60,30 +86,32 @@ const App = () => {
   }, []);
 
   return (
-    <MenuProvider>
-      <ToastProvider>
-        <GestureHandlerRootView style={{ flex: 1 }}>
-          <Provider store={store}>
-            {getStartedBtnPressed || !isFirstTimeState ? (
-              <Navigation
-                theme={theme}
-                setTheme={setTheme}
-                isThemeChanged={isThemeChanged}
-                setIsThemeChanged={setIsThemeChanged}
-              />
-            ) : (
-              <NavigationWelcome
-                isThemeChanged={isThemeChanged}
-                setIsThemeChanged={setIsThemeChanged}
-                theme={theme}
-                setTheme={setTheme}
-                setGetStartedBtnPressed={setGetStartedBtnPressed}
-              />
-            )}
-          </Provider>
-        </GestureHandlerRootView>
-      </ToastProvider>
-    </MenuProvider>
+    <RevenueCatProvider>
+      <MenuProvider>
+        <ToastProvider>
+          <GestureHandlerRootView style={{ flex: 1 }}>
+            <Provider store={store}>
+              {getStartedBtnPressed || !isFirstTimeState ? (
+                <Navigation
+                  theme={theme}
+                  setTheme={setTheme}
+                  isThemeChanged={isThemeChanged}
+                  setIsThemeChanged={setIsThemeChanged}
+                />
+              ) : (
+                <NavigationWelcome
+                  isThemeChanged={isThemeChanged}
+                  setIsThemeChanged={setIsThemeChanged}
+                  theme={theme}
+                  setTheme={setTheme}
+                  setGetStartedBtnPressed={setGetStartedBtnPressed}
+                />
+              )}
+            </Provider>
+          </GestureHandlerRootView>
+        </ToastProvider>
+      </MenuProvider>
+    </RevenueCatProvider>
   );
 };
 

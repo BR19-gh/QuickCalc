@@ -19,13 +19,9 @@ import {
   MenuTrigger,
 } from "react-native-popup-menu";
 
-import {
-  isDontShowAgain,
-  setDontShowAgain,
-  setQuickAccessToolId,
-} from "../../../../_DATA";
+import { setQuickAccessToolId } from "../../../../_DATA";
 
-const Header = ({ currentTool, t, tools, dispatch, theme }) => {
+const Header = ({ currentTool, t, tools, theme }) => {
   const toast = useToast();
   const text = (text) => "screens.Home.CreatedTool.Header." + text;
 

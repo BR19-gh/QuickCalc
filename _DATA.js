@@ -93,6 +93,23 @@ const TOOLS = [
     isFavorite: false,
     isHidden: false,
   },
+  // {
+  //   id: 6,
+  //   searchName: "GPA Calculator حاسبة المعدل",
+  //   name: {
+  //     en: "GPA Calculator",
+  //     ar: "حاسبة المعدل",
+  //   },
+  //   description: {
+  //     en: "Calculate your GPA",
+  //     ar: "احسب معدلك الجامعي",
+  //   },
+  //   icon: "graduationcap.fill",
+  //   colors: ["#c29f0c", "#9b740d", "#6d4a16"],
+  //   link: "GPACal",
+  //   isFavorite: false,
+  //   isHidden: false,
+  // },
 ];
 
 const BLUE = [
@@ -116,7 +133,7 @@ export const getTools = async () => {
   } catch (e) {
     console.error("Error: getTools: ", e);
     Alert.alert(
-      "Unable lood tools",
+      "Unable load tools",
       "Please contact with the developer, you can find developer socials in the Settings tab",
       [
         {
@@ -129,6 +146,49 @@ export const getTools = async () => {
   }
 };
 
+export const setTrackingStat = async (bool) => {
+  try {
+    if (bool) {
+      await AsyncStorage.setItem("trackingStat", JSON.stringify(true));
+    } else {
+      await AsyncStorage.setItem("trackingStat", JSON.stringify(false));
+    }
+  } catch (e) {
+    console.error("Error: setTrackingStat: ", e);
+    Alert.alert(
+      "Unable to set trackingStat",
+      "Please contact with the developer, you can find developer socials in the Settings tab",
+      [
+        {
+          text: "Will Do",
+          onPress: () => null,
+          style: "Ok",
+        },
+      ]
+    );
+  }
+};
+
+export const getTrackingStat = async () => {
+  try {
+    const value = await AsyncStorage.getItem("trackingStat");
+    return value ? value : null;
+  } catch (e) {
+    console.error("Error: getTrackingStat: ", e);
+    Alert.alert(
+      "Unable to get trackingStat",
+      "Please contact with the developer, you can find developer socials in the Settings tab",
+      [
+        {
+          text: "Will Do",
+          onPress: () => null,
+          style: "Ok",
+        },
+      ]
+    );
+    return true;
+  }
+};
 export const setQuickAccessToolId = async (id) => {
   try {
     await AsyncStorage.setItem("quickAccessToolId", `${id}`);

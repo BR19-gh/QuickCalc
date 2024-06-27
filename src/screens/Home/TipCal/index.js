@@ -8,6 +8,7 @@ import {
   TextInput,
   Alert,
   Clipboard,
+  Dimensions,
 } from "react-native";
 import styles from "./styles";
 import SweetSFSymbol from "sweet-sfsymbols";
@@ -23,6 +24,9 @@ import { lang } from "../../../helpers";
 import * as Haptics from "expo-haptics";
 
 import * as StoreReview from "expo-store-review";
+
+import InlineAd from "../../../components/InlineAd/InlineAd";
+import { useRevenueCat } from "../../../providers/RevenueCatProvider";
 
 function TipCal({ theme }) {
   const { t } = useTranslation();
@@ -98,7 +102,7 @@ function TipCal({ theme }) {
         setTipAmount(Amount);
       }
 
-      scrollViewSizeChanged(100);
+      scrollViewSizeChanged(300);
     }
   };
 
@@ -113,16 +117,28 @@ function TipCal({ theme }) {
 
   const isDark = (darkOp, lightp) => (theme === "dark" ? darkOp : lightp);
 
+  const { user } = useRevenueCat();
+
   return (
     <View>
       <ScrollView
         style={{
-          height: "100%",
+          height: user.golden
+            ? "100%"
+            : Dimensions.get("window").height > 667
+            ? "93%"
+            : "91%",
           width: "100%",
         }}
         ref={scrollViewRef}
       >
-        <View className={"w-full mt-28 items-center"}>
+        <View
+          className={
+            "w-full " +
+            (Dimensions.get("window").height > 667 ? "mt-28" : "mt-20") +
+            " items-center"
+          }
+        >
           <View className={"w-full flex-row flex-wrap justify-evenly"}>
             <View>
               <Text
@@ -291,6 +307,7 @@ function TipCal({ theme }) {
         </View>
       </ScrollView>
       <StatusBar style="auto" />
+      {user.golden ? null : <InlineAd />}
     </View>
   );
 }
