@@ -78,7 +78,7 @@ const User = ({ theme }) => {
                 : t(text("subscribed"))
               : t(text("notSubscribed"))}
           </Text>
-          {user.golden && (
+          {user.golden && user.periodType !== "TRIAL" && (
             <Text
               className={
                 "mt-3 text-md text-xl " + isDark("text-white", "text-black")

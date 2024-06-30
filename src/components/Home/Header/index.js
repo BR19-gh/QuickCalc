@@ -126,16 +126,13 @@ const Header = ({ currentTool, t, tools, theme }) => {
                 }}
               />
             </MenuOption>
-
             <MenuOption
               onSelect={() => {
-                {
-                  if (user.golden) {
-                    Haptics.selectionAsync();
-                    changeQuickAccess(tool.id);
-                  } else {
-                    navigation.navigate("Paywall");
-                  }
+                if (user.golden) {
+                  Haptics.selectionAsync();
+                  changeQuickAccess(tool.id);
+                } else {
+                  navigation.navigate("Paywall");
                 }
               }}
               value={2}

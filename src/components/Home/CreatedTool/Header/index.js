@@ -23,11 +23,14 @@ import {
   setQuickAccessToolId,
 } from "../../../../../_DATA";
 
+import { useRevenueCat } from "../../../../providers/RevenueCatProvider";
+
 const Header = ({ currentTool, t, tools, dispatch, theme }) => {
   const text = (text) => "screens.Home.CreatedTool.Header." + text;
 
   const toast = useToast();
 
+  const { user } = useRevenueCat();
   const navigation = useNavigation();
 
   const handleDelete = (id) => {
@@ -178,10 +181,19 @@ const Header = ({ currentTool, t, tools, dispatch, theme }) => {
             </MenuOption>
             <MenuOption
               onSelect={() => {
-                Haptics.selectionAsync();
-                navigation.navigate("EditTool", {
-                  tool: currentTool,
-                });
+                if (
+                  user.golden ||
+                  Object.values(tools).filter(
+                    (tool) => tool.link === "CreatedTool"
+                  ).length <= 1
+                ) {
+                  Haptics.selectionAsync();
+                  navigation.navigate("EditTool", {
+                    tool: currentTool,
+                  });
+                } else {
+                  navigation.navigate("Paywall");
+                }
               }}
               value={2}
             >
@@ -242,9 +254,11 @@ const Header = ({ currentTool, t, tools, dispatch, theme }) => {
             </MenuOption>
             <MenuOption
               onSelect={() => {
-                {
+                if (user.golden) {
                   Haptics.selectionAsync();
-                  changeQuickAccess(currentTool.id);
+                  changeQuickAccess(tool.id);
+                } else {
+                  navigation.navigate("Paywall");
                 }
               }}
               value={2}
@@ -263,14 +277,6 @@ const Header = ({ currentTool, t, tools, dispatch, theme }) => {
                   colors={[theme === "dark" ? "#fff" : "#151E26"]}
                 />
               </View>
-              <View
-                style={{
-                  marginTop: 10,
-                  borderBottomColor: theme === "dark" ? "#333333" : "#CCCCCC",
-                  borderBottomWidth: StyleSheet.hairlineWidth,
-                  alignSelf: "stretch",
-                }}
-              />
             </MenuOption>
             <MenuOption
               onSelect={() => {
@@ -332,10 +338,19 @@ const Header = ({ currentTool, t, tools, dispatch, theme }) => {
               Haptics.selectionAsync();
               Alert.alert(currentTool.name, currentTool.description);
             } else if (e.nativeEvent.name === t(text("edit"))) {
-              Haptics.selectionAsync();
-              navigation.navigate("EditTool", {
-                tool: currentTool,
-              });
+              if (
+                user.golden ||
+                Object.values(tools).filter(
+                  (tool) => tool.link === "CreatedTool"
+                ).length <= 1
+              ) {
+                Haptics.selectionAsync();
+                navigation.navigate("EditTool", {
+                  tool: currentTool,
+                });
+              } else {
+                navigation.navigate("Paywall");
+              }
             } else if (e.nativeEvent.name === t(text("delete"))) {
               Haptics.notificationAsync(
                 Haptics.NotificationFeedbackType.Warning

@@ -89,7 +89,7 @@ const Header = ({
                 if (
                   Object.values(tools).filter(
                     (tool) => tool.link === "CreatedTool"
-                  ).length >= 2 &&
+                  ).length >= 1 &&
                   user.golden === false
                 ) {
                   return Alert.alert(
