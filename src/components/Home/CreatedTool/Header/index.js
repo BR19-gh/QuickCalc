@@ -256,7 +256,7 @@ const Header = ({ currentTool, t, tools, dispatch, theme }) => {
               onSelect={() => {
                 if (user.golden) {
                   Haptics.selectionAsync();
-                  changeQuickAccess(tool.id);
+                  changeQuickAccess(currentTool.id);
                 } else {
                   navigation.navigate("Paywall");
                 }
