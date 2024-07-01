@@ -31,6 +31,7 @@ import { getQuickAccessToolId } from "../../_DATA";
 import { Alert, Platform } from "react-native";
 
 import Purchases from "react-native-purchases";
+import { useRevenueCat } from "../providers/RevenueCatProvider";
 
 const Stack = createNativeStackNavigator();
 
@@ -55,6 +56,8 @@ const HomeNavi = ({ isEditing, setIsEditing, theme, tools }) => {
 
   const navigation = useNavigation();
 
+  const { user } = useRevenueCat();
+
   useQuickActionCallback(async (action) => {
     navigation.navigate("HomeNavi");
     if (action.id === "search") {
@@ -69,6 +72,28 @@ const HomeNavi = ({ isEditing, setIsEditing, theme, tools }) => {
       setIsEditing(false);
       setIsEditingFavorite(false);
       setIsShowedFavorite(false);
+
+      const textNavi = (text) => "screens.Navi.text." + text;
+
+      if (
+        Object.values(tools).filter((tool) => tool.link === "CreatedTool")
+          .length >= 1 &&
+        user.golden === false
+      ) {
+        return Alert.alert(
+          t(textNavi("maxToolsAlertTitle")),
+          t(textNavi("maxToolsAlert")),
+          [
+            {
+              text: t(textNavi("gotIt")),
+              style: "default",
+              onPress: () => {
+                navigation.navigate("Paywall");
+              },
+            },
+          ]
+        );
+      }
 
       navigation.navigate("NewTool");
     }
@@ -237,7 +262,9 @@ const HomeNavi = ({ isEditing, setIsEditing, theme, tools }) => {
       <Stack.Screen
         options={{
           title: t(UnitsConText("title")),
-          headerRight: () => <HeaderTools currentTool={"UnitsCon"} t={t} />,
+          headerRight: () => (
+            <HeaderTools theme={theme} currentTool={"UnitsCon"} t={t} />
+          ),
         }}
         name="UnitsCon"
         children={() => <UnitsCon theme={theme} />}

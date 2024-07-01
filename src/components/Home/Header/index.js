@@ -117,15 +117,14 @@ const Header = ({ currentTool, t, tools, theme }) => {
                   colors={[theme === "dark" ? "#fff" : "#151E26"]}
                 />
               </View>
-              <View
-                style={{
-                  marginTop: 10,
-                  borderBottomColor: theme === "dark" ? "#333333" : "#CCCCCC",
-                  borderBottomWidth: StyleSheet.hairlineWidth,
-                  alignSelf: "stretch",
-                }}
-              />
             </MenuOption>
+            <View
+              style={{
+                borderBottomColor: theme === "dark" ? "#333333" : "#CCCCCC",
+                borderBottomWidth: StyleSheet.hairlineWidth,
+                alignSelf: "stretch",
+              }}
+            />
             <MenuOption
               onSelect={() => {
                 if (user.golden) {
