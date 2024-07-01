@@ -17,6 +17,7 @@ import SweetSFSymbol from "sweet-sfsymbols";
 import { Image } from "expo-image";
 import { lang } from "../../../helpers";
 import Communications from "react-native-communications";
+import { useToast } from "react-native-toast-notifications";
 
 const Paywall = ({ theme }) => {
   const navigation = useNavigation();
@@ -30,6 +31,7 @@ const Paywall = ({ theme }) => {
 
   const { t } = useTranslation();
   const text = (text) => "screens.Settings.Paywall." + text;
+  const toast = useToast();
 
   const onPurchase = async (pack /*: PurchasesPackage*/) => {
     // Purchase the package
@@ -55,12 +57,14 @@ const Paywall = ({ theme }) => {
       ? require(`../../../../assets/golden_version_ar.png`)
       : require(`../../../../assets/golden_version_en.png`);
 
+  const [isRestoreLoad, setIsRestoreLoad] = React.useState(false);
+
   return (
     <ScrollView className={"h-full"}>
       <View
         className={
           "flex flex-col items-center " +
-          (Dimensions.get("window").width < 376 ? "mt-0" : "mt-16")
+          (Dimensions.get("window").width < 376 ? "mt-0" : "mt-20")
         }
       >
         <Image
@@ -130,25 +134,45 @@ const Paywall = ({ theme }) => {
           <View className="flex-row justify-between w-72">
             <TouchableOpacity
               onPress={async () => {
+                setIsRestoreLoad(true);
                 try {
                   restorePermissions();
-                  Alert.alert(
-                    t(text("restoreTitle")),
-                    t(text("restoreMsg")),
-                    [
-                      {
-                        text: t(text("ok")),
-                        style: "default",
-                        onPress: () => {
-                          navigation.navigate("user");
+                  setTimeout(() => {
+                    setIsRestoreLoad(false);
+                    Alert.alert(
+                      t(text("restoreTitle")),
+                      t(text("restoreMsg")),
+                      [
+                        {
+                          text: t(text("ok")),
+                          style: "default",
+                          onPress: () => {
+                            navigation.navigate("user");
+                          },
                         },
-                      },
-                    ],
-                    {
-                      cancelable: false,
-                    }
-                  );
+                      ],
+                      {
+                        cancelable: false,
+                      }
+                    );
+                  }, 1000);
                 } catch (e) {
+                  setTimeout(() => {
+                    setIsRestoreLoad(false);
+                    Alert.alert(
+                      t(text("restoreErrTitle")),
+                      t(text("restoreErrMsg")),
+                      [
+                        {
+                          text: t(text("ok")),
+                          style: "default",
+                        },
+                      ],
+                      {
+                        cancelable: false,
+                      }
+                    );
+                  }, 1000);
                   Alert.alert(
                     t(text("restoreErrTitle")),
                     t(text("restoreErrMsg")),
@@ -172,7 +196,9 @@ const Paywall = ({ theme }) => {
                 backgroundColor: isDark("#5450D4", "#38377C"),
               }}
             >
-              <Text className={"text-white text-md"}>{t(text("restore"))}</Text>
+              <Text className={"text-white text-md"}>
+                {isRestoreLoad ? t(text("restoreLoading")) : t(text("restore"))}
+              </Text>
             </TouchableOpacity>
             <TouchableOpacity
               onPress={() => presentCodeRedemptionSheet()}

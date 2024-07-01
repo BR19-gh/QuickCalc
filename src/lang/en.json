@@ -412,7 +412,8 @@
           "restoreMsg": "Your Purchase has been restored successfully",
           "restoreErrTitle": "Restore Purchase Failed",
           "restoreErrMsg": "An error occurred while restoring your purchase. Please check your internet connection and make sure if you had a subscribtion.",
-          "ok": "Ok"
+          "ok": "Ok",
+          "restoreLoading": "Restoring..."
         }
       }
     }
