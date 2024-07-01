@@ -5,7 +5,7 @@ import {
   StyleSheet,
   TouchableOpacity,
   Dimensions,
-  Pressable,
+  Alert,
 } from "react-native";
 import React, { useLayoutEffect } from "react";
 import { useRevenueCat } from "../../../providers/RevenueCatProvider";
@@ -130,7 +130,39 @@ const Paywall = ({ theme }) => {
           <View className="flex-row justify-between w-72">
             <TouchableOpacity
               onPress={async () => {
-                restorePermissions();
+                try {
+                  restorePermissions();
+                  Alert.alert(
+                    t(text("restoreTitle")),
+                    t(text("restoreMsg")),
+                    [
+                      {
+                        text: t(text("ok")),
+                        style: "default",
+                        onPress: () => {
+                          navigation.navigate("user");
+                        },
+                      },
+                    ],
+                    {
+                      cancelable: false,
+                    }
+                  );
+                } catch (e) {
+                  Alert.alert(
+                    t(text("restoreErrTitle")),
+                    t(text("restoreErrMsg")),
+                    [
+                      {
+                        text: t(text("ok")),
+                        style: "default",
+                      },
+                    ],
+                    {
+                      cancelable: false,
+                    }
+                  );
+                }
               }}
               className={
                 "mt-1 h-9 rounded-md items-center flex-row justify-center"
