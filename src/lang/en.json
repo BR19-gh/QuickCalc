@@ -1,7 +1,7 @@
 {
   "translation": {
     "screens": {
-      "versionNum": "1.0.21",
+      "versionNum": "1.0.22",
       "QuickAction": {
         "search": "Search",
         "createTool": "Create Tool",
@@ -404,12 +404,14 @@
           "notSubscribed": "You are not subscribed",
           "paywall": "Paywall",
           "oneMonth": "Subscribtion Period: One month",
+          "oneMonthTitle": "One Month",
           "oneYear": "Subscribtion Period: One year",
+          "oneYearTitle": "One Year",
           "subStartDate": "Start Date",
           "subEndDate": "End Date",
           "trial": "You are in Trial Mode",
           "restoreTitle": "Restore Purchase",
-          "restoreMsg": "Your Purchase has been restored successfully",
+          "restoreMsg": "Your purchase has been restored successfully, If you have a previous subscription, check it on the Current Plan page",
           "restoreErrTitle": "Restore Purchase Failed",
           "restoreErrMsg": "An error occurred while restoring your purchase. Please check your internet connection and make sure if you had a subscribtion.",
           "ok": "Ok",

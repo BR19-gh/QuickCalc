@@ -125,7 +125,12 @@ const Paywall = ({ theme }) => {
               }
               style={{ backgroundColor: isDark("#38377C", "#5450D4") }}
             >
-              <Text className={"text-white text-xl"}>{pack.product.title}</Text>
+              <Text className={"text-white text-xl"}>
+                {" "}
+                {pack.product.identifier === "qc_0099_1m"
+                  ? t(text("oneMonthTitle"))
+                  : t(text("oneYearTitle"))}
+              </Text>
               <Text className={"text-white text-lg font-bold"}>
                 {pack.product.priceString}
               </Text>

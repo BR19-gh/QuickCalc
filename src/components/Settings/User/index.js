@@ -69,7 +69,7 @@ const User = ({ theme }) => {
           />
           <Text
             className={
-              "mt-8  text-md text-2xl " + isDark("text-white", "text-black")
+              "mt-8 mb-1 text-md text-2xl " + isDark("text-white", "text-black")
             }
           >
             {user.golden
