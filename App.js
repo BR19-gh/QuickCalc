@@ -9,7 +9,7 @@ import { useEffect, useState } from "react";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { ToastProvider } from "react-native-toast-notifications";
 import { MenuProvider } from "react-native-popup-menu";
-import { isFirstTimeLaunch } from "./_DATA";
+import { getTools, isFirstTimeLaunch, storeTools } from "./_DATA";
 import * as QuickActions from "expo-quick-actions";
 import { useTranslation } from "react-i18next";
 import mobileAds from "react-native-google-mobile-ads";

@@ -93,23 +93,23 @@ const TOOLS = [
     isFavorite: false,
     isHidden: false,
   },
-  // {
-  //   id: 6,
-  //   searchName: "GPA Calculator حاسبة المعدل",
-  //   name: {
-  //     en: "GPA Calculator",
-  //     ar: "حاسبة المعدل",
-  //   },
-  //   description: {
-  //     en: "Calculate your GPA",
-  //     ar: "احسب معدلك الجامعي",
-  //   },
-  //   icon: "graduationcap.fill",
-  //   colors: ["#c29f0c", "#9b740d", "#6d4a16"],
-  //   link: "GPACal",
-  //   isFavorite: false,
-  //   isHidden: false,
-  // },
+  {
+    id: 6,
+    searchName: "GPA Calculator حاسبة المعدل",
+    name: {
+      en: "GPA Calculator",
+      ar: "حاسبة المعدل",
+    },
+    description: {
+      en: "Calculate your GPA",
+      ar: "احسب معدلك الجامعي",
+    },
+    icon: "graduationcap.fill",
+    colors: ["#c29f0c", "#9b740d", "#6d4a16"],
+    link: "GPACal",
+    isFavorite: false,
+    isHidden: false,
+  },
 ];
 
 const BLUE = [
@@ -330,6 +330,32 @@ export const getToolsInitial = async () => {
       );
     }
   } else {
+    if ((await getTools()).filter((tool) => tool.id === 6).length < 1) {
+      await storeTools(
+        JSON.stringify([
+          ...(await getTools()),
+
+          {
+            id: 6,
+            searchName: "GPA Calculator حاسبة المعدل",
+            name: {
+              en: "GPA Calculator",
+              ar: "حاسبة المعدل",
+            },
+            description: {
+              en: "Calculate your GPA",
+              ar: "احسب معدلك الجامعي",
+            },
+            icon: "graduationcap.fill",
+            colors: ["#c29f0c", "#9b740d", "#6d4a16"],
+            link: "GPACal",
+            isFavorite: false,
+            isHidden: false,
+          },
+        ]),
+        "ADD"
+      );
+    }
     return await getTools();
   }
 };

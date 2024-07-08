@@ -25,13 +25,17 @@ import { TermsOfUse } from "../screens/Settings/Paywall/TermsOfUse";
 import User from "../components/Settings/User";
 
 import { useNavigation } from "@react-navigation/native";
-import { useQuickActionCallback } from "expo-quick-actions/hooks";
+import {
+  useQuickActionCallback,
+  useQuickAction,
+} from "expo-quick-actions/hooks";
 
 import { getQuickAccessToolId } from "../../_DATA";
 import { Alert, Platform } from "react-native";
 
 import Purchases from "react-native-purchases";
 import { useRevenueCat } from "../providers/RevenueCatProvider";
+import GPACal from "../screens/Home/GPACal";
 
 const Stack = createNativeStackNavigator();
 
@@ -44,6 +48,7 @@ const HomeNavi = ({ isEditing, setIsEditing, theme, tools }) => {
   const CurrencyConText = (text) => "screens.Home.CurrencyCon." + text;
   const UnitsConText = (text) => "screens.Home.UnitsCon." + text;
   const CalendarConText = (text) => "screens.Home.CalendarCon." + text;
+  const GPACalText = (text) => "screens.Home.GPACal." + text;
   const NewTooltext = (text) => "screens.Home.NewTool." + text;
 
   const [currentTool, setCurrentTool] = useState({});
@@ -298,6 +303,16 @@ const HomeNavi = ({ isEditing, setIsEditing, theme, tools }) => {
         }}
         name="CalendarCon"
         children={() => <CalendarCon theme={theme} />}
+      />
+      <Stack.Screen
+        options={{
+          title: t(GPACalText("title")),
+          headerRight: () => (
+            <HeaderTools theme={theme} currentTool={"GPACal"} t={t} />
+          ),
+        }}
+        name="GPACal"
+        children={() => <GPACal theme={theme} />}
       />
       <Stack.Screen
         options={{

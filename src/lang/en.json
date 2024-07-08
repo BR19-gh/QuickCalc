@@ -1,7 +1,7 @@
 {
   "translation": {
     "screens": {
-      "versionNum": "1.0.22",
+      "versionNum": "1.0.27",
       "QuickAction": {
         "search": "Search",
         "createTool": "Create Tool",
@@ -352,6 +352,27 @@
                 "12": "Elul"
               }
             }
+          }
+        },
+        "GPACal": {
+          "title": "GPA Calculator",
+          "text": {
+            "course": "Course",
+            "courseName": "Name (Optional)",
+            "creditHours": "Credit Hours",
+            "selectGrade": "Select Grade",
+            "selectScale": "Select Scale",
+            "isPrevGPA": "GPA type",
+            "prevGPA": "Previous GPA",
+            "gpa": "GPA",
+            "cumulative": "Cumulative",
+            "semester": "Semester",
+            "calculate": "Calculate",
+            "reset": "Reset",
+            "errorInValidInput": "Invalid or empty inputs",
+            "onlyNumbers": "Make sure you have entered all valid inputs",
+            "gotIt": "Got it",
+            "copied": "Copied!"
           }
         }
       },

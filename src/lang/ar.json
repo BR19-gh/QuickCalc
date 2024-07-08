@@ -1,7 +1,7 @@
 {
   "translation": {
     "screens": {
-      "versionNum": "1.0.22",
+      "versionNum": "1.0.27",
       "QuickAction": {
         "search": "بحث",
         "createTool": "إنشاء أداة",
@@ -353,6 +353,27 @@
                 "12": "أيلول"
               }
             }
+          }
+        },
+        "GPACal": {
+          "title": "حاسبة المعدل",
+          "text": {
+            "course": "المادة",
+            "courseName": "الاسم (اختياري)",
+            "creditHours": "عدد الساعات",
+            "selectGrade": "اختر الدرجة",
+            "selectScale": "مقياس المعدل",
+            "isPrevGPA": "نوع المعدل",
+            "prevGPA": "المعدل السابق",
+            "gpa": "المعدل",
+            "cumulative": "تراكمي",
+            "semester": "فصلي",
+            "calculate": "احـســـب",
+            "reset": "إعادة تعيين",
+            "errorInValidInput": "مدخلات فارغة أو غير صالحة",
+            "onlyNumbers": "تأكد من أنك أدخلت جميع المدخلات، وأنك أدخلتها بالشكل الصحيح",
+            "gotIt": "فهمت",
+            "copied": "تم النسخ!"
           }
         }
       },
