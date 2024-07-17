@@ -232,7 +232,7 @@ function GPACal(props) {
         >
           <View className="w-full flex-row items-center justify-evenly">
             <View
-              className={"w-1/2 flex-row items-center justify-center flex-wrap"}
+              className={"w-52 flex-row items-center justify-center flex-wrap"}
             >
               <Text
                 className={
@@ -314,10 +314,10 @@ function GPACal(props) {
                       <Text
                         className="text-center"
                         style={{
+                          color: isDark("#DBEAFE", "#1E3A8A"),
                           flex: 1,
                           fontSize: 18,
                           fontWeight: "300",
-                          color: props.theme === "dark" ? "#fff" : "#151E26",
                           ...(isSelected && {
                             fontWeight: "bold",
                           }),
@@ -337,7 +337,7 @@ function GPACal(props) {
               />
             </View>
             <View
-              className={"w-1/2 flex-row items-center justify-center flex-wrap"}
+              className={"w-52 flex-row items-center justify-center flex-wrap"}
             >
               <Text
                 className={
@@ -422,7 +422,7 @@ function GPACal(props) {
                           flex: 1,
                           fontSize: 18,
                           fontWeight: "300",
-                          color: props.theme === "dark" ? "#fff" : "#151E26",
+                          color: isDark("#DBEAFE", "#1E3A8A"),
                           ...(isSelected && {
                             fontWeight: "bold",
                           }),
@@ -446,7 +446,7 @@ function GPACal(props) {
             <View className={"w-full flex-row flex-wrap  justify-center"}>
               <View
                 className={
-                  "w-1/2 flex-row items-center justify-center flex-wrap"
+                  "w-52 flex-row items-center justify-center flex-wrap"
                 }
               >
                 <Text
@@ -679,7 +679,7 @@ function GPACal(props) {
                             flex: 1,
                             fontSize: 18,
                             fontWeight: "300",
-                            color: props.theme === "dark" ? "#fff" : "#151E26",
+                            color: isDark("#DBEAFE", "#1E3A8A"),
                             ...(isSelected && {
                               fontWeight: "bold",
                             }),

@@ -461,15 +461,15 @@ function Home(props) {
     }, 60000 * 3);
   };
 
-  // useEffect(() => {
-  //   setTimeout(() => {
-  //     try {
-  //       showAd(handleAdClosed);
-  //     } catch (e) {
-  //       console.log(e);
-  //     }
-  //   }, 30000);
-  // }, []);
+  useEffect(() => {
+    setTimeout(() => {
+      try {
+        showAd(handleAdClosed);
+      } catch (e) {
+        console.log(e);
+      }
+    }, 30000);
+  }, []);
 
   return (
     <SafeAreaView>
