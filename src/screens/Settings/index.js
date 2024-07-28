@@ -140,6 +140,28 @@ function Settings({ theme, isThemeChanged, setIsThemeChanged, dispatch }) {
                 {t(text("general"))}
               </Text>
               <SettingsGroup>
+                <SettingsButton
+                  title={t(text("language"))}
+                  type="newpage"
+                  onPress={() => openAppPref(t, text)}
+                />
+                <SettingsButton
+                  title={t(text("goldenVersion"))}
+                  type="newpage"
+                  onPress={() => {
+                    user.golden
+                      ? navigation.navigate("user")
+                      : navigation.navigate("Paywall");
+                  }}
+                />
+              </SettingsGroup>
+            </View>
+
+            <View>
+              <Text style={stylesSettings.groupTitle}>
+                {t(text("appearance"))}
+              </Text>
+              <SettingsGroup>
                 <TouchableOpacity
                   onPress={() => {
                     Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
@@ -274,9 +296,9 @@ function Settings({ theme, isThemeChanged, setIsThemeChanged, dispatch }) {
                   />
                 </TouchableOpacity>
                 <SettingsButton
-                  title={t(text("language"))}
+                  title={t(text("changeIcon"))}
                   type="newpage"
-                  onPress={() => openAppPref(t, text)}
+                  onPress={() => navigation.navigate("ChangeColor")}
                 />
               </SettingsGroup>
             </View>
@@ -344,18 +366,10 @@ function Settings({ theme, isThemeChanged, setIsThemeChanged, dispatch }) {
                 />
               </SettingsGroup>
             </View>
+
             <View>
               <Text style={stylesSettings.groupTitle}>{t(text("app"))}</Text>
               <SettingsGroup>
-                <SettingsButton
-                  title={t(text("goldenVersion"))}
-                  type="newpage"
-                  onPress={() => {
-                    user.golden
-                      ? navigation.navigate("user")
-                      : navigation.navigate("Paywall");
-                  }}
-                />
                 <SettingsButton
                   title={t(text("walkThrough"))}
                   type="newpage"

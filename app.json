@@ -2,7 +2,7 @@
   "expo": {
     "name": "QuickCalc",
     "slug": "QuickCalc",
-    "version": "1.0.28",
+    "version": "1.0.30",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "automatic",
@@ -13,7 +13,7 @@
     },
     "assetBundlePatterns": ["**/*"],
     "ios": {
-      "buildNumber": "2.1.28",
+      "buildNumber": "2.1.30",
       "supportsTablet": true,
       "infoPlist": {
         "CFBundleAllowMixedLocalizations": true,
@@ -91,6 +91,43 @@
       }
     },
     "plugins": [
+      [
+        "expo-dynamic-app-icon",
+        {
+          "original": {
+            "image": "./assets/icon.png",
+            "prerendered": true
+          },
+          "black": {
+            "image": "./assets/black_icon.png",
+            "prerendered": true
+          },
+          "red": {
+            "image": "./assets/red_icon.png",
+            "prerendered": true
+          },
+          "yellow": {
+            "image": "./assets/yellow_icon.png",
+            "prerendered": true
+          },
+          "purple": {
+            "image": "./assets/purple_icon.png",
+            "prerendered": true
+          },
+          "green": {
+            "image": "./assets/green_icon.png",
+            "prerendered": true
+          },
+          "pink": {
+            "image": "./assets/pink_icon.png",
+            "prerendered": true
+          },
+          "orange": {
+            "image": "./assets/orange_icon.png",
+            "prerendered": true
+          }
+        }
+      ],
       "expo-localization",
       "expo-quick-actions",
       [
@@ -106,7 +143,8 @@
           }
         }
       ],
-      "expo-tracking-transparency"
+      "expo-tracking-transparency",
+      "expo-dynamic-app-icon"
     ]
   },
   "react-native-google-mobile-ads": {

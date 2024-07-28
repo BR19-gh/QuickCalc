@@ -10,6 +10,7 @@ import { Platform } from "react-native";
 import Paywall from "../screens/Settings/Paywall";
 import { TermsOfUse } from "../screens/Settings/Paywall/TermsOfUse";
 import User from "../components/Settings/User";
+import ChangeColor from "../screens/Settings/ChangeIcon";
 
 const Stack = createNativeStackNavigator();
 
@@ -101,6 +102,14 @@ const SettingsNavi = ({
         }}
         name="user"
         children={() => <User theme={theme} />}
+      />
+      <Stack.Screen
+        options={{
+          presentation: "modal",
+          header: () => null,
+        }}
+        name="ChangeColor"
+        children={() => <ChangeColor theme={theme} />}
       />
     </Stack.Navigator>
   );

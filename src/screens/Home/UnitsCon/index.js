@@ -269,7 +269,7 @@ function UnitsCon({ theme, dispatch, unitResult }) {
                   style={{
                     marginRight: 5,
                   }}
-                  name={isFocus ? "chevron.down" : "chevron.up"}
+                  name={isFocus ? "chevron.up" : "chevron.down"}
                   size={10}
                   colors={theme === "dark" ? "#fff" : "#151E26"}
                 />

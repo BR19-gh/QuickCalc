@@ -1,7 +1,7 @@
 {
   "translation": {
     "screens": {
-      "versionNum": "1.0.28",
+      "versionNum": "1.0.30",
       "QuickAction": {
         "search": "Search",
         "createTool": "Create Tool",
@@ -379,8 +379,11 @@
       "Settings": {
         "title": "Settings",
         "text": {
+          "changeIcon": "Change App Icon",
+          "appIcon": "App Icon",
           "language": "Language",
           "theme": "Theme",
+          "appearance": "Appearance",
           "general": "General",
           "contactDeveloper": "Contact Developer",
           "selectTheme": "Selevt Theme",
@@ -404,7 +407,18 @@
           "coffee": "Buy me a cup of coffee!",
           "coffeeAlert": "Buy Me a Coffee and Support the App ☕️!",
           "coffeeAlertMsg": "Hey there! Noticed there are no annoying ads in this app 😉? If you’re enjoying it, how about buying me a coffee ☕️? You can support me with a tiny donation, equivalent to buying me a coffee, your support helps me improve the app and add cool features without showing any kind of ads. Plus, coffee keeps my headaches away while coding 😵‍💫. Thanks for your support! 🫶",
-          "goldenVersion": "Golden Version"
+          "goldenVersion": "Golden Version",
+          "red": "Red",
+          "yellow": "Yellow",
+          "pink": "Pink",
+          "purple": "Purple",
+          "black": "Black",
+          "green": "Green",
+          "orange": "Orange",
+          "original": "Original",
+          "notSubAlertTitle": "Changing App Icon",
+          "notSubAlertMsg": "You have to be subscribed to the Golden Version to change the app icon 👑",
+          "gotIt": "Got It"
         },
         "Paywall": {
           "title": "Golden Version",
@@ -419,7 +433,8 @@
             "2": "Create Unlimited Tools",
             "3": "Enable Quick Access",
             "4": "Support Your Favorite App",
-            "5": "And More Other Features"
+            "5": "And More Other Features",
+            "6": "Change App Icon"
           },
           "subscribed": "You are subscribed",
           "notSubscribed": "You are not subscribed",

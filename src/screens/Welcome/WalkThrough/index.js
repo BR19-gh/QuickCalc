@@ -5,6 +5,7 @@ import {
   SafeAreaView,
   Text,
   Platform,
+  Dimensions,
 } from "react-native";
 import SweetSFSymbol from "sweet-sfsymbols";
 import { useState, useEffect } from "react";
@@ -27,7 +28,7 @@ function WalkThrough(props) {
             require(`../../../../walkthro_ar/home.png`),
             require(`../../../../walkthro_ar/edit.gif`),
             require(`../../../../walkthro_ar/hidden.png`),
-            require(`../../../../walkthro_ar/settings.png`),
+            require(`../../../../walkthro_ar/final.png`),
           ]
         : [
             require(`../../../../walkthro_ar/welcome.png`),
@@ -36,7 +37,7 @@ function WalkThrough(props) {
             require(`../../../../walkthro_ar/edit.gif`),
             require(`../../../../walkthro_ar/hidden.png`),
             require(`../../../../walkthro_ar/home_swipe.gif`),
-            require(`../../../../walkthro_ar/settings.png`),
+            require(`../../../../walkthro_ar/final.png`),
           ]
       : Platform.isPad
       ? [
@@ -44,7 +45,7 @@ function WalkThrough(props) {
           require(`../../../../walkthro_en/home.png`),
           require(`../../../../walkthro_en/edit.gif`),
           require(`../../../../walkthro_en/hidden.png`),
-          require(`../../../../walkthro_en/settings.png`),
+          require(`../../../../walkthro_en/final.png`),
         ]
       : [
           require(`../../../../walkthro_en/welcome.png`),
@@ -53,7 +54,7 @@ function WalkThrough(props) {
           require(`../../../../walkthro_en/edit.gif`),
           require(`../../../../walkthro_en/hidden.png`),
           require(`../../../../walkthro_en/home_swipe.gif`),
-          require(`../../../../walkthro_en/settings.png`),
+          require(`../../../../walkthro_en/final.png`),
         ];
 
   const selectImg = (dir) => {
@@ -70,16 +71,20 @@ function WalkThrough(props) {
         <Image
           style={{
             //Platform.isPad ? 435 :
-            width: 290,
+            width: Dimensions.get("window").height > 800 ? 290 : 225,
             height: props.isFirstTimeLaunch
               ? // Platform.isPad
                 //   ? 975
                 //   :
-                660
+                Dimensions.get("window").height > 800
+                ? 640
+                : 490
               : //Platform.isPad
-                // ? 919.5
-                // :
-                613,
+              // ? 919.5
+              // :
+              Dimensions.get("window").height > 800
+              ? 620
+              : 490,
           }}
           source={IMGS[currentImage]}
         />

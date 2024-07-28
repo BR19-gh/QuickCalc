@@ -35,7 +35,7 @@ import * as StoreReview from "expo-store-review";
 function EditTool({ theme, tools, route, dispatch }) {
   const { t } = useTranslation();
   const text = (text) => "screens.Home.NewTool.text." + text;
-  const secondInput = useRef(null);
+  const dropdownRef = useRef(null);
   const toast = useToast();
 
   const { tool } = route.params;
@@ -86,9 +86,9 @@ function EditTool({ theme, tools, route, dispatch }) {
     },
     dropdown: {
       backgroundColor: isDark("#2C2C2D", "#FFFFFF"),
+      color: isDark("#DBEAFE", "#283987"),
       height: 40,
-      width: 200,
-
+      width: newTool.icon ? 145 : 200,
       borderRadius: 8,
       paddingHorizontal: 10,
       marginBottom: 10,
@@ -268,13 +268,13 @@ function EditTool({ theme, tools, route, dispatch }) {
               style={{
                 backgroundColor: isDark("#2C2C2D", "#FFFFFF"),
                 width: 200,
-                height: 100,
+                height: 150,
                 fontSize: 20,
                 textAlign: newTool.description ? "auto" : "center",
                 color: isDark("#DBEAFE", "#283987"),
                 borderRadius: 10,
 
-                paddingTop: newTool.description ? 10 : 35,
+                paddingTop: newTool.description ? 10 : 60,
                 padding: 10,
               }}
               multiline={true}
@@ -318,121 +318,148 @@ function EditTool({ theme, tools, route, dispatch }) {
             >
               {t(text("selectIcon"))}
             </Text>
-            <Dropdown
-              activeColor={theme === "dark" ? "#999999" : "#DDDDDD"}
-              itemContainerStyle={{
-                backgroundColor: isDark("#2C2C2D", "#FFFFFF"),
-                borderWidth: 0,
-              }}
-              itemTextStyle={{
-                color: isDark("#DBEAFE", "#283987"),
-              }}
-              containerStyle={{
-                borderRadius: 8,
-                borderWidth: 0,
-                backgroundColor: isDark("#2C2C2D", "#FFFFFF"),
-                paddingBottom: 5,
-              }}
-              style={[styles.dropdown]}
-              placeholderStyle={{
-                fontSize: 18,
-                color: isDark("#DBEAFE88", "#28398755"),
-              }}
-              selectedTextStyle={{
-                fontSize: 18,
-                color: isDark("#DBEAFE", "#283987"),
-              }}
-              inputSearchStyle={{
-                height: 40,
-                fontSize: 14,
-                color: isDark("#DBEAFE", "#283987"),
-              }}
-              data={[...ICONS]}
-              search
-              maxHeight={300}
-              valueField="value"
-              labelField="value"
-              autoScroll={false}
-              renderItem={(item, selected) => (
-                <View
-                  className={
-                    "w-full flex-row justify-around items-center pb-3 pt-3" +
-                    (selected
-                      ? theme === "dark"
-                        ? " bg-neutral-900"
-                        : ""
-                      : " ")
-                  }
-                >
-                  {lang === "ar" ? (
-                    <Text
-                      className={
-                        "text-2xl font-semibold " +
-                        isDark("text-white", "text-black")
-                      }
-                    >
-                      رقم {item.key}:
-                    </Text>
-                  ) : (
-                    <Text
-                      className={
-                        "text-2xl font-semibold " +
-                        isDark("text-white", "text-black")
-                      }
-                    >
-                      Id. {item.key}:
-                    </Text>
-                  )}
-                  <SweetSFSymbol
-                    name={item.value}
-                    weight="normal"
-                    size={40}
-                    colors={isDark("white", "black")}
-                  />
-                </View>
-              )}
-              placeholder={!isFocus ? t(text("selectIcon")) : "..."}
-              searchPlaceholder={t(text("searchIcon"))}
-              searchPlaceholderStyle={{
-                color: "#151E26",
-              }}
-              renderRightIcon={() =>
-                lang === "ar" ? null : (
-                  <SweetSFSymbol
-                    style={{
-                      marginRight: 5,
-                    }}
-                    name={isFocus ? "chevron.down" : "chevron.up"}
-                    size={10}
-                    colors={isDark("#ffffff99", "#151E26")}
-                  />
-                )
-              }
-              renderLeftIcon={() =>
-                lang === "ar" ? (
-                  <SweetSFSymbol
-                    style={{
-                      marginRight: 5,
-                    }}
-                    name={isFocus ? "chevron.down" : "chevron.up"}
-                    size={10}
-                    colors={isDark("#ffffff99", "#151E26")}
-                  />
-                ) : null
-              }
-              value={newTool.icon ? newTool.icon : ""}
-              onFocus={() => setIsFocus(true)}
-              onBlur={() => setIsFocus(false)}
-              onChange={(item) => {
-                Haptics.selectionAsync();
-                setNewTool({
-                  ...newTool,
-                  icon: item.value,
-                });
+            <View className="flex-row">
+              <Dropdown
+                ref={dropdownRef}
+                activeColor={theme === "dark" ? "#999999" : "#DDDDDD"}
+                itemContainerStyle={{
+                  backgroundColor: isDark("#2C2C2D", "#FFFFFF"),
+                  borderWidth: 0,
+                }}
+                itemTextStyle={{
+                  color: isDark("#DBEAFE", "#283987"),
+                }}
+                containerStyle={{
+                  borderRadius: 8,
+                  borderWidth: 0,
+                  backgroundColor: isDark("#2C2C2D", "#FFFFFF"),
+                  paddingBottom: 5,
+                }}
+                style={[styles.dropdown]}
+                placeholderStyle={{
+                  fontSize: 18,
+                  color: isDark("#DBEAFE88", "#28398755"),
+                }}
+                selectedTextStyle={{
+                  fontSize: 18,
+                  color: isDark("#DBEAFE", "#283987"),
+                }}
+                inputSearchStyle={{
+                  height: 40,
+                  fontSize: 14,
+                  color: isDark("#DBEAFE", "#283987"),
+                }}
+                data={[...ICONS]}
+                search
+                maxHeight={300}
+                valueField="value"
+                labelField="value"
+                autoScroll={false}
+                renderItem={(item, selected) => (
+                  <View
+                    className={
+                      "w-full flex-row justify-around items-center pb-3 pt-3" +
+                      (selected
+                        ? theme === "dark"
+                          ? " bg-neutral-900"
+                          : ""
+                        : " ")
+                    }
+                  >
+                    {lang === "ar" ? (
+                      <Text
+                        className={
+                          "text-2xl font-semibold " +
+                          isDark("text-blue-100", "text-blue-900")
+                        }
+                      >
+                        رقم {item.key}:
+                      </Text>
+                    ) : (
+                      <Text
+                        className={
+                          "text-2xl font-semibold " +
+                          isDark("text-blue-100", "text-blue-900")
+                        }
+                      >
+                        Id. {item.key}:
+                      </Text>
+                    )}
+                    <SweetSFSymbol
+                      name={item.value}
+                      weight="normal"
+                      size={40}
+                      colors={isDark("#DBEAFE", "#283987")}
+                    />
+                  </View>
+                )}
+                placeholder={!isFocus ? t(text("selectIcon")) : "..."}
+                searchPlaceholder={t(text("searchIcon"))}
+                searchPlaceholderStyle={{
+                  color: "#151E26",
+                }}
+                renderRightIcon={() =>
+                  lang === "ar" ? null : (
+                    <SweetSFSymbol
+                      style={{
+                        marginRight: 5,
+                      }}
+                      name={isFocus ? "chevron.up" : "chevron.down"}
+                      size={10}
+                      colors={isDark("#DBEAFE", "#283987")}
+                    />
+                  )
+                }
+                renderLeftIcon={() =>
+                  lang === "ar" ? (
+                    <SweetSFSymbol
+                      style={{
+                        marginRight: 5,
+                      }}
+                      name={isFocus ? "chevron.up" : "chevron.down"}
+                      size={10}
+                      colors={isDark("#DBEAFE", "#283987")}
+                    />
+                  ) : null
+                }
+                value={newTool.icon ? newTool.icon : ""}
+                onFocus={() => setIsFocus(true)}
+                onBlur={() => setIsFocus(false)}
+                onChange={(item) => {
+                  Haptics.selectionAsync();
+                  setNewTool({
+                    ...newTool,
+                    icon: item.value,
+                  });
 
-                setIsFocus(false);
-              }}
-            />
+                  setIsFocus(false);
+                }}
+              />
+              {newTool.icon && (
+                <TouchableOpacity
+                  onPress={() => {
+                    dropdownRef.current.open();
+                  }}
+                  className="items-center"
+                  style={{
+                    marginStart: 4,
+                    backgroundColor: isDark("#2C2C2D", "#FFFFFF"),
+                    width: 50,
+                    height: 40,
+                    fontSize: 20,
+                    color: isDark("#DBEAFE", "#283987"),
+                    borderRadius: 10,
+                    padding: 10,
+                  }}
+                >
+                  <SweetSFSymbol
+                    name={newTool.icon}
+                    size={20}
+                    colors={isDark("#DBEAFE", "#283987")}
+                  />
+                </TouchableOpacity>
+              )}
+            </View>
           </View>
           <View className={"mb-2"}>
             <Text

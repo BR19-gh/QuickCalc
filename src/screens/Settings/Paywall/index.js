@@ -48,6 +48,7 @@ const Paywall = ({ theme }) => {
     "screens.Settings.Paywall.features.1",
     "screens.Settings.Paywall.features.2",
     "screens.Settings.Paywall.features.3",
+    "screens.Settings.Paywall.features.6",
     "screens.Settings.Paywall.features.4",
     "screens.Settings.Paywall.features.5",
   ];

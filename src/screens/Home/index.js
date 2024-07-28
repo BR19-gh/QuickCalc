@@ -45,12 +45,19 @@ import {
 import InlineAd from "../../components/InlineAd/InlineAd";
 import { showAd, loadAd } from "../../components/InterstitialAd";
 import { useRevenueCat } from "../../providers/RevenueCatProvider";
-
-import { storeTools } from "../../../_DATA";
+import { getAppIcon, setAppIcon } from "expo-dynamic-app-icon";
 
 function Home(props) {
   useEffect(() => {
     loadAd(); // Load the ad when the component mounts
+  }, []);
+
+  useEffect(() => {
+    if (user.golden === false) {
+      console.log("appIcon", getAppIcon());
+      if (getAppIcon() === "DEFAULT") return;
+      setAppIcon("original");
+    }
   }, []);
 
   useEffect(() => {
@@ -833,7 +840,7 @@ function Home(props) {
         </NestableScrollContainer>
       </View>
       <StatusBar style="auto" />
-      {user.golden ? null : <InlineAd />}
+      {user.golden ? null : <InlineAd /> ? <InlineAd /> : null}
     </SafeAreaView>
   );
 }
