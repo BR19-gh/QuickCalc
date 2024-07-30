@@ -146,7 +146,19 @@ function Settings({ theme, isThemeChanged, setIsThemeChanged, dispatch }) {
                   onPress={() => openAppPref(t, text)}
                 />
                 <SettingsButton
-                  title={t(text("goldenVersion"))}
+                  title={
+                    <View className="flex-row-reverse justify-end items-center">
+                      <Text className={isDarkTextColor()}>
+                        {t(text("goldenVersion"))}
+                      </Text>
+                      <Text>{"   "}</Text>
+                      <SweetSFSymbol
+                        name={"crown.fill"}
+                        size={20}
+                        colors={["#daa520CC"]}
+                      />
+                    </View>
+                  }
                   type="newpage"
                   onPress={() => {
                     user.golden
@@ -295,11 +307,13 @@ function Settings({ theme, isThemeChanged, setIsThemeChanged, dispatch }) {
                     type="custom"
                   />
                 </TouchableOpacity>
-                <SettingsButton
-                  title={t(text("changeIcon"))}
-                  type="newpage"
-                  onPress={() => navigation.navigate("ChangeColor")}
-                />
+                {DeviceInfo.getModel().includes("Mac") ? null : (
+                  <SettingsButton
+                    title={t(text("changeIcon"))}
+                    type="newpage"
+                    onPress={() => navigation.navigate("ChangeColor")}
+                  />
+                )}
               </SettingsGroup>
             </View>
 

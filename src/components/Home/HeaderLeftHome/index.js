@@ -7,6 +7,8 @@ import i18n from "../../../lang/i18n";
 import { handleInitialData } from "../../../store/actions/shared";
 import { connect } from "react-redux";
 import * as Haptics from "expo-haptics";
+import { useRevenueCat } from "../../../providers/RevenueCatProvider";
+import { useEffect, useState } from "react";
 
 const Header = ({
   isShowedFavorite,
@@ -22,6 +24,10 @@ const Header = ({
   const text = (text) => "screens.Navi.text." + text;
 
   const toast = useToast();
+
+  const { user } = useRevenueCat();
+
+  const [anim, setAnim] = useState(false);
 
   return (
     <>
@@ -48,6 +54,25 @@ const Header = ({
           size={22}
           colors={["#3B82F6"]}
         />
+      </TouchableOpacity>
+      <TouchableOpacity
+        className="items-start w-14"
+        onPress={() => {
+          Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+          if (user.golden) {
+            navigation.navigate("user");
+          } else {
+            navigation.navigate("Paywall");
+          }
+        }}
+      >
+        {
+          <SweetSFSymbol
+            name={user.golden ? "crown.fill" : "crown"}
+            size={22}
+            colors={["gold"]}
+          />
+        }
       </TouchableOpacity>
       <TouchableOpacity
         onPress={() => {

@@ -468,7 +468,6 @@ function GPACal(props) {
                     color: isDark("#DBEAFE", "#283987"),
                     borderRadius: 10,
                   }}
-                  blurOnSubmit={false}
                   returnKeyType={"done"}
                   value={prevGPA.gpa}
                   onChangeText={(value) => {
@@ -499,7 +498,6 @@ function GPACal(props) {
                     color: isDark("#DBEAFE", "#283987"),
                     borderRadius: 10,
                   }}
-                  blurOnSubmit={false}
                   returnKeyType={"done"}
                   value={prevGPA.credit}
                   onChangeText={(value) => {
@@ -571,7 +569,6 @@ function GPACal(props) {
                     color: isDark("#DBEAFE", "#283987"),
                     borderRadius: 10,
                   }}
-                  blurOnSubmit={false}
                   returnKeyType={"done"}
                   value={courses[index].name}
                   onChangeText={(value) => {
@@ -709,7 +706,6 @@ function GPACal(props) {
                     color: isDark("#DBEAFE", "#283987"),
                     borderRadius: 10,
                   }}
-                  blurOnSubmit={false}
                   returnKeyType={"done"}
                   value={courses[index].credit}
                   onChangeText={(value) => {

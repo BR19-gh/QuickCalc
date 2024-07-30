@@ -18,6 +18,7 @@ import { Image } from "expo-image";
 import { lang } from "../../../helpers";
 import Communications from "react-native-communications";
 import { useToast } from "react-native-toast-notifications";
+import DeviceInfo from "react-native-device-info";
 
 const Paywall = ({ theme }) => {
   const navigation = useNavigation();
@@ -82,25 +83,27 @@ const Paywall = ({ theme }) => {
           }}
         />
         <View className="w-72">
-          {FEATURES.map((feature, index) => (
-            <Text
-              key={feature}
-              className={
-                "text-left font-semibold pb-2 " +
-                isDark("text-white", "text-black")
-              }
-              style={{
-                fontSize: 14,
-              }}
-            >
-              <SweetSFSymbol
-                name={"crown.fill"}
-                size={18}
-                colors={[isDark("gold", "orange")]}
-              />
-              {"     " + t(feature)}
-            </Text>
-          ))}
+          {FEATURES.map((feature, index) =>
+            DeviceInfo.getModel().includes("Mac") && index === 3 ? null : (
+              <Text
+                key={feature}
+                className={
+                  "text-left font-semibold pb-2 " +
+                  isDark("text-white", "text-black")
+                }
+                style={{
+                  fontSize: 14,
+                }}
+              >
+                <SweetSFSymbol
+                  name={"crown.fill"}
+                  size={18}
+                  colors={[isDark("gold", "orange")]}
+                />
+                {"     " + t(feature)}
+              </Text>
+            )
+          )}
         </View>
         <View
           style={{
