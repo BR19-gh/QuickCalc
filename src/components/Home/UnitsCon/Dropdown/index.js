@@ -13,7 +13,14 @@ const DropdownComponent = ({ theme, text, t, setUnit, unit, measurement }) => {
       backgroundColor: "transparent",
     },
     dropdown: {
-      backgroundColor: theme === "dark" ? "#555555" : "#E9ECEF",
+      backgroundColor:
+        theme === "dark"
+          ? measurement
+            ? "#555555"
+            : "#55555588"
+          : measurement
+          ? "#E9ECEF"
+          : "#D6D9DC",
       height: 40,
       borderRadius: 8,
       paddingHorizontal: 10,
@@ -56,7 +63,14 @@ const DropdownComponent = ({ theme, text, t, setUnit, unit, measurement }) => {
       placeholderStyle={{
         fontSize: 14,
         fontWeight: "bold",
-        color: theme === "dark" ? "#fff" : "#151E26",
+        color:
+          theme === "dark"
+            ? measurement
+              ? "#fff"
+              : "#ffffff88"
+            : measurement
+            ? "#151E26"
+            : "#151E2688",
       }}
       selectedTextStyle={{
         fontSize: 14,
@@ -86,7 +100,15 @@ const DropdownComponent = ({ theme, text, t, setUnit, unit, measurement }) => {
             }}
             name={isFocus ? "chevron.up" : "chevron.down"}
             size={10}
-            colors={theme === "dark" ? "#fff" : "#151E26"}
+            colors={
+              theme === "dark"
+                ? measurement
+                  ? "#fff"
+                  : "#ffffff88"
+                : measurement
+                ? "#151E26"
+                : "#151E2688"
+            }
           />
         )
       }
@@ -98,7 +120,15 @@ const DropdownComponent = ({ theme, text, t, setUnit, unit, measurement }) => {
             }}
             name={isFocus ? "chevron.up" : "chevron.down"}
             size={10}
-            colors={theme === "dark" ? "#fff" : "#151E26"}
+            colors={
+              theme === "dark"
+                ? measurement
+                  ? "#fff"
+                  : "#ffffff88"
+                : measurement
+                ? "#151E26"
+                : "#151E2688"
+            }
           />
         ) : null
       }

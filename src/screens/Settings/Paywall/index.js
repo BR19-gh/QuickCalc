@@ -84,7 +84,9 @@ const Paywall = ({ theme }) => {
         />
         <View className="w-72">
           {FEATURES.map((feature, index) =>
-            DeviceInfo.getModel().includes("Mac") && index === 3 ? null : (
+            DeviceInfo.getModel().includes(
+              "iPad Pro 12.9-inch (3rd generation)"
+            ) && index === 3 ? null : (
               <Text
                 key={feature}
                 className={

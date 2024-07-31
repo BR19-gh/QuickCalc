@@ -148,7 +148,13 @@ function Settings({ theme, isThemeChanged, setIsThemeChanged, dispatch }) {
                 <SettingsButton
                   title={
                     <View className="flex-row-reverse justify-end items-center">
-                      <Text className={isDarkTextColor()}>
+                      <Text
+                        className={isDarkTextColor()}
+                        style={{
+                          fontSize: 16,
+                          fontWeight: "500",
+                        }}
+                      >
                         {t(text("goldenVersion"))}
                       </Text>
                       <Text>{"   "}</Text>
@@ -307,7 +313,9 @@ function Settings({ theme, isThemeChanged, setIsThemeChanged, dispatch }) {
                     type="custom"
                   />
                 </TouchableOpacity>
-                {DeviceInfo.getModel().includes("Mac") ? null : (
+                {DeviceInfo.getModel().includes(
+                  "iPad Pro 12.9-inch (3rd generation)"
+                ) ? null : (
                   <SettingsButton
                     title={t(text("changeIcon"))}
                     type="newpage"
@@ -325,7 +333,13 @@ function Settings({ theme, isThemeChanged, setIsThemeChanged, dispatch }) {
                 <SettingsButton
                   title={
                     <View className="flex-row-reverse justify-end items-center">
-                      <Text className={isDarkTextColor()}>
+                      <Text
+                        className={isDarkTextColor()}
+                        style={{
+                          fontSize: 16,
+                          fontWeight: "500",
+                        }}
+                      >
                         Ibrahim-abdalaziz@hotmail.com
                       </Text>
                       <Text>{"   "}</Text>
@@ -366,7 +380,15 @@ function Settings({ theme, isThemeChanged, setIsThemeChanged, dispatch }) {
                 <SettingsButton
                   title={
                     <View className="flex-row-reverse justify-end items-center">
-                      <Text className={isDarkTextColor()}>BR19.me</Text>
+                      <Text
+                        className={isDarkTextColor()}
+                        style={{
+                          fontSize: 16,
+                          fontWeight: "500",
+                        }}
+                      >
+                        BR19.me
+                      </Text>
                       <Text>{"   "}</Text>
                       <SweetSFSymbol
                         name={"globe"}

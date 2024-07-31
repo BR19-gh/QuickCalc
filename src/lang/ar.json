@@ -1,7 +1,7 @@
 {
   "translation": {
     "screens": {
-      "versionNum": "1.0.32",
+      "versionNum": "1.0.33",
       "QuickAction": {
         "search": "بحث",
         "createTool": "إنشاء أداة",
@@ -25,7 +25,8 @@
           "hiddenTools": "الأدوات المخفية",
           "swipeAction": "التمرير للتعديل",
           "newPage": "صفحة إضافة الأدوات",
-          "settingsPage": "هيا لنبدأ!",
+          "settingsPage": "صفحة الإعدادات",
+          "final": "هيا لنبدأ!",
           "welcome": "مرحبا"
         }
       },
@@ -118,7 +119,7 @@
             "noOperands": "يجب أن تحتوي المعادلة ما بين معاملين وحتى 5 معاملات",
             "save": "حفظ",
             "selectIcon": "اختر أيقونة",
-            "searchIcon": "ابحث عن أيقونة",
+            "searchIcon": "ابحث بالانجليزية",
             "addingNewTool": "جار اضافة الأداة...",
             "toolAdded": "تمت اضافة الأداة بنجاح!",
             "editingTool": "جار تعديل الأداة...",
