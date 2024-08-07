@@ -1,7 +1,7 @@
 {
   "translation": {
     "screens": {
-      "versionNum": "1.0.33",
+      "versionNum": "1.0.35",
       "QuickAction": {
         "search": "Search",
         "createTool": "Create Tool",
