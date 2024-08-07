@@ -718,7 +718,7 @@ function CalendarCon({ theme }) {
                   toCalendarValue.day !== "" &&
                   toCalendarValue.month !== "" &&
                   toCalendarValue.year !== "" &&
-                  toCalendarValue.timeSince.days >= 0
+                  toCalendarValue.timeSince.days >= -1
                     ? t(text("elapsed")) + ":  "
                     : ""}
                 </Text>

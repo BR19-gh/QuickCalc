@@ -380,7 +380,6 @@
       "Settings": {
         "title": "Settings",
         "text": {
-          "changeIcon": "Change App Icon",
           "appIcon": "App Icon",
           "language": "Language",
           "theme": "Theme",

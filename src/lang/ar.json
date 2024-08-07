@@ -381,7 +381,6 @@
       "Settings": {
         "title": "الإعدادات",
         "text": {
-          "changeIcon": "تغيير أيقونة التطبيق",
           "appIcon": "أيقونة التطبيق",
           "language": "اللغة",
           "theme": "المظهر",

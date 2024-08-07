@@ -141,7 +141,37 @@ function Settings({ theme, isThemeChanged, setIsThemeChanged, dispatch }) {
               </Text>
               <SettingsGroup>
                 <SettingsButton
-                  title={t(text("language"))}
+                  title={
+                    <View className="flex-row-reverse justify-end items-center">
+                      <Text
+                        className={isDarkTextColor()}
+                        style={{
+                          fontSize: 18,
+                          fontWeight: 400,
+                        }}
+                      >
+                        {t(t(text("language")))}
+                      </Text>
+                      <Text>{"   "}</Text>
+                      <View
+                        className="bg-blue-500"
+                        style={{
+                          alignItems: "center",
+                          padding: 6,
+                          width: 30,
+                          height: 30,
+
+                          borderRadius: 5,
+                        }}
+                      >
+                        <SweetSFSymbol
+                          name={"globe"}
+                          size={18}
+                          colors={["white"]}
+                        />
+                      </View>
+                    </View>
+                  }
                   type="newpage"
                   onPress={() => openAppPref(t, text)}
                 />
@@ -151,18 +181,30 @@ function Settings({ theme, isThemeChanged, setIsThemeChanged, dispatch }) {
                       <Text
                         className={isDarkTextColor()}
                         style={{
-                          fontSize: 16,
-                          fontWeight: "500",
+                          fontSize: 18,
+                          fontWeight: 400,
                         }}
                       >
                         {t(text("goldenVersion"))}
                       </Text>
                       <Text>{"   "}</Text>
-                      <SweetSFSymbol
-                        name={"crown.fill"}
-                        size={20}
-                        colors={["#daa520CC"]}
-                      />
+                      <View
+                        className="bg-yellow-500"
+                        style={{
+                          alignItems: "center",
+                          padding: 6,
+                          width: 30,
+                          height: 30,
+
+                          borderRadius: 5,
+                        }}
+                      >
+                        <SweetSFSymbol
+                          name={"crown.fill"}
+                          size={17}
+                          colors={["white"]}
+                        />
+                      </View>
                     </View>
                   }
                   type="newpage"
@@ -187,7 +229,37 @@ function Settings({ theme, isThemeChanged, setIsThemeChanged, dispatch }) {
                   }}
                 >
                   <SettingsInfoDisplay
-                    title={t(text("theme"))}
+                    title={
+                      <View className="flex-row-reverse justify-end items-center">
+                        <Text
+                          className={isDarkTextColor()}
+                          style={{
+                            fontSize: 18,
+                            fontWeight: 400,
+                          }}
+                        >
+                          {t(text("theme"))}
+                        </Text>
+                        <Text>{"   "}</Text>
+                        <View
+                          style={{
+                            marginStart: lang === "ar" ? 0 : 4,
+                            alignItems: "center",
+                            padding: 6,
+                            width: 30,
+                            height: 30,
+                            backgroundColor: "#555555",
+                            borderRadius: 5,
+                          }}
+                        >
+                          <SweetSFSymbol
+                            name={"platter.2.filled.iphone"}
+                            size={18}
+                            colors={["white"]}
+                          />
+                        </View>
+                      </View>
+                    }
                     status={
                       <SelectDropdown
                         ref={dropdownRef}
@@ -317,7 +389,37 @@ function Settings({ theme, isThemeChanged, setIsThemeChanged, dispatch }) {
                   "iPad Pro 12.9-inch (3rd generation)"
                 ) ? null : (
                   <SettingsButton
-                    title={t(text("changeIcon"))}
+                    title={
+                      <View className="flex-row-reverse justify-end items-center">
+                        <Text
+                          className={isDarkTextColor()}
+                          style={{
+                            fontSize: 18,
+                            fontWeight: 400,
+                          }}
+                        >
+                          {t(text("appIcon"))}
+                        </Text>
+                        <Text>{"   "}</Text>
+                        <View
+                          className="bg-violet-500"
+                          style={{
+                            alignItems: "center",
+                            padding: 6,
+                            width: 30,
+                            height: 30,
+
+                            borderRadius: 5,
+                          }}
+                        >
+                          <SweetSFSymbol
+                            name={"questionmark.app.fill"}
+                            size={17}
+                            colors={["white"]}
+                          />
+                        </View>
+                      </View>
+                    }
                     type="newpage"
                     onPress={() => navigation.navigate("ChangeColor")}
                   />
@@ -336,18 +438,29 @@ function Settings({ theme, isThemeChanged, setIsThemeChanged, dispatch }) {
                       <Text
                         className={isDarkTextColor()}
                         style={{
-                          fontSize: 16,
-                          fontWeight: "500",
+                          fontSize: 18,
+                          fontWeight: 400,
                         }}
                       >
                         Ibrahim-abdalaziz@hotmail.com
                       </Text>
                       <Text>{"   "}</Text>
-                      <SweetSFSymbol
-                        name={"envelope.fill"}
-                        size={20}
-                        colors={["gray"]}
-                      />
+                      <View
+                        style={{
+                          alignItems: "center",
+                          padding: 6,
+                          width: 30,
+                          height: 30,
+                          backgroundColor: "grey",
+                          borderRadius: 5,
+                        }}
+                      >
+                        <SweetSFSymbol
+                          name={"envelope.fill"}
+                          size={17}
+                          colors={["white"]}
+                        />
+                      </View>
                     </View>
                   }
                   type="newpage"
@@ -383,18 +496,30 @@ function Settings({ theme, isThemeChanged, setIsThemeChanged, dispatch }) {
                       <Text
                         className={isDarkTextColor()}
                         style={{
-                          fontSize: 16,
-                          fontWeight: "500",
+                          fontSize: 18,
+                          fontWeight: 400,
                         }}
                       >
                         BR19.me
                       </Text>
                       <Text>{"   "}</Text>
-                      <SweetSFSymbol
-                        name={"globe"}
-                        size={20}
-                        colors={["gray"]}
-                      />
+                      <View
+                        className="bg-green-500"
+                        style={{
+                          alignItems: "center",
+                          padding: 6,
+                          width: 30,
+                          height: 30,
+
+                          borderRadius: 5,
+                        }}
+                      >
+                        <SweetSFSymbol
+                          name={"globe.badge.chevron.backward"}
+                          size={17}
+                          colors={["white"]}
+                        />
+                      </View>
                     </View>
                   }
                   type="newpage"
@@ -407,15 +532,67 @@ function Settings({ theme, isThemeChanged, setIsThemeChanged, dispatch }) {
               <Text style={stylesSettings.groupTitle}>{t(text("app"))}</Text>
               <SettingsGroup>
                 <SettingsButton
-                  title={t(text("walkThrough"))}
+                  title={
+                    <View className="flex-row-reverse justify-end items-center">
+                      <Text
+                        className={isDarkTextColor()}
+                        style={{
+                          fontSize: 18,
+                          fontWeight: 400,
+                        }}
+                      >
+                        {t(text("walkThrough"))}
+                      </Text>
+                      <Text>{"   "}</Text>
+                      <View
+                        className="bg-red-500"
+                        style={{
+                          alignItems: "center",
+                          padding: 6,
+                          width: 30,
+                          height: 30,
+
+                          borderRadius: 5,
+                        }}
+                      >
+                        <SweetSFSymbol
+                          name={"info.circle.fill"}
+                          size={17}
+                          colors={["white"]}
+                        />
+                      </View>
+                    </View>
+                  }
                   type="newpage"
                   onPress={() => navigation.navigate("WalkThrough")}
                 />
                 <SettingsInfoDisplay
-                  title={t(text("version"))}
+                  title={
+                    <View className="flex-row-reverse justify-end items-center">
+                      <Text
+                        className={isDarkTextColor()}
+                        style={{
+                          fontSize: 18,
+                          fontWeight: 400,
+                        }}
+                      >
+                        {t(text("version"))}
+                      </Text>
+                    </View>
+                  }
                   status={
-                    t("screens.versionNum") +
-                    (Platform.isPad ? "(desktop)" : "")
+                    <Text
+                      className={
+                        theme === "dark" ? "text-gray-400" : "text-gray-500"
+                      }
+                      style={{
+                        fontWeight: 400,
+                        fontSize: 18,
+                      }}
+                    >
+                      {t("screens.versionNum") +
+                        (Platform.isPad ? "(desktop)" : "")}
+                    </Text>
                   }
                   type="custom"
                 />
@@ -424,14 +601,22 @@ function Settings({ theme, isThemeChanged, setIsThemeChanged, dispatch }) {
                 >
                   <SettingsInfoDisplay
                     title={
-                      <Text className={"text-destructive"}>
-                        {t(text("deleteData"))}
-                      </Text>
+                      <View className="flex-row-reverse justify-end items-center">
+                        <Text
+                          className="text-destructive"
+                          style={{
+                            fontSize: 18,
+                            fontWeight: 400,
+                          }}
+                        >
+                          {t(text("deleteData"))}
+                        </Text>
+                      </View>
                     }
                     status={
                       <SweetSFSymbol
                         name={"trash"}
-                        size={20}
+                        size={17}
                         colors={["#e63746"]}
                       />
                     }

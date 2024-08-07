@@ -30,6 +30,7 @@ const DropdownComponent = ({ theme, text, t, setCurrency, currency }) => {
 
   return (
     <Dropdown
+      autoScroll={false}
       activeColor={theme === "dark" ? "#444444" : "#D2D2D2"}
       itemContainerStyle={{
         backgroundColor: theme === "dark" ? "#555555" : "#E9ECEF",
