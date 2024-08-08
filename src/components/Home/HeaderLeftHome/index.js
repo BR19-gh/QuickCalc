@@ -32,7 +32,7 @@ const Header = ({
   return (
     <>
       <TouchableOpacity
-        className="items-start w-14"
+        className="items-start w-11"
         onPress={() => {
           Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
           let refreshToast = toast.show(t(text("refreshing")), {
@@ -56,7 +56,7 @@ const Header = ({
         />
       </TouchableOpacity>
       <TouchableOpacity
-        className="items-start w-14"
+        className="items-start w-11"
         onPress={() => {
           Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
           if (user.golden) {
@@ -75,6 +75,7 @@ const Header = ({
         }
       </TouchableOpacity>
       <TouchableOpacity
+        className="mr-6"
         onPress={() => {
           Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
           setIsShowedFavorite(!isShowedFavorite);

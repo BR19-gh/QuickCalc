@@ -512,7 +512,7 @@ function GPACal(props) {
                       credit: "",
                     }))
                   }
-                  maxLength={2}
+                  maxLength={3}
                   placeholderTextColor={isDark("#DBEAFE88", "#28398755")}
                   placeholder={t(text("creditHours"))}
                   keyboardType="decimal-pad"

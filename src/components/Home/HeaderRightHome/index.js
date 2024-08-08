@@ -33,8 +33,8 @@ const Header = ({
     <View
       className={
         "items-center " +
-        "flex-row justify-between" +
-        (isEditing ? " w-20" : " w-24")
+        "flex-row justify-between ml-9" +
+        (isEditing ? " w-20" : " w-20")
       }
     >
       {isShowedFavorite ? (

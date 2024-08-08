@@ -8,6 +8,7 @@ import {
   Alert,
   Share,
   StatusBar,
+  ScrollView,
 } from "react-native";
 import Card from "../../components/Home/Card";
 import SwipeableRow from "../../components/Home/Swipeable";
@@ -461,176 +462,173 @@ function Home(props) {
 
   const { user } = useRevenueCat();
 
-  //show ads
-  const handleAdClosed = () => {
-    setTimeout(() => {
-      showAd(handleAdClosed);
-    }, 60000 * 3);
-  };
+  // //show ads
+  // const handleAdClosed = () => {
+  //   setTimeout(() => {
+  //     showAd(handleAdClosed);
+  //   }, 60000 * 3);
+  // };
 
-  useEffect(() => {
-    setTimeout(() => {
-      try {
-        showAd(handleAdClosed);
-      } catch (e) {
-        console.log(e);
-      }
-    }, 30000);
-  }, []);
+  // useEffect(() => {
+  //   setTimeout(() => {
+  //     try {
+  //       showAd(handleAdClosed);
+  //     } catch (e) {
+  //       console.log(e);
+  //     }
+  //   }, 30000);
+  // }, []);
 
   return (
     <SafeAreaView>
-      <View className="items-center">
-        {props.searchText.length > 0 || props.isEditing === true ? (
-          <View
-            style={{
-              width: 135,
-              height: 30,
-              marginBottom: 10,
-              marginTop: 10,
-              backgroundColor: props.theme === "dark" ? "#2C2C2F" : "#E7E7E8",
-              borderRadius: 8,
-              flexDirection: "row",
-              justifyContent: "center",
-              alignItems: "center",
-            }}
-          >
-            <Text
-              style={{
-                color: props.theme === "dark" ? "#ffffffAA" : "#00000088",
-              }}
-            >
-              {t(text("filterIsDisabled"))}
-            </Text>
-          </View>
-        ) : (
-          <SelectDropdown
-            disabled={props.searchText.length > 0 || props.isEditing === true}
-            data={[
-              t(text("allTools")),
-              t(text("yourTools")),
-              t(text("builtinTools")),
-            ]}
-            defaultValue={t(text("allTools"))}
-            onSelect={(selectedItem, index) => {
-              Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Heavy);
-              if (index === 0) {
-                setYourToolsDisplayes(false);
-                setBuiltinToolsDisplayes(false);
-              } else if (index === 1) {
-                setYourToolsDisplayes(true);
-                setBuiltinToolsDisplayes(false);
-              } else if (index === 2) {
-                setYourToolsDisplayes(false);
-                setBuiltinToolsDisplayes(true);
-              }
-            }}
-            renderButton={(selectedItem, isOpened) => {
-              return (
-                <View
-                  style={{
-                    width: 135,
-                    height: 30,
-                    marginBottom: 10,
-                    marginTop: 10,
-                    backgroundColor:
-                      props.theme === "dark" ? "#2C2C2F" : "#E7E7E8",
-                    borderRadius: 8,
-                    flexDirection: "row",
-                    justifyContent: "center",
-                    alignItems: "center",
-                  }}
-                >
-                  <Text
-                    style={{
-                      color: props.theme === "dark" ? "#fff" : "#151E26",
-                      flex: 1,
-                      fontSize: 18,
-                      fontWeight: "400",
-                      textAlign: "center",
-                    }}
-                  >
-                    {selectedItem}
-                  </Text>
-                </View>
-              );
-            }}
-            renderItem={(item, index, isSelected) => {
-              return (
-                <View
-                  style={{
-                    paddingHorizontal: 12,
-                    paddingVertical: 8,
-                  }}
-                >
-                  <Text
-                    className="text-center"
-                    style={{
-                      flex: 1,
-                      fontSize: 18,
-                      fontWeight: "300",
-                      color: props.theme === "dark" ? "#fff" : "#151E26",
-                      ...(isSelected && {
-                        fontWeight: "bold",
-                        fontSize: 18,
-                      }),
-                    }}
-                  >
-                    {item}
-                  </Text>
-                </View>
-              );
-            }}
-            showsVerticalScrollIndicator={false}
-            dropdownStyle={{
-              marginStart: -7,
-              marginEnd: -7,
-              backgroundColor: props.theme === "dark" ? "#2C2C2F" : "#E7E7E8",
-              borderRadius: 8,
-              width: 150,
-            }}
-          />
-        )}
-
-        <NestableScrollContainer
-          style={{
-            width: "100%",
-            height: user.golden
-              ? windowHight > 667
-                ? windowHight > 852
-                  ? "95%"
-                  : "91.5%"
-                : "89.5%"
-              : windowHight > 667
-              ? windowHight > 852
-                ? "86%"
-                : "79.5%"
-              : "76.5%",
-          }}
-          refreshControl={
-            <RefreshControl
-              refreshing={refreshing}
-              onRefresh={() => {
-                let refreshToast = toast.show(t(text("refreshing")), {
+      <NestableScrollContainer
+        style={{
+          width: "100%",
+          height: user.golden
+            ? "100%"
+            : windowHight > 667
+            ? windowHight > 852
+              ? "92%"
+              : "92%"
+            : "90%",
+        }}
+        refreshControl={
+          <RefreshControl
+            refreshing={refreshing}
+            onRefresh={() => {
+              let refreshToast = toast.show(t(text("refreshing")), {
+                placement: "top",
+              });
+              props.dispatch(handleInitialData());
+              setRefreshing(true);
+              setTimeout(() => {
+                Haptics.notificationAsync(
+                  Haptics.NotificationFeedbackType.Success
+                );
+                toast.update(refreshToast, t(text("refreshComplated")), {
+                  type: "success",
+                  duration: 500,
                   placement: "top",
                 });
-                props.dispatch(handleInitialData());
-                setRefreshing(true);
-                setTimeout(() => {
-                  Haptics.notificationAsync(
-                    Haptics.NotificationFeedbackType.Success
-                  );
-                  toast.update(refreshToast, t(text("refreshComplated")), {
-                    type: "success",
-                    duration: 500,
-                    placement: "top",
-                  });
-                  setRefreshing(false);
-                }, 500);
+                setRefreshing(false);
+              }, 500);
+            }}
+          />
+        }
+      >
+        <View>
+          {props.searchText.length > 0 || props.isEditing === true ? (
+            <View
+              style={{
+                alignSelf: "center",
+                width: 135,
+                height: 30,
+                marginBottom: 10,
+                marginTop: 10,
+                backgroundColor: props.theme === "dark" ? "#2C2C2F" : "#E7E7E8",
+                borderRadius: 8,
+                flexDirection: "row",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              <Text
+                style={{
+                  color: props.theme === "dark" ? "#ffffffAA" : "#00000088",
+                }}
+              >
+                {t(text("filterIsDisabled"))}
+              </Text>
+            </View>
+          ) : (
+            <SelectDropdown
+              disabled={props.searchText.length > 0 || props.isEditing === true}
+              data={[
+                t(text("allTools")),
+                t(text("yourTools")),
+                t(text("builtinTools")),
+              ]}
+              defaultValue={t(text("allTools"))}
+              onSelect={(selectedItem, index) => {
+                Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Heavy);
+                if (index === 0) {
+                  setYourToolsDisplayes(false);
+                  setBuiltinToolsDisplayes(false);
+                } else if (index === 1) {
+                  setYourToolsDisplayes(true);
+                  setBuiltinToolsDisplayes(false);
+                } else if (index === 2) {
+                  setYourToolsDisplayes(false);
+                  setBuiltinToolsDisplayes(true);
+                }
+              }}
+              renderButton={(selectedItem, isOpened) => {
+                return (
+                  <View
+                    style={{
+                      alignSelf: "center",
+                      width: 135,
+                      height: 30,
+                      marginBottom: 10,
+                      marginTop: 10,
+                      backgroundColor:
+                        props.theme === "dark" ? "#2C2C2F" : "#E7E7E8",
+                      borderRadius: 8,
+                      flexDirection: "row",
+                      justifyContent: "center",
+                      alignItems: "center",
+                    }}
+                  >
+                    <Text
+                      style={{
+                        color: props.theme === "dark" ? "#fff" : "#151E26",
+                        flex: 1,
+                        fontSize: 18,
+                        fontWeight: "400",
+                        textAlign: "center",
+                      }}
+                    >
+                      {selectedItem}
+                    </Text>
+                  </View>
+                );
+              }}
+              renderItem={(item, index, isSelected) => {
+                return (
+                  <View
+                    style={{
+                      paddingHorizontal: 12,
+                      paddingVertical: 8,
+                    }}
+                  >
+                    <Text
+                      className="text-center"
+                      style={{
+                        flex: 1,
+                        fontSize: 18,
+                        fontWeight: "300",
+                        color: props.theme === "dark" ? "#fff" : "#151E26",
+                        ...(isSelected && {
+                          fontWeight: "bold",
+                          fontSize: 18,
+                        }),
+                      }}
+                    >
+                      {item}
+                    </Text>
+                  </View>
+                );
+              }}
+              showsVerticalScrollIndicator={false}
+              dropdownStyle={{
+                marginStart: -7,
+                marginEnd: -7,
+                backgroundColor: props.theme === "dark" ? "#2C2C2F" : "#E7E7E8",
+                borderRadius: 8,
+                width: 150,
               }}
             />
-          }
-        >
+          )}
           <Text
             className={styles.title + (props.theme === "dark" && " text-white")}
           >
@@ -638,55 +636,29 @@ function Home(props) {
               ? t(text("favoredTools"))
               : t(text("tools"))}
           </Text>
-
-          {
-            //shown tools
-            props.isShowedFavorite ? (
-              currentTools.filter((tool) => tool.isFavorite === true).length ===
-              0 ? (
-                <Text
-                  className={
-                    "text-xl m-4 mt-0 text-left " +
-                    (props.theme === "dark" && " text-white")
-                  }
-                >
-                  {t(text("noFavoredTools"))}
-                </Text>
-              ) : currentTools.filter((tool) =>
-                  yourToolsDisplayes
-                    ? tool.link === "CreatedTool" &&
-                      tool.isHidden === false &&
-                      tool.isFavorite === true
-                    : builtinToolsDisplayes
-                    ? tool.link !== "CreatedTool" &&
-                      tool.isHidden === false &&
-                      tool.isFavorite === true
-                    : true
-                ).length === 0 ? (
-                <Text
-                  className={
-                    "text-xl m-4 mt-0 text-left " +
-                    (props.theme === "dark" && " text-white")
-                  }
-                >
-                  {t(text("noFilteredFavoredTools"))}
-                </Text>
-              ) : null
-            ) : currentTools.filter((tool) => tool.isHidden === false)
-                .length === 0 ? (
+        </View>
+        {
+          //shown tools
+          props.isShowedFavorite ? (
+            currentTools.filter((tool) => tool.isFavorite === true).length ===
+            0 ? (
               <Text
                 className={
                   "text-xl m-4 mt-0 text-left " +
                   (props.theme === "dark" && " text-white")
                 }
               >
-                {t(text("noTools"))}
+                {t(text("noFavoredTools"))}
               </Text>
             ) : currentTools.filter((tool) =>
                 yourToolsDisplayes
-                  ? tool.link === "CreatedTool" && tool.isHidden === false
+                  ? tool.link === "CreatedTool" &&
+                    tool.isHidden === false &&
+                    tool.isFavorite === true
                   : builtinToolsDisplayes
-                  ? tool.link !== "CreatedTool" && tool.isHidden === false
+                  ? tool.link !== "CreatedTool" &&
+                    tool.isHidden === false &&
+                    tool.isFavorite === true
                   : true
               ).length === 0 ? (
               <Text
@@ -695,152 +667,182 @@ function Home(props) {
                   (props.theme === "dark" && " text-white")
                 }
               >
-                {t(text("noFilteredTools"))}
+                {t(text("noFilteredFavoredTools"))}
               </Text>
             ) : null
-          }
-
-          <NestableDraggableFlatList
-            extraData={currentTools}
-            contentInsetAdjustmentBehavior="automatic"
-            data={
-              props.searchText.length > 0
-                ? props.isShowedFavorite
-                  ? currentTools.filter(
-                      (tool) =>
-                        tool.searchName.includes(props.searchText) &&
-                        tool.isFavorite === true
-                    )
-                  : currentTools.filter(
-                      (tool) =>
-                        tool.searchName.includes(props.searchText) &&
-                        tool.isHidden === false
-                    )
-                : props.isShowedFavorite
-                ? currentTools.filter((tool) =>
-                    yourToolsDisplayes
-                      ? tool.link === "CreatedTool" && tool.isFavorite === true
-                      : (builtinToolsDisplayes
-                          ? tool.link !== "CreatedTool" &&
-                            tool.isFavorite === true
-                          : true && tool.isFavorite === true) &&
-                        tool.isFavorite === true
-                  )
-                : currentTools.filter((tool) =>
-                    yourToolsDisplayes
-                      ? tool.link === "CreatedTool" && tool.isHidden === false
-                      : (builtinToolsDisplayes
-                          ? tool.link !== "CreatedTool" &&
-                            tool.isHidden === false
-                          : true && tool.isHidden === false) &&
-                        tool.isHidden === false
-                  )
-            }
-            onDragEnd={({ data }) => {
-              props.isShowedFavorite || props.searchText.length > 0
-                ? null
-                : handleReorder([
-                    ...data,
-                    ...currentTools.filter((tool) => tool.isHidden === true),
-                  ]);
-            }}
-            className={
-              props.isEditing || props.isEditingFavorite ? "" : " h-full"
-            }
-            renderItem={({ item: tool, getIndex, drag, isActive }) => {
-              if (props.isEditing || props.isEditingFavorite) {
-                return renderItemDrag({ tool, getIndex, drag, isActive });
-              } else {
-                return renderItemContextMenu({
-                  tool,
-                  getIndex,
-                  drag,
-                  isActive,
-                });
+          ) : currentTools.filter((tool) => tool.isHidden === false).length ===
+            0 ? (
+            <Text
+              className={
+                "text-xl m-4 mt-0 text-left " +
+                (props.theme === "dark" && " text-white")
               }
-            }}
-            keyExtractor={(item, index) => String(index)}
-          />
+            >
+              {t(text("noTools"))}
+            </Text>
+          ) : currentTools.filter((tool) =>
+              yourToolsDisplayes
+                ? tool.link === "CreatedTool" && tool.isHidden === false
+                : builtinToolsDisplayes
+                ? tool.link !== "CreatedTool" && tool.isHidden === false
+                : true
+            ).length === 0 ? (
+            <Text
+              className={
+                "text-xl m-4 mt-0 text-left " +
+                (props.theme === "dark" && " text-white")
+              }
+            >
+              {t(text("noFilteredTools"))}
+            </Text>
+          ) : null
+        }
 
-          {
-            //not shown tools
-            (props.isEditing || props.isEditingFavorite) && (
-              <View
+        <NestableDraggableFlatList
+          extraData={currentTools}
+          contentInsetAdjustmentBehavior="automatic"
+          data={
+            props.searchText.length > 0
+              ? props.isShowedFavorite
+                ? currentTools.filter(
+                    (tool) =>
+                      tool.searchName.includes(props.searchText) &&
+                      tool.isFavorite === true
+                  )
+                : currentTools.filter(
+                    (tool) =>
+                      tool.searchName.includes(props.searchText) &&
+                      tool.isHidden === false
+                  )
+              : props.isShowedFavorite
+              ? currentTools.filter((tool) =>
+                  yourToolsDisplayes
+                    ? tool.link === "CreatedTool" && tool.isFavorite === true
+                    : (builtinToolsDisplayes
+                        ? tool.link !== "CreatedTool" &&
+                          tool.isFavorite === true
+                        : true && tool.isFavorite === true) &&
+                      tool.isFavorite === true
+                )
+              : currentTools.filter((tool) =>
+                  yourToolsDisplayes
+                    ? tool.link === "CreatedTool" && tool.isHidden === false
+                    : (builtinToolsDisplayes
+                        ? tool.link !== "CreatedTool" && tool.isHidden === false
+                        : true && tool.isHidden === false) &&
+                      tool.isHidden === false
+                )
+          }
+          onDragEnd={({ data }) => {
+            props.isShowedFavorite || props.searchText.length > 0
+              ? null
+              : handleReorder([
+                  ...data,
+                  ...currentTools.filter((tool) => tool.isHidden === true),
+                ]);
+          }}
+          className={
+            props.isEditing || props.isEditingFavorite ? "" : " h-full"
+          }
+          renderItem={({ item: tool, getIndex, drag, isActive }) => {
+            if (props.isEditing || props.isEditingFavorite) {
+              return renderItemDrag({ tool, getIndex, drag, isActive });
+            } else {
+              return renderItemContextMenu({
+                tool,
+                getIndex,
+                drag,
+                isActive,
+              });
+            }
+          }}
+          keyExtractor={(item, index) => String(index)}
+        />
+
+        {
+          //not shown tools
+          (props.isEditing || props.isEditingFavorite) && (
+            <View
+              className={
+                "bg-slate-300 pb-4" +
+                (props.theme === "dark" && " bg-slate-950")
+              }
+            >
+              <Text
                 className={
-                  "bg-slate-300 pb-4" +
-                  (props.theme === "dark" && " bg-slate-950")
+                  styles.title +
+                  (props.theme === "dark"
+                    ? "  text-gray-400"
+                    : "  text-gray-600")
                 }
               >
+                {props.isShowedFavorite
+                  ? t(text("unfavoredTools"))
+                  : t(text("hiddenTools"))}
+              </Text>
+              {currentTools.filter((tool) =>
+                props.isShowedFavorite
+                  ? tool.isFavorite === false && tool.isHidden === false
+                  : tool.isHidden === true
+              ).length !== 0 ? (
+                currentTools
+                  .filter((tool) =>
+                    props.searchText.length > 0
+                      ? tool.searchName.includes(props.searchText) &&
+                        (props.isShowedFavorite
+                          ? tool.isFavorite === false && tool.isHidden === false
+                          : tool.isHidden === true)
+                      : props.isShowedFavorite
+                      ? tool.isFavorite === false &&
+                        tool.isHidden === false &&
+                        (yourToolsDisplayes
+                          ? tool.link === "CreatedTool"
+                          : builtinToolsDisplayes
+                          ? tool.link !== "CreatedTool"
+                          : true)
+                      : tool.isHidden === true
+                  )
+                  .map((tool) => (
+                    <Card
+                      searchTextLength={props.searchText.length}
+                      isEditingFavorite={props.isEditingFavorite}
+                      handleFavorite={handleFavorite}
+                      theme={props.theme}
+                      lang={lang}
+                      tool={tool}
+                      key={tool.id}
+                      changeVis={changeVis}
+                      navigation={navigation}
+                      isEditing={props.isEditing}
+                      t={t}
+                      text={text}
+                    />
+                  ))
+              ) : (
                 <Text
                   className={
-                    styles.title +
-                    (props.theme === "dark"
-                      ? "  text-gray-400"
-                      : "  text-gray-600")
+                    "text-xl m-4 mt-0 text-gray-600 text-left" +
+                    (props.theme === "dark" && " text-gray-400")
                   }
                 >
                   {props.isShowedFavorite
-                    ? t(text("unfavoredTools"))
-                    : t(text("hiddenTools"))}
+                    ? t(text("noUnfavoredTools"))
+                    : t(text("noHiddenTools"))}
                 </Text>
-                {currentTools.filter((tool) =>
-                  props.isShowedFavorite
-                    ? tool.isFavorite === false && tool.isHidden === false
-                    : tool.isHidden === true
-                ).length !== 0 ? (
-                  currentTools
-                    .filter((tool) =>
-                      props.searchText.length > 0
-                        ? tool.searchName.includes(props.searchText) &&
-                          (props.isShowedFavorite
-                            ? tool.isFavorite === false &&
-                              tool.isHidden === false
-                            : tool.isHidden === true)
-                        : props.isShowedFavorite
-                        ? tool.isFavorite === false &&
-                          tool.isHidden === false &&
-                          (yourToolsDisplayes
-                            ? tool.link === "CreatedTool"
-                            : builtinToolsDisplayes
-                            ? tool.link !== "CreatedTool"
-                            : true)
-                        : tool.isHidden === true
-                    )
-                    .map((tool) => (
-                      <Card
-                        searchTextLength={props.searchText.length}
-                        isEditingFavorite={props.isEditingFavorite}
-                        handleFavorite={handleFavorite}
-                        theme={props.theme}
-                        lang={lang}
-                        tool={tool}
-                        key={tool.id}
-                        changeVis={changeVis}
-                        navigation={navigation}
-                        isEditing={props.isEditing}
-                        t={t}
-                        text={text}
-                      />
-                    ))
-                ) : (
-                  <Text
-                    className={
-                      "text-xl m-4 mt-0 text-gray-600 text-left" +
-                      (props.theme === "dark" && " text-gray-400")
-                    }
-                  >
-                    {props.isShowedFavorite
-                      ? t(text("noUnfavoredTools"))
-                      : t(text("noHiddenTools"))}
-                  </Text>
-                )}
-              </View>
-            )
-          }
-        </NestableScrollContainer>
+              )}
+            </View>
+          )
+        }
+      </NestableScrollContainer>
+      <View
+        style={{
+          top: windowHight > 667 ? (windowHight > 852 ? 1025 : 715) : 559,
+          position: "absolute",
+        }}
+      >
+        {user.golden ? null : <InlineAd /> ? <InlineAd /> : null}
       </View>
       <StatusBar style="auto" />
-      {user.golden ? null : <InlineAd /> ? <InlineAd /> : null}
     </SafeAreaView>
   );
 }

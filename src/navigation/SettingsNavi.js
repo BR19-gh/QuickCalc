@@ -107,7 +107,7 @@ const SettingsNavi = ({
       />
       <Stack.Screen
         options={{
-          headerTitle: t("screens.Settings.text.changeIcon"),
+          headerTitle: t("screens.Settings.text.appIcon"),
           // presentation: "fullScreenModal",
           // header: () => null,
         }}
