@@ -462,22 +462,22 @@ function Home(props) {
 
   const { user } = useRevenueCat();
 
-  // //show ads
-  // const handleAdClosed = () => {
-  //   setTimeout(() => {
-  //     showAd(handleAdClosed);
-  //   }, 60000 * 3);
-  // };
+  //show ads
+  const handleAdClosed = () => {
+    setTimeout(() => {
+      showAd(handleAdClosed);
+    }, 60000 * 3);
+  };
 
-  // useEffect(() => {
-  //   setTimeout(() => {
-  //     try {
-  //       showAd(handleAdClosed);
-  //     } catch (e) {
-  //       console.log(e);
-  //     }
-  //   }, 30000);
-  // }, []);
+  useEffect(() => {
+    setTimeout(() => {
+      try {
+        showAd(handleAdClosed);
+      } catch (e) {
+        console.log(e);
+      }
+    }, 30000);
+  }, []);
 
   return (
     <SafeAreaView>
