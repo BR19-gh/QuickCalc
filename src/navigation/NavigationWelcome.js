@@ -35,6 +35,7 @@ const Navigation = ({
         t(WalkThroughText("editYourTools")),
         t(WalkThroughText("hiddenTools")),
         t(WalkThroughText("settingsPage")),
+        t(WalkThroughText("final")),
       ]
     : [
         t(WalkThroughText("welcome")),
@@ -44,6 +45,7 @@ const Navigation = ({
         t(WalkThroughText("hiddenTools")),
         t(WalkThroughText("swipeAction")),
         t(WalkThroughText("settingsPage")),
+        t(WalkThroughText("final")),
       ];
 
   useEffect(() => {

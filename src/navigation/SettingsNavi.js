@@ -32,7 +32,7 @@ const SettingsNavi = ({
         t(WalkThroughText("homePage")),
         t(WalkThroughText("editYourTools")),
         t(WalkThroughText("hiddenTools")),
-        //    t(WalkThroughText("settingsPage")),
+        t(WalkThroughText("settingsPage")),
         t(WalkThroughText("final")),
       ]
     : [
@@ -42,7 +42,7 @@ const SettingsNavi = ({
         t(WalkThroughText("editYourTools")),
         t(WalkThroughText("hiddenTools")),
         t(WalkThroughText("swipeAction")),
-        //   t(WalkThroughText("settingsPage")),
+        t(WalkThroughText("settingsPage")),
         t(WalkThroughText("final")),
       ];
 
