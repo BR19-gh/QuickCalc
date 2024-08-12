@@ -32,34 +32,10 @@ const Header = ({
   return (
     <>
       <TouchableOpacity
-        className="items-start w-11"
+        className="items-start w-12"
         onPress={() => {
           Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
-          let refreshToast = toast.show(t(text("refreshing")), {
-            placement: "top",
-          });
-          dispatch(handleInitialData());
-          setTimeout(() => {
-            Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
-            toast.update(refreshToast, t(text("refreshComplated")), {
-              type: "success",
-              duration: 500,
-              placement: "top",
-            });
-          }, 1000);
-        }}
-      >
-        <SweetSFSymbol
-          name={"arrow.clockwise"}
-          size={22}
-          colors={["#3B82F6"]}
-        />
-      </TouchableOpacity>
-      <TouchableOpacity
-        className="items-start w-11"
-        onPress={() => {
-          Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
-          if (user.golden) {
+          if (true /*user.golden*/) {
             navigation.navigate("user");
           } else {
             navigation.navigate("Paywall");
@@ -68,14 +44,14 @@ const Header = ({
       >
         {
           <SweetSFSymbol
-            name={user.golden ? "crown.fill" : "crown"}
+            name={true /*user.golden*/ ? "crown.fill" : "crown"}
             size={22}
             colors={["gold"]}
           />
         }
       </TouchableOpacity>
       <TouchableOpacity
-        className="mr-6"
+        className="items-start w-12 mr-9"
         onPress={() => {
           Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
           setIsShowedFavorite(!isShowedFavorite);

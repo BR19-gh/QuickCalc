@@ -107,9 +107,7 @@ const SettingsNavi = ({
       />
       <Stack.Screen
         options={{
-          headerTitle: t("screens.Settings.text.appIcon"),
-          // presentation: "fullScreenModal",
-          // header: () => null,
+          title: t("screens.Settings.text.appIcon"),
         }}
         name="ChangeColor"
         children={() => <ChangeColor theme={theme} />}

@@ -24,7 +24,7 @@ import SelectDropdown from "react-native-select-dropdown";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import DeviceInfo from "react-native-device-info";
 import * as IntentLauncher from "expo-intent-launcher";
-import Linking from "react-native/Libraries/Linking/Linking";
+import { Linking } from "react-native";
 import { clearAsyncStorage } from "../../../_DATA";
 import { useToast } from "react-native-toast-notifications";
 import { connect } from "react-redux";
@@ -43,7 +43,7 @@ const openAppPref = (t, text) => {
       [
         {
           text: t(text("goToSettings")),
-          onPress: () => Linking.openURL("App-prefs:root=General"),
+          onPress: () => Linking.openURL("app-settings:"),
           style: "Ok",
         },
         {

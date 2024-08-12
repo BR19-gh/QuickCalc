@@ -7,6 +7,7 @@ import {
   Alert,
   TouchableOpacity,
   Platform,
+  Dimensions,
 } from "react-native";
 import { SettingsProvider, SettingsGroup } from "react-native-settings-ui";
 import styles, { stylesSettings } from "./styles";
@@ -84,74 +85,75 @@ function ChangeColor({ theme }) {
   };
 
   return (
-    <SafeAreaView className={styles.container}>
-      <ScrollView>
-        <View className="ml-4 mr-4">
-          <SettingsProvider theme={theme}>
-            <View className="mt-8">
-              <Text style={stylesSettings.groupTitle}>
-                {t(text("appIcon"))}
-              </Text>
-              <SettingsGroup>
-                <View
-                  style={{
-                    flexDirection: "row",
-                    justifyContent: "space-between",
-                    padding: 16,
-                    borderBottomWidth: 1,
-                    borderBottomColor: isDark(
-                      COLORS.dark.borderColor,
-                      COLORS.light.borderColor
-                    ),
-                    backgroundColor: isDark(
-                      COLORS.dark.containerColor,
-                      COLORS.light.containerColor
-                    ),
-                  }}
-                >
-                  <View className="items-center flex-row flex-wrap justify-between">
-                    {APP_ICONS.map((icon, index) => (
-                      <TouchableOpacity
-                        onPress={() => changeIcon(icon.name)}
-                        key={index}
-                        className="m-1 items-center text-center"
+    <ScrollView>
+      <View
+        className={
+          "ml-4 mr-4 " +
+          (Dimensions.get("window").height > 667 ? "mt-20" : "mt-12")
+        }
+      >
+        <SettingsProvider theme={theme}>
+          <View className="mt-8">
+            <Text style={stylesSettings.groupTitle}>{t(text("appIcon"))}</Text>
+            <SettingsGroup>
+              <View
+                style={{
+                  flexDirection: "row",
+                  justifyContent: "space-between",
+                  padding: 16,
+                  borderBottomWidth: 1,
+                  borderBottomColor: isDark(
+                    COLORS.dark.borderColor,
+                    COLORS.light.borderColor
+                  ),
+                  backgroundColor: isDark(
+                    COLORS.dark.containerColor,
+                    COLORS.light.containerColor
+                  ),
+                }}
+              >
+                <View className="items-center flex-row flex-wrap justify-between">
+                  {APP_ICONS.map((icon, index) => (
+                    <TouchableOpacity
+                      onPress={() => changeIcon(icon.name)}
+                      key={index}
+                      className="m-1 items-center text-center"
+                    >
+                      <Image
+                        source={icon.img}
+                        style={{
+                          borderWidth:
+                            getAppIcon() === icon.name
+                              ? Platform.isPad
+                                ? 4
+                                : 2
+                              : 0,
+                          borderColor: "#3B82F6",
+                          borderRadius: Platform.isPad ? 22.5 : 11.25,
+                          width: Platform.isPad ? 128 : 64,
+                          height: Platform.isPad ? 128 : 64,
+                        }}
+                      />
+                      <Text
+                        className={
+                          (Platform.isPad ? "text-lg " : "text-sm ") +
+                          (getAppIcon() === icon.name
+                            ? "text-blue-500"
+                            : isDark("text-white", "text-black"))
+                        }
                       >
-                        <Image
-                          source={icon.img}
-                          style={{
-                            borderWidth:
-                              getAppIcon() === icon.name
-                                ? Platform.isPad
-                                  ? 4
-                                  : 2
-                                : 0,
-                            borderColor: "#3B82F6",
-                            borderRadius: Platform.isPad ? 22.5 : 11.25,
-                            width: Platform.isPad ? 128 : 64,
-                            height: Platform.isPad ? 128 : 64,
-                          }}
-                        />
-                        <Text
-                          className={
-                            (Platform.isPad ? "text-lg " : "text-sm ") +
-                            (getAppIcon() === icon.name
-                              ? "text-blue-500"
-                              : isDark("text-white", "text-black"))
-                          }
-                        >
-                          {t(text(icon.name))}
-                        </Text>
-                      </TouchableOpacity>
-                    ))}
-                  </View>
+                        {t(text(icon.name))}
+                      </Text>
+                    </TouchableOpacity>
+                  ))}
                 </View>
-              </SettingsGroup>
-            </View>
-          </SettingsProvider>
-        </View>
-      </ScrollView>
+              </View>
+            </SettingsGroup>
+          </View>
+        </SettingsProvider>
+      </View>
       <StatusBar style="auto" />
-    </SafeAreaView>
+    </ScrollView>
   );
 }
 

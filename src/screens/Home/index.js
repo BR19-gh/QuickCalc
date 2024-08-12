@@ -54,7 +54,7 @@ function Home(props) {
   }, []);
 
   useEffect(() => {
-    if (user.golden === false) {
+    if (true /*user.golden*/ === false) {
       console.log("appIcon", getAppIcon());
       if (getAppIcon() === "DEFAULT") return;
       setAppIcon("original");
@@ -383,7 +383,7 @@ function Home(props) {
                 } else if (
                   e.nativeEvent.name === t(text("enableQuickAccess"))
                 ) {
-                  if (user.golden) {
+                  if (true /*user.golden*/) {
                     Haptics.selectionAsync();
                     changeQuickAccess(tool.id);
                   } else {
@@ -462,29 +462,29 @@ function Home(props) {
 
   const { user } = useRevenueCat();
 
-  //show ads
-  const handleAdClosed = () => {
-    setTimeout(() => {
-      showAd(handleAdClosed);
-    }, 60000 * 3);
-  };
+  // //show ads
+  // const handleAdClosed = () => {
+  //   setTimeout(() => {
+  //     showAd(handleAdClosed);
+  //   }, 60000 * 3);
+  // };
 
-  useEffect(() => {
-    setTimeout(() => {
-      try {
-        showAd(handleAdClosed);
-      } catch (e) {
-        console.log(e);
-      }
-    }, 30000);
-  }, []);
+  // useEffect(() => {
+  //   setTimeout(() => {
+  //     try {
+  //       showAd(handleAdClosed);
+  //     } catch (e) {
+  //       console.log(e);
+  //     }
+  //   }, 30000);
+  // }, []);
 
   return (
     <SafeAreaView>
       <NestableScrollContainer
         style={{
           width: "100%",
-          height: user.golden
+          height: true /*user.golden*/
             ? "100%"
             : windowHight > 667
             ? windowHight > 852
@@ -840,7 +840,7 @@ function Home(props) {
           position: "absolute",
         }}
       >
-        {user.golden ? null : <InlineAd /> ? <InlineAd /> : null}
+        {true /*user.golden*/ ? null : <InlineAd /> ? <InlineAd /> : null}
       </View>
       <StatusBar style="auto" />
     </SafeAreaView>
