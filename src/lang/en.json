@@ -1,7 +1,7 @@
 {
   "translation": {
     "screens": {
-      "versionNum": "1.0.37",
+      "versionNum": "1.0.38",
       "QuickAction": {
         "search": "Search",
         "createTool": "Create Tool",
@@ -424,7 +424,7 @@
           "title": "Golden Version",
           "restore": "Restore Purchase",
           "promocode": "Promo Code",
-          "description": "You can cancel at any time\n7 days free trial when subscribing for first time",
+          "description": "You can cancel at any time\n7 days free trial for first time subscribers",
           "privacy": "Privacy Policy",
           "termsOfUse": "Terms of Use",
           "currentPlan": "Current Plan",

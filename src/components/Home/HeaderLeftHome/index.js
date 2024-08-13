@@ -35,7 +35,7 @@ const Header = ({
         className="items-start w-12"
         onPress={() => {
           Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
-          if (true /*user.golden*/) {
+          if (user.golden) {
             navigation.navigate("user");
           } else {
             navigation.navigate("Paywall");
@@ -44,7 +44,7 @@ const Header = ({
       >
         {
           <SweetSFSymbol
-            name={true /*user.golden*/ ? "crown.fill" : "crown"}
+            name={user.golden ? "crown.fill" : "crown"}
             size={22}
             colors={["gold"]}
           />

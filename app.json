@@ -2,7 +2,7 @@
   "expo": {
     "name": "QuickCalc",
     "slug": "QuickCalc",
-    "version": "1.0.37",
+    "version": "1.0.38",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "automatic",
@@ -13,7 +13,7 @@
     },
     "assetBundlePatterns": ["**/*"],
     "ios": {
-      "buildNumber": "2.1.37",
+      "buildNumber": "2.1.38",
       "supportsTablet": true,
       "infoPlist": {
         "CFBundleAllowMixedLocalizations": true,

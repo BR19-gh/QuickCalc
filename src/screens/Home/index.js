@@ -54,7 +54,7 @@ function Home(props) {
   }, []);
 
   useEffect(() => {
-    if (true /*user.golden*/ === false) {
+    if (user.golden === false) {
       console.log("appIcon", getAppIcon());
       if (getAppIcon() === "DEFAULT") return;
       setAppIcon("original");
@@ -383,7 +383,7 @@ function Home(props) {
                 } else if (
                   e.nativeEvent.name === t(text("enableQuickAccess"))
                 ) {
-                  if (true /*user.golden*/) {
+                  if (user.golden) {
                     Haptics.selectionAsync();
                     changeQuickAccess(tool.id);
                   } else {
@@ -484,7 +484,7 @@ function Home(props) {
       <NestableScrollContainer
         style={{
           width: "100%",
-          height: true /*user.golden*/
+          height: user.golden
             ? "100%"
             : windowHight > 667
             ? windowHight > 852
@@ -840,7 +840,7 @@ function Home(props) {
           position: "absolute",
         }}
       >
-        {true /*user.golden*/ ? null : <InlineAd /> ? <InlineAd /> : null}
+        {user.golden ? null : <InlineAd /> ? <InlineAd /> : null}
       </View>
       <StatusBar style="auto" />
     </SafeAreaView>

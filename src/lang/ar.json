@@ -1,7 +1,7 @@
 {
   "translation": {
     "screens": {
-      "versionNum": "1.0.37",
+      "versionNum": "1.0.38",
       "QuickAction": {
         "search": "بحث",
         "createTool": "إنشاء أداة",
@@ -426,7 +426,7 @@
           "restore": "استعادة المشتريات",
           "promocode": "كوبون التخفيض",
 
-          "description": "يمكنك الإلغاء في أي وقت\n7 أيام مجانية عند اشتراكك لأول مرة",
+          "description": "يمكنك الإلغاء في أي وقت\n7 أيام تجربة مجانية للمشتركين الجدد",
           "privacy": "سياسة الخصوصية",
           "termsOfUse": "شروط الاستخدام",
           "currentPlan": "الخـطــة الحـاليــة",
