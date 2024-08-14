@@ -1,7 +1,7 @@
 {
   "translation": {
     "screens": {
-      "versionNum": "1.0.38",
+      "versionNum": "1.0.39",
       "QuickAction": {
         "search": "Search",
         "createTool": "Create Tool",
@@ -27,7 +27,8 @@
           "newPage": "New Tools Page",
           "settingsPage": "Settings Page",
           "final": "Let's Get Started!",
-          "welcome": "Welcome"
+          "welcome": "Welcome",
+          "of": "of"
         }
       },
       "Navi": {

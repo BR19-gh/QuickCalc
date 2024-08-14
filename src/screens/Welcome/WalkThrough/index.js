@@ -12,9 +12,12 @@ import { useState, useEffect } from "react";
 import { lang } from "../../../helpers";
 import { Image } from "expo-image";
 import * as Haptics from "expo-haptics";
+import { useTranslation } from "react-i18next";
 
 function WalkThrough(props) {
   const [currentImage, setCurrentImage] = useState(0);
+
+  const { t } = useTranslation();
 
   useEffect(() => {
     props.setCurrentTitles(currentImage);
@@ -69,25 +72,36 @@ function WalkThrough(props) {
     }
   };
 
+  const windowHight = Dimensions.get("window").height;
+
+  const [orientation, setOrientation] = useState("PORTRAIT");
+
+  useEffect(() => {
+    Dimensions.addEventListener("change", ({ window: { width, height } }) => {
+      if (width < height) {
+        setOrientation("PORTRAIT");
+      } else {
+        setOrientation("LANDSCAPE");
+      }
+    });
+  }, [orientation]);
+
   return (
     <SafeAreaView className="items-center">
       <View className={"w-full h-full items-center"}>
         <Image
           style={{
-            //Platform.isPad ? 435 :
-            width: Dimensions.get("window").height > 800 ? 290 : 225,
+            width: windowHight > 667 ? (windowHight > 852 ? 450 : 285) : 225,
             height: props.isFirstTimeLaunch
-              ? // Platform.isPad
-                //   ? 975
-                //   :
-                Dimensions.get("window").height > 800
-                ? 640
-                : 490
-              : //Platform.isPad
-              // ? 919.5
-              // :
-              Dimensions.get("window").height > 800
-              ? 620
+              ? windowHight > 667
+                ? windowHight > 852
+                  ? 1000
+                  : 640
+                : 510
+              : windowHight > 667
+              ? windowHight > 852
+                ? 980
+                : 615
               : 490,
           }}
           source={IMGS[currentImage]}
@@ -111,7 +125,9 @@ function WalkThrough(props) {
             />
           </TouchableOpacity>
           <Text className="text-xl text-center text-gray-500">
-            {currentImage + 1}/{IMGS.length}
+            {currentImage + 1}
+            {" " + t("screens.Welcome.text.of") + " "}
+            {IMGS.length}
           </Text>
           <TouchableOpacity
             disabled={currentImage === 0}
