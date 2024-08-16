@@ -74,7 +74,7 @@ function WalkThrough(props) {
 
   const windowHight = Dimensions.get("window").height;
 
-  const [orientation, setOrientation] = useState("PORTRAIT");
+  const [orientation, setOrientation] = useState("");
 
   useEffect(() => {
     Dimensions.addEventListener("change", ({ window: { width, height } }) => {
@@ -89,25 +89,10 @@ function WalkThrough(props) {
   return (
     <SafeAreaView className="items-center">
       <View className={"w-full h-full items-center"}>
-        <Image
-          style={{
-            width: windowHight > 667 ? (windowHight > 852 ? 450 : 285) : 225,
-            height: props.isFirstTimeLaunch
-              ? windowHight > 667
-                ? windowHight > 852
-                  ? 1000
-                  : 640
-                : 510
-              : windowHight > 667
-              ? windowHight > 852
-                ? 980
-                : 615
-              : 490,
-          }}
-          source={IMGS[currentImage]}
-        />
         <View
-          className={"flex-row-reverse w-full items-center justify-around mt-5"}
+          className={
+            "flex-row-reverse w-full flex-wrap items-center justify-around mt-5"
+          }
         >
           <TouchableOpacity
             disabled={currentImage === IMGS.length - 1}
@@ -118,17 +103,30 @@ function WalkThrough(props) {
           >
             <SweetSFSymbol
               name={lang === "ar" ? "chevron.left" : "chevron.right"}
-              size={32}
+              size={52}
               colors={
                 currentImage === IMGS.length - 1 ? ["#3B82F655"] : ["#3B82F6"]
               }
             />
           </TouchableOpacity>
-          <Text className="text-xl text-center text-gray-500">
-            {currentImage + 1}
-            {" " + t("screens.Welcome.text.of") + " "}
-            {IMGS.length}
-          </Text>
+          <Image
+            style={{
+              width: windowHight > 667 ? (windowHight > 852 ? 450 : 285) : 225,
+              height: props.isFirstTimeLaunch
+                ? windowHight > 667
+                  ? windowHight > 852
+                    ? 1000
+                    : 640
+                  : 510
+                : windowHight > 667
+                ? windowHight > 852
+                  ? 980
+                  : 615
+                : 490,
+            }}
+            source={IMGS[currentImage]}
+          />
+
           <TouchableOpacity
             disabled={currentImage === 0}
             onPress={() => {
@@ -138,10 +136,15 @@ function WalkThrough(props) {
           >
             <SweetSFSymbol
               name={lang === "ar" ? "chevron.right" : "chevron.left"}
-              size={32}
+              size={52}
               colors={currentImage === 0 ? ["#3B82F655"] : ["#3B82F6"]}
             />
           </TouchableOpacity>
+          <Text className="text-xl w-full text-center text-gray-500">
+            {currentImage + 1}
+            {" " + t("screens.Welcome.text.of") + " "}
+            {IMGS.length}
+          </Text>
         </View>
       </View>
       <StatusBar style="auto" />

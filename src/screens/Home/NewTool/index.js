@@ -619,6 +619,7 @@ function NewTool({ theme, tools, dispatch }) {
                   operandNum: "",
                 })
               }
+              maxLength={1}
               placeholderTextColor={isDark("#DBEAFE88", "#28398755")}
               placeholder={t(text("operandNumPlaceholder"))}
               keyboardType="numeric"

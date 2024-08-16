@@ -559,12 +559,7 @@ function EditTool({ theme, tools, route, dispatch }) {
                   operandNum: a2e(value),
                 });
               }}
-              // onFocus={() =>
-              //   setNewTool({
-              //     ...newTool,
-              //     operandNum: "",
-              //   })
-              // }
+              maxLength={2}
               placeholderTextColor={isDark("#DBEAFE88", "#28398755")}
               placeholder={t(text("operandNumPlaceholder"))}
               keyboardType="numeric"
