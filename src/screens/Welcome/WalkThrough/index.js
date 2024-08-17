@@ -13,6 +13,7 @@ import { lang } from "../../../helpers";
 import { Image } from "expo-image";
 import * as Haptics from "expo-haptics";
 import { useTranslation } from "react-i18next";
+import DeviceInfo from "react-native-device-info";
 
 function WalkThrough(props) {
   const [currentImage, setCurrentImage] = useState(0);
