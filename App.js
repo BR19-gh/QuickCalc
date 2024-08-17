@@ -85,21 +85,7 @@ const App = () => {
     <RevenueCatProvider>
       <MenuProvider>
         <ToastProvider>
-          <GestureHandlerRootView
-            style={
-              DeviceInfo.getModel().includes(
-                "iPad Pro 12.9-inch (3rd generation)"
-              )
-                ? {
-                    flex: 1,
-                    minHeight: 1150,
-                    minWidth: 820,
-                    maxHeight: 1150,
-                    minWidth: 820,
-                  }
-                : { flex: 1 }
-            }
-          >
+          <GestureHandlerRootView style={{ flex: 1 }}>
             <Provider store={store}>
               {getStartedBtnPressed || !isFirstTimeState ? (
                 <Navigation

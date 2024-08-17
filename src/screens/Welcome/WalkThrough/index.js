@@ -110,15 +110,22 @@ function WalkThrough(props) {
         </TouchableOpacity>
         <Image
           style={{
-            width:
-              windowHight > 667
-                ? windowHight > 852
-                  ? 450
-                  : Platform.isPad
-                  ? 270
-                  : 285
-                : 225,
-            height: props.isFirstTimeLaunch
+            width: DeviceInfo.getModel().includes(
+              "iPad Pro 12.9-inch (3rd generation)"
+            )
+              ? 285
+              : windowHight > 667
+              ? windowHight > 852
+                ? 450
+                : Platform.isPad
+                ? 270
+                : 285
+              : 225,
+            height: DeviceInfo.getModel().includes(
+              "iPad Pro 12.9-inch (3rd generation)"
+            )
+              ? 615
+              : props.isFirstTimeLaunch
               ? windowHight > 667
                 ? windowHight > 852
                   ? 1000
