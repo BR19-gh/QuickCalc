@@ -88,64 +88,73 @@ function WalkThrough(props) {
 
   return (
     <SafeAreaView className="items-center">
-      <View className={"w-full h-full items-center"}>
-        <View
-          className={
-            "flex-row-reverse w-full flex-wrap items-center justify-around mt-5"
-          }
+      <View
+        className={
+          "flex-row-reverse w-full flex-wrap items-center justify-around mt-5"
+        }
+      >
+        <TouchableOpacity
+          disabled={currentImage === IMGS.length - 1}
+          onPress={() => {
+            selectImg("next");
+            Haptics.selectionAsync();
+          }}
         >
-          <TouchableOpacity
-            disabled={currentImage === IMGS.length - 1}
-            onPress={() => {
-              selectImg("next");
-              Haptics.selectionAsync();
-            }}
-          >
-            <SweetSFSymbol
-              name={lang === "ar" ? "chevron.left" : "chevron.right"}
-              size={52}
-              colors={
-                currentImage === IMGS.length - 1 ? ["#3B82F655"] : ["#3B82F6"]
-              }
-            />
-          </TouchableOpacity>
-          <Image
-            style={{
-              width: windowHight > 667 ? (windowHight > 852 ? 450 : 285) : 225,
-              height: props.isFirstTimeLaunch
-                ? windowHight > 667
-                  ? windowHight > 852
-                    ? 1000
-                    : 640
-                  : 510
-                : windowHight > 667
-                ? windowHight > 852
-                  ? 980
-                  : 615
-                : 490,
-            }}
-            source={IMGS[currentImage]}
+          <SweetSFSymbol
+            name={lang === "ar" ? "chevron.left" : "chevron.right"}
+            size={52}
+            colors={
+              currentImage === IMGS.length - 1 ? ["#3B82F655"] : ["#3B82F6"]
+            }
           />
+        </TouchableOpacity>
+        <Image
+          style={{
+            width:
+              windowHight > 667
+                ? windowHight > 852
+                  ? 450
+                  : Platform.isPad
+                  ? 270
+                  : 285
+                : 225,
+            height: props.isFirstTimeLaunch
+              ? windowHight > 667
+                ? windowHight > 852
+                  ? 1000
+                  : Platform.isPad
+                  ? 575
+                  : 640
+                : 510
+              : windowHight > 667
+              ? windowHight > 852
+                ? 980
+                : Platform.isPad
+                ? 575
+                : 615
+              : 490,
+          }}
+          source={IMGS[currentImage]}
+        />
 
-          <TouchableOpacity
-            disabled={currentImage === 0}
-            onPress={() => {
-              selectImg("prev");
-              Haptics.selectionAsync();
-            }}
-          >
-            <SweetSFSymbol
-              name={lang === "ar" ? "chevron.right" : "chevron.left"}
-              size={52}
-              colors={currentImage === 0 ? ["#3B82F655"] : ["#3B82F6"]}
-            />
-          </TouchableOpacity>
-          <Text className="text-xl w-full text-center text-gray-500">
-            {currentImage + 1}
-            {" " + t("screens.Welcome.text.of") + " "}
-            {IMGS.length}
-          </Text>
-        </View>
+        <TouchableOpacity
+          disabled={currentImage === 0}
+          onPress={() => {
+            selectImg("prev");
+            Haptics.selectionAsync();
+          }}
+        >
+          <SweetSFSymbol
+            name={lang === "ar" ? "chevron.right" : "chevron.left"}
+            size={52}
+            colors={currentImage === 0 ? ["#3B82F655"] : ["#3B82F6"]}
+          />
+        </TouchableOpacity>
+        <Text className="text-xl w-full text-center text-gray-500">
+          {currentImage + 1}
+          {" " + t("screens.Welcome.text.of") + " "}
+          {IMGS.length}
+        </Text>
       </View>
       <StatusBar style="auto" />
     </SafeAreaView>

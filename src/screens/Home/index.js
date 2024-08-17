@@ -479,6 +479,19 @@ function Home(props) {
     }, 30000);
   }, []);
 
+  const [orientation, setOrientation] = useState("");
+
+  useEffect(() => {
+    Dimensions.addEventListener("change", ({ window: { width, height } }) => {
+      props.dispatch(handleInitialData());
+      if (width < height) {
+        setOrientation("PORTRAIT");
+      } else {
+        setOrientation("LANDSCAPE");
+      }
+    });
+  }, [orientation]);
+
   return (
     <SafeAreaView>
       <NestableScrollContainer
@@ -489,6 +502,8 @@ function Home(props) {
             : windowHight > 667
             ? windowHight > 852
               ? "92%"
+              : Platform.isPad
+              ? "87%"
               : "92%"
             : "90%",
         }}
@@ -836,7 +851,14 @@ function Home(props) {
       </NestableScrollContainer>
       <View
         style={{
-          top: windowHight > 667 ? (windowHight > 852 ? 1025 : 715) : 559,
+          top:
+            windowHight > 667
+              ? windowHight > 852
+                ? 1025
+                : Platform.isPad
+                ? 664
+                : 715
+              : 559,
           position: "absolute",
         }}
       >
