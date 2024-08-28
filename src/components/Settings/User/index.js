@@ -41,6 +41,22 @@ const User = ({ theme }) => {
     return dateOnlyString;
   }
 
+  function dateDifference(startDate, endDate) {
+    // Parse the input dates
+    const start = new Date(startDate);
+    const end = new Date(endDate);
+
+    // Calculate the difference in time
+    const diffTime = Math.abs(end - start);
+
+    // Convert the difference from milliseconds to days
+    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+    return diffDays > 1
+      ? diffDays + " " + t("screens.Settings.Paywall.days")
+      : diffDays + " " + t("screens.Settings.Paywall.day");
+  }
+
   const banner =
     lang === "ar"
       ? require(`../../../../assets/golden_version_ar.png`)
@@ -91,6 +107,9 @@ const User = ({ theme }) => {
           )}
           {user.golden && (
             <Text className={" text-md " + isDark("text-white", "text-black")}>
+              {t(text("remaining"))}:{" "}
+              {dateDifference(Date.now(), user.subEndDate)}
+              {"\n"}
               {t(text("subStartDate"))}: {convertToDateOnly(user.subStartDate)}
               {"\n"}
               {t(text("subEndDate"))}: {convertToDateOnly(user.subEndDate)}

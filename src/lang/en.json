@@ -1,7 +1,7 @@
 {
   "translation": {
     "screens": {
-      "versionNum": "1.0.41",
+      "versionNum": "1.0.44",
       "QuickAction": {
         "search": "Search",
         "createTool": "Create Tool",
@@ -63,6 +63,7 @@
           "favorite": "Favorite",
           "unfavorite": "Un\nfavorite",
           "unfavorite2": "Unfavorite",
+          "edit": "Edit",
           "move": "Move",
           "share": "Share",
           "enableQuickAccess": "Enable Quick Access",
@@ -425,6 +426,9 @@
           "title": "Golden Version",
           "restore": "Restore Purchase",
           "promocode": "Promo Code",
+          "remaining": "Remaining",
+          "days": "days",
+          "day": "day",
           "description": "You can cancel at any time\n7 days free trial for first time subscribers",
           "privacy": "Privacy Policy",
           "termsOfUse": "Terms of Use",

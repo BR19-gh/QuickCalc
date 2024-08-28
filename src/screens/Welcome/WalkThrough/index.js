@@ -114,7 +114,7 @@ function WalkThrough(props) {
             width: DeviceInfo.getModel().includes(
               "iPad Pro 12.9-inch (3rd generation)"
             )
-              ? 285
+              ? 342
               : windowHight > 667
               ? windowHight > 852
                 ? 450
@@ -125,7 +125,7 @@ function WalkThrough(props) {
             height: DeviceInfo.getModel().includes(
               "iPad Pro 12.9-inch (3rd generation)"
             )
-              ? 615
+              ? 738
               : props.isFirstTimeLaunch
               ? windowHight > 667
                 ? windowHight > 852

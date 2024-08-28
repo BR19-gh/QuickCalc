@@ -1,7 +1,7 @@
 {
   "translation": {
     "screens": {
-      "versionNum": "1.0.41",
+      "versionNum": "1.0.44",
       "QuickAction": {
         "search": "بحث",
         "createTool": "إنشاء أداة",
@@ -63,6 +63,7 @@
           "favorite": "تفضيل",
           "unfavorite": "إلغاء\nالتفضيل",
           "unfavorite2": "إلغاء التفضيل",
+          "edit": "تعديل",
           "move": "نقل",
           "share": "مشاركة",
           "enableQuickAccess": "تفعيل الوصول السريع",
@@ -426,7 +427,9 @@
           "title": "الإصدار الذهبي",
           "restore": "استعادة المشتريات",
           "promocode": "كوبون التخفيض",
-
+          "remaining": "الـمتـبقــي",
+          "days": "يوم",
+          "day": "يوم",
           "description": "يمكنك الإلغاء في أي وقت\n7 أيام تجربة مجانية للمشتركين الجدد",
           "privacy": "سياسة الخصوصية",
           "termsOfUse": "شروط الاستخدام",

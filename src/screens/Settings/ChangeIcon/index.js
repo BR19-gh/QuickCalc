@@ -125,13 +125,13 @@ function ChangeColor({ theme }) {
                           borderWidth:
                             getAppIcon() === icon.name
                               ? Platform.isPad
-                                ? 4
+                                ? 3
                                 : 2
                               : 0,
                           borderColor: "#3B82F6",
-                          borderRadius: Platform.isPad ? 22.5 : 11.25,
-                          width: Platform.isPad ? 128 : 64,
-                          height: Platform.isPad ? 128 : 64,
+                          borderRadius: Platform.isPad ? 16 : 11.25,
+                          width: Platform.isPad ? 90 : 64,
+                          height: Platform.isPad ? 90 : 64,
                         }}
                       />
                       <Text

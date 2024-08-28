@@ -237,9 +237,14 @@ function Home(props) {
 
                         { title: t(text("hide")), systemIcon: "eye.slash" },
                         {
+                          title: t(text("edit")),
+                          systemIcon: "square.and.pencil",
+                        },
+                        {
                           title: t(text("share")),
                           systemIcon: "square.and.arrow.up",
                         },
+
                         {
                           title: t(text("enableQuickAccess")),
                           systemIcon: "arrow.forward.to.line.circle",
@@ -268,6 +273,10 @@ function Home(props) {
                       },
 
                       { title: t(text("hide")), systemIcon: "eye.slash" },
+                      {
+                        title: t(text("edit")),
+                        systemIcon: "square.and.pencil",
+                      },
                       {
                         title: t(text("move")),
                         systemIcon:
@@ -365,6 +374,20 @@ function Home(props) {
                       offset: 20,
                       animationType: "zoom-in",
                     });
+                  }
+                } else if (e.nativeEvent.name === t(text("edit"))) {
+                  if (
+                    user.golden ||
+                    Object.values(props.tools).filter(
+                      (tool) => tool.link === "CreatedTool"
+                    ).length <= 1
+                  ) {
+                    Haptics.selectionAsync();
+                    navigation.navigate("EditTool", {
+                      tool: tool,
+                    });
+                  } else {
+                    navigation.navigate("Paywall");
                   }
                 } else if (e.nativeEvent.name === t(text("move"))) {
                   if (props.isShowedFavorite) {
