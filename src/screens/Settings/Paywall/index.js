@@ -63,10 +63,24 @@ const Paywall = ({ theme }) => {
 
   return (
     <ScrollView className={"h-full"}>
+      <TouchableOpacity
+        onPress={() => {
+          navigation.goBack();
+        }}
+        className={
+          "w-7 h-7 bg-white mt-4 ml-3 z-10 rounded-full flex items-center justify-center"
+        }
+      >
+        <SweetSFSymbol
+          name={"multiply.circle.fill"}
+          size={32}
+          colors={[isDark("#5450D4", "#38377C")]}
+        />
+      </TouchableOpacity>
       <View
         className={
           "flex flex-col items-center " +
-          (Dimensions.get("window").width < 376 ? "mt-0" : "mt-20")
+          (Dimensions.get("window").width < 376 ? "-mt-6" : "mt-10")
         }
       >
         <Image

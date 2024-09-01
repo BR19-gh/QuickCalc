@@ -1,7 +1,7 @@
 {
   "translation": {
     "screens": {
-      "versionNum": "1.0.44",
+      "versionNum": "1.0.46",
       "QuickAction": {
         "search": "Search",
         "createTool": "Create Tool",
@@ -11,6 +11,9 @@
         "quickAccessAlertTitle": "Enabling Quick Access",
         "quickAccessAlertMsg": "Please select a tool first before using Quick Access, long press the tool you want to access quickly then select (Enable Quick Access).",
         "quickAccessAlertMsgDisktop": "Please select a tool first before using Quick Access, press the ellipsis (...) in the tool's header you want to access quickly then select (Enable Quick Access)."
+      },
+      "Note": {
+        "close": "Close"
       },
       "Welcome": {
         "title": null,
@@ -443,7 +446,8 @@
           },
           "subscribed": "You are subscribed",
           "notSubscribed": "You are not subscribed",
-          "paywall": "Paywall",
+          "paywall": "Paywall Page",
+          "subscriptionPeriod": "Subscribtion Period",
           "oneMonth": "Subscribtion Period: One month",
           "oneMonthTitle": "One Month",
           "oneYear": "Subscribtion Period: One year",

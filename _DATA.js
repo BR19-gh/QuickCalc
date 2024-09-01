@@ -146,6 +146,46 @@ export const getTools = async () => {
   }
 };
 
+export const setNoteId = async (id) => {
+  try {
+    await AsyncStorage.setItem("noteId", `${id}`);
+  } catch (e) {
+    console.error("Error: setNoteId: ", e);
+    Alert.alert(
+      "Unable to set noteId",
+      "Please contact with the developer, you can find developer socials in the Settings tab",
+      [
+        {
+          text: "Will Do",
+          onPress: () => null,
+          style: "Ok",
+        },
+      ]
+    );
+  }
+};
+
+export const getNoteId = async () => {
+  try {
+    const value = await AsyncStorage.getItem("noteId");
+    return value ? value : null;
+  } catch (e) {
+    console.error("Error: getNoteId: ", e);
+    Alert.alert(
+      "Unable to get noteId",
+      "Please contact with the developer, you can find developer socials in the Settings tab",
+      [
+        {
+          text: "Will Do",
+          onPress: () => null,
+          style: "Ok",
+        },
+      ]
+    );
+    return true;
+  }
+};
+
 export const setTrackingStat = async (bool) => {
   try {
     if (bool) {
@@ -189,6 +229,7 @@ export const getTrackingStat = async () => {
     return true;
   }
 };
+
 export const setQuickAccessToolId = async (id) => {
   try {
     await AsyncStorage.setItem("quickAccessToolId", `${id}`);

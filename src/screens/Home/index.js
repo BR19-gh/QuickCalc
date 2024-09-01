@@ -42,6 +42,8 @@ import {
   isDontShowAgain,
   setDontShowAgain,
   setQuickAccessToolId,
+  getNoteId,
+  setNoteId,
 } from "../../../_DATA";
 import InlineAd from "../../components/InlineAd/InlineAd";
 import { showAd, loadAd } from "../../components/InterstitialAd";
@@ -49,6 +51,36 @@ import { useRevenueCat } from "../../providers/RevenueCatProvider";
 import { getAppIcon, setAppIcon } from "expo-dynamic-app-icon";
 
 function Home(props) {
+  const [noteIdState, setNoteIdState] = useState("");
+
+  useEffect(() => {
+    const getNoteIdFun = async () => {
+      const noteId = await getNoteId();
+      console.log("noteId: ", noteId);
+      setNoteIdState(noteId);
+    };
+
+    getNoteIdFun();
+  }, []);
+
+  useEffect(() => {
+    if (noteIdState !== "") {
+      fetch("https://br19.pythonanywhere.com/getNote")
+        .then((response) => response.json())
+        .then((data) => {
+          if (data.note !== undefined && data.id !== noteIdState) {
+            setNoteId(data.id);
+            navigation.navigate("Note", {
+              note: data.note,
+            });
+          }
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    }
+  }, [noteIdState]);
+
   useEffect(() => {
     loadAd(); // Load the ad when the component mounts
   }, []);

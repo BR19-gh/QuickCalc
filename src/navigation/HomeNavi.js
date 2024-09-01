@@ -10,6 +10,7 @@ import CalendarCon from "../screens/Home/CalendarCon";
 import NewTool from "../screens/Home/NewTool";
 import NewToolViaCode from "../screens/Home/NewToolViaCode";
 import EditTool from "../screens/Home/EditTool";
+import Note from "../screens/Home/Note";
 
 import { useTranslation } from "react-i18next";
 import { useState, useRef } from "react";
@@ -313,6 +314,14 @@ const HomeNavi = ({ isEditing, setIsEditing, theme, tools }) => {
         }}
         name="GPACal"
         children={() => <GPACal theme={theme} />}
+      />
+      <Stack.Screen
+        options={{
+          presentation: "modal",
+          header: () => null,
+        }}
+        name="Note"
+        children={(props) => <Note {...props} theme={theme} />}
       />
       <Stack.Screen
         options={{

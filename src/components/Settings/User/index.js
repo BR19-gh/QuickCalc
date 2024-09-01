@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
 } from "react-native";
 import React from "react";
+import SweetSFSymbol from "sweet-sfsymbols";
 import { useRevenueCat } from "../../../providers/RevenueCatProvider";
 import { useTranslation } from "react-i18next";
 import { useNavigation } from "@react-navigation/native";
@@ -64,10 +65,24 @@ const User = ({ theme }) => {
 
   return (
     <ScrollView className={"h-full"}>
+      <TouchableOpacity
+        onPress={() => {
+          navigation.goBack();
+        }}
+        className={
+          "w-7 h-7 bg-white mt-20 ml-3 z-10 rounded-full flex items-center justify-center"
+        }
+      >
+        <SweetSFSymbol
+          name={"multiply.circle.fill"}
+          size={32}
+          colors={[isDark("#5450D4", "#38377C")]}
+        />
+      </TouchableOpacity>
       <View
         className={
           "flex flex-col items-center " +
-          (Dimensions.get("window").width < 376 ? "mt-20" : "mt-24")
+          (Dimensions.get("window").width < 376 ? "-mt-5" : "mt-6")
         }
       >
         <View
@@ -78,14 +93,14 @@ const User = ({ theme }) => {
           <Image
             source={banner}
             style={{
-              marginTop: 150,
+              marginTop: 135,
               width: 250,
               height: 250,
             }}
           />
           <Text
             className={
-              "mt-8 mb-1 text-md text-2xl " + isDark("text-white", "text-black")
+              "mt-5 mb-1 text-md text-2xl " + isDark("text-white", "text-black")
             }
           >
             {user.golden
@@ -94,26 +109,96 @@ const User = ({ theme }) => {
                 : t(text("subscribed"))
               : t(text("notSubscribed"))}
           </Text>
-          {user.golden && user.periodType !== "TRIAL" && (
-            <Text
-              className={
-                "mt-3 text-md text-xl " + isDark("text-white", "text-black")
-              }
-            >
-              {user.entitlement === "qc_0099_1m"
-                ? t(text("oneMonth"))
-                : t(text("oneYear"))}
-            </Text>
-          )}
+
           {user.golden && (
-            <Text className={" text-md " + isDark("text-white", "text-black")}>
-              {t(text("remaining"))}:{" "}
-              {dateDifference(Date.now(), user.subEndDate)}
-              {"\n"}
-              {t(text("subStartDate"))}: {convertToDateOnly(user.subStartDate)}
-              {"\n"}
-              {t(text("subEndDate"))}: {convertToDateOnly(user.subEndDate)}
-            </Text>
+            <View className={"flex-wrap flex-row items-center justify-center"}>
+              {user.golden && user.periodType !== "TRIAL" && (
+                <View
+                  className={"flex flex-col items-center justify-center m-2"}
+                >
+                  <Text
+                    className={"text-sm " + isDark("text-white", "text-black")}
+                  >
+                    {t(text("subscriptionPeriod"))}
+                  </Text>
+                  <View
+                    className={
+                      "h-14 mt-1 rounded-md items-center flex-row justify-center"
+                    }
+                    style={{
+                      width: 135,
+                      backgroundColor: isDark("#38377C", "#5450D4"),
+                    }}
+                  >
+                    <Text className={"text-base text-white"}>
+                      {user.entitlement === "qc_0099_1m"
+                        ? t(text("oneMonthTitle"))
+                        : t(text("oneYearTitle"))}
+                    </Text>
+                  </View>
+                </View>
+              )}
+              <View className={"flex flex-col items-center justify-center m-2"}>
+                <Text
+                  className={"text-sm " + isDark("text-white", "text-black")}
+                >
+                  {t(text("remaining"))}
+                </Text>
+                <View
+                  className={
+                    "h-14 mt-1 rounded-md items-center flex-row justify-center"
+                  }
+                  style={{
+                    width: 135,
+                    backgroundColor: isDark("#38377C", "#5450D4"),
+                  }}
+                >
+                  <Text className={"text-base text-white"}>
+                    {dateDifference(Date.now(), user.subEndDate)}
+                  </Text>
+                </View>
+              </View>
+              <View className={"flex flex-col items-center justify-center m-2"}>
+                <Text
+                  className={"text-sm " + isDark("text-white", "text-black")}
+                >
+                  {t(text("subStartDate"))}
+                </Text>
+                <View
+                  className={
+                    "h-14 mt-1 rounded-md items-center flex-row justify-center"
+                  }
+                  style={{
+                    width: 135,
+                    backgroundColor: isDark("#38377C", "#5450D4"),
+                  }}
+                >
+                  <Text className={"text-base text-white"}>
+                    {convertToDateOnly(user.subStartDate)}
+                  </Text>
+                </View>
+              </View>
+              <View className={"flex flex-col items-center justify-center m-2"}>
+                <Text
+                  className={"text-sm " + isDark("text-white", "text-black")}
+                >
+                  {t(text("subEndDate"))}
+                </Text>
+                <View
+                  className={
+                    "h-14 mt-1 rounded-md items-center flex-row justify-center"
+                  }
+                  style={{
+                    width: 135,
+                    backgroundColor: isDark("#38377C", "#5450D4"),
+                  }}
+                >
+                  <Text className={"text-base text-white"}>
+                    {convertToDateOnly(user.subEndDate)}
+                  </Text>
+                </View>
+              </View>
+            </View>
           )}
           <TouchableOpacity
             onPress={() => {
@@ -121,14 +206,16 @@ const User = ({ theme }) => {
               navigation.navigate("Paywall");
             }}
             className={
-              "mt-8 h-14 rounded-md items-center flex-row justify-center"
+              "mt-5 h-14 rounded-md items-center flex-row justify-center"
             }
             style={{
               width: 180,
               backgroundColor: isDark("#5450D4", "#38377C"),
             }}
           >
-            <Text className={"text-xl text-white"}>{t(text("paywall"))}</Text>
+            <Text className={"text-lg font-bold text-white"}>
+              {t(text("paywall"))}
+            </Text>
           </TouchableOpacity>
         </View>
       </View>
