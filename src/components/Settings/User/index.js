@@ -12,6 +12,7 @@ import { useTranslation } from "react-i18next";
 import { useNavigation } from "@react-navigation/native";
 import { Image } from "expo-image";
 import { lang } from "../../../helpers";
+import * as Haptics from "expo-haptics";
 
 // Display the user state based on entitlements (previous purchases)
 const User = ({ theme }) => {
@@ -67,6 +68,7 @@ const User = ({ theme }) => {
     <ScrollView className={"h-full"}>
       <TouchableOpacity
         onPress={() => {
+          Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
           navigation.goBack();
         }}
         className={
@@ -112,6 +114,46 @@ const User = ({ theme }) => {
 
           {user.golden && (
             <View className={"flex-wrap flex-row items-center justify-center"}>
+              <View className={"flex flex-col items-center justify-center m-2"}>
+                <Text
+                  className={"text-sm " + isDark("text-white", "text-black")}
+                >
+                  {t(text("subStartDate"))}
+                </Text>
+                <View
+                  className={
+                    "h-14 mt-1 rounded-md items-center flex-row justify-center"
+                  }
+                  style={{
+                    width: 135,
+                    backgroundColor: isDark("#38377C", "#5450D4"),
+                  }}
+                >
+                  <Text className={"text-lg text-white"}>
+                    {convertToDateOnly(user.subStartDate)}
+                  </Text>
+                </View>
+              </View>
+              <View className={"flex flex-col items-center justify-center m-2"}>
+                <Text
+                  className={"text-sm " + isDark("text-white", "text-black")}
+                >
+                  {t(text("subEndDate"))}
+                </Text>
+                <View
+                  className={
+                    "h-14 mt-1 rounded-md items-center flex-row justify-center"
+                  }
+                  style={{
+                    width: 135,
+                    backgroundColor: isDark("#38377C", "#5450D4"),
+                  }}
+                >
+                  <Text className={"text-lg text-white"}>
+                    {convertToDateOnly(user.subEndDate)}
+                  </Text>
+                </View>
+              </View>
               {user.golden && user.periodType !== "TRIAL" && (
                 <View
                   className={"flex flex-col items-center justify-center m-2"}
@@ -130,7 +172,7 @@ const User = ({ theme }) => {
                       backgroundColor: isDark("#38377C", "#5450D4"),
                     }}
                   >
-                    <Text className={"text-base text-white"}>
+                    <Text className={"text-lg text-white"}>
                       {user.entitlement === "qc_0099_1m"
                         ? t(text("oneMonthTitle"))
                         : t(text("oneYearTitle"))}
@@ -153,48 +195,8 @@ const User = ({ theme }) => {
                     backgroundColor: isDark("#38377C", "#5450D4"),
                   }}
                 >
-                  <Text className={"text-base text-white"}>
+                  <Text className={"text-lg text-white"}>
                     {dateDifference(Date.now(), user.subEndDate)}
-                  </Text>
-                </View>
-              </View>
-              <View className={"flex flex-col items-center justify-center m-2"}>
-                <Text
-                  className={"text-sm " + isDark("text-white", "text-black")}
-                >
-                  {t(text("subStartDate"))}
-                </Text>
-                <View
-                  className={
-                    "h-14 mt-1 rounded-md items-center flex-row justify-center"
-                  }
-                  style={{
-                    width: 135,
-                    backgroundColor: isDark("#38377C", "#5450D4"),
-                  }}
-                >
-                  <Text className={"text-base text-white"}>
-                    {convertToDateOnly(user.subStartDate)}
-                  </Text>
-                </View>
-              </View>
-              <View className={"flex flex-col items-center justify-center m-2"}>
-                <Text
-                  className={"text-sm " + isDark("text-white", "text-black")}
-                >
-                  {t(text("subEndDate"))}
-                </Text>
-                <View
-                  className={
-                    "h-14 mt-1 rounded-md items-center flex-row justify-center"
-                  }
-                  style={{
-                    width: 135,
-                    backgroundColor: isDark("#38377C", "#5450D4"),
-                  }}
-                >
-                  <Text className={"text-base text-white"}>
-                    {convertToDateOnly(user.subEndDate)}
                   </Text>
                 </View>
               </View>
@@ -203,6 +205,7 @@ const User = ({ theme }) => {
           <TouchableOpacity
             onPress={() => {
               logg();
+              Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
               navigation.navigate("Paywall");
             }}
             className={

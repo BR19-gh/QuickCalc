@@ -1,10 +1,29 @@
-import { ScrollView, Text } from "react-native";
+import { ScrollView, Text, TouchableOpacity } from "react-native";
+import SweetSFSymbol from "sweet-sfsymbols";
 import { lang } from "../../../../helpers";
+import { useNavigation } from "@react-navigation/native";
+import * as Haptics from "expo-haptics";
 
 export const TermsOfUse = ({ theme }) => {
+  const navigation = useNavigation();
   const isDark = (darkOp, lightp) => (theme === "dark" ? darkOp : lightp);
   return (
-    <ScrollView className="mt-20">
+    <ScrollView>
+      <TouchableOpacity
+        onPress={() => {
+          Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+          navigation.goBack();
+        }}
+        className={
+          "w-7 h-7 bg-white mt-16 mb-6 ml-3 z-10 rounded-full flex items-center justify-center"
+        }
+      >
+        <SweetSFSymbol
+          name={"multiply.circle.fill"}
+          size={32}
+          colors={[isDark("#5450D4", "#38377C")]}
+        />
+      </TouchableOpacity>
       <Text
         className={
           "text-2xl p-4 pb-0 pt-0 text-left " +

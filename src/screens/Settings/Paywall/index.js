@@ -19,6 +19,7 @@ import { lang } from "../../../helpers";
 import Communications from "react-native-communications";
 import { useToast } from "react-native-toast-notifications";
 import DeviceInfo from "react-native-device-info";
+import * as Haptics from "expo-haptics";
 
 const Paywall = ({ theme }) => {
   const navigation = useNavigation();
@@ -65,6 +66,7 @@ const Paywall = ({ theme }) => {
     <ScrollView className={"h-full"}>
       <TouchableOpacity
         onPress={() => {
+          Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
           navigation.goBack();
         }}
         className={

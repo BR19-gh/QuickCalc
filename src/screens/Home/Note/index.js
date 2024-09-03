@@ -5,10 +5,7 @@ import {
   ScrollView,
   TouchableOpacity,
 } from "react-native";
-
-import { Image } from "expo-image";
-
-import { useState, useRef } from "react";
+import Communications from "react-native-communications";
 import { useNavigation } from "@react-navigation/native";
 import { useTranslation } from "react-i18next";
 import { lang } from "../../../helpers";
@@ -27,6 +24,7 @@ function Note({ route, theme }) {
     <ScrollView className={"h-full"}>
       <TouchableOpacity
         onPress={() => {
+          Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
           navigation.goBack();
         }}
         className={
@@ -92,7 +90,10 @@ function Note({ route, theme }) {
         <View className={"flex-col p-5 rounded-lg"}>
           <TouchableOpacity
             onPress={() => {
-              navigation.navigate(note.en.button.action);
+              Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+              note.en.button.type === "link"
+                ? Communications.web(note.en.button.link)
+                : navigation.navigate(note.en.button.action);
             }}
             className={
               "mt-5 h-14 rounded-md items-center flex-row justify-center"

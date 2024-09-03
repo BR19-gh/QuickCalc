@@ -11,6 +11,7 @@ import Paywall from "../screens/Settings/Paywall";
 import { TermsOfUse } from "../screens/Settings/Paywall/TermsOfUse";
 import User from "../components/Settings/User";
 import ChangeColor from "../screens/Settings/ChangeIcon";
+import Note from "../screens/Home/Note";
 
 const Stack = createNativeStackNavigator();
 
@@ -111,6 +112,14 @@ const SettingsNavi = ({
         }}
         name="ChangeColor"
         children={() => <ChangeColor theme={theme} />}
+      />
+      <Stack.Screen
+        options={{
+          presentation: "modal",
+          header: () => null,
+        }}
+        name="Note"
+        children={(props) => <Note {...props} theme={theme} />}
       />
     </Stack.Navigator>
   );

@@ -566,6 +566,57 @@ function Settings({ theme, isThemeChanged, setIsThemeChanged, dispatch }) {
                   type="newpage"
                   onPress={() => navigation.navigate("WalkThrough")}
                 />
+                <SettingsButton
+                  title={
+                    <View className="flex-row-reverse justify-end items-center">
+                      <Text
+                        className={isDarkTextColor()}
+                        style={{
+                          fontSize: 18,
+                          fontWeight: 400,
+                        }}
+                      >
+                        {t(text("notification"))}
+                      </Text>
+                      <Text>{"   "}</Text>
+                      <View
+                        className="bg-pink-400"
+                        style={{
+                          alignItems: "center",
+                          padding: 6,
+                          width: 30,
+                          height: 30,
+
+                          borderRadius: 5,
+                        }}
+                      >
+                        <SweetSFSymbol
+                          name={"bell.badge.fill"}
+                          size={17}
+                          colors={["white"]}
+                        />
+                      </View>
+                    </View>
+                  }
+                  type="newpage"
+                  onPress={() => {
+                    fetch("https://br19.pythonanywhere.com/getNote")
+                      .then((response) => response.json())
+                      .then((data) => {
+                        if (data.note !== undefined) {
+                          navigation.navigate("Note", {
+                            note: data.note,
+                          });
+                        }
+                      })
+                      .catch((error) => {
+                        Alert.alert(
+                          t(text("errorNoteTitle")),
+                          t(text("errorNoteMsg"))
+                        );
+                      });
+                  }}
+                />
                 <SettingsInfoDisplay
                   title={
                     <View className="flex-row-reverse justify-end items-center">
