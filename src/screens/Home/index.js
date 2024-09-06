@@ -87,9 +87,9 @@ function Home(props) {
 
   useEffect(() => {
     if (user.golden === false) {
-      console.log("appIcon", getAppIcon());
-      if (getAppIcon() === "DEFAULT") return;
+      console.log("appIcon Before: ", getAppIcon());
       setAppIcon("original");
+      console.log("appIcon After: ", getAppIcon());
     }
   }, []);
 
