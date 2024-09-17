@@ -2,7 +2,7 @@
   "expo": {
     "name": "QuickCalc",
     "slug": "QuickCalc",
-    "version": "1.0.50",
+    "version": "1.0.51",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "automatic",
@@ -13,7 +13,7 @@
     },
     "assetBundlePatterns": ["**/*"],
     "ios": {
-      "buildNumber": "2.1.50",
+      "buildNumber": "2.1.51",
       "supportsTablet": true,
       "infoPlist": {
         "CFBundleAllowMixedLocalizations": true,
@@ -98,7 +98,7 @@
             "image": "./assets/icon.png",
             "prerendered": true
           },
-          "dark": {
+          "darkIcon": {
             "image": "./assets/dark_icon.png",
             "prerendered": true
           },
