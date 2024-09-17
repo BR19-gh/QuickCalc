@@ -88,6 +88,13 @@ function Home(props) {
   useEffect(() => {
     if (user.golden === false) {
       console.log("appIcon Before: ", getAppIcon());
+      if (
+        getAppIcon() === "darkIcon" ||
+        getAppIcon() === "original" ||
+        getAppIcon() === "tinted"
+      ) {
+        return;
+      }
       setAppIcon("original");
       console.log("appIcon After: ", getAppIcon());
     }

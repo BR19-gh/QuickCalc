@@ -30,6 +30,8 @@ function ChangeColor({ theme }) {
 
   const APP_ICONS = [
     { name: "original", img: require("../../../../assets/icon.png") },
+    { name: "darkIcon", img: require("../../../../assets/dark_icon.png") },
+    { name: "tinted", img: require("../../../../assets/tinted_icon.png") },
     { name: "black", img: require("../../../../assets/black_icon.png") },
     { name: "red", img: require("../../../../assets/red_icon.png") },
     { name: "yellow", img: require("../../../../assets/yellow_icon.png") },
@@ -44,7 +46,12 @@ function ChangeColor({ theme }) {
   const [iconName, setIconName] = useState("");
 
   const changeIcon = (name) => {
-    if (user.golden) {
+    if (
+      user.golden ||
+      name === "darkIcon" ||
+      name === "original" ||
+      name === "tinted"
+    ) {
       Haptics.selectionAsync();
       setIconName(name);
       setAppIcon(name);
@@ -100,6 +107,7 @@ function ChangeColor({ theme }) {
                 style={{
                   flexDirection: "row",
                   justifyContent: "space-between",
+
                   padding: 16,
                   borderBottomWidth: 1,
                   borderBottomColor: isDark(
@@ -112,7 +120,7 @@ function ChangeColor({ theme }) {
                   ),
                 }}
               >
-                <View className="items-center flex-row flex-wrap justify-between">
+                <View className="items-center flex-row flex-wrap justify-around">
                   {APP_ICONS.map((icon, index) => (
                     <TouchableOpacity
                       onPress={() => changeIcon(icon.name)}

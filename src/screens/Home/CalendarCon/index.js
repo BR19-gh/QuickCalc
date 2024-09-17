@@ -714,13 +714,7 @@ function CalendarCon({ theme }) {
                     "text-xl" + isDark(" text-blue-100", " text-blue-900")
                   }
                 >
-                  {toCalendar[lang] &&
-                  toCalendarValue.day !== "" &&
-                  toCalendarValue.month !== "" &&
-                  toCalendarValue.year !== "" &&
-                  toCalendarValue.timeSince.days <= -2 === false
-                    ? t(text("elapsed")) + ":  "
-                    : ""}
+                  {t(text("elapsed")) + ":  "}
                 </Text>
                 <Text
                   className={
