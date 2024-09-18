@@ -3,14 +3,13 @@ import {
   Text,
   View,
   ScrollView,
-  SafeAreaView,
   Alert,
   TouchableOpacity,
   Platform,
   Dimensions,
 } from "react-native";
 import { SettingsProvider, SettingsGroup } from "react-native-settings-ui";
-import styles, { stylesSettings } from "./styles";
+import { stylesSettings } from "./styles";
 import { useEffect, useState, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { useToast } from "react-native-toast-notifications";
@@ -19,6 +18,8 @@ import { Image } from "expo-image";
 import { setAppIcon, getAppIcon } from "expo-dynamic-app-icon";
 import { useRevenueCat } from "../../../providers/RevenueCatProvider";
 import { useNavigation } from "@react-navigation/native";
+import SweetSFSymbol from "sweet-sfsymbols";
+import { lang } from "../../../helpers";
 
 function ChangeColor({ theme }) {
   const { t } = useTranslation();
@@ -125,8 +126,43 @@ function ChangeColor({ theme }) {
                     <TouchableOpacity
                       onPress={() => changeIcon(icon.name)}
                       key={index}
-                      className="m-1 items-center text-center"
+                      className="items-center text-center"
+                      style={{
+                        margin: Platform.isPad ? 5 : 1,
+                      }}
                     >
+                      {user.golden ||
+                      icon.name === "original" ||
+                      icon.name === "darkIcon" ||
+                      icon.name === "tinted" ? (
+                        <SweetSFSymbol
+                          name="crown.fill"
+                          size={18}
+                          colors={["transparent"]}
+                          style={{
+                            position: "relative",
+                            right: 30,
+                            top: 5,
+                          }}
+                        />
+                      ) : (
+                        <SweetSFSymbol
+                          name="crown.fill"
+                          size={16}
+                          colors={["gold"]}
+                          style={{
+                            zIndex: 1,
+                            position: "relative",
+                            top: 5,
+                            transform: [
+                              {
+                                rotate: "-30deg",
+                              },
+                            ],
+                            left: lang === "ar" ? 30 : -30,
+                          }}
+                        />
+                      )}
                       <Image
                         source={icon.img}
                         style={{
@@ -137,9 +173,9 @@ function ChangeColor({ theme }) {
                                 : 2
                               : 0,
                           borderColor: "#3B82F6",
-                          borderRadius: Platform.isPad ? 16 : 11.25,
-                          width: Platform.isPad ? 90 : 64,
-                          height: Platform.isPad ? 90 : 64,
+                          borderRadius: Platform.isPad ? 15 : 10.25,
+                          width: Platform.isPad ? 70 : 60,
+                          height: Platform.isPad ? 70 : 60,
                         }}
                       />
                       <Text
