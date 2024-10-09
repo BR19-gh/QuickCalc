@@ -32,7 +32,7 @@ function ChangeColor({ theme }) {
   const APP_ICONS = [
     { name: "original", img: require("../../../../assets/icon.png") },
     { name: "darkIcon", img: require("../../../../assets/dark_icon.png") },
-    { name: "tinted", img: require("../../../../assets/tinted_icon.png") },
+    { name: "tinted", img: require("../../../../assets/icon-tinted.png") },
     { name: "black", img: require("../../../../assets/black_icon.png") },
     { name: "red", img: require("../../../../assets/red_icon.png") },
     { name: "yellow", img: require("../../../../assets/yellow_icon.png") },

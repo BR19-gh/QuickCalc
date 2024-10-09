@@ -127,48 +127,48 @@ function NewTool({ theme, tools, dispatch }) {
     },
   });
 
+  const covertUndefinedExponents = (exponents) => {
+    for (let i = 0; i < newTool.operandNum; i++) {
+      if (exponents[i] === undefined) {
+        exponents[i] = 1;
+      }
+    }
+    return exponents;
+  };
+  const covertUndefinedOperands = (operands) => {
+    for (let i = 0; i < newTool.operandNum; i++) {
+      if (operands[i] === undefined || operands[i] === "") {
+        return false;
+      }
+    }
+    return operands;
+  };
+  const covertUndefinedOperators = (operators) => {
+    for (let i = 0; i < newTool.operandNum - 1; i++) {
+      if (operators[i] === undefined) {
+        return false;
+      }
+    }
+    return operators;
+  };
+  const isValidItem = (item) => {
+    return typeof item !== "undefined" && isNaN(item)
+      ? item.trim() !== ""
+      : item !== 0;
+  };
+  const isValidArray = (arr, minItems) => {
+    for (let i = 0; i < arr.length; i++) {
+      if (arr[i] === undefined) return false;
+    }
+    return (
+      Array.isArray(arr) && arr.length >= minItems && arr.every(isValidItem)
+    );
+  };
+
   function saveNewTool(newTool) {
     const exponents = newTool.equation.exponents;
     const operands = newTool.equation.operands;
     const operators = newTool.equation.operators;
-
-    const covertUndefinedExponents = (exponents) => {
-      for (let i = 0; i < newTool.operandNum; i++) {
-        if (exponents[i] === undefined) {
-          exponents[i] = 1;
-        }
-      }
-      return exponents;
-    };
-    const covertUndefinedOperands = (operands) => {
-      for (let i = 0; i < newTool.operandNum; i++) {
-        if (operands[i] === undefined || operands[i] === "") {
-          return false;
-        }
-      }
-      return operands;
-    };
-    const covertUndefinedOperators = (operators) => {
-      for (let i = 0; i < newTool.operandNum - 1; i++) {
-        if (operators[i] === undefined) {
-          return false;
-        }
-      }
-      return operators;
-    };
-    const isValidItem = (item) => {
-      return typeof item !== "undefined" && isNaN(item)
-        ? item.trim() !== ""
-        : item !== 0;
-    };
-    const isValidArray = (arr, minItems) => {
-      for (let i = 0; i < arr.length; i++) {
-        if (arr[i] === undefined) return false;
-      }
-      return (
-        Array.isArray(arr) && arr.length >= minItems && arr.every(isValidItem)
-      );
-    };
 
     const isValidExponents = isValidArray(
       covertUndefinedExponents(exponents),
@@ -278,8 +278,8 @@ function NewTool({ theme, tools, dispatch }) {
             <TextInput
               style={{
                 backgroundColor: isDark("#2C2C2D", "#FFFFFF"),
-                width: 200,
-                height: 80,
+                width: 180,
+                height: 70,
                 fontSize: 20,
                 textAlign: "center",
                 color: isDark("#DBEAFE", "#283987"),
@@ -321,14 +321,13 @@ function NewTool({ theme, tools, dispatch }) {
             <TextInput
               style={{
                 backgroundColor: isDark("#2C2C2D", "#FFFFFF"),
-                width: 200,
-                height: 150,
+                width: 180,
+                height: 120,
                 fontSize: 20,
                 textAlign: newTool.description ? "auto" : "center",
                 color: isDark("#DBEAFE", "#283987"),
                 borderRadius: 10,
-
-                paddingTop: newTool.description ? 10 : 60,
+                paddingTop: newTool.description ? 10 : 48,
                 padding: 10,
               }}
               multiline={true}
@@ -356,9 +355,10 @@ function NewTool({ theme, tools, dispatch }) {
           </View>
           <View
             style={{
-              marginTop: 10,
-              marginBottom: 10,
-              borderBottomColor: isDark("#333333", "#CCCCCC"),
+              margin: 15,
+              marginLeft: 35,
+              marginRight: 35,
+              borderBottomColor: isDark("#666666", "#BBBBBB"),
               borderBottomWidth: StyleSheet.hairlineWidth,
               alignSelf: "stretch",
             }}
@@ -558,9 +558,10 @@ function NewTool({ theme, tools, dispatch }) {
           </View>
           <View
             style={{
-              marginTop: 10,
-              marginBottom: 10,
-              borderBottomColor: isDark("#333333", "#CCCCCC"),
+              margin: 15,
+              marginLeft: 35,
+              marginRight: 35,
+              borderBottomColor: isDark("#666666", "#BBBBBB"),
               borderBottomWidth: StyleSheet.hairlineWidth,
               alignSelf: "stretch",
             }}
@@ -596,9 +597,9 @@ function NewTool({ theme, tools, dispatch }) {
             <TextInput
               style={{
                 backgroundColor: isDark("#2C2C2D", "#FFFFFF"),
-                width: 80,
-                height: 80,
-                fontSize: newTool.operandNum ? 40 : 20,
+                width: 70,
+                height: 70,
+                fontSize: newTool.operandNum ? 35 : 15,
                 textAlign: "center",
                 color: isDark("#DBEAFE", "#283987"),
                 borderRadius: 10,
@@ -804,9 +805,9 @@ function NewTool({ theme, tools, dispatch }) {
                           maxLength={20}
                           style={{
                             backgroundColor: isDark("#2C2C2D", "#FFFFFF"),
-                            width: newTool.operandNum > 3 ? 40 : 80,
-                            height: newTool.operandNum > 3 ? 40 : 80,
-                            fontSize: newTool.operandNum > 3 ? 7 : 18,
+                            width: newTool.operandNum > 3 ? 40 : 70,
+                            height: newTool.operandNum > 3 ? 40 : 70,
+                            fontSize: newTool.operandNum > 3 ? 7 : 16,
                             textAlign: "center",
                             color: isDark("#DBEAFE", "#283987"),
                             borderRadius: newTool.operandNum > 3 ? 5 : 10,
@@ -971,14 +972,86 @@ function NewTool({ theme, tools, dispatch }) {
           </View>
           <View className="flex flex-row w-11/12 justify-center mt-5 mb-5">
             <TouchableOpacity
+              disabled={
+                !(
+                  newTool.name &&
+                  newTool.description &&
+                  newTool.icon &&
+                  newTool.colors.length === 3 &&
+                  newTool.link &&
+                  newTool.operandNum &&
+                  isValidArray(
+                    covertUndefinedExponents(newTool.equation.exponents),
+                    2
+                  ) &&
+                  isValidArray(
+                    covertUndefinedOperands(newTool.equation.operands),
+                    2
+                  ) &&
+                  isValidArray(
+                    covertUndefinedOperators(newTool.equation.operators),
+                    1
+                  )
+                )
+              }
               className="w-11/12 h-16 rounded-full items-center justify-center"
-              style={{ backgroundColor: isDark("#5450D4", "#38377C") }}
+              style={{
+                backgroundColor:
+                  newTool.name &&
+                  newTool.description &&
+                  newTool.icon &&
+                  newTool.colors.length === 3 &&
+                  newTool.link &&
+                  newTool.operandNum &&
+                  isValidArray(
+                    covertUndefinedExponents(newTool.equation.exponents),
+                    2
+                  ) &&
+                  isValidArray(
+                    covertUndefinedOperands(newTool.equation.operands),
+                    2
+                  ) &&
+                  isValidArray(
+                    covertUndefinedOperators(newTool.equation.operators),
+                    1
+                  )
+                    ? "#38377C"
+                    : "#6C6BA6",
+              }}
               onPress={() => {
                 Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
                 saveNewTool(newTool);
               }}
             >
-              <Text className={"text-white text-3xl"}>{t(text("save"))}</Text>
+              <Text
+                className={"text-3xl"}
+                style={{
+                  color:
+                    newTool.name &&
+                    newTool.description &&
+                    newTool.icon &&
+                    newTool.colors.length === 3 &&
+                    newTool.link &&
+                    newTool.operandNum &&
+                    isValidArray(
+                      covertUndefinedExponents(newTool.equation.exponents),
+                      2
+                    ) &&
+                    isValidArray(
+                      covertUndefinedOperands(newTool.equation.operands),
+                      2
+                    ) &&
+                    isValidArray(
+                      covertUndefinedOperators(newTool.equation.operators),
+                      1
+                    )
+                      ? "#FFFFFF"
+                      : "#D3D3D3",
+                  fontWeight: "bold",
+                }}
+              >
+                {t(text("save"))}
+              </Text>
             </TouchableOpacity>
           </View>
         </View>

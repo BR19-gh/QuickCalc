@@ -64,25 +64,27 @@ const Paywall = ({ theme }) => {
 
   return (
     <ScrollView className={"h-full"}>
-      <TouchableOpacity
-        onPress={() => {
-          Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
-          navigation.goBack();
-        }}
-        className={
-          "w-7 h-7 bg-white mt-4 ml-3 z-10 rounded-full flex items-center justify-center"
-        }
-      >
-        <SweetSFSymbol
-          name={"multiply.circle.fill"}
-          size={32}
-          colors={[isDark("#5450D4", "#38377C")]}
-        />
-      </TouchableOpacity>
+      <View className={"w-full flex-row justify-end"}>
+        <TouchableOpacity
+          onPress={() => {
+            Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+            navigation.goBack();
+          }}
+          className={
+            "w-7 h-7 bg-white m-5 z-10 rounded-full flex items-center justify-center"
+          }
+        >
+          <SweetSFSymbol
+            name={"multiply.circle.fill"}
+            size={32}
+            colors={[isDark("#5450D4", "#38377C")]}
+          />
+        </TouchableOpacity>
+      </View>
       <View
         className={
           "flex flex-col items-center " +
-          (Dimensions.get("window").width < 376 ? "-mt-6" : "mt-10")
+          (Dimensions.get("window").width < 376 ? "-mt-2" : "mt-6")
         }
       >
         <Image

@@ -23,6 +23,7 @@ const Navigation = ({
 }) => {
   const auto = useColorScheme();
   const { t } = useTranslation();
+  const text = (text) => "screens.Welcome.text." + text;
 
   const [currentTitles, setCurrentTitles] = useState(0);
 
@@ -73,6 +74,7 @@ const Navigation = ({
         <Stack.Screen
           options={{
             headerShown: false,
+            title: t(text("welcome")),
           }}
           name="Welcome"
           children={() => (

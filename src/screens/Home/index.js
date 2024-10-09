@@ -8,7 +8,7 @@ import {
   Alert,
   Share,
   StatusBar,
-  ScrollView,
+  TouchableOpacity,
 } from "react-native";
 import Card from "../../components/Home/Card";
 import SwipeableRow from "../../components/Home/Swipeable";
@@ -554,6 +554,50 @@ function Home(props) {
     });
   }, [orientation]);
 
+  const styelForFiltersOuter = {
+    alignSelf: "center",
+    padding: 13,
+    margin: 5,
+    marginBottom: 10,
+    marginTop: 10,
+    backgroundColor: props.theme === "dark" ? "#2C2C2D" : "#E2E4E2",
+    borderRadius: 50,
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+  };
+
+  const styelForFiltersOuterSelected = {
+    ...styelForFiltersOuter,
+    backgroundColor: props.theme === "dark" ? "#11253F" : "#C8D9F3",
+  };
+
+  const styelForFiltersInner = {
+    color: props.theme === "dark" ? "#9E9EA4" : "#6D6D6F",
+    fontSize: 15,
+    fontWeight: "bold",
+    textAlign: "center",
+  };
+
+  const styelForFiltersInnerSelected = {
+    ...styelForFiltersInner,
+    color: props.theme === "dark" ? "#D6E7FB" : "#1A3C72",
+  };
+
+  const onSelect = (index) => {
+    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Heavy);
+    if (index === 0) {
+      setYourToolsDisplayes(false);
+      setBuiltinToolsDisplayes(false);
+    } else if (index === 1) {
+      setYourToolsDisplayes(true);
+      setBuiltinToolsDisplayes(false);
+    } else if (index === 2) {
+      setYourToolsDisplayes(false);
+      setBuiltinToolsDisplayes(true);
+    }
+  };
+
   return (
     <SafeAreaView>
       <NestableScrollContainer
@@ -563,11 +607,11 @@ function Home(props) {
             ? "100%"
             : windowHight > 667
             ? windowHight > 852
-              ? "92%"
+              ? "89%"
               : Platform.isPad
-              ? "87%"
-              : "92%"
-            : "90%",
+              ? "84%"
+              : "89%"
+            : "87%",
         }}
         refreshControl={
           <RefreshControl
@@ -595,116 +639,83 @@ function Home(props) {
       >
         <View>
           {props.searchText.length > 0 || props.isEditing === true ? (
-            <View
-              style={{
-                alignSelf: "center",
-                width: 135,
-                height: 30,
-                marginBottom: 10,
-                marginTop: 10,
-                backgroundColor: props.theme === "dark" ? "#2C2C2F" : "#E7E7E8",
-                borderRadius: 8,
-                flexDirection: "row",
-                justifyContent: "center",
-                alignItems: "center",
-              }}
-            >
-              <Text
-                style={{
-                  color: props.theme === "dark" ? "#ffffffAA" : "#00000088",
-                }}
-              >
+            <View style={{ ...styelForFiltersOuter, width: 150 }}>
+              <Text style={styelForFiltersInner}>
                 {t(text("filterIsDisabled"))}
               </Text>
             </View>
           ) : (
-            <SelectDropdown
-              disabled={props.searchText.length > 0 || props.isEditing === true}
-              data={[
-                t(text("allTools")),
-                t(text("yourTools")),
-                t(text("builtinTools")),
-              ]}
-              defaultValue={t(text("allTools"))}
-              onSelect={(selectedItem, index) => {
-                Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Heavy);
-                if (index === 0) {
-                  setYourToolsDisplayes(false);
-                  setBuiltinToolsDisplayes(false);
-                } else if (index === 1) {
-                  setYourToolsDisplayes(true);
-                  setBuiltinToolsDisplayes(false);
-                } else if (index === 2) {
-                  setYourToolsDisplayes(false);
-                  setBuiltinToolsDisplayes(true);
+            <View className="flex flex-row justify-center">
+              <TouchableOpacity
+                style={
+                  yourToolsDisplayes === false &&
+                  builtinToolsDisplayes === false
+                    ? styelForFiltersOuterSelected
+                    : styelForFiltersOuter
                 }
-              }}
-              renderButton={(selectedItem, isOpened) => {
-                return (
-                  <View
-                    style={{
-                      alignSelf: "center",
-                      width: 135,
-                      height: 30,
-                      marginBottom: 10,
-                      marginTop: 10,
-                      backgroundColor:
-                        props.theme === "dark" ? "#2C2C2F" : "#E7E7E8",
-                      borderRadius: 8,
-                      flexDirection: "row",
-                      justifyContent: "center",
-                      alignItems: "center",
-                    }}
-                  >
-                    <Text
-                      style={{
-                        color: props.theme === "dark" ? "#fff" : "#151E26",
-                        flex: 1,
-                        fontSize: 18,
-                        fontWeight: "400",
-                        textAlign: "center",
-                      }}
-                    >
-                      {selectedItem}
-                    </Text>
-                  </View>
-                );
-              }}
-              renderItem={(item, index, isSelected) => {
-                return (
-                  <View
-                    style={{
-                      paddingHorizontal: 12,
-                      paddingVertical: 8,
-                    }}
-                  >
-                    <Text
-                      className="text-center"
-                      style={{
-                        flex: 1,
-                        fontSize: 18,
-                        fontWeight: "300",
-                        color: props.theme === "dark" ? "#fff" : "#151E26",
-                        ...(isSelected && {
-                          fontWeight: "bold",
-                          fontSize: 18,
-                        }),
-                      }}
-                    >
-                      {item}
-                    </Text>
-                  </View>
-                );
-              }}
-              showsVerticalScrollIndicator={false}
-              dropdownStyle={{
-                marginStart: -7,
-                marginEnd: -7,
-                backgroundColor: props.theme === "dark" ? "#2C2C2F" : "#E7E7E8",
-                borderRadius: 8,
-                width: 150,
-              }}
-            />
+                activeOpacity={1}
+                onPress={() => {
+                  onSelect(0);
+                }}
+              >
+                <Text
+                  style={
+                    yourToolsDisplayes === false &&
+                    builtinToolsDisplayes === false
+                      ? styelForFiltersInnerSelected
+                      : styelForFiltersInner
+                  }
+                >
+                  {t(text("allTools"))}
+                </Text>
+              </TouchableOpacity>
+
+              <TouchableOpacity
+                style={
+                  yourToolsDisplayes === true && builtinToolsDisplayes === false
+                    ? styelForFiltersOuterSelected
+                    : styelForFiltersOuter
+                }
+                activeOpacity={1}
+                onPress={() => {
+                  onSelect(1);
+                }}
+              >
+                <Text
+                  style={
+                    yourToolsDisplayes === true &&
+                    builtinToolsDisplayes === false
+                      ? styelForFiltersInnerSelected
+                      : styelForFiltersInner
+                  }
+                >
+                  {t(text("yourTools"))}
+                </Text>
+              </TouchableOpacity>
+
+              <TouchableOpacity
+                style={
+                  yourToolsDisplayes === false && builtinToolsDisplayes === true
+                    ? styelForFiltersOuterSelected
+                    : styelForFiltersOuter
+                }
+                activeOpacity={1}
+                onPress={() => {
+                  onSelect(2);
+                }}
+              >
+                <Text
+                  style={
+                    yourToolsDisplayes === false &&
+                    builtinToolsDisplayes === true
+                      ? styelForFiltersInnerSelected
+                      : styelForFiltersInner
+                  }
+                >
+                  {t(text("builtinTools"))}
+                </Text>
+              </TouchableOpacity>
+            </View>
           )}
           <Text
             className={styles.title + (props.theme === "dark" && " text-white")}

@@ -10,18 +10,14 @@ export const TermsOfUse = ({ theme }) => {
   return (
     <ScrollView>
       <TouchableOpacity
-        onPress={() => {
-          Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
-          navigation.goBack();
-        }}
         className={
-          "w-7 h-7 bg-white mt-16 mb-6 ml-3 z-10 rounded-full flex items-center justify-center"
+          "w-7 h-7 bg-transparent mt-10 ml-3 z-12 rounded-full flex items-center justify-center"
         }
       >
         <SweetSFSymbol
           name={"multiply.circle.fill"}
           size={32}
-          colors={[isDark("#5450D4", "#38377C")]}
+          colors={["transparent"]}
         />
       </TouchableOpacity>
       <Text

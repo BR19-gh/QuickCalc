@@ -43,13 +43,13 @@ function Welcome(props) {
   return (
     <View
       style={{
-        marginTop: windowHight > 667 ? (windowHight > 852 ? 470 : 170) : 85,
+        marginTop: windowHight > 667 ? (windowHight > 1000 ? 470 : 170) : 85,
       }}
       className={
         "h-full items-center flex-1" +
         (props.theme === "dark" && " bg-black") +
         (windowHight > 667
-          ? windowHight > 852
+          ? windowHight > 1000
             ? " scale-150"
             : " scale-100"
           : " scale-100")

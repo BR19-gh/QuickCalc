@@ -116,7 +116,7 @@ function WalkThrough(props) {
             )
               ? 342
               : windowHight > 667
-              ? windowHight > 852
+              ? windowHight > 1000
                 ? 450
                 : Platform.isPad
                 ? 270
@@ -128,14 +128,14 @@ function WalkThrough(props) {
               ? 738
               : props.isFirstTimeLaunch
               ? windowHight > 667
-                ? windowHight > 852
+                ? windowHight > 1000
                   ? 1000
                   : Platform.isPad
                   ? 575
                   : 640
                 : 510
               : windowHight > 667
-              ? windowHight > 852
+              ? windowHight > 1000
                 ? 980
                 : Platform.isPad
                 ? 575

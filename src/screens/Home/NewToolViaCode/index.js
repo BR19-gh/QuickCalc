@@ -9,6 +9,7 @@ import {
   Alert,
   Clipboard,
   Dimensions,
+  StyleSheet,
 } from "react-native";
 import SweetSFSymbol from "sweet-sfsymbols";
 
@@ -283,7 +284,7 @@ function NewToolViaCode({ theme, tools, dispatch }) {
       <View
         className={
           "w-full " +
-          (Dimensions.get("window").height > 667 ? "mt-28" : "mt-16") +
+          (Dimensions.get("window").height > 667 ? "mt-32" : "mt-20") +
           " items-center"
         }
       >
@@ -316,7 +317,7 @@ function NewToolViaCode({ theme, tools, dispatch }) {
                     ? isDark("#2C2C2D", "#FFFFFF")
                     : isDark("#2C2C2D99", "#CCCCCC"),
                 width: 350,
-                height: 250,
+                height: 225,
                 fontSize: 18,
                 textAlign: toolCode ? "left" : "center",
                 color:
@@ -325,7 +326,7 @@ function NewToolViaCode({ theme, tools, dispatch }) {
                     : isDark("#C1D4F1", "#495A7C"),
                 borderRadius: 10,
 
-                paddingTop: toolCode ? 10 : 80,
+                paddingTop: toolCode ? 10 : 70,
                 padding: 10,
               }}
               multiline={true}
@@ -353,6 +354,16 @@ function NewToolViaCode({ theme, tools, dispatch }) {
           >
             {errMsg}
           </Text>
+          <View
+            style={{
+              margin: 15,
+              marginLeft: 35,
+              marginRight: 35,
+              borderBottomColor: isDark("#666666", "#BBBBBB"),
+              borderBottomWidth: StyleSheet.hairlineWidth,
+              alignSelf: "stretch",
+            }}
+          />
           <View className={"items-center"}>
             <LinearGradient
               key={
@@ -434,58 +445,58 @@ function NewToolViaCode({ theme, tools, dispatch }) {
           <View
             className={"w-full flex-row flex-wrap items-center justify-evenly"}
           ></View>
-          <View
-            className={"w-full flex-row flex-wrap items-center justify-evenly"}
+        </View>
+        <View
+          className={"w-full flex-row flex-wrap items-center justify-evenly"}
+        >
+          <TouchableOpacity
+            disabled={toolCode !== ""}
+            className={
+              "mt-5 h-14 w-36 flex-row items-center justify-evenly rounded-full"
+            }
+            style={{
+              backgroundColor: toolCode !== "" ? "#6C6BA6" : "#38377C",
+            }}
+            onPress={async () => {
+              Haptics.selectionAsync();
+              setToolCode(await Clipboard.getString());
+            }}
           >
-            <TouchableOpacity
-              disabled={toolCode !== ""}
-              className={
-                "mt-5 h-14 w-36 flex-row items-center justify-evenly rounded-full"
-              }
+            <Text
+              className={"text-center text-lg"}
               style={{
-                backgroundColor: toolCode !== "" ? "#6C6BA6" : "#38377C",
-              }}
-              onPress={async () => {
-                Haptics.selectionAsync();
-                setToolCode(await Clipboard.getString());
+                color: toolCode !== "" ? "#D3D3D3" : "#FFFFFF",
               }}
             >
-              <Text
-                className={"text-center text-lg"}
-                style={{
-                  color: toolCode !== "" ? "#D3D3D3" : "#FFFFFF",
-                }}
-              >
-                {t(text("pasteCode"))}
-              </Text>
-              <SweetSFSymbol
-                name={"doc.on.clipboard.fill"}
-                size={18}
-                colors={[toolCode !== "" ? "#D3D3D3" : "#FFFFFF"]}
-              />
-            </TouchableOpacity>
-            <TouchableOpacity
-              className={
-                "mt-2.5 h-14 w-36 flex-row items-center justify-evenly rounded-full"
-              }
-              style={{ backgroundColor: "#38377C" }}
-              onPress={() => {
-                Haptics.notificationAsync(
-                  Haptics.NotificationFeedbackType.Success
-                );
-                setToolCode("");
-              }}
-            >
-              <Text className={"text-center text-lg text-white"}>
-                {t(text("reset"))}
-              </Text>
-              <SweetSFSymbol
-                name={"arrow.counterclockwise.circle.fill"}
-                size={18}
-                colors={["white"]}
-              />
-            </TouchableOpacity>
-          </View>
+              {t(text("pasteCode"))}
+            </Text>
+            <SweetSFSymbol
+              name={"doc.on.clipboard.fill"}
+              size={18}
+              colors={[toolCode !== "" ? "#D3D3D3" : "#FFFFFF"]}
+            />
+          </TouchableOpacity>
+          <TouchableOpacity
+            className={
+              "mt-2.5 h-14 w-36 flex-row items-center justify-evenly rounded-full"
+            }
+            style={{ backgroundColor: "#38377C" }}
+            onPress={() => {
+              Haptics.notificationAsync(
+                Haptics.NotificationFeedbackType.Success
+              );
+              setToolCode("");
+            }}
+          >
+            <Text className={"text-center text-lg text-white"}>
+              {t(text("reset"))}
+            </Text>
+            <SweetSFSymbol
+              name={"arrow.counterclockwise.circle.fill"}
+              size={18}
+              colors={["white"]}
+            />
+          </TouchableOpacity>
         </View>
         <View className="mb-2.5 mt-2.5 flex w-11/12 flex-row justify-center">
           <TouchableOpacity
