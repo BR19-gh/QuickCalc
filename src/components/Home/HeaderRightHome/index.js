@@ -8,15 +8,7 @@ import { useEffect } from "react";
 import { connect } from "react-redux";
 import { useRevenueCat } from "../../../providers/RevenueCatProvider";
 
-const Header = ({
-  setIsEditing,
-  isEditing,
-  setIsEditingFavorite,
-  isEditingFavorite,
-  isShowedFavorite,
-  setMoving,
-  tools,
-}) => {
+const Header = ({ setIsEditing, isEditing, setMoving, tools }) => {
   const { t } = i18n;
   const text = (text) => "screens.Navi.text." + text;
 
@@ -37,83 +29,56 @@ const Header = ({
         (isEditing ? " w-20" : " w-20")
       }
     >
-      {isShowedFavorite ? (
-        <>
-          <SweetSFSymbol name={"plus"} size={22} colors={["transparent"]} />
-          <TouchableOpacity
-            onPress={() => {
-              Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
-              setIsEditingFavorite(!isEditingFavorite);
-            }}
-          >
-            <Text
-              className={
-                "text-blue-500" +
-                (isEditingFavorite ? " font-semibold text-lg" : " text-lg")
-              }
-              style={{
-                paddingEnd: 8.5,
-              }}
-            >
-              {isEditingFavorite ? t(text("done")) : t(text("edit"))}
-            </Text>
-          </TouchableOpacity>
-        </>
+      <TouchableOpacity
+        onPress={() => {
+          Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+          setIsEditing(!isEditing);
+        }}
+      >
+        <Text
+          className={
+            "text-blue-500" +
+            (isEditing ? " font-semibold text-lg" : " text-lg")
+          }
+          style={{
+            paddingStart: isEditing ? (lang === "ar" ? 55 : 36) : 0,
+          }}
+        >
+          {isEditing ? t(text("done")) : t(text("edit"))}
+        </Text>
+      </TouchableOpacity>
+
+      {isEditing ? (
+        <SweetSFSymbol name={"plus"} size={22} colors={["transparent"]} />
       ) : (
-        <>
-          <TouchableOpacity
-            onPress={() => {
-              Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
-              setIsEditing(!isEditing);
-            }}
-          >
-            <Text
-              className={
-                "text-blue-500" +
-                (isEditing ? " font-semibold text-lg" : " text-lg")
-              }
-              style={{
-                paddingStart: isEditing ? (lang === "ar" ? 55 : 36) : 0,
-              }}
-            >
-              {isEditing ? t(text("done")) : t(text("edit"))}
-            </Text>
-          </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => {
+            Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+            if (
+              Object.values(tools).filter((tool) => tool.link === "CreatedTool")
+                .length >= 1 &&
+              user.golden === false
+            ) {
+              return Alert.alert(
+                t(text("maxToolsAlertTitle")),
+                t(text("maxToolsAlert")),
+                [
+                  {
+                    text: t(text("gotIt")),
+                    style: "default",
+                    onPress: () => {
+                      navigation.navigate("Paywall");
+                    },
+                  },
+                ]
+              );
+            }
 
-          {isEditing ? (
-            <SweetSFSymbol name={"plus"} size={22} colors={["transparent"]} />
-          ) : (
-            <TouchableOpacity
-              onPress={() => {
-                Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
-                if (
-                  Object.values(tools).filter(
-                    (tool) => tool.link === "CreatedTool"
-                  ).length >= 1 &&
-                  user.golden === false
-                ) {
-                  return Alert.alert(
-                    t(text("maxToolsAlertTitle")),
-                    t(text("maxToolsAlert")),
-                    [
-                      {
-                        text: t(text("gotIt")),
-                        style: "default",
-                        onPress: () => {
-                          navigation.navigate("Paywall");
-                        },
-                      },
-                    ]
-                  );
-                }
-
-                navigation.navigate("NewTool");
-              }}
-            >
-              <SweetSFSymbol name={"plus"} size={22} colors={["#3B82F6"]} />
-            </TouchableOpacity>
-          )}
-        </>
+            navigation.navigate("NewTool");
+          }}
+        >
+          <SweetSFSymbol name={"plus"} size={22} colors={["#3B82F6"]} />
+        </TouchableOpacity>
       )}
     </View>
   );

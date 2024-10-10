@@ -358,7 +358,7 @@ function NewTool({ theme, tools, dispatch }) {
               margin: 15,
               marginLeft: 35,
               marginRight: 35,
-              borderBottomColor: isDark("#666666", "#BBBBBB"),
+              borderBottomColor: isDark("#333333", "#CCCCCC"),
               borderBottomWidth: StyleSheet.hairlineWidth,
               alignSelf: "stretch",
             }}
@@ -561,7 +561,7 @@ function NewTool({ theme, tools, dispatch }) {
               margin: 15,
               marginLeft: 35,
               marginRight: 35,
-              borderBottomColor: isDark("#666666", "#BBBBBB"),
+              borderBottomColor: isDark("#333333", "#CCCCCC"),
               borderBottomWidth: StyleSheet.hairlineWidth,
               alignSelf: "stretch",
             }}
@@ -748,7 +748,6 @@ function NewTool({ theme, tools, dispatch }) {
                                     color: isDark("#DBEAFE", "#283987"),
                                     flex: 1,
                                     fontWeight: "bold",
-
                                     textAlign: "center",
                                   }}
                                 >

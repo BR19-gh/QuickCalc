@@ -19,6 +19,7 @@ import {
   handleEditVisTools,
   handleReorderTools,
   handleFavoriteTools,
+  handleDeleteTool,
 } from "../../store/actions/tools";
 import styles from "./styles";
 import { connect } from "react-redux";
@@ -81,9 +82,9 @@ function Home(props) {
     }
   }, [noteIdState]);
 
-  useEffect(() => {
-    loadAd(); // Load the ad when the component mounts
-  }, []);
+  // useEffect(() => {
+  //   loadAd(); // Load the ad when the component mounts
+  // }, []);
 
   useEffect(() => {
     if (user.golden === false) {
@@ -109,9 +110,6 @@ function Home(props) {
   const [refreshing, setRefreshing] = useState(false);
 
   const toast = useToast();
-
-  const [yourToolsDisplayes, setYourToolsDisplayes] = useState(false);
-  const [builtinToolsDisplayes, setBuiltinToolsDisplayes] = useState(false);
 
   const navigation = useNavigation();
 
@@ -236,7 +234,6 @@ function Home(props) {
           <Card
             isEditingFavorite={props.isEditingFavorite}
             handleFavorite={handleFavorite}
-            isShowedFavorite={props.isShowedFavorite}
             theme={props.theme}
             lang={lang}
             tool={tool}
@@ -264,45 +261,7 @@ function Home(props) {
             <ContextMenu
               dropdownMenuMode={false}
               actions={
-                props.isShowedFavorite
-                  ? tool.link === "CreatedTool"
-                    ? [
-                        {
-                          title: tool.isFavorite
-                            ? t(text("unfavorite2"))
-                            : t(text("favorite")),
-                          systemIcon: tool.isFavorite ? "star.slash" : "star",
-                        },
-
-                        { title: t(text("hide")), systemIcon: "eye.slash" },
-                        {
-                          title: t(text("edit")),
-                          systemIcon: "square.and.pencil",
-                        },
-                        {
-                          title: t(text("share")),
-                          systemIcon: "square.and.arrow.up",
-                        },
-
-                        {
-                          title: t(text("enableQuickAccess")),
-                          systemIcon: "arrow.forward.to.line.circle",
-                        },
-                      ]
-                    : [
-                        {
-                          title: tool.isFavorite
-                            ? t(text("unfavorite2"))
-                            : t(text("favorite")),
-                          systemIcon: tool.isFavorite ? "star.slash" : "star",
-                        },
-                        { title: t(text("hide")), systemIcon: "eye.slash" },
-                        {
-                          title: t(text("enableQuickAccess")),
-                          systemIcon: "arrow.forward.to.line.circle",
-                        },
-                      ]
-                  : tool.link === "CreatedTool"
+                tool.link === "CreatedTool"
                   ? [
                       {
                         title: tool.isFavorite
@@ -328,6 +287,11 @@ function Home(props) {
                       {
                         title: t(text("enableQuickAccess")),
                         systemIcon: "arrow.forward.to.line.circle",
+                      },
+                      {
+                        title: t("screens.Home.CreatedTool.Header.delete"),
+                        systemIcon: "trash",
+                        destructive: true,
                       },
                     ]
                   : [
@@ -429,15 +393,11 @@ function Home(props) {
                     navigation.navigate("Paywall");
                   }
                 } else if (e.nativeEvent.name === t(text("move"))) {
-                  if (props.isShowedFavorite) {
-                    null;
-                  } else {
-                    props.setIsEditing(true);
-                    props.setSearchText("");
-                    props.searchBarRef.current.clearText();
-                    props.searchBarRef.current.blur();
-                    props.setMoving(true);
-                  }
+                  props.setIsEditing(true);
+                  props.setSearchText("");
+                  props.searchBarRef.current.clearText();
+                  props.searchBarRef.current.blur();
+                  props.setMoving(true);
                 } else if (e.nativeEvent.name === t(text("share"))) {
                   Haptics.selectionAsync();
 
@@ -451,13 +411,38 @@ function Home(props) {
                   } else {
                     navigation.navigate("Paywall");
                   }
+                } else if (
+                  e.nativeEvent.name ===
+                  t("screens.Home.CreatedTool.Header.delete")
+                ) {
+                  Haptics.notificationAsync(
+                    Haptics.NotificationFeedbackType.Warning
+                  );
+                  Alert.alert(
+                    t("screens.Home.CreatedTool.Header.deleteConfirmTitle"),
+                    t(
+                      "screens.Home.CreatedTool.Header.deleteConfirmMessage",
+                      tool.name
+                    ),
+                    [
+                      {
+                        text: t("screens.Home.CreatedTool.Header.cancel"),
+                        style: "cancel",
+                        onPress: () => null,
+                      },
+                      {
+                        text: t("screens.Home.CreatedTool.Header.delete"),
+                        style: "destructive",
+                        onPress: () => handleDelete(tool.id),
+                      },
+                    ]
+                  );
                 }
               }}
             >
               <Card
                 isEditingFavorite={props.isEditingFavorite}
                 handleFavorite={handleFavorite}
-                isShowedFavorite={props.isShowedFavorite}
                 theme={props.theme}
                 lang={lang}
                 tool={tool}
@@ -494,7 +479,6 @@ function Home(props) {
             searchTextLength={props.searchText.length}
             isEditingFavorite={props.isEditingFavorite}
             handleFavorite={handleFavorite}
-            isShowedFavorite={props.isShowedFavorite}
             theme={props.theme}
             lang={lang}
             tool={tool}
@@ -514,32 +498,33 @@ function Home(props) {
   };
 
   useEffect(() => {
-    if (props.searchText.length > 0 || props.isEditing === true) {
-      setYourToolsDisplayes(false);
-      setBuiltinToolsDisplayes(false);
+    if (props.isEditing === true) {
+      props.setYourToolsDisplayes(false);
+      props.setBuiltinToolsDisplayes(false);
+      props.setIsShowedFavorite(false);
     }
-  }, [props.isEditing, props.searchText]);
+  }, [props.isEditing]);
 
   const windowHight = Dimensions.get("window").height;
 
   const { user } = useRevenueCat();
 
-  //show ads
-  const handleAdClosed = () => {
-    setTimeout(() => {
-      showAd(handleAdClosed);
-    }, 60000 * 3);
-  };
+  // //show ads
+  // const handleAdClosed = () => {
+  //   setTimeout(() => {
+  //     showAd(handleAdClosed);
+  //   }, 60000 * 3);
+  // };
 
-  useEffect(() => {
-    setTimeout(() => {
-      try {
-        showAd(handleAdClosed);
-      } catch (e) {
-        console.log(e);
-      }
-    }, 30000);
-  }, []);
+  // useEffect(() => {
+  //   setTimeout(() => {
+  //     try {
+  //       showAd(handleAdClosed);
+  //     } catch (e) {
+  //       console.log(e);
+  //     }
+  //   }, 30000);
+  // }, []);
 
   const [orientation, setOrientation] = useState("");
 
@@ -556,7 +541,7 @@ function Home(props) {
 
   const styelForFiltersOuter = {
     alignSelf: "center",
-    padding: 13,
+    padding: 10,
     margin: 5,
     marginBottom: 10,
     marginTop: 10,
@@ -585,16 +570,71 @@ function Home(props) {
   };
 
   const onSelect = (index) => {
-    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Heavy);
+    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
     if (index === 0) {
-      setYourToolsDisplayes(false);
-      setBuiltinToolsDisplayes(false);
+      props.setYourToolsDisplayes(false);
+      props.setBuiltinToolsDisplayes(false);
+      props.setIsShowedFavorite(false);
     } else if (index === 1) {
-      setYourToolsDisplayes(true);
-      setBuiltinToolsDisplayes(false);
+      props.setYourToolsDisplayes(true);
+      props.setBuiltinToolsDisplayes(false);
+      props.setIsShowedFavorite(false);
     } else if (index === 2) {
-      setYourToolsDisplayes(false);
-      setBuiltinToolsDisplayes(true);
+      props.setYourToolsDisplayes(false);
+      props.setBuiltinToolsDisplayes(true);
+      props.setIsShowedFavorite(false);
+    } else if (index === 3) {
+      props.setYourToolsDisplayes(false);
+      props.setBuiltinToolsDisplayes(false);
+      props.setIsShowedFavorite(true);
+      props.setIsEditingFavorite(false);
+      props.setIsEditing(false);
+    }
+  };
+
+  const handleDelete = (id) => {
+    const newData = [...Object.values(props.tools)];
+    const oldData = [...Object.values(props.tools)];
+
+    newData.forEach((item, index) => {
+      if (item.id === id) {
+        newData.splice(index, 1);
+      }
+    });
+
+    try {
+      let refreshToast = toast.show(
+        t("screens.Home.CreatedTool.Header.deletingTool"),
+        {
+          placement: "top",
+          type: "normal",
+        }
+      );
+      props.dispatch(handleDeleteTool(newData, oldData));
+
+      setTimeout(() => {
+        Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
+
+        toast.update(
+          refreshToast,
+          t("screens.Home.CreatedTool.Header.toolHasBeenDeleted"),
+          {
+            type: "success",
+            duration: 4000,
+            placement: "top",
+          }
+        );
+
+        navigation.navigate("HomeNavi");
+      }, 1000);
+    } catch (error) {
+      Haptics.notificationAsync(Haptics.NotificationFeedbackType.Error);
+      Alert.alert(
+        t("screens.Home.CreatedTool.Header.errorTitle"),
+        error.message +
+          "\n\n" +
+          t("screens.Home.CreatedTool.Header.pleaseShareError")
+      );
     }
   };
 
@@ -607,11 +647,11 @@ function Home(props) {
             ? "100%"
             : windowHight > 667
             ? windowHight > 852
-              ? "89%"
+              ? "92%"
               : Platform.isPad
-              ? "84%"
-              : "89%"
-            : "87%",
+              ? "88%"
+              : "92%"
+            : "90%",
         }}
         refreshControl={
           <RefreshControl
@@ -638,7 +678,7 @@ function Home(props) {
         }
       >
         <View>
-          {props.searchText.length > 0 || props.isEditing === true ? (
+          {props.isEditing === true ? (
             <View style={{ ...styelForFiltersOuter, width: 150 }}>
               <Text style={styelForFiltersInner}>
                 {t(text("filterIsDisabled"))}
@@ -648,8 +688,9 @@ function Home(props) {
             <View className="flex flex-row justify-center">
               <TouchableOpacity
                 style={
-                  yourToolsDisplayes === false &&
-                  builtinToolsDisplayes === false
+                  props.yourToolsDisplayes === false &&
+                  props.builtinToolsDisplayes === false &&
+                  props.isShowedFavorite === false
                     ? styelForFiltersOuterSelected
                     : styelForFiltersOuter
                 }
@@ -660,8 +701,9 @@ function Home(props) {
               >
                 <Text
                   style={
-                    yourToolsDisplayes === false &&
-                    builtinToolsDisplayes === false
+                    props.yourToolsDisplayes === false &&
+                    props.builtinToolsDisplayes === false &&
+                    props.isShowedFavorite === false
                       ? styelForFiltersInnerSelected
                       : styelForFiltersInner
                   }
@@ -672,7 +714,8 @@ function Home(props) {
 
               <TouchableOpacity
                 style={
-                  yourToolsDisplayes === true && builtinToolsDisplayes === false
+                  props.yourToolsDisplayes === true &&
+                  props.builtinToolsDisplayes === false
                     ? styelForFiltersOuterSelected
                     : styelForFiltersOuter
                 }
@@ -683,8 +726,8 @@ function Home(props) {
               >
                 <Text
                   style={
-                    yourToolsDisplayes === true &&
-                    builtinToolsDisplayes === false
+                    props.yourToolsDisplayes === true &&
+                    props.builtinToolsDisplayes === false
                       ? styelForFiltersInnerSelected
                       : styelForFiltersInner
                   }
@@ -695,7 +738,8 @@ function Home(props) {
 
               <TouchableOpacity
                 style={
-                  yourToolsDisplayes === false && builtinToolsDisplayes === true
+                  props.yourToolsDisplayes === false &&
+                  props.builtinToolsDisplayes === true
                     ? styelForFiltersOuterSelected
                     : styelForFiltersOuter
                 }
@@ -706,13 +750,34 @@ function Home(props) {
               >
                 <Text
                   style={
-                    yourToolsDisplayes === false &&
-                    builtinToolsDisplayes === true
+                    props.yourToolsDisplayes === false &&
+                    props.builtinToolsDisplayes === true
                       ? styelForFiltersInnerSelected
                       : styelForFiltersInner
                   }
                 >
-                  {t(text("builtinTools"))}
+                  {t(text("builtin"))}
+                </Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={
+                  props.isShowedFavorite === true
+                    ? styelForFiltersOuterSelected
+                    : styelForFiltersOuter
+                }
+                activeOpacity={1}
+                onPress={() => {
+                  onSelect(3);
+                }}
+              >
+                <Text
+                  style={
+                    props.isShowedFavorite === true
+                      ? styelForFiltersInnerSelected
+                      : styelForFiltersInner
+                  }
+                >
+                  {t(text("favorites"))}
                 </Text>
               </TouchableOpacity>
             </View>
@@ -722,14 +787,19 @@ function Home(props) {
           >
             {props.isShowedFavorite
               ? t(text("favoredTools"))
+              : props.yourToolsDisplayes
+              ? t(text("createdTools"))
+              : props.builtinToolsDisplayes
+              ? t(text("builtinTools"))
               : t(text("tools"))}
           </Text>
         </View>
         {
           //shown tools
           props.isShowedFavorite ? (
-            currentTools.filter((tool) => tool.isFavorite === true).length ===
-            0 ? (
+            currentTools.filter(
+              (tool) => tool.isFavorite === true && tool.isHidden === false
+            ).length === 0 ? (
               <Text
                 className={
                   "text-xl m-4 mt-0 text-left " +
@@ -738,16 +808,8 @@ function Home(props) {
               >
                 {t(text("noFavoredTools"))}
               </Text>
-            ) : currentTools.filter((tool) =>
-                yourToolsDisplayes
-                  ? tool.link === "CreatedTool" &&
-                    tool.isHidden === false &&
-                    tool.isFavorite === true
-                  : builtinToolsDisplayes
-                  ? tool.link !== "CreatedTool" &&
-                    tool.isHidden === false &&
-                    tool.isFavorite === true
-                  : true
+            ) : currentTools.filter(
+                (tool) => tool.isFavorite === true && tool.isHidden === false
               ).length === 0 ? (
               <Text
                 className={
@@ -756,6 +818,52 @@ function Home(props) {
                 }
               >
                 {t(text("noFilteredFavoredTools"))}
+              </Text>
+            ) : null
+          ) : props.yourToolsDisplayes ? (
+            currentTools.filter((tool) => tool.link === "CreatedTool")
+              .length === 0 ? (
+              <Text
+                className={
+                  "text-xl m-4 mt-0 text-left " +
+                  (props.theme === "dark" && " text-white")
+                }
+              >
+                {t(text("noCreatedTools"))}
+              </Text>
+            ) : currentTools.filter(
+                (tool) => tool.link === "CreatedTool" && tool.isHidden === false
+              ).length === 0 ? (
+              <Text
+                className={
+                  "text-xl m-4 mt-0 text-left " +
+                  (props.theme === "dark" && " text-white")
+                }
+              >
+                {t(text("noFilteredCreatedTools"))}
+              </Text>
+            ) : null
+          ) : props.builtinToolsDisplayes ? (
+            currentTools.filter((tool) => tool.link !== "CreatedTool")
+              .length === 0 ? (
+              <Text
+                className={
+                  "text-xl m-4 mt-0 text-left " +
+                  (props.theme === "dark" && " text-white")
+                }
+              >
+                {t(text("noBuiltinTools"))}
+              </Text>
+            ) : currentTools.filter(
+                (tool) => tool.link !== "CreatedTool" && tool.isHidden === false
+              ).length === 0 ? (
+              <Text
+                className={
+                  "text-xl m-4 mt-0 text-left " +
+                  (props.theme === "dark" && " text-white")
+                }
+              >
+                {t(text("noFilteredBuiltinTools"))}
               </Text>
             ) : null
           ) : currentTools.filter((tool) => tool.isHidden === false).length ===
@@ -769,9 +877,9 @@ function Home(props) {
               {t(text("noTools"))}
             </Text>
           ) : currentTools.filter((tool) =>
-              yourToolsDisplayes
+              props.yourToolsDisplayes
                 ? tool.link === "CreatedTool" && tool.isHidden === false
-                : builtinToolsDisplayes
+                : props.builtinToolsDisplayes
                 ? tool.link !== "CreatedTool" && tool.isHidden === false
                 : true
             ).length === 0 ? (
@@ -791,49 +899,41 @@ function Home(props) {
           contentInsetAdjustmentBehavior="automatic"
           data={
             props.searchText.length > 0
-              ? props.isShowedFavorite
-                ? currentTools.filter(
-                    (tool) =>
-                      tool.searchName.includes(props.searchText) &&
-                      tool.isFavorite === true
-                  )
-                : currentTools.filter(
-                    (tool) =>
-                      tool.searchName.includes(props.searchText) &&
-                      tool.isHidden === false
-                  )
-              : props.isShowedFavorite
-              ? currentTools.filter((tool) =>
-                  yourToolsDisplayes
-                    ? tool.link === "CreatedTool" && tool.isFavorite === true
-                    : (builtinToolsDisplayes
-                        ? tool.link !== "CreatedTool" &&
-                          tool.isFavorite === true
-                        : true && tool.isFavorite === true) &&
-                      tool.isFavorite === true
+              ? currentTools.filter(
+                  (tool) =>
+                    tool.searchName.includes(props.searchText) &&
+                    (props.yourToolsDisplayes
+                      ? tool.link === "CreatedTool" && tool.isHidden === false
+                      : props.isShowedFavorite
+                      ? tool.isFavorite && tool.isHidden === false
+                      : (props.builtinToolsDisplayes
+                          ? tool.link !== "CreatedTool" &&
+                            tool.isHidden === false
+                          : true && tool.isHidden === false) &&
+                        tool.isHidden === false)
                 )
               : currentTools.filter((tool) =>
-                  yourToolsDisplayes
+                  props.yourToolsDisplayes
                     ? tool.link === "CreatedTool" && tool.isHidden === false
-                    : (builtinToolsDisplayes
+                    : props.isShowedFavorite
+                    ? tool.isFavorite && tool.isHidden === false
+                    : (props.builtinToolsDisplayes
                         ? tool.link !== "CreatedTool" && tool.isHidden === false
                         : true && tool.isHidden === false) &&
                       tool.isHidden === false
                 )
           }
           onDragEnd={({ data }) => {
-            props.isShowedFavorite || props.searchText.length > 0
+            props.searchText.length > 0
               ? null
               : handleReorder([
                   ...data,
                   ...currentTools.filter((tool) => tool.isHidden === true),
                 ]);
           }}
-          className={
-            props.isEditing || props.isEditingFavorite ? "" : " h-full"
-          }
+          className={props.isEditing ? "" : " h-full"}
           renderItem={({ item: tool, getIndex, drag, isActive }) => {
-            if (props.isEditing || props.isEditingFavorite) {
+            if (props.isEditing) {
               return renderItemDrag({ tool, getIndex, drag, isActive });
             } else {
               return renderItemContextMenu({
@@ -849,7 +949,7 @@ function Home(props) {
 
         {
           //not shown tools
-          (props.isEditing || props.isEditingFavorite) && (
+          props.isEditing && (
             <View
               className={
                 "bg-slate-300 pb-4" +
@@ -864,30 +964,15 @@ function Home(props) {
                     : "  text-gray-600")
                 }
               >
-                {props.isShowedFavorite
-                  ? t(text("unfavoredTools"))
-                  : t(text("hiddenTools"))}
+                {t(text("hiddenTools"))}
               </Text>
-              {currentTools.filter((tool) =>
-                props.isShowedFavorite
-                  ? tool.isFavorite === false && tool.isHidden === false
-                  : tool.isHidden === true
-              ).length !== 0 ? (
+              {currentTools.filter((tool) => tool.isHidden === true).length !==
+              0 ? (
                 currentTools
                   .filter((tool) =>
                     props.searchText.length > 0
                       ? tool.searchName.includes(props.searchText) &&
-                        (props.isShowedFavorite
-                          ? tool.isFavorite === false && tool.isHidden === false
-                          : tool.isHidden === true)
-                      : props.isShowedFavorite
-                      ? tool.isFavorite === false &&
-                        tool.isHidden === false &&
-                        (yourToolsDisplayes
-                          ? tool.link === "CreatedTool"
-                          : builtinToolsDisplayes
-                          ? tool.link !== "CreatedTool"
-                          : true)
+                        tool.isHidden === true
                       : tool.isHidden === true
                   )
                   .map((tool) => (
@@ -913,9 +998,7 @@ function Home(props) {
                     (props.theme === "dark" && " text-gray-400")
                   }
                 >
-                  {props.isShowedFavorite
-                    ? t(text("noUnfavoredTools"))
-                    : t(text("noHiddenTools"))}
+                  {t(text("noHiddenTools"))}
                 </Text>
               )}
             </View>

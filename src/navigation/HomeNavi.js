@@ -106,7 +106,6 @@ const HomeNavi = ({ isEditing, setIsEditing, theme, tools }) => {
 
     if (action.id === "favorite") {
       setIsEditing(false);
-      setIsEditingFavorite(false);
       setIsShowedFavorite(true);
     }
 
@@ -148,6 +147,9 @@ const HomeNavi = ({ isEditing, setIsEditing, theme, tools }) => {
     }
   });
 
+  const [yourToolsDisplayes, setYourToolsDisplayes] = useState(false);
+  const [builtinToolsDisplayes, setBuiltinToolsDisplayes] = useState(false);
+
   return (
     <Stack.Navigator
       screenOptions={{
@@ -160,9 +162,6 @@ const HomeNavi = ({ isEditing, setIsEditing, theme, tools }) => {
           headerLargeTitle: true,
           headerRight: () => (
             <HeaderRightHome
-              setIsEditingFavorite={setIsEditingFavorite}
-              isEditingFavorite={isEditingFavorite}
-              isShowedFavorite={isShowedFavorite}
               isEditing={isEditing}
               setIsEditing={setIsEditing}
               setMoving={setMoving}
@@ -170,25 +169,17 @@ const HomeNavi = ({ isEditing, setIsEditing, theme, tools }) => {
             />
           ),
           headerLeft: () => (
-            <HeaderLeftHome
-              setIsEditing={setIsEditing}
-              setIsEditingFavorite={setIsEditingFavorite}
-              isShowedFavorite={isShowedFavorite}
-              isEditing={isEditing}
-              setIsShowedFavorite={setIsShowedFavorite}
-            />
+            <HeaderLeftHome setIsEditing={setIsEditing} isEditing={isEditing} />
           ),
-          title: isShowedFavorite
-            ? isEditingFavorite
-              ? t(text("selectToFavor"))
-              : t(text("favorite"))
-            : isEditing
-            ? t(text("selectToHideOrToMove"))
-            : t(text("home")),
+          title: isEditing ? t(text("selectToHideOrToMove")) : t(text("home")),
           headerSearchBarOptions: {
             ref: searchBarRef,
             placeholder: isShowedFavorite
               ? t(text("searchFavorite"))
+              : yourToolsDisplayes
+              ? t(text("searchCreated"))
+              : builtinToolsDisplayes
+              ? t(text("searchBuiltin"))
               : t(text("search")),
             value: searchText,
             onChangeText: (text) => {
@@ -200,6 +191,11 @@ const HomeNavi = ({ isEditing, setIsEditing, theme, tools }) => {
         name="HomeNavi"
         children={() => (
           <Home
+            yourToolsDisplayes={yourToolsDisplayes}
+            setYourToolsDisplayes={setYourToolsDisplayes}
+            builtinToolsDisplayes={builtinToolsDisplayes}
+            setBuiltinToolsDisplayes={setBuiltinToolsDisplayes}
+            setIsEditingFavorite={setIsEditingFavorite}
             currentTools={currentTools}
             setCurrentTools={setCurrentTools}
             searchBarRef={searchBarRef}

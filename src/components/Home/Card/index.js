@@ -19,7 +19,6 @@ const Card = ({
   text,
   lang,
   theme,
-  isShowedFavorite,
   isEditingFavorite,
   searchTextLength,
   moving,
@@ -30,17 +29,9 @@ const Card = ({
       colors={[...tool.colors]}
       style={{
         marginStart: "4%",
-        opacity: isEditingFavorite
-          ? !tool.isFavorite
-            ? 0.2
-            : 0.7
-          : isEditing
-          ? tool.isHidden
-            ? 0.2
-            : 0.7
-          : 1,
+        opacity: isEditing ? (tool.isHidden ? 0.2 : 0.7) : 1,
 
-        borderWidth: isEditingFavorite || isEditing ? 3.5 : 0,
+        borderWidth: isEditing ? 3.5 : 0,
         borderColor: theme === "dark" ? "gray" : "black",
         width: "92%",
       }}
@@ -66,19 +57,6 @@ const Card = ({
             Alert.alert(
               t(text("unableToMove")),
               t(text("youCannotMoveHidenTools")),
-              [
-                {
-                  text: t(text("gotIt")),
-                  onPress: () => null,
-                  style: "Ok",
-                },
-              ]
-            );
-          } else if (isShowedFavorite || isEditingFavorite) {
-            Haptics.notificationAsync(Haptics.NotificationFeedbackType.Error);
-            Alert.alert(
-              t(text("unableToMove")),
-              t(text("youCannotMoveToolsInFavorite")),
               [
                 {
                   text: t(text("gotIt")),

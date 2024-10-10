@@ -95,48 +95,48 @@ function EditTool({ theme, tools, route, dispatch }) {
     },
   });
 
+  const covertUndefinedExponents = (exponents) => {
+    for (let i = 0; i < newTool.operandNum; i++) {
+      if (exponents[i] === undefined) {
+        exponents[i] = 1;
+      }
+    }
+    return exponents;
+  };
+  const covertUndefinedOperands = (operands) => {
+    for (let i = 0; i < newTool.operandNum; i++) {
+      if (operands[i] === undefined || operands[i] === "") {
+        return false;
+      }
+    }
+    return operands;
+  };
+  const covertUndefinedOperators = (operators) => {
+    for (let i = 0; i < newTool.operandNum - 1; i++) {
+      if (operators[i] === undefined) {
+        return false;
+      }
+    }
+    return operators;
+  };
+  const isValidItem = (item) => {
+    return typeof item !== "undefined" && isNaN(item)
+      ? item.trim() !== ""
+      : item !== 0;
+  };
+  const isValidArray = (arr, minItems) => {
+    for (let i = 0; i < arr.length; i++) {
+      if (arr[i] === undefined) return false;
+    }
+    return (
+      Array.isArray(arr) && arr.length >= minItems && arr.every(isValidItem)
+    );
+  };
+
   function editTool(newTool) {
     const exponents = newTool.equation.exponents;
     const operands = newTool.equation.operands;
     const operators = newTool.equation.operators;
-
-    const covertUndefinedExponents = (exponents) => {
-      for (let i = 0; i < newTool.operandNum; i++) {
-        if (exponents[i] === undefined) {
-          exponents[i] = 1;
-        }
-      }
-      return exponents;
-    };
-    const covertUndefinedOperands = (operands) => {
-      for (let i = 0; i < newTool.operandNum; i++) {
-        if (operands[i] === undefined || operands[i] === "") {
-          return false;
-        }
-      }
-      return operands;
-    };
-    const covertUndefinedOperators = (operators) => {
-      for (let i = 0; i < newTool.operandNum - 1; i++) {
-        if (operators[i] === undefined) {
-          return false;
-        }
-      }
-      return operators;
-    };
-    const isValidItem = (item) => {
-      return typeof item !== "undefined" && isNaN(item)
-        ? item.trim() !== ""
-        : item !== 0;
-    };
-    const isValidArray = (arr, minItems) => {
-      for (let i = 0; i < arr.length; i++) {
-        if (arr[i] === undefined) return false;
-      }
-      return (
-        Array.isArray(arr) && arr.length >= minItems && arr.every(isValidItem)
-      );
-    };
 
     const isValidExponents = isValidArray(
       covertUndefinedExponents(exponents),
@@ -302,8 +302,9 @@ function EditTool({ theme, tools, route, dispatch }) {
           </View>
           <View
             style={{
-              marginTop: 10,
-              marginBottom: 10,
+              margin: 15,
+              marginLeft: 35,
+              marginRight: 35,
               borderBottomColor: isDark("#333333", "#CCCCCC"),
               borderBottomWidth: StyleSheet.hairlineWidth,
               alignSelf: "stretch",
@@ -504,8 +505,9 @@ function EditTool({ theme, tools, route, dispatch }) {
           </View>
           <View
             style={{
-              marginTop: 10,
-              marginBottom: 10,
+              margin: 15,
+              marginLeft: 35,
+              marginRight: 35,
               borderBottomColor: isDark("#333333", "#CCCCCC"),
               borderBottomWidth: StyleSheet.hairlineWidth,
               alignSelf: "stretch",
@@ -925,16 +927,86 @@ function EditTool({ theme, tools, route, dispatch }) {
           </View>
           <View className="flex flex-row w-11/12 justify-center mt-5 mb-5">
             <TouchableOpacity
+              disabled={
+                !(
+                  newTool.name &&
+                  newTool.description &&
+                  newTool.icon &&
+                  newTool.colors.length === 3 &&
+                  newTool.link &&
+                  newTool.operandNum &&
+                  isValidArray(
+                    covertUndefinedExponents(newTool.equation.exponents),
+                    2
+                  ) &&
+                  isValidArray(
+                    covertUndefinedOperands(newTool.equation.operands),
+                    2
+                  ) &&
+                  isValidArray(
+                    covertUndefinedOperators(newTool.equation.operators),
+                    1
+                  )
+                )
+              }
               className="w-11/12 h-16 rounded-full items-center justify-center"
               style={{
-                backgroundColor: isDark("#5450D4", "#38377C"),
+                backgroundColor:
+                  newTool.name &&
+                  newTool.description &&
+                  newTool.icon &&
+                  newTool.colors.length === 3 &&
+                  newTool.link &&
+                  newTool.operandNum &&
+                  isValidArray(
+                    covertUndefinedExponents(newTool.equation.exponents),
+                    2
+                  ) &&
+                  isValidArray(
+                    covertUndefinedOperands(newTool.equation.operands),
+                    2
+                  ) &&
+                  isValidArray(
+                    covertUndefinedOperators(newTool.equation.operators),
+                    1
+                  )
+                    ? "#38377C"
+                    : "#6C6BA6",
               }}
               onPress={() => {
                 Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
                 editTool(newTool);
               }}
             >
-              <Text className={"text-white text-3xl"}>{t(text("save"))}</Text>
+              <Text
+                className={"text-3xl"}
+                style={{
+                  color:
+                    newTool.name &&
+                    newTool.description &&
+                    newTool.icon &&
+                    newTool.colors.length === 3 &&
+                    newTool.link &&
+                    newTool.operandNum &&
+                    isValidArray(
+                      covertUndefinedExponents(newTool.equation.exponents),
+                      2
+                    ) &&
+                    isValidArray(
+                      covertUndefinedOperands(newTool.equation.operands),
+                      2
+                    ) &&
+                    isValidArray(
+                      covertUndefinedOperators(newTool.equation.operators),
+                      1
+                    )
+                      ? "#FFFFFF"
+                      : "#D3D3D3",
+                  fontWeight: "bold",
+                }}
+              >
+                {t(text("save"))}
+              </Text>
             </TouchableOpacity>
           </View>
         </View>
