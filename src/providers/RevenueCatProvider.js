@@ -102,9 +102,7 @@ export const RevenueCatProvider = ({ children }) => {
 
   const value = {
     restorePermissions,
-    user: {
-      golden: true,
-    },
+    user,
     packages,
     purchasePackage,
     presentCodeRedemptionSheet,
