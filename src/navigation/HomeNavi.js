@@ -64,10 +64,17 @@ const HomeNavi = ({ isEditing, setIsEditing, theme, tools }) => {
 
   const { user } = useRevenueCat();
 
+  const [yourToolsDisplayes, setYourToolsDisplayes] = useState(false);
+  const [builtinToolsDisplayes, setBuiltinToolsDisplayes] = useState(false);
+
   useQuickActionCallback(async (action) => {
     navigation.navigate("HomeNavi");
     if (action.id === "search") {
       setTimeout(() => {
+        setIsEditing(false);
+        setIsShowedFavorite(false);
+        setYourToolsDisplayes(false);
+        setBuiltinToolsDisplayes(false);
         searchBarRef.current.clearText();
         searchBarRef.current.blur();
         searchBarRef.current.focus();
@@ -107,6 +114,8 @@ const HomeNavi = ({ isEditing, setIsEditing, theme, tools }) => {
     if (action.id === "favorite") {
       setIsEditing(false);
       setIsShowedFavorite(true);
+      setYourToolsDisplayes(false);
+      setBuiltinToolsDisplayes(false);
     }
 
     if (action.id === "quickAccess") {
@@ -146,9 +155,6 @@ const HomeNavi = ({ isEditing, setIsEditing, theme, tools }) => {
       }
     }
   });
-
-  const [yourToolsDisplayes, setYourToolsDisplayes] = useState(false);
-  const [builtinToolsDisplayes, setBuiltinToolsDisplayes] = useState(false);
 
   return (
     <Stack.Navigator

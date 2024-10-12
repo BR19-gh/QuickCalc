@@ -1,7 +1,7 @@
 {
   "translation": {
     "screens": {
-      "versionNum": "1.0.60",
+      "versionNum": "1.0.61",
       "QuickAction": {
         "search": "بحث",
         "createTool": "إنشاء أداة",
@@ -155,6 +155,11 @@
           "Header": {
             "edit": "تعديل",
             "delete": "حذف",
+            "favorite": "تفضيل",
+            "unfavorite": "إلغاء التفضيل",
+            "toolHasbeenFavored": "تم تفضيل الأداة",
+            "toolHasbeenUnFavored": "تم إلغاء تفضيل الأداة",
+            "errorFavoriting": "حدث خطأ أثناء التفضيل، تواصل مع المطور للمساعدة",
             "deletingTool": "جار حذف الأداة...",
             "toolHasBeenDeleted": "تم حذف الأداة",
             "errorTitle": "حدث خطأ",

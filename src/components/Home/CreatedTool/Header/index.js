@@ -4,9 +4,14 @@ import * as Haptics from "expo-haptics";
 import { useNavigation } from "@react-navigation/native";
 import ContextMenu from "react-native-context-menu-view";
 
-import { handleDeleteTool } from "../../../../store/actions/tools";
+import {
+  handleDeleteTool,
+  handleFavoriteTools,
+} from "../../../../store/actions/tools";
 
 import { connect } from "react-redux";
+
+import { useState } from "react";
 
 import { useToast } from "react-native-toast-notifications";
 
@@ -32,6 +37,8 @@ const Header = ({ currentTool, t, tools, dispatch, theme }) => {
 
   const { user } = useRevenueCat();
   const navigation = useNavigation();
+
+  const [isFavorite, setIsFavorite] = useState(currentTool.isFavorite);
 
   const handleDelete = (id) => {
     const newData = [...Object.values(tools)];
@@ -119,6 +126,25 @@ const Header = ({ currentTool, t, tools, dispatch, theme }) => {
     });
   };
 
+  const handleFavorite = (id) => {
+    const newData = [...Object.values(tools)];
+    const oldData = [...Object.values(tools)];
+    let changedIndex = -1;
+
+    newData.forEach((item, index) => {
+      if (item.id === id) {
+        item.isFavorite = !item.isFavorite;
+        setIsFavorite(item.isFavorite);
+        if (item.isFavorite === true) {
+          item.isHidden = false;
+        }
+        changedIndex = index;
+      }
+    });
+
+    dispatch(handleFavoriteTools(newData, oldData));
+  };
+
   return (
     <View>
       {Platform.isPad ? (
@@ -149,6 +175,69 @@ const Header = ({ currentTool, t, tools, dispatch, theme }) => {
               shadowRadius: 6.68,
             }}
           >
+            <MenuOption
+              onSelect={() => {
+                Haptics.selectionAsync();
+                handleFavorite(currentTool.id);
+                if (currentTool.isFavorite) {
+                  Haptics.notificationAsync(
+                    Haptics.NotificationFeedbackType.Success
+                  );
+                  toast.show(t(text("toolHasbeenFavored")), {
+                    type: "success",
+                    placement: "top",
+                    duration: 1000,
+                    offset: 20,
+                    animationType: "zoom-in",
+                  });
+                } else if (!currentTool.isFavorite) {
+                  Haptics.notificationAsync(
+                    Haptics.NotificationFeedbackType.Success
+                  );
+                  toast.show(t(text("toolHasbeenUnFavored")), {
+                    type: "success",
+                    placement: "top",
+                    duration: 1000,
+                    offset: 20,
+                    animationType: "zoom-in",
+                  });
+                } else {
+                  Haptics.notificationAsync(
+                    Haptics.NotificationFeedbackType.Error
+                  );
+                  toast.show(t(text("errorFavoriting")), {
+                    type: "warning",
+                    placement: "top",
+                    duration: 4000,
+                    offset: 20,
+                    animationType: "zoom-in",
+                  });
+                }
+              }}
+              value={1}
+            >
+              <View className="flex-row justify-between p-1">
+                <Text
+                  style={{
+                    color: theme === "dark" ? "#fff" : "#151E26",
+                  }}
+                >
+                  {isFavorite ? t(text("unfavorite")) : t(text("favorite"))}
+                </Text>
+                <SweetSFSymbol
+                  name={isFavorite ? "star.fill" : "star"}
+                  size={18}
+                  colors={[theme === "dark" ? "#fff" : "#151E26"]}
+                />
+              </View>
+            </MenuOption>
+            <View
+              style={{
+                borderBottomColor: theme === "dark" ? "#333333" : "#CCCCCC",
+                borderBottomWidth: StyleSheet.hairlineWidth,
+                alignSelf: "stretch",
+              }}
+            />
             <MenuOption
               onSelect={() => {
                 Haptics.selectionAsync();

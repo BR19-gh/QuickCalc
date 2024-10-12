@@ -1,7 +1,7 @@
 {
   "translation": {
     "screens": {
-      "versionNum": "1.0.60",
+      "versionNum": "1.0.61",
       "QuickAction": {
         "search": "Search",
         "createTool": "Create Tool",
@@ -154,6 +154,11 @@
           "Header": {
             "edit": "Edit",
             "delete": "Delete",
+            "favorite": "Favorite",
+            "unfavorite": "Unfavorite",
+            "toolHasbeenFavored": "Tool has been added to Favorite",
+            "toolHasbeenUnFavored": "Tool has been removed from Favorite",
+            "errorFavoriting": "There was an error while favoriting. Please contact the developer for help",
             "deletingTool": "Deleting Tool...",
             "toolHasBeenDeleted": "Tool has been deleted",
             "errorTitle": "An error occurred",

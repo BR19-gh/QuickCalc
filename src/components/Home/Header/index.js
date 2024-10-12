@@ -6,6 +6,7 @@ import {
   StyleSheet,
   Platform,
 } from "react-native";
+import { useState } from "react";
 import SweetSFSymbol from "sweet-sfsymbols";
 import { lang } from "../../../helpers";
 import * as Haptics from "expo-haptics";
@@ -25,7 +26,9 @@ import { setQuickAccessToolId } from "../../../../_DATA";
 
 import { useRevenueCat } from "../../../providers/RevenueCatProvider";
 
-const Header = ({ currentTool, t, tools, theme }) => {
+import { handleFavoriteTools } from "../../../store/actions/tools";
+
+const Header = ({ currentTool, t, tools, theme, dispatch }) => {
   const toast = useToast();
   const text = (text) => "screens.Home.CreatedTool.Header." + text;
 
@@ -45,6 +48,7 @@ const Header = ({ currentTool, t, tools, theme }) => {
   }
 
   const tool = getToolByName(currentTool);
+  const [isFavorite, setIsFavorite] = useState(tool.isFavorite);
 
   const changeQuickAccess = async (id) => {
     await setQuickAccessToolId(id);
@@ -53,6 +57,25 @@ const Header = ({ currentTool, t, tools, theme }) => {
       type: "success",
       placement: "top",
     });
+  };
+
+  const handleFavorite = (id) => {
+    const newData = [...Object.values(tools)];
+    const oldData = [...Object.values(tools)];
+    let changedIndex = -1;
+
+    newData.forEach((item, index) => {
+      if (item.id === id) {
+        item.isFavorite = !item.isFavorite;
+        setIsFavorite(item.isFavorite);
+        if (item.isFavorite === true) {
+          item.isHidden = false;
+        }
+        changedIndex = index;
+      }
+    });
+
+    dispatch(handleFavoriteTools(newData, oldData));
   };
 
   return (
@@ -85,6 +108,69 @@ const Header = ({ currentTool, t, tools, theme }) => {
               shadowRadius: 6.68,
             }}
           >
+            <MenuOption
+              onSelect={() => {
+                Haptics.selectionAsync();
+                handleFavorite(tool.id);
+                if (tool.isFavorite) {
+                  Haptics.notificationAsync(
+                    Haptics.NotificationFeedbackType.Success
+                  );
+                  toast.show(t(text("toolHasbeenFavored")), {
+                    type: "success",
+                    placement: "top",
+                    duration: 1000,
+                    offset: 20,
+                    animationType: "zoom-in",
+                  });
+                } else if (!tool.isFavorite) {
+                  Haptics.notificationAsync(
+                    Haptics.NotificationFeedbackType.Success
+                  );
+                  toast.show(t(text("toolHasbeenUnFavored")), {
+                    type: "success",
+                    placement: "top",
+                    duration: 1000,
+                    offset: 20,
+                    animationType: "zoom-in",
+                  });
+                } else {
+                  Haptics.notificationAsync(
+                    Haptics.NotificationFeedbackType.Error
+                  );
+                  toast.show(t(text("errorFavoriting")), {
+                    type: "warning",
+                    placement: "top",
+                    duration: 4000,
+                    offset: 20,
+                    animationType: "zoom-in",
+                  });
+                }
+              }}
+              value={1}
+            >
+              <View className="flex-row justify-between p-1">
+                <Text
+                  style={{
+                    color: theme === "dark" ? "#fff" : "#151E26",
+                  }}
+                >
+                  {isFavorite ? t(text("unfavorite")) : t(text("favorite"))}
+                </Text>
+                <SweetSFSymbol
+                  name={isFavorite ? "star.fill" : "star"}
+                  size={18}
+                  colors={[theme === "dark" ? "#fff" : "#151E26"]}
+                />
+              </View>
+            </MenuOption>
+            <View
+              style={{
+                borderBottomColor: theme === "dark" ? "#333333" : "#CCCCCC",
+                borderBottomWidth: StyleSheet.hairlineWidth,
+                alignSelf: "stretch",
+              }}
+            />
             <MenuOption
               onSelect={() => {
                 Haptics.selectionAsync();

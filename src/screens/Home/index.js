@@ -32,7 +32,6 @@ import {
 
 import { useTranslation } from "react-i18next";
 
-import SelectDropdown from "react-native-select-dropdown";
 import ContextMenu from "react-native-context-menu-view";
 import { useToast } from "react-native-toast-notifications";
 import * as Haptics from "expo-haptics";
@@ -570,7 +569,7 @@ function Home(props) {
   };
 
   const onSelect = (index) => {
-    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+    Haptics.selectionAsync();
     if (index === 0) {
       props.setYourToolsDisplayes(false);
       props.setBuiltinToolsDisplayes(false);
