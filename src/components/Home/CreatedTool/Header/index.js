@@ -225,7 +225,7 @@ const Header = ({ currentTool, t, tools, dispatch, theme }) => {
                   {isFavorite ? t(text("unfavorite")) : t(text("favorite"))}
                 </Text>
                 <SweetSFSymbol
-                  name={isFavorite ? "star.fill" : "star"}
+                  name={isFavorite ? "star.slash" : "star"}
                   size={18}
                   colors={[theme === "dark" ? "#fff" : "#151E26"]}
                 />
