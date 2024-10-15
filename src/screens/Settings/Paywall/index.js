@@ -84,7 +84,7 @@ const Paywall = ({ theme }) => {
       <View
         className={
           "flex flex-col items-center " +
-          (Dimensions.get("window").width < 376 ? "-mt-2" : "mt-6")
+          (Dimensions.get("window").width < 376 ? "-mt-2" : "mt-1")
         }
       >
         <Image

@@ -42,7 +42,7 @@ function Note({ route, theme }) {
       <View
         className={
           "flex flex-col items-center " +
-          (Dimensions.get("window").width < 376 ? "mt-0" : "mt-14")
+          (Dimensions.get("window").width < 376 ? "mt-0" : "mt-10")
         }
       >
         <View className="w-72 items-center">
@@ -98,7 +98,7 @@ function Note({ route, theme }) {
                 : navigation.navigate(note.en.button.action);
             }}
             className={
-              "mt-5 h-14 rounded-md items-center flex-row justify-center"
+              "mt-3 h-14 rounded-md items-center flex-row justify-center"
             }
             style={{
               width: 180,

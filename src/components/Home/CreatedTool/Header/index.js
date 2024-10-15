@@ -11,7 +11,7 @@ import {
 
 import { connect } from "react-redux";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { useToast } from "react-native-toast-notifications";
 
@@ -37,8 +37,6 @@ const Header = ({ currentTool, t, tools, dispatch, theme }) => {
 
   const { user } = useRevenueCat();
   const navigation = useNavigation();
-
-  const [isFavorite, setIsFavorite] = useState(currentTool.isFavorite);
 
   const handleDelete = (id) => {
     const newData = [...Object.values(tools)];
@@ -116,6 +114,14 @@ const Header = ({ currentTool, t, tools, dispatch, theme }) => {
       );
     }
   };
+
+  const [isFavorite, setIsFavorite] = useState(currentTool.isFavorite);
+
+  useEffect(() => {
+    if (currentTool.isFavorite) {
+      setIsFavorite(true);
+    }
+  }, [currentTool]);
 
   const changeQuickAccess = async (id) => {
     await setQuickAccessToolId(id);
