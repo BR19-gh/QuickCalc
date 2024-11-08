@@ -41,7 +41,7 @@ function WalkThrough(props) {
             require(`../../../../walkthro_ar/home_menu.png`),
             require(`../../../../walkthro_ar/edit.gif`),
             require(`../../../../walkthro_ar/hidden.png`),
-            require(`../../../../walkthro_ar/home_swipe.gif`),
+            require(`../../../../walkthro_ar/home_swipe.png`),
             require(`../../../../walkthro_ar/settings.png`),
             require(`../../../../walkthro_ar/final.png`),
           ]
@@ -60,7 +60,7 @@ function WalkThrough(props) {
           require(`../../../../walkthro_en/home_menu.png`),
           require(`../../../../walkthro_en/edit.gif`),
           require(`../../../../walkthro_en/hidden.png`),
-          require(`../../../../walkthro_en/home_swipe.gif`),
+          require(`../../../../walkthro_en/home_swipe.png`),
           require(`../../../../walkthro_en/settings.png`),
           require(`../../../../walkthro_en/final.png`),
         ];

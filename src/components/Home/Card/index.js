@@ -40,17 +40,7 @@ const Card = ({
       <TouchableOpacity
         key={tool.id}
         className={"h-full w-full flex-row flex-wrap justify-center"}
-        onPress={() => {
-          if (isEditing) {
-            changeVis(tool.id);
-          } else if (isEditingFavorite) {
-            handleFavorite(tool.id);
-          } else if (tool.link === "CreatedTool") {
-            navigation.navigate("CreatedTool", { tool });
-          } else {
-            navigation.navigate(tool.link);
-          }
-        }}
+        activeOpacity={1}
         onLongPress={() => {
           if (tool.isHidden) {
             Haptics.notificationAsync(Haptics.NotificationFeedbackType.Error);
@@ -85,30 +75,71 @@ const Card = ({
         }}
         disabled={isActive}
       >
-        <View className={"w-full justify-start flex-row-reverse"}>
-          <SweetSFSymbol
-            name={tool.icon}
-            size={24}
-            colors={["white"]}
-            style={{
-              margin: 16,
-            }}
-          />
-
-          <Text
-            className={styles.btnText}
-            style={{
-              width: "80%",
-            }}
-          >
-            {tool.name.en
-              ? lang === "en"
-                ? tool.name.en
-                : tool.name.ar === "حاسبة البقشيش"
-                ? "حاسبة القطة"
-                : tool.name.ar
-              : tool.name}
-          </Text>
+        <View className={"w-full flex-col"}>
+          <View className={"w-full justify-start flex-row-reverse"}>
+            <SweetSFSymbol
+              name={tool.icon}
+              size={24}
+              colors={["white"]}
+              style={{
+                margin: 16,
+              }}
+            />
+            <Text
+              className={styles.btnText}
+              style={{
+                width: "80%",
+              }}
+            >
+              {tool.name.en
+                ? lang === "en"
+                  ? tool.name.en
+                  : tool.name.ar === "حاسبة البقشيش"
+                  ? "حاسبة القطة"
+                  : tool.name.ar
+                : tool.name}
+            </Text>
+          </View>
+          <View className={"w-full flex-row justify-end"}>
+            <LinearGradient
+              key={tool.id}
+              colors={[...tool.colors]}
+              style={{
+                width: 40,
+                height: 56,
+                marginRight: 8,
+                borderRadius: 9999,
+                justifyContent: "center",
+                alignItems: "center",
+                backgroundColor: "#5450D4",
+              }}
+              className="mb-3 h-32 rounded-lg"
+            >
+              <TouchableOpacity
+                className={"h-full w-full flex-row flex-wrap justify-center"}
+                onPress={() => {
+                  if (isEditing) {
+                    changeVis(tool.id);
+                  } else if (isEditingFavorite) {
+                    handleFavorite(tool.id);
+                  } else if (tool.link === "CreatedTool") {
+                    navigation.navigate("CreatedTool", { tool });
+                  } else {
+                    navigation.navigate(tool.link);
+                  }
+                }}
+              >
+                <SweetSFSymbol
+                  name={"chevron.forward"}
+                  size={24}
+                  colors={["white"]}
+                  style={{
+                    margin: 16,
+                  }}
+                />
+              </TouchableOpacity>
+            </LinearGradient>
+          </View>
         </View>
       </TouchableOpacity>
     </LinearGradient>

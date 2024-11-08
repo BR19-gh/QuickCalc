@@ -214,9 +214,38 @@ function Settings({ theme, isThemeChanged, setIsThemeChanged, dispatch }) {
                       : navigation.navigate("Paywall");
                   }}
                 />
+                <SettingsInfoDisplay
+                  title={
+                    <View className="flex-row-reverse justify-end items-center">
+                      <Text
+                        className={isDarkTextColor()}
+                        style={{
+                          fontSize: 18,
+                          fontWeight: 400,
+                        }}
+                      >
+                        {t(text("version"))}
+                      </Text>
+                    </View>
+                  }
+                  status={
+                    <Text
+                      className={
+                        theme === "dark" ? "text-gray-400" : "text-gray-500"
+                      }
+                      style={{
+                        fontWeight: 400,
+                        fontSize: 18,
+                      }}
+                    >
+                      {t("screens.versionNum") +
+                        (Platform.isPad ? "(desktop)" : "")}
+                    </Text>
+                  }
+                  type="custom"
+                />
               </SettingsGroup>
             </View>
-
             <View>
               <Text style={stylesSettings.groupTitle}>
                 {t(text("appearance"))}
@@ -426,7 +455,6 @@ function Settings({ theme, isThemeChanged, setIsThemeChanged, dispatch }) {
                 )}
               </SettingsGroup>
             </View>
-
             <View>
               <Text style={stylesSettings.groupTitle}>
                 {t(text("contactDeveloper"))}
@@ -442,7 +470,7 @@ function Settings({ theme, isThemeChanged, setIsThemeChanged, dispatch }) {
                           fontWeight: 400,
                         }}
                       >
-                        Ibrahim-abdalaziz@hotmail.com
+                        {t(text("email"))}
                       </Text>
                       <Text>{"   "}</Text>
                       <View
@@ -451,7 +479,7 @@ function Settings({ theme, isThemeChanged, setIsThemeChanged, dispatch }) {
                           padding: 6,
                           width: 30,
                           height: 30,
-                          backgroundColor: "grey",
+                          backgroundColor: "#8E8E93",
                           borderRadius: 5,
                         }}
                       >
@@ -500,7 +528,7 @@ function Settings({ theme, isThemeChanged, setIsThemeChanged, dispatch }) {
                           fontWeight: 400,
                         }}
                       >
-                        BR19.me
+                        {t(text("website"))}
                       </Text>
                       <Text>{"   "}</Text>
                       <View
@@ -527,10 +555,50 @@ function Settings({ theme, isThemeChanged, setIsThemeChanged, dispatch }) {
                 />
               </SettingsGroup>
             </View>
-
             <View>
               <Text style={stylesSettings.groupTitle}>{t(text("app"))}</Text>
               <SettingsGroup>
+                <SettingsButton
+                  title={
+                    <View className="flex-row-reverse justify-end items-center">
+                      <Text
+                        className={isDarkTextColor()}
+                        style={{
+                          fontSize: 18,
+                          fontWeight: 400,
+                        }}
+                      >
+                        {t(text("rateApp"))}
+                      </Text>
+                      <Text>{"   "}</Text>
+                      <View
+                        //  className="bg-pink-400"
+                        style={{
+                          backgroundColor: "#FF9F09",
+                          alignItems: "center",
+                          padding: 6,
+                          width: 30,
+                          height: 30,
+
+                          borderRadius: 5,
+                        }}
+                      >
+                        <SweetSFSymbol
+                          name={"star.leadinghalf.filled"}
+                          size={17}
+                          colors={["white"]}
+                        />
+                      </View>
+                    </View>
+                  }
+                  type="newpage"
+                  onPress={() => {
+                    const itunesItemId = 6502615780;
+                    Linking.openURL(
+                      `itms-apps://itunes.apple.com/app/viewContentsUserReviews/id${itunesItemId}?action=write-review`
+                    );
+                  }}
+                />
                 <SettingsButton
                   title={
                     <View className="flex-row-reverse justify-end items-center">
@@ -545,8 +613,9 @@ function Settings({ theme, isThemeChanged, setIsThemeChanged, dispatch }) {
                       </Text>
                       <Text>{"   "}</Text>
                       <View
-                        className="bg-red-500"
+                        // className="bg-red-500"
                         style={{
+                          backgroundColor: "#FF453A",
                           alignItems: "center",
                           padding: 6,
                           width: 30,
@@ -566,6 +635,52 @@ function Settings({ theme, isThemeChanged, setIsThemeChanged, dispatch }) {
                   type="newpage"
                   onPress={() => navigation.navigate("WalkThrough")}
                 />
+
+                <SettingsButton
+                  title={
+                    <View className="flex-row-reverse justify-end items-center">
+                      <Text
+                        className={isDarkTextColor()}
+                        style={{
+                          fontSize: 18,
+                          fontWeight: 400,
+                        }}
+                      >
+                        {t(text("helpTranslate"))}
+                      </Text>
+                      <Text>{"   "}</Text>
+                      <View
+                        //  className="bg-pink-400"
+                        style={{
+                          backgroundColor: "#FF375F",
+                          alignItems: "center",
+                          padding: 6,
+                          width: 30,
+                          height: 30,
+
+                          borderRadius: 5,
+                        }}
+                      >
+                        <SweetSFSymbol
+                          name={"bubble.left.and.text.bubble.right.fill"}
+                          size={17}
+                          colors={["white"]}
+                        />
+                      </View>
+                    </View>
+                  }
+                  type="newpage"
+                  onPress={() => {
+                    Communications.web(
+                      "https://crowdin.com/project/quickcalc/invite?h=6bad2d157dbed6c0a955ee2fd59fecde2260881"
+                    );
+                  }}
+                />
+              </SettingsGroup>
+            </View>
+            <View>
+              <Text style={stylesSettings.groupTitle}>{t(text("other"))}</Text>
+              <SettingsGroup>
                 <SettingsButton
                   title={
                     <View className="flex-row-reverse justify-end items-center">
@@ -616,36 +731,6 @@ function Settings({ theme, isThemeChanged, setIsThemeChanged, dispatch }) {
                         );
                       });
                   }}
-                />
-                <SettingsInfoDisplay
-                  title={
-                    <View className="flex-row-reverse justify-end items-center">
-                      <Text
-                        className={isDarkTextColor()}
-                        style={{
-                          fontSize: 18,
-                          fontWeight: 400,
-                        }}
-                      >
-                        {t(text("version"))}
-                      </Text>
-                    </View>
-                  }
-                  status={
-                    <Text
-                      className={
-                        theme === "dark" ? "text-gray-400" : "text-gray-500"
-                      }
-                      style={{
-                        fontWeight: 400,
-                        fontSize: 18,
-                      }}
-                    >
-                      {t("screens.versionNum") +
-                        (Platform.isPad ? "(desktop)" : "")}
-                    </Text>
-                  }
-                  type="custom"
                 />
                 <TouchableOpacity
                   onPress={() => deleteData(t, text, toast, dispatch)}

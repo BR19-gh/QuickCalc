@@ -1,7 +1,7 @@
 {
   "translation": {
     "screens": {
-      "versionNum": "1.0.62",
+      "versionNum": "1.0.65",
       "QuickAction": {
         "search": "Search",
         "createTool": "Create Tool",
@@ -66,7 +66,7 @@
           "builtinTools": "Built-in Tools",
           "hide": "Hide",
           "favorite": "Favorite",
-          "favorites": "Favorites",
+          "favorites": "Favorite",
           "unfavorite": "Un\nfavorite",
           "unfavorite2": "Unfavorite",
           "edit": "Edit",
@@ -138,7 +138,9 @@
             "errorTitle": "An error occurred",
             "pleaseShareError": "\n\nPlease share this error with the developer, contact information in the settings.",
             "errorTitleUnkown": "An unknown error occurred",
-            "powerOf": "Power of"
+            "powerOf": "Power of",
+            "next": "Next",
+            "back": "Back"
           }
         },
         "CreatedTool": {
@@ -437,7 +439,12 @@
           "gotIt": "Got It",
           "notification": "Notification",
           "errorNoteMsg": "Error occurred while fetching notifications, please try again later",
-          "errorNoteTitle": "Fetching Notification Error"
+          "errorNoteTitle": "Fetching Notification Error",
+          "rateApp": "Rate Our App",
+          "helpTranslate": "Translate App to Your Language",
+          "email": "Contact Developer via Email",
+          "website": "Visit Developer Website",
+          "other": "Other"
         },
         "Paywall": {
           "title": "Golden Version",
