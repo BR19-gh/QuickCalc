@@ -995,6 +995,7 @@ function EditTool({ theme, tools, route, dispatch }) {
                   key={pageNumber}
                   activeOpacity={1}
                   onPress={() => {
+                    Haptics.selectionAsync();
                     setPage({
                       currentPage: pageNumber,
                       totalPages: page.totalPages,

@@ -41,6 +41,13 @@ const Card = ({
         key={tool.id}
         className={"h-full w-full flex-row flex-wrap justify-center"}
         activeOpacity={1}
+        onPress={() => {
+          if (isEditing) {
+            changeVis(tool.id);
+          } else {
+            return;
+          }
+        }}
         onLongPress={() => {
           if (tool.isHidden) {
             Haptics.notificationAsync(Haptics.NotificationFeedbackType.Error);
@@ -101,33 +108,34 @@ const Card = ({
             </Text>
           </View>
           <View className={"w-full flex-row justify-end"}>
-            <LinearGradient
-              key={tool.id}
-              colors={[...tool.colors]}
-              style={{
-                width: 40,
-                height: 56,
-                marginRight: 8,
-                borderRadius: 9999,
-                justifyContent: "center",
-                alignItems: "center",
-                backgroundColor: "#5450D4",
+            <TouchableOpacity
+              disabled={isEditing}
+              className={"w-10 h-14 flex-row flex-wrap justify-end"}
+              onPress={() => {
+                if (isEditing) {
+                  changeVis(tool.id);
+                } else if (isEditingFavorite) {
+                  handleFavorite(tool.id);
+                } else if (tool.link === "CreatedTool") {
+                  navigation.navigate("CreatedTool", { tool });
+                } else {
+                  navigation.navigate(tool.link);
+                }
               }}
-              className="mb-3 h-32 rounded-lg"
             >
-              <TouchableOpacity
-                className={"h-full w-full flex-row flex-wrap justify-center"}
-                onPress={() => {
-                  if (isEditing) {
-                    changeVis(tool.id);
-                  } else if (isEditingFavorite) {
-                    handleFavorite(tool.id);
-                  } else if (tool.link === "CreatedTool") {
-                    navigation.navigate("CreatedTool", { tool });
-                  } else {
-                    navigation.navigate(tool.link);
-                  }
+              <LinearGradient
+                key={tool.id}
+                colors={[...tool.colors]}
+                style={{
+                  width: 40,
+                  height: 56,
+                  marginRight: 8,
+                  borderRadius: 9999,
+                  justifyContent: "center",
+                  alignItems: "center",
+                  backgroundColor: "#5450D4",
                 }}
+                className="mb-3 h-32 rounded-lg"
               >
                 <SweetSFSymbol
                   name={"chevron.forward"}
@@ -137,8 +145,8 @@ const Card = ({
                     margin: 16,
                   }}
                 />
-              </TouchableOpacity>
-            </LinearGradient>
+              </LinearGradient>
+            </TouchableOpacity>
           </View>
         </View>
       </TouchableOpacity>
