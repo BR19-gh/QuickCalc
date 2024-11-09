@@ -1,4 +1,4 @@
-
+[![Crowdin](https://badges.crowdin.net/quickcalc/localized.svg)](https://crowdin.com)
 # QuickCalc
 
 <img src="https://github.com/BR19-gh/QuickCalc/blob/master/assets/panel.png" alt="Icon" width="25%" height="25%">
