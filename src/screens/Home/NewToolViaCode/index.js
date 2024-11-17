@@ -3,7 +3,6 @@ import {
   Text,
   View,
   TouchableOpacity,
-  ScrollView,
   Keyboard,
   TextInput,
   Alert,
@@ -280,7 +279,7 @@ function NewToolViaCode({ theme, tools, dispatch }) {
   }
 
   return (
-    <ScrollView>
+    <View>
       <View
         className={
           "w-full " +
@@ -396,7 +395,7 @@ function NewToolViaCode({ theme, tools, dispatch }) {
               }}
               className="mb-2.5 h-32 rounded-lg"
             >
-              <TouchableOpacity
+              <View
                 key={
                   toolCode === "" || errMsg === t(text("invalidCode"))
                     ? JSON.parse(
@@ -439,7 +438,37 @@ function NewToolViaCode({ theme, tools, dispatch }) {
                       : JSON.parse(toolCode).name}
                   </Text>
                 </View>
-              </TouchableOpacity>
+                <View className={"w-full h-14 flex-row flex-wrap justify-end"}>
+                  <LinearGradient
+                    colors={[
+                      ...(toolCode === "" || errMsg === t(text("invalidCode"))
+                        ? JSON.parse(
+                            `{"id":"1111","searchName":"----","name":"----","description":"----","icon":"rectangle.dashed","colors":["#454d59","#3e444c","#21242b"],"link":"CreatedTool","operandNum":"2","equation":{"exponents":[1,1],"operands":["1","1"],"operators":["*"]},"isFavorite":false,"isHidden":false}`
+                          ).colors
+                        : JSON.parse(toolCode).colors),
+                    ]}
+                    style={{
+                      width: 40,
+                      height: 56,
+                      marginRight: 8,
+                      borderRadius: 9999,
+                      justifyContent: "center",
+                      alignItems: "center",
+                      backgroundColor: "#5450D4",
+                    }}
+                    className="mb-3 h-32 rounded-lg"
+                  >
+                    <SweetSFSymbol
+                      name={"chevron.forward"}
+                      size={24}
+                      colors={["white"]}
+                      style={{
+                        margin: 16,
+                      }}
+                    />
+                  </LinearGradient>
+                </View>
+              </View>
             </LinearGradient>
           </View>
           <View
@@ -452,7 +481,7 @@ function NewToolViaCode({ theme, tools, dispatch }) {
           <TouchableOpacity
             disabled={toolCode !== ""}
             className={
-              "mt-5 h-14 w-36 flex-row items-center justify-evenly rounded-full"
+              "mt-5 h-14 w-36 flex-row items-center justify-evenly rounded-md"
             }
             style={{
               backgroundColor: toolCode !== "" ? "#6C6BA6" : "#38377C",
@@ -478,9 +507,9 @@ function NewToolViaCode({ theme, tools, dispatch }) {
           </TouchableOpacity>
           <TouchableOpacity
             className={
-              "mt-2.5 h-14 w-36 flex-row items-center justify-evenly rounded-full"
+              "mt-2.5 h-14 w-36 flex-row items-center justify-evenly rounded-md"
             }
-            style={{ backgroundColor: "#38377C" }}
+            style={{ backgroundColor: "#5450D4" }}
             onPress={() => {
               Haptics.notificationAsync(
                 Haptics.NotificationFeedbackType.Success
@@ -501,7 +530,7 @@ function NewToolViaCode({ theme, tools, dispatch }) {
         <View className="mb-2.5 mt-2.5 flex w-11/12 flex-row justify-center">
           <TouchableOpacity
             disabled={errMsg !== t(text("acceptedCode"))}
-            className="h-16 w-11/12 items-center justify-center rounded-full"
+            className="h-16 w-11/12 items-center justify-center rounded-md"
             style={{
               backgroundColor:
                 errMsg !== t(text("acceptedCode")) ? "#6C6BA6" : "#38377C",
@@ -524,7 +553,7 @@ function NewToolViaCode({ theme, tools, dispatch }) {
         </View>
       </View>
       <StatusBar style="auto" />
-    </ScrollView>
+    </View>
   );
 }
 

@@ -1,7 +1,7 @@
 {
   "translation": {
     "screens": {
-      "versionNum": "1.0.66",
+      "versionNum": "1.0.68",
       "QuickAction": {
         "search": "Search",
         "createTool": "Create Tool",
@@ -125,7 +125,7 @@
             "operand": "Operand",
             "operator": "Operator",
             "equationInfo": "In Operands fields, you can write either a variable name or a constant number:\n1- If you write a variable name: it will appear as a box field that you can fill in when using the tool later with any number you want.\n2- If you write a constant number: it will be part of the equation when you use the tool later.\n\nIn Operators fields, put the mathematical operation you want to perform on the operands\n\nExample:\nA tool for calculating discounts will look like this:\n amount + discount × 0.1.\n\n\nWrite equation from left to right.",
-            "noOperands": "Equation must have from 2 to 5 operands",
+            "noOperands": "Set the number of operands to start naming them.\n Click on ( i ) for more information.",
             "save": "Save",
             "selectIcon": "Select Icon",
             "searchIcon": "Search Icons",

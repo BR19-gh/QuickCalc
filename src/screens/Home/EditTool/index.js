@@ -3,7 +3,6 @@ import {
   Text,
   View,
   TouchableOpacity,
-  ScrollView,
   Keyboard,
   TextInput,
   Alert,
@@ -88,7 +87,7 @@ function EditTool({ theme, tools, route, dispatch }) {
       backgroundColor: isDark("#2C2C2D", "#FFFFFF"),
       color: isDark("#DBEAFE", "#283987"),
       height: 40,
-      width: newTool.icon ? 145 : 200,
+      width: newTool.icon ? 200 : 255,
       borderRadius: 8,
       paddingHorizontal: 10,
       marginBottom: 10,
@@ -214,7 +213,7 @@ function EditTool({ theme, tools, route, dispatch }) {
 
   return (
     <View>
-      <ScrollView className="h-full" automaticallyAdjustKeyboardInsets={true}>
+      <View className="h-full" automaticallyAdjustKeyboardInsets={true}>
         <View
           className={
             "w-full " +
@@ -231,7 +230,7 @@ function EditTool({ theme, tools, route, dispatch }) {
             {page.currentPage === 0 ? (
               // Tool name and description
               <View
-                className={"h-full flex flex-col items-center justify-around"}
+                className={"h-full flex flex-col items-center justify-evenly"}
               >
                 <View className={"mb-2"}>
                   <Text
@@ -245,8 +244,8 @@ function EditTool({ theme, tools, route, dispatch }) {
                   <TextInput
                     style={{
                       backgroundColor: isDark("#2C2C2D", "#FFFFFF"),
-                      width: 200,
-                      height: 80,
+                      width: 180,
+                      height: 70,
                       fontSize: 20,
                       textAlign: "center",
                       color: isDark("#DBEAFE", "#283987"),
@@ -288,8 +287,8 @@ function EditTool({ theme, tools, route, dispatch }) {
                   <TextInput
                     style={{
                       backgroundColor: isDark("#2C2C2D", "#FFFFFF"),
-                      width: 200,
-                      height: 150,
+                      width: 180,
+                      height: 120,
                       fontSize: 20,
                       textAlign: newTool.description ? "auto" : "center",
                       color: isDark("#DBEAFE", "#283987"),
@@ -325,7 +324,7 @@ function EditTool({ theme, tools, route, dispatch }) {
             ) : page.currentPage === 1 ? (
               // Tool shape
               <View
-                className={"h-full flex flex-col items-center justify-around"}
+                className={"h-full flex flex-col items-center justify-evenly"}
               >
                 <View className={"mb-2"}>
                   <Text
@@ -523,7 +522,7 @@ function EditTool({ theme, tools, route, dispatch }) {
               </View>
             ) : page.currentPage === 2 ? (
               <View
-                className={"h-full flex flex-col items-center justify-around"}
+                className={"h-full flex flex-col items-center justify-evenly"}
               >
                 <View className={"mb-2 items-center"}>
                   <View className="flex flex-row">
@@ -556,30 +555,101 @@ function EditTool({ theme, tools, route, dispatch }) {
                       />
                     </TouchableOpacity>
                   </View>
-                  <TextInput
-                    style={{
-                      backgroundColor: isDark("#2C2C2D", "#FFFFFF"),
-                      width: 80,
-                      height: 80,
-                      fontSize: newTool.operandNum ? 40 : 20,
-                      textAlign: "center",
-                      color: isDark("#DBEAFE", "#283987"),
-                      borderRadius: 10,
-                    }}
-                    blurOnSubmit={false}
-                    returnKeyType={"done"}
-                    onSubmitEditing={hideKeyboard}
-                    value={a2e(newTool.operandNum)}
-                    onChangeText={(value) => {
+                  <SelectDropdown
+                    defaultValue={newTool.operandNum}
+                    data={["2", "3", "4", "5"]}
+                    onSelect={(selectedItem) => {
+                      Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Heavy);
                       setNewTool({
                         ...newTool,
-                        operandNum: a2e(value),
+                        operandNum: selectedItem,
                       });
                     }}
-                    maxLength={2}
-                    placeholderTextColor={isDark("#DBEAFE88", "#28398755")}
-                    placeholder={t(text("operandNumPlaceholder"))}
-                    keyboardType="numeric"
+                    renderButton={(selectedItem, isOpened, isSelected) => {
+                      return (
+                        <View
+                          style={{
+                            backgroundColor: isDark("#2C2C2D", "#FFFFFF"),
+                            width: 75,
+                            height: 75,
+                            fontSize: newTool.operandNum ? 40 : 20,
+                            textAlign: "center",
+                            color: isDark("#DBEAFE", "#283987"),
+                            borderRadius: 10,
+                          }}
+                        >
+                          <View>
+                            {selectedItem ? (
+                              <Text
+                                style={{
+                                  color: isDark("#DBEAFE", "#283987"),
+                                  fontSize: selectedItem ? 40 : 20,
+                                  textAlign: "center",
+                                  marginTop: 12,
+                                }}
+                              >
+                                {selectedItem
+                                  ? selectedItem
+                                  : t(text("select"))}
+                              </Text>
+                            ) : (
+                              <View className="flex-row items-center justify-center mt-6">
+                                <Text
+                                  style={{
+                                    color: isDark("#DBEAFE88", "#28398755"),
+                                    fontSize: 18,
+                                    textAlign: "center",
+                                  }}
+                                >
+                                  {t(text("operandNumPlaceholder")) + "  "}
+                                </Text>
+                                <SweetSFSymbol
+                                  name={
+                                    isOpened ? "chevron.up" : "chevron.down"
+                                  }
+                                  colors={[isDark("#DBEAFE88", "#28398755")]}
+                                  size={17}
+                                />
+                              </View>
+                            )}
+                          </View>
+                        </View>
+                      );
+                    }}
+                    renderItem={(item, index, isSelected) => {
+                      return (
+                        <View
+                          style={{
+                            ...{
+                              width: "100%",
+                              flexDirection: "row",
+                              paddingHorizontal: 12,
+                              paddingVertical: 8,
+                            },
+                          }}
+                        >
+                          <Text
+                            className="text-center"
+                            style={{
+                              color: isDark("#DBEAFE", "#1E3A8A"),
+                              flex: 1,
+                              fontSize: 25,
+                              fontWeight: "300",
+                              ...(isSelected && {
+                                fontWeight: "bold",
+                              }),
+                            }}
+                          >
+                            {item}
+                          </Text>
+                        </View>
+                      );
+                    }}
+                    showsVerticalScrollIndicator={false}
+                    dropdownStyle={{
+                      backgroundColor: theme === "dark" ? "#2C2C2F" : "#E7E7E8",
+                      borderRadius: 8,
+                    }}
                   />
                 </View>
                 <View>
@@ -626,7 +696,7 @@ function EditTool({ theme, tools, route, dispatch }) {
                     ) === 0 ? (
                       <Text
                         className={
-                          "text-base" +
+                          "text-center text-lg" +
                           isDark(" text-blue-100", " text-blue-900")
                         }
                       >
@@ -749,11 +819,8 @@ function EditTool({ theme, tools, route, dispatch }) {
                                       style={{
                                         width: "100%",
                                         flexDirection: "row",
-                                        paddingHorizontal:
-                                          newTool.operandNum > 3 ? 3 : 6,
-
-                                        paddingVertical:
-                                          newTool.operandNum > 3 ? 4 : 8,
+                                        paddingHorizontal: 6,
+                                        paddingVertical: 8,
                                       }}
                                     >
                                       <Text
@@ -762,7 +829,7 @@ function EditTool({ theme, tools, route, dispatch }) {
                                           ...{
                                             flex: 1,
                                             fontSize:
-                                              newTool.operandNum > 3 ? 10 : 17,
+                                              newTool.operandNum > 3 ? 12 : 19,
                                             fontWeight: "bold",
                                             color: isDark("#DBEAFE", "#283987"),
                                             fontWeight: "200",
@@ -789,9 +856,9 @@ function EditTool({ theme, tools, route, dispatch }) {
                                 maxLength={20}
                                 style={{
                                   backgroundColor: isDark("#2C2C2D", "#FFFFFF"),
-                                  width: newTool.operandNum > 3 ? 40 : 80,
-                                  height: newTool.operandNum > 3 ? 40 : 80,
-                                  fontSize: newTool.operandNum > 3 ? 7 : 18,
+                                  width: newTool.operandNum > 3 ? 44 : 80,
+                                  height: newTool.operandNum > 3 ? 44 : 80,
+                                  fontSize: newTool.operandNum > 3 ? 9 : 18,
                                   textAlign: "center",
                                   color: isDark("#DBEAFE", "#283987"),
                                   borderRadius: newTool.operandNum > 3 ? 5 : 10,
@@ -889,10 +956,10 @@ function EditTool({ theme, tools, route, dispatch }) {
                                             fontSize: newTool.equation
                                               .operators[i]
                                               ? newTool.operandNum > 3
-                                                ? 10
+                                                ? 12
                                                 : 20
                                               : newTool.operandNum > 3
-                                              ? 4
+                                              ? 5
                                               : 9,
                                             color: isDark("#DBEAFE", "#283987"),
                                             flex: 1,
@@ -922,7 +989,6 @@ function EditTool({ theme, tools, route, dispatch }) {
                                           width: "100%",
                                           flexDirection: "row",
                                           paddingHorizontal: 6,
-
                                           paddingVertical: 8,
                                         }}
                                       >
@@ -933,7 +999,7 @@ function EditTool({ theme, tools, route, dispatch }) {
                                               flex: 1,
                                               fontSize:
                                                 newTool.operandNum > 3
-                                                  ? 10
+                                                  ? 15
                                                   : 20,
                                               color: isDark(
                                                 "#DBEAFE",
@@ -1146,7 +1212,7 @@ function EditTool({ theme, tools, route, dispatch }) {
             )}
           </View>
         </View>
-      </ScrollView>
+      </View>
       <StatusBar style="auto" />
     </View>
   );

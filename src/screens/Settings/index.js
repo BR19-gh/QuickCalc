@@ -7,6 +7,7 @@ import {
   Alert,
   TouchableOpacity,
   Platform,
+  ActivityIndicator,
 } from "react-native";
 import {
   SettingsProvider,
@@ -130,6 +131,27 @@ function Settings({ theme, isThemeChanged, setIsThemeChanged, dispatch }) {
 
   const navigation = useNavigation();
 
+  const [loadingNote, setLoadingNote] = useState(false);
+
+  const handlePressNote = () => {
+    setLoadingNote(true);
+    fetch("https://br19.pythonanywhere.com/getNote")
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.note !== undefined) {
+          navigation.navigate("Note", {
+            note: data.note,
+          });
+        }
+      })
+      .catch((error) => {
+        Alert.alert(t(text("errorNoteTitle")), t(text("errorNoteMsg")));
+      })
+      .finally(() => {
+        setLoadingNote(false);
+      });
+  };
+
   return (
     <SafeAreaView className={styles.container}>
       <ScrollView>
@@ -213,36 +235,6 @@ function Settings({ theme, isThemeChanged, setIsThemeChanged, dispatch }) {
                       ? navigation.navigate("user")
                       : navigation.navigate("Paywall");
                   }}
-                />
-                <SettingsInfoDisplay
-                  title={
-                    <View className="flex-row-reverse justify-end items-center">
-                      <Text
-                        className={isDarkTextColor()}
-                        style={{
-                          fontSize: 18,
-                          fontWeight: 400,
-                        }}
-                      >
-                        {t(text("version"))}
-                      </Text>
-                    </View>
-                  }
-                  status={
-                    <Text
-                      className={
-                        theme === "dark" ? "text-gray-400" : "text-gray-500"
-                      }
-                      style={{
-                        fontWeight: 400,
-                        fontSize: 18,
-                      }}
-                    >
-                      {t("screens.versionNum") +
-                        (Platform.isPad ? "(desktop)" : "")}
-                    </Text>
-                  }
-                  type="custom"
                 />
               </SettingsGroup>
             </View>
@@ -568,6 +560,143 @@ function Settings({ theme, isThemeChanged, setIsThemeChanged, dispatch }) {
                           fontWeight: 400,
                         }}
                       >
+                        {t(text("walkThrough"))}
+                      </Text>
+                      <Text>{"   "}</Text>
+                      <View
+                        // className="bg-red-500"
+                        style={{
+                          backgroundColor: "#FF453A",
+                          alignItems: "center",
+                          padding: 6,
+                          width: 30,
+                          height: 30,
+
+                          borderRadius: 5,
+                        }}
+                      >
+                        <SweetSFSymbol
+                          name={"info.circle.fill"}
+                          size={17}
+                          colors={["white"]}
+                        />
+                      </View>
+                    </View>
+                  }
+                  type="newpage"
+                  onPress={() => navigation.navigate("WalkThrough")}
+                />
+                <SettingsInfoDisplay
+                  title={
+                    <View className="flex-row-reverse justify-end items-center">
+                      <Text
+                        className={isDarkTextColor()}
+                        style={{
+                          fontSize: 18,
+                          fontWeight: 400,
+                        }}
+                      >
+                        {t(text("version"))}
+                      </Text>
+                    </View>
+                  }
+                  status={
+                    <Text
+                      className={
+                        theme === "dark" ? "text-gray-400" : "text-gray-500"
+                      }
+                      style={{
+                        fontWeight: 400,
+                        fontSize: 18,
+                      }}
+                    >
+                      {t("screens.versionNum") +
+                        (Platform.isPad ? "(desktop)" : "")}
+                    </Text>
+                  }
+                  type="custom"
+                />
+                <TouchableOpacity
+                  onPress={() => deleteData(t, text, toast, dispatch)}
+                >
+                  <SettingsInfoDisplay
+                    title={
+                      <View className="flex-row-reverse justify-end items-center">
+                        <Text
+                          className="text-destructive"
+                          style={{
+                            fontSize: 18,
+                            fontWeight: 400,
+                          }}
+                        >
+                          {t(text("deleteData"))}
+                        </Text>
+                      </View>
+                    }
+                    status={
+                      <SweetSFSymbol
+                        name={"trash"}
+                        size={17}
+                        colors={["#e63746"]}
+                      />
+                    }
+                    type="custom"
+                  />
+                </TouchableOpacity>
+              </SettingsGroup>
+            </View>
+            <View>
+              <Text style={stylesSettings.groupTitle}>{t(text("other"))}</Text>
+              <SettingsGroup>
+                <SettingsButton
+                  title={
+                    <View className="flex-row-reverse justify-end items-center">
+                      <Text
+                        className={isDarkTextColor()}
+                        style={{
+                          fontSize: 18,
+                          fontWeight: 400,
+                        }}
+                      >
+                        {t(text("notification"))}
+                      </Text>
+                      <Text>{"   "}</Text>
+                      <View
+                        className="bg-pink-400"
+                        style={{
+                          alignItems: "center",
+                          padding: 6,
+                          width: 30,
+                          height: 30,
+
+                          borderRadius: 5,
+                        }}
+                      >
+                        {loadingNote ? (
+                          <ActivityIndicator size="small" color="white" />
+                        ) : (
+                          <SweetSFSymbol
+                            name={"bell.badge.fill"}
+                            size={17}
+                            colors={["white"]}
+                          />
+                        )}
+                      </View>
+                    </View>
+                  }
+                  type="newpage"
+                  onPress={() => handlePressNote()}
+                />
+                <SettingsButton
+                  title={
+                    <View className="flex-row-reverse justify-end items-center">
+                      <Text
+                        className={isDarkTextColor()}
+                        style={{
+                          fontSize: 18,
+                          fontWeight: 400,
+                        }}
+                      >
                         {t(text("rateApp"))}
                       </Text>
                       <Text>{"   "}</Text>
@@ -609,43 +738,6 @@ function Settings({ theme, isThemeChanged, setIsThemeChanged, dispatch }) {
                           fontWeight: 400,
                         }}
                       >
-                        {t(text("walkThrough"))}
-                      </Text>
-                      <Text>{"   "}</Text>
-                      <View
-                        // className="bg-red-500"
-                        style={{
-                          backgroundColor: "#FF453A",
-                          alignItems: "center",
-                          padding: 6,
-                          width: 30,
-                          height: 30,
-
-                          borderRadius: 5,
-                        }}
-                      >
-                        <SweetSFSymbol
-                          name={"info.circle.fill"}
-                          size={17}
-                          colors={["white"]}
-                        />
-                      </View>
-                    </View>
-                  }
-                  type="newpage"
-                  onPress={() => navigation.navigate("WalkThrough")}
-                />
-
-                <SettingsButton
-                  title={
-                    <View className="flex-row-reverse justify-end items-center">
-                      <Text
-                        className={isDarkTextColor()}
-                        style={{
-                          fontSize: 18,
-                          fontWeight: 400,
-                        }}
-                      >
                         {t(text("helpTranslate"))}
                       </Text>
                       <Text>{"   "}</Text>
@@ -676,89 +768,6 @@ function Settings({ theme, isThemeChanged, setIsThemeChanged, dispatch }) {
                     );
                   }}
                 />
-              </SettingsGroup>
-            </View>
-            <View>
-              <Text style={stylesSettings.groupTitle}>{t(text("other"))}</Text>
-              <SettingsGroup>
-                <SettingsButton
-                  title={
-                    <View className="flex-row-reverse justify-end items-center">
-                      <Text
-                        className={isDarkTextColor()}
-                        style={{
-                          fontSize: 18,
-                          fontWeight: 400,
-                        }}
-                      >
-                        {t(text("notification"))}
-                      </Text>
-                      <Text>{"   "}</Text>
-                      <View
-                        className="bg-pink-400"
-                        style={{
-                          alignItems: "center",
-                          padding: 6,
-                          width: 30,
-                          height: 30,
-
-                          borderRadius: 5,
-                        }}
-                      >
-                        <SweetSFSymbol
-                          name={"bell.badge.fill"}
-                          size={17}
-                          colors={["white"]}
-                        />
-                      </View>
-                    </View>
-                  }
-                  type="newpage"
-                  onPress={() => {
-                    fetch("https://br19.pythonanywhere.com/getNote")
-                      .then((response) => response.json())
-                      .then((data) => {
-                        if (data.note !== undefined) {
-                          navigation.navigate("Note", {
-                            note: data.note,
-                          });
-                        }
-                      })
-                      .catch((error) => {
-                        Alert.alert(
-                          t(text("errorNoteTitle")),
-                          t(text("errorNoteMsg"))
-                        );
-                      });
-                  }}
-                />
-                <TouchableOpacity
-                  onPress={() => deleteData(t, text, toast, dispatch)}
-                >
-                  <SettingsInfoDisplay
-                    title={
-                      <View className="flex-row-reverse justify-end items-center">
-                        <Text
-                          className="text-destructive"
-                          style={{
-                            fontSize: 18,
-                            fontWeight: 400,
-                          }}
-                        >
-                          {t(text("deleteData"))}
-                        </Text>
-                      </View>
-                    }
-                    status={
-                      <SweetSFSymbol
-                        name={"trash"}
-                        size={17}
-                        colors={["#e63746"]}
-                      />
-                    }
-                    type="custom"
-                  />
-                </TouchableOpacity>
               </SettingsGroup>
             </View>
           </SettingsProvider>
