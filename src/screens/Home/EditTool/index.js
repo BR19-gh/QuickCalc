@@ -570,8 +570,8 @@ function EditTool({ theme, tools, route, dispatch }) {
                         <View
                           style={{
                             backgroundColor: isDark("#2C2C2D", "#FFFFFF"),
-                            width: 75,
-                            height: 75,
+                            width: 80,
+                            height: 80,
                             fontSize: newTool.operandNum ? 40 : 20,
                             textAlign: "center",
                             color: isDark("#DBEAFE", "#283987"),
@@ -585,7 +585,7 @@ function EditTool({ theme, tools, route, dispatch }) {
                                   color: isDark("#DBEAFE", "#283987"),
                                   fontSize: selectedItem ? 40 : 20,
                                   textAlign: "center",
-                                  marginTop: 12,
+                                  marginTop: 15,
                                 }}
                               >
                                 {selectedItem
@@ -593,11 +593,16 @@ function EditTool({ theme, tools, route, dispatch }) {
                                   : t(text("select"))}
                               </Text>
                             ) : (
-                              <View className="flex-row items-center justify-center mt-6">
+                              <View
+                                className="flex-row items-center justify-center"
+                                style={{
+                                  marginTop: 30,
+                                }}
+                              >
                                 <Text
                                   style={{
                                     color: isDark("#DBEAFE88", "#28398755"),
-                                    fontSize: 18,
+                                    fontSize: 15,
                                     textAlign: "center",
                                   }}
                                 >
@@ -608,7 +613,7 @@ function EditTool({ theme, tools, route, dispatch }) {
                                     isOpened ? "chevron.up" : "chevron.down"
                                   }
                                   colors={[isDark("#DBEAFE88", "#28398755")]}
-                                  size={17}
+                                  size={10}
                                 />
                               </View>
                             )}
