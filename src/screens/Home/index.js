@@ -48,7 +48,7 @@ import {
 import InlineAd from "../../components/InlineAd/InlineAd";
 import { showAd, loadAd } from "../../components/InterstitialAd";
 import { useRevenueCat } from "../../providers/RevenueCatProvider";
-import { getAppIcon, setAppIcon } from "expo-dynamic-app-icon";
+import { getAppIconName, setAlternateAppIcon } from "expo-alternate-app-icons";
 
 function Home(props) {
   const [noteIdState, setNoteIdState] = useState("");
@@ -83,20 +83,22 @@ function Home(props) {
 
   useEffect(() => {
     loadAd(); // Load the ad when the component mounts
-  }, []);
-
-  useEffect(() => {
     if (user.golden === false) {
-      console.log("appIcon Before: ", getAppIcon());
+      console.log("appIcon Before: ", getAppIconName());
       if (
-        getAppIcon() === "darkIcon" ||
-        getAppIcon() === "original" ||
-        getAppIcon() === "tinted"
+        getAppIconName() === "darkIcon" ||
+        getAppIconName() === null ||
+        getAppIconName() === "tinted"
       ) {
         return;
       }
-      setAppIcon("original");
-      console.log("appIcon After: ", getAppIcon());
+      const setAppIcon = async () => {
+        await setAlternateAppIcon(null);
+      };
+
+      setAppIcon();
+
+      console.log("appIcon After: ", getAppIconName());
     }
   }, []);
 

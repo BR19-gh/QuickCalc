@@ -92,8 +92,8 @@ const User = ({ theme }) => {
             source={banner}
             style={{
               marginTop: 135,
-              width: 250,
-              height: 250,
+              width: 190,
+              height: 190,
             }}
           />
           <Text

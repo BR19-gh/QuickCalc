@@ -1,7 +1,7 @@
 {
   "translation": {
     "screens": {
-      "versionNum": "1.0.69",
+      "versionNum": "1.0.70",
       "QuickAction": {
         "search": "Search",
         "createTool": "Create Tool",
@@ -433,7 +433,7 @@
           "black": "Black",
           "green": "Green",
           "orange": "Orange",
-          "original": "Original",
+          "null": "Default",
           "notSubAlertTitle": "Changing App Icon",
           "notSubAlertMsg": "You have to be subscribed to the Golden Version to change to this icon 👑",
           "gotIt": "Got It",

@@ -15,7 +15,7 @@ import { useTranslation } from "react-i18next";
 import { useToast } from "react-native-toast-notifications";
 import * as Haptics from "expo-haptics";
 import { Image } from "expo-image";
-import { setAppIcon, getAppIcon } from "expo-dynamic-app-icon";
+import { setAlternateAppIcon, getAppIconName } from "expo-alternate-app-icons";
 import { useRevenueCat } from "../../../providers/RevenueCatProvider";
 import { useNavigation } from "@react-navigation/native";
 import SweetSFSymbol from "sweet-sfsymbols";
@@ -30,7 +30,7 @@ function ChangeColor({ theme }) {
   const navigation = useNavigation();
 
   const APP_ICONS = [
-    { name: "original", img: require("../../../../assets/icon.png") },
+    { name: null, img: require("../../../../assets/icon.png") },
     { name: "darkIcon", img: require("../../../../assets/dark_icon.png") },
     { name: "tinted", img: require("../../../../assets/icon-tinted.png") },
     { name: "black", img: require("../../../../assets/black_icon.png") },
@@ -46,16 +46,16 @@ function ChangeColor({ theme }) {
 
   const [iconName, setIconName] = useState("");
 
-  const changeIcon = (name) => {
+  const changeIcon = async (name) => {
     if (
       user.golden ||
       name === "darkIcon" ||
-      name === "original" ||
+      name === null ||
       name === "tinted"
     ) {
       Haptics.selectionAsync();
       setIconName(name);
-      setAppIcon(name);
+      await setAlternateAppIcon(name);
     } else {
       return Alert.alert(
         t(text("notSubAlertTitle")),
@@ -73,7 +73,7 @@ function ChangeColor({ theme }) {
     }
   };
 
-  useEffect(() => console.log(iconName, getAppIcon()), [iconName]);
+  useEffect(() => console.log(iconName, getAppIconName()), [iconName]);
 
   const COLORS = {
     light: {
@@ -132,7 +132,7 @@ function ChangeColor({ theme }) {
                       }}
                     >
                       {user.golden ||
-                      icon.name === "original" ||
+                      icon.name === null ||
                       icon.name === "darkIcon" ||
                       icon.name === "tinted" ? (
                         <SweetSFSymbol
@@ -167,7 +167,7 @@ function ChangeColor({ theme }) {
                         source={icon.img}
                         style={{
                           borderWidth:
-                            getAppIcon() === icon.name
+                            getAppIconName() === icon.name
                               ? Platform.isPad
                                 ? 3
                                 : 2
@@ -181,7 +181,7 @@ function ChangeColor({ theme }) {
                       <Text
                         className={
                           (Platform.isPad ? "text-lg " : "text-sm ") +
-                          (getAppIcon() === icon.name
+                          (getAppIconName() === icon.name
                             ? "text-blue-500"
                             : isDark("text-white", "text-black"))
                         }
