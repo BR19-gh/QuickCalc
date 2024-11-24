@@ -15,7 +15,11 @@ import { useTranslation } from "react-i18next";
 import { useToast } from "react-native-toast-notifications";
 import * as Haptics from "expo-haptics";
 import { Image } from "expo-image";
-import { setAlternateAppIcon, getAppIconName } from "expo-alternate-app-icons";
+import {
+  setAlternateAppIcon,
+  getAppIconName,
+  resetAppIcon,
+} from "expo-alternate-app-icons";
 import { useRevenueCat } from "../../../providers/RevenueCatProvider";
 import { useNavigation } from "@react-navigation/native";
 import SweetSFSymbol from "sweet-sfsymbols";
@@ -30,7 +34,6 @@ function ChangeColor({ theme }) {
   const navigation = useNavigation();
 
   const APP_ICONS = [
-    { name: null, img: require("../../../../assets/icon.png") },
     { name: "darkIcon", img: require("../../../../assets/dark_icon.png") },
     { name: "tinted", img: require("../../../../assets/icon-tinted.png") },
     { name: "black", img: require("../../../../assets/black_icon.png") },
@@ -122,6 +125,51 @@ function ChangeColor({ theme }) {
                 }}
               >
                 <View className="items-center flex-row flex-wrap justify-around">
+                  <TouchableOpacity
+                    onPress={() => {
+                      resetAppIcon();
+                      setIconName(null);
+                    }}
+                    className="items-center text-center"
+                    style={{
+                      margin: Platform.isPad ? 5 : 1,
+                    }}
+                  >
+                    <SweetSFSymbol
+                      name="crown.fill"
+                      size={18}
+                      colors={["transparent"]}
+                      style={{
+                        position: "relative",
+                        right: 30,
+                        top: 5,
+                      }}
+                    />
+                    <View
+                      style={{
+                        backgroundColor: "#3B82F6",
+                        borderRadius: Platform.isPad ? 15 : 10.25,
+                        width: Platform.isPad ? 70 : 60,
+                        height: Platform.isPad ? 70 : 60,
+                        alignItems: "center",
+                        justifyContent: "center",
+                      }}
+                    >
+                      <SweetSFSymbol
+                        name="arrow.counterclockwise.circle.fill"
+                        size={40}
+                        colors={["white"]}
+                      />
+                    </View>
+                    <Text
+                      className={
+                        (Platform.isPad ? "text-lg " : "text-sm ") +
+                        isDark("text-white", "text-black")
+                      }
+                    >
+                      {t("screens.Home.NewTool.text.reset")}
+                    </Text>
+                  </TouchableOpacity>
                   {APP_ICONS.map((icon, index) => (
                     <TouchableOpacity
                       onPress={() => changeIcon(icon.name)}

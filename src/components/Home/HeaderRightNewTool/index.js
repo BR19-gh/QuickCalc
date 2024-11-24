@@ -16,7 +16,7 @@ const Header = ({}) => {
       <TouchableOpacity
         onPress={() => {
           Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
-          navigation.navigate("NewToolViaCode");
+          navigation.navigate("Home", { screen: "NewToolViaCode" });
         }}
       >
         <Text className={"text-blue-500 text-lg"}>{t(text("useCode"))}</Text>

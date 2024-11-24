@@ -67,14 +67,14 @@ const Header = ({ setIsEditing, isEditing, setMoving, tools }) => {
                     text: t(text("gotIt")),
                     style: "default",
                     onPress: () => {
-                      navigation.navigate("Paywall");
+                      navigation.navigate("Home", { screen: "Paywall" });
                     },
                   },
                 ]
               );
             }
 
-            navigation.navigate("NewTool");
+            navigation.navigate("Home", { screen: "NewTool" });
           }}
         >
           <SweetSFSymbol name={"plus"} size={22} colors={["#3B82F6"]} />

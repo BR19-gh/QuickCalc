@@ -16,9 +16,9 @@ const Header = ({ isEditing }) => {
         onPress={() => {
           Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
           if (user.golden) {
-            navigation.navigate("user");
+            navigation.navigate("Home", { screen: "user" });
           } else {
-            navigation.navigate("Paywall");
+            navigation.navigate("Home", { screen: "Paywall" });
           }
         }}
       >

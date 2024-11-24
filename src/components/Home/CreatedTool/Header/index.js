@@ -444,11 +444,15 @@ const Header = ({ currentTool, t, tools, dispatch, theme }) => {
                 ).length <= 1
               ) {
                 Haptics.selectionAsync();
-                navigation.navigate("EditTool", {
-                  tool: currentTool,
+
+                navigation.navigate("Home", {
+                  screen: "EditTool",
+                  params: {
+                    tool: currentTool,
+                  },
                 });
               } else {
-                navigation.navigate("Paywall");
+                navigation.navigate("Home", { screen: "Paywall" });
               }
             } else if (e.nativeEvent.name === t(text("delete"))) {
               Haptics.notificationAsync(

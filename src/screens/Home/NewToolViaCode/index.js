@@ -265,7 +265,7 @@ function NewToolViaCode({ theme, tools, dispatch }) {
             duration: 4000,
             placement: "top",
           });
-          navigation.navigate("HomeNavi");
+          navigation.navigate("Home", { screen: "HomeNavi" });
         }, 1000);
       } catch (error) {
         Alert.alert(

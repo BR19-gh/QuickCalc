@@ -222,7 +222,7 @@ function NewTool({ theme, tools, dispatch }) {
             duration: 4000,
             placement: "top",
           });
-          navigation.navigate("HomeNavi");
+          navigation.navigate("Home", { screen: "HomeNavi" });
           setTimeout(() => {
             StoreReview.requestReview();
           }, 500);
