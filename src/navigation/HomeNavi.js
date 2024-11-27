@@ -68,8 +68,9 @@ const HomeNavi = ({ isEditing, setIsEditing, theme, tools }) => {
   const [builtinToolsDisplayes, setBuiltinToolsDisplayes] = useState(false);
 
   useQuickActionCallback(async (action) => {
+    console.log("search");
     navigation.navigate("HomeNavi");
-    if (action.id === "search") {
+    if (action.id === "search5555") {
       setTimeout(() => {
         setIsEditing(false);
         setIsShowedFavorite(false);

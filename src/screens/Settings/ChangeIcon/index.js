@@ -127,6 +127,7 @@ function ChangeColor({ theme }) {
                 <View className="items-center flex-row flex-wrap justify-around">
                   <TouchableOpacity
                     onPress={() => {
+                      Haptics.selectionAsync();
                       resetAppIcon();
                       setIconName(null);
                     }}
@@ -167,7 +168,7 @@ function ChangeColor({ theme }) {
                         isDark("text-white", "text-black")
                       }
                     >
-                      {t("screens.Home.NewTool.text.reset")}
+                      {t("screens.Home.CreatedTool.text.reset")}
                     </Text>
                   </TouchableOpacity>
                   {APP_ICONS.map((icon, index) => (
