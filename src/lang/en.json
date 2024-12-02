@@ -102,7 +102,11 @@
           "noFilteredTools": "No tools match the filter, refresh to check or check hidden tools",
           "noFilteredFavoredTools": "No tools match the filter, refresh to check or check unfavored tools",
           "noFilteredCreatedTools": "No tools match the filter, refresh to check or check hidden tools",
-          "noFilteredBuiltinTools": "No tools match the filter, refresh to check or check hidden tools"
+          "noFilteredBuiltinTools": "No tools match the filter, refresh to check or check hidden tools",
+          "deleteOrHide": "Delete or Hide",
+          "deleteOrHideConfirmation": "Do you want to delete or hide this tool?",
+          "delete": "Delete",
+          "cancel": "Cancel"
         },
         "NewTool": {
           "title": "Create New Tool",

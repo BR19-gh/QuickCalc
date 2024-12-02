@@ -50,6 +50,8 @@ import { showAd, loadAd } from "../../components/InterstitialAd";
 import { useRevenueCat } from "../../providers/RevenueCatProvider";
 import { getAppIconName, setAlternateAppIcon } from "expo-alternate-app-icons";
 
+import SweetSFSymbol from "sweet-sfsymbols";
+
 function Home(props) {
   const [noteIdState, setNoteIdState] = useState("");
 
@@ -247,6 +249,7 @@ function Home(props) {
             t={t}
             text={text}
             moving={props.moving}
+            handleDelete={handleDelete}
           />
         ) : (
           <SwipeableRow
@@ -456,6 +459,7 @@ function Home(props) {
                 t={t}
                 text={text}
                 moving={props.moving}
+                handleDelete={handleDelete}
               />
             </ContextMenu>
           </SwipeableRow>
@@ -477,6 +481,7 @@ function Home(props) {
           t={t}
         >
           <Card
+            index={getIndex()}
             searchTextLength={props.searchText.length}
             isEditingFavorite={props.isEditingFavorite}
             handleFavorite={handleFavorite}
@@ -492,6 +497,7 @@ function Home(props) {
             t={t}
             text={text}
             moving={props.moving}
+            handleDelete={handleDelete}
           />
         </SwipeableRow>
       </ScaleDecorator>
@@ -990,6 +996,7 @@ function Home(props) {
                       isEditing={props.isEditing}
                       t={t}
                       text={text}
+                      handleDelete={handleDelete}
                     />
                   ))
               ) : (

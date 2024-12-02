@@ -24,15 +24,21 @@ const Card = ({
   isEditingFavorite,
   searchTextLength,
   moving,
+  handleDelete,
 }) => {
   return (
     <MotiView
       animate={{
         rotate: isEditing
-          ? [
-              `${Math.random(0.02) * 0.02}` + " deg",
-              `${Math.random(-0.04) * -0.02}` + " deg",
-            ]
+          ? Math.random(0) * 1 === 0
+            ? [
+                `${Math.random(0.02) * 0.02}` + " deg",
+                `${Math.random(-0.04) * -0.04}` + " deg",
+              ]
+            : [
+                `${Math.random(0.04) * 0.04}` + " deg",
+                `${Math.random(-0.02) * -0.02}` + " deg",
+              ]
           : "0 deg",
         translateY: isEditing
           ? [Math.random(0.8) * 0.9, Math.random(-0.9) * -0.8]
@@ -43,25 +49,138 @@ const Card = ({
         duration: 150,
         loop: true,
       }}
+      style={{
+        marginTop: tool.isHidden ? 0 : 15,
+      }}
     >
       <MotiView
         animate={{
-          scale: isEditing ? 1 : [0, 0.2, 0.4, 0.6, 0.8, 1],
-          opacity: isEditing ? 1 : [0, 0.2, 0.4, 0.6, 0.8, 1],
+          opacity: [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1],
         }}
         transition={{
           type: "timing",
           duration: 10,
         }}
       >
+        {isEditing ? (
+          tool.isHidden ? (
+            <View
+              style={{
+                width: 24,
+                height: 0,
+                position: "relative",
+                top: -10,
+                left: Platform.isPad ? 25 : 5,
+                zIndex: 1,
+              }}
+            >
+              <TouchableOpacity
+                style={{
+                  width: 24,
+                  height: 24,
+                  borderRadius: 100,
+                  backgroundColor: theme === "dark" ? "black" : "#888888",
+                }}
+                onPress={() => {
+                  changeVis(tool.id);
+                }}
+              >
+                <SweetSFSymbol
+                  name={"plus.circle.fill"}
+                  size={24}
+                  style={{
+                    opacity: tool.isHidden ? 0.45 : 0.7,
+                  }}
+                  colors={[theme === "dark" ? "gray" : "#DDDDDD"]}
+                />
+              </TouchableOpacity>
+            </View>
+          ) : isActive ? (
+            <SweetSFSymbol
+              name={"minus.circle.fill"}
+              size={24}
+              colors={["transparent"]}
+              style={{
+                width: 24,
+                height: 5,
+                position: "relative",
+                top: -8,
+                left: 5,
+                zIndex: 1,
+              }}
+            />
+          ) : (
+            <MotiView
+              style={{
+                width: 24,
+                height: 0,
+                position: "relative",
+                top: -10,
+                left: Platform.isPad ? 25 : 5,
+                zIndex: 1,
+              }}
+              animate={{
+                opacity: [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1],
+              }}
+              transition={{
+                type: "timing",
+                duration: 10,
+              }}
+            >
+              <TouchableOpacity
+                style={{
+                  width: 24,
+                  height: 24,
+                  borderRadius: 100,
+                  backgroundColor: "black",
+                }}
+                onPress={() => {
+                  tool.link === "CreatedTool"
+                    ? Alert.alert(
+                        t(text("deleteOrHide")),
+                        t(text("deleteOrHideConfirmation")),
+                        [
+                          {
+                            text: t(text("cancel")),
+                            style: "cancel",
+                          },
+
+                          {
+                            text: t(text("hide")),
+                            onPress: () => {
+                              changeVis(tool.id);
+                            },
+                          },
+                          {
+                            text: t(text("delete")),
+                            onPress: () => {
+                              handleDelete(tool.id);
+                            },
+                            style: "destructive",
+                          },
+                        ]
+                      )
+                    : changeVis(tool.id);
+                }}
+              >
+                <SweetSFSymbol
+                  name={"minus.circle.fill"}
+                  size={24}
+                  colors={[theme === "dark" ? "gray" : "#CCCCCC"]}
+                />
+              </TouchableOpacity>
+            </MotiView>
+          )
+        ) : null}
         <LinearGradient
           key={tool.id}
           colors={[...tool.colors]}
           style={{
+            margin: 5,
+            marginTop: 0,
             marginStart: "4%",
             opacity: isEditing ? (tool.isHidden ? 0.2 : 0.7) : 1,
-
-            borderWidth: isEditing ? 3.5 : 0,
+            borderWidth: isEditing ? 0 : 0,
             borderColor: theme === "dark" ? "gray" : "black",
             width: "92%",
           }}
@@ -72,8 +191,12 @@ const Card = ({
             className={"h-full w-full flex-row flex-wrap justify-center"}
             activeOpacity={1}
             onPress={() => {
-              if (isEditing) {
-                changeVis(tool.id);
+              if (tool.isHidden) {
+                if (isEditing) {
+                  changeVis(tool.id);
+                } else {
+                  return;
+                }
               } else {
                 return;
               }
@@ -145,17 +268,17 @@ const Card = ({
                 <TouchableOpacity
                   disabled={isEditing}
                   className={"w-10 h-14 flex-row flex-wrap justify-end"}
-                  onPress={() => {
-                    if (isEditing) {
-                      changeVis(tool.id);
-                    } else if (isEditingFavorite) {
-                      handleFavorite(tool.id);
-                    } else if (tool.link === "CreatedTool") {
-                      navigation.navigate("CreatedTool", { tool });
-                    } else {
-                      navigation.navigate(tool.link);
-                    }
-                  }}
+                  // onPress={() => {
+                  //   if (isEditing) {
+                  //     changeVis(tool.id);
+                  //   } else if (isEditingFavorite) {
+                  //     handleFavorite(tool.id);
+                  //   } else if (tool.link === "CreatedTool") {
+                  //     navigation.navigate("CreatedTool", { tool });
+                  //   } else {
+                  //     navigation.navigate(tool.link);
+                  //   }
+                  // }}
                 >
                   <LinearGradient
                     key={tool.id}
