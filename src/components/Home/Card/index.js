@@ -33,10 +33,10 @@ const Card = ({
           ? Math.random(0) * 1 === 0
             ? [
                 `${Math.random(0.02) * 0.02}` + " deg",
-                `${Math.random(-0.04) * -0.04}` + " deg",
+                `${Math.random(-0.02) * -0.02}` + " deg",
               ]
             : [
-                `${Math.random(0.04) * 0.04}` + " deg",
+                `${Math.random(0.02) * 0.02}` + " deg",
                 `${Math.random(-0.02) * -0.02}` + " deg",
               ]
           : "0 deg",
@@ -50,7 +50,7 @@ const Card = ({
         loop: true,
       }}
       style={{
-        marginTop: tool.isHidden ? 0 : 15,
+        marginTop: tool.isHidden ? 0 : isEditing ? 15 : 5,
       }}
     >
       <MotiView
