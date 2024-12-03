@@ -12,7 +12,7 @@
     },
     "assetBundlePatterns": ["**/*"],
     "ios": {
-      "buildNumber": "1.0.0",
+      "buildNumber": "1.0.1",
       "supportsTablet": true,
       "icon": {
         "light": "./assets/icon.png",
