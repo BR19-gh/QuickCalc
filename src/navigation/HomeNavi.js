@@ -68,9 +68,8 @@ const HomeNavi = ({ isEditing, setIsEditing, theme, tools }) => {
   const [builtinToolsDisplayes, setBuiltinToolsDisplayes] = useState(false);
 
   useQuickActionCallback(async (action) => {
-    console.log("search");
-    navigation.navigate("HomeNavi");
-    if (action.id === "search5555") {
+    navigation.navigate("Home");
+    if (action.id === "search") {
       setTimeout(() => {
         setIsEditing(false);
         setIsShowedFavorite(false);
@@ -102,14 +101,14 @@ const HomeNavi = ({ isEditing, setIsEditing, theme, tools }) => {
               text: t(textNavi("gotIt")),
               style: "default",
               onPress: () => {
-                navigation.navigate("Paywall");
+                navigation.navigate("Home", { screen: "Paywall" });
               },
             },
           ]
         );
       }
 
-      navigation.navigate("NewTool");
+      navigation.navigate("Home", { screen: "NewTool" });
     }
 
     if (action.id === "favorite") {
@@ -121,8 +120,8 @@ const HomeNavi = ({ isEditing, setIsEditing, theme, tools }) => {
 
     if (action.id === "quickAccess") {
       const customerInfo = await Purchases.getCustomerInfo();
-      if (customerInfo?.entitlements.active["Golden Version"] === undefined) {
-        navigation.navigate("Paywall");
+      if (user.golden === false) {
+        navigation.navigate("Home", { screen: "Paywall" });
         return;
       }
       const toolId = await getQuickAccessToolId();
@@ -149,9 +148,16 @@ const HomeNavi = ({ isEditing, setIsEditing, theme, tools }) => {
         }
 
         if (tool.link === "CreatedTool") {
-          navigation.navigate("CreatedTool", { tool });
+          navigation.navigate("Home", {
+            screen: "CreatedTool",
+            params: {
+              tool,
+            },
+          });
         } else {
-          navigation.navigate(tool.link);
+          navigation.navigate("Home", {
+            screen: tool.link,
+          });
         }
       }
     }

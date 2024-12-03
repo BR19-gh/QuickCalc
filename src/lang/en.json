@@ -105,7 +105,7 @@
           "noFilteredBuiltinTools": "No tools match the filter, refresh to check or check hidden tools",
           "deleteOrHide": "Delete or Hide",
           "deleteOrHideConfirmation": "Do you want to delete or hide this tool?",
-          "delete": "Delete",
+          "delete": "Delete Permanently",
           "cancel": "Cancel"
         },
         "NewTool": {

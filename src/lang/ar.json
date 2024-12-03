@@ -105,7 +105,7 @@
           "noFilteredBuiltinTools": "لا توجد أدوات مطابقة للفلتر، حدث للتأكد أو تحقق من الأدوات المخفية",
           "deleteOrHide": "حذف أو إخفاء",
           "deleteOrHideConfirmation": "هل تريد حذف أم إخفاء الأداة؟",
-          "delete": "حذف",
+          "delete": "حذف للأبد",
           "cancel": "إلغاء"
         },
         "NewTool": {

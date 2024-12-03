@@ -50,7 +50,7 @@ const Card = ({
         loop: true,
       }}
       style={{
-        marginTop: tool.isHidden ? 0 : isEditing ? 15 : 5,
+        marginTop: tool.isHidden ? 0 : isEditing ? (isActive ? -10 : 15) : 5,
       }}
     >
       <MotiView
@@ -102,10 +102,10 @@ const Card = ({
               colors={["transparent"]}
               style={{
                 width: 24,
-                height: 5,
+                height: 0,
                 position: "relative",
-                top: -8,
-                left: 5,
+                top: -10,
+                left: Platform.isPad ? 25 : 5,
                 zIndex: 1,
               }}
             />
@@ -268,17 +268,13 @@ const Card = ({
                 <TouchableOpacity
                   disabled={isEditing}
                   className={"w-10 h-14 flex-row flex-wrap justify-end"}
-                  // onPress={() => {
-                  //   if (isEditing) {
-                  //     changeVis(tool.id);
-                  //   } else if (isEditingFavorite) {
-                  //     handleFavorite(tool.id);
-                  //   } else if (tool.link === "CreatedTool") {
-                  //     navigation.navigate("CreatedTool", { tool });
-                  //   } else {
-                  //     navigation.navigate(tool.link);
-                  //   }
-                  // }}
+                  onPress={() => {
+                    if (tool.link === "CreatedTool") {
+                      navigation.navigate("CreatedTool", { tool });
+                    } else {
+                      navigation.navigate(tool.link);
+                    }
+                  }}
                 >
                   <LinearGradient
                     key={tool.id}
