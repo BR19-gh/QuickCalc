@@ -124,7 +124,7 @@ const Card = ({
               }}
               transition={{
                 type: "timing",
-                duration: 10,
+                duration: 5,
               }}
             >
               <TouchableOpacity

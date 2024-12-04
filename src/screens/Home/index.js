@@ -11,7 +11,6 @@ import {
   TouchableOpacity,
 } from "react-native";
 import Card from "../../components/Home/Card";
-import SwipeableRow from "../../components/Home/Swipeable";
 import { useNavigation } from "@react-navigation/native";
 import { useEffect, useState } from "react";
 import { handleInitialData } from "../../store/actions/shared";
@@ -252,217 +251,202 @@ function Home(props) {
             handleDelete={handleDelete}
           />
         ) : (
-          <SwipeableRow
-            index={getIndex()}
-            isShowedFavorite={props.isShowedFavorite}
-            isEditingFavorite={props.isEditingFavorite}
-            isEditing={props.isEditing}
-            handleFavorite={handleFavorite}
-            changeVis={changeVis}
-            tool={tool}
-            t={t}
-          >
-            <ContextMenu
-              dropdownMenuMode={false}
-              actions={
-                tool.link === "CreatedTool"
-                  ? [
-                      {
-                        title: tool.isFavorite
-                          ? t(text("unfavorite2"))
-                          : t(text("favorite")),
-                        systemIcon: tool.isFavorite ? "star.slash" : "star",
-                      },
+          <ContextMenu
+            dropdownMenuMode={false}
+            actions={
+              tool.link === "CreatedTool"
+                ? [
+                    {
+                      title: tool.isFavorite
+                        ? t(text("unfavorite2"))
+                        : t(text("favorite")),
+                      systemIcon: tool.isFavorite ? "star.slash" : "star",
+                    },
 
-                      { title: t(text("hide")), systemIcon: "eye.slash" },
-                      {
-                        title: t(text("edit")),
-                        systemIcon: "square.and.pencil",
-                      },
-                      {
-                        title: t(text("move")),
-                        systemIcon:
-                          "arrow.up.and.down.and.arrow.left.and.right",
-                      },
-                      {
-                        title: t(text("share")),
-                        systemIcon: "square.and.arrow.up",
-                      },
-                      {
-                        title: t(text("enableQuickAccess")),
-                        systemIcon: "arrow.forward.to.line.circle",
-                      },
-                      {
-                        title: t("screens.Home.CreatedTool.Header.delete"),
-                        systemIcon: "trash",
-                        destructive: true,
-                      },
-                    ]
-                  : [
-                      {
-                        title: tool.isFavorite
-                          ? t(text("unfavorite2"))
-                          : t(text("favorite")),
-                        systemIcon: tool.isFavorite ? "star.slash" : "star",
-                      },
-                      { title: t(text("hide")), systemIcon: "eye.slash" },
-                      {
-                        title: t(text("move")),
-                        systemIcon:
-                          "arrow.up.and.down.and.arrow.left.and.right",
-                      },
-                      {
-                        title: t(text("enableQuickAccess")),
-                        systemIcon: "arrow.forward.to.line.circle",
-                      },
-                    ]
-              }
-              onPress={(e) => {
-                if (
-                  e.nativeEvent.name === t(text("favorite")) ||
-                  e.nativeEvent.name === t(text("unfavorite2"))
-                ) {
-                  handleFavorite(tool.id);
-                  if (tool.isFavorite) {
-                    Haptics.notificationAsync(
-                      Haptics.NotificationFeedbackType.Success
-                    );
-                    toast.show(t(text("toolHasbeenFavored")), {
-                      type: "success",
-                      placement: "top",
-                      duration: 1000,
-                      offset: 20,
-                      animationType: "zoom-in",
-                    });
-                  } else if (!tool.isFavorite) {
-                    Haptics.notificationAsync(
-                      Haptics.NotificationFeedbackType.Success
-                    );
-                    toast.show(t(text("toolHasbeenUnFavored")), {
-                      type: "success",
-                      placement: "top",
-                      duration: 1000,
-                      offset: 20,
-                      animationType: "zoom-in",
-                    });
-                  } else {
-                    Haptics.notificationAsync(
-                      Haptics.NotificationFeedbackType.Error
-                    );
-                    toast.show(t(text("errorFavoriting")), {
-                      type: "warning",
-                      placement: "top",
-                      duration: 4000,
-                      offset: 20,
-                      animationType: "zoom-in",
-                    });
-                  }
-                } else if (e.nativeEvent.name === t(text("hide"))) {
-                  changeVis(tool.id);
-                  if (tool.isHidden) {
-                    Haptics.notificationAsync(
-                      Haptics.NotificationFeedbackType.Success
-                    );
-                    toast.show(t(text("toolHasBeenHidden")), {
-                      type: "success",
-                      placement: "top",
-                      duration: 1000,
-                      offset: 20,
-                      animationType: "zoom-in",
-                    });
-                  } else {
-                    Haptics.notificationAsync(
-                      Haptics.NotificationFeedbackType.Error
-                    );
-                    toast.show(t(text("errorHiding")), {
-                      type: "warning",
-                      placement: "top",
-                      duration: 4000,
-                      offset: 20,
-                      animationType: "zoom-in",
-                    });
-                  }
-                } else if (e.nativeEvent.name === t(text("edit"))) {
-                  if (
-                    user.golden ||
-                    Object.values(props.tools).filter(
-                      (tool) => tool.link === "CreatedTool"
-                    ).length <= 1
-                  ) {
-                    Haptics.selectionAsync();
-                    navigation.navigate("EditTool", {
-                      tool: tool,
-                    });
-                  } else {
-                    navigation.navigate("Paywall");
-                  }
-                } else if (e.nativeEvent.name === t(text("move"))) {
-                  props.setIsEditing(true);
-                  props.setSearchText("");
-                  props.searchBarRef.current.clearText();
-                  props.searchBarRef.current.blur();
-                  props.setMoving(true);
-                } else if (e.nativeEvent.name === t(text("share"))) {
-                  Haptics.selectionAsync();
-
-                  shareText(JSON.stringify(tool));
-                } else if (
-                  e.nativeEvent.name === t(text("enableQuickAccess"))
-                ) {
-                  if (user.golden) {
-                    Haptics.selectionAsync();
-                    changeQuickAccess(tool.id);
-                  } else {
-                    navigation.navigate("Paywall");
-                  }
-                } else if (
-                  e.nativeEvent.name ===
-                  t("screens.Home.CreatedTool.Header.delete")
-                ) {
+                    { title: t(text("hide")), systemIcon: "eye.slash" },
+                    {
+                      title: t(text("edit")),
+                      systemIcon: "square.and.pencil",
+                    },
+                    {
+                      title: t(text("move")),
+                      systemIcon: "arrow.up.and.down.and.arrow.left.and.right",
+                    },
+                    {
+                      title: t(text("share")),
+                      systemIcon: "square.and.arrow.up",
+                    },
+                    {
+                      title: t(text("enableQuickAccess")),
+                      systemIcon: "arrow.forward.to.line.circle",
+                    },
+                    {
+                      title: t("screens.Home.CreatedTool.Header.delete"),
+                      systemIcon: "trash",
+                      destructive: true,
+                    },
+                  ]
+                : [
+                    {
+                      title: tool.isFavorite
+                        ? t(text("unfavorite2"))
+                        : t(text("favorite")),
+                      systemIcon: tool.isFavorite ? "star.slash" : "star",
+                    },
+                    { title: t(text("hide")), systemIcon: "eye.slash" },
+                    {
+                      title: t(text("move")),
+                      systemIcon: "arrow.up.and.down.and.arrow.left.and.right",
+                    },
+                    {
+                      title: t(text("enableQuickAccess")),
+                      systemIcon: "arrow.forward.to.line.circle",
+                    },
+                  ]
+            }
+            onPress={(e) => {
+              if (
+                e.nativeEvent.name === t(text("favorite")) ||
+                e.nativeEvent.name === t(text("unfavorite2"))
+              ) {
+                handleFavorite(tool.id);
+                if (tool.isFavorite) {
                   Haptics.notificationAsync(
-                    Haptics.NotificationFeedbackType.Warning
+                    Haptics.NotificationFeedbackType.Success
                   );
-                  Alert.alert(
-                    t("screens.Home.CreatedTool.Header.deleteConfirmTitle"),
-                    t(
-                      "screens.Home.CreatedTool.Header.deleteConfirmMessage",
-                      tool.name
-                    ),
-                    [
-                      {
-                        text: t("screens.Home.CreatedTool.Header.cancel"),
-                        style: "cancel",
-                        onPress: () => null,
-                      },
-                      {
-                        text: t("screens.Home.CreatedTool.Header.delete"),
-                        style: "destructive",
-                        onPress: () => handleDelete(tool.id),
-                      },
-                    ]
+                  toast.show(t(text("toolHasbeenFavored")), {
+                    type: "success",
+                    placement: "top",
+                    duration: 1000,
+                    offset: 20,
+                    animationType: "zoom-in",
+                  });
+                } else if (!tool.isFavorite) {
+                  Haptics.notificationAsync(
+                    Haptics.NotificationFeedbackType.Success
                   );
+                  toast.show(t(text("toolHasbeenUnFavored")), {
+                    type: "success",
+                    placement: "top",
+                    duration: 1000,
+                    offset: 20,
+                    animationType: "zoom-in",
+                  });
+                } else {
+                  Haptics.notificationAsync(
+                    Haptics.NotificationFeedbackType.Error
+                  );
+                  toast.show(t(text("errorFavoriting")), {
+                    type: "warning",
+                    placement: "top",
+                    duration: 4000,
+                    offset: 20,
+                    animationType: "zoom-in",
+                  });
                 }
-              }}
-            >
-              <Card
-                isEditingFavorite={props.isEditingFavorite}
-                handleFavorite={handleFavorite}
-                theme={props.theme}
-                lang={lang}
-                tool={tool}
-                key={tool.id}
-                changeVis={changeVis}
-                navigation={navigation}
-                isEditing={props.isEditing}
-                drag={drag}
-                isActive={isActive}
-                t={t}
-                text={text}
-                moving={props.moving}
-                handleDelete={handleDelete}
-              />
-            </ContextMenu>
-          </SwipeableRow>
+              } else if (e.nativeEvent.name === t(text("hide"))) {
+                changeVis(tool.id);
+                if (tool.isHidden) {
+                  Haptics.notificationAsync(
+                    Haptics.NotificationFeedbackType.Success
+                  );
+                  toast.show(t(text("toolHasBeenHidden")), {
+                    type: "success",
+                    placement: "top",
+                    duration: 1000,
+                    offset: 20,
+                    animationType: "zoom-in",
+                  });
+                } else {
+                  Haptics.notificationAsync(
+                    Haptics.NotificationFeedbackType.Error
+                  );
+                  toast.show(t(text("errorHiding")), {
+                    type: "warning",
+                    placement: "top",
+                    duration: 4000,
+                    offset: 20,
+                    animationType: "zoom-in",
+                  });
+                }
+              } else if (e.nativeEvent.name === t(text("edit"))) {
+                if (
+                  user.golden ||
+                  Object.values(props.tools).filter(
+                    (tool) => tool.link === "CreatedTool"
+                  ).length <= 1
+                ) {
+                  Haptics.selectionAsync();
+                  navigation.navigate("EditTool", {
+                    tool: tool,
+                  });
+                } else {
+                  navigation.navigate("Paywall");
+                }
+              } else if (e.nativeEvent.name === t(text("move"))) {
+                props.setIsEditing(true);
+                props.setSearchText("");
+                props.searchBarRef.current.clearText();
+                props.searchBarRef.current.blur();
+                props.setMoving(true);
+              } else if (e.nativeEvent.name === t(text("share"))) {
+                Haptics.selectionAsync();
+
+                shareText(JSON.stringify(tool));
+              } else if (e.nativeEvent.name === t(text("enableQuickAccess"))) {
+                if (user.golden) {
+                  Haptics.selectionAsync();
+                  changeQuickAccess(tool.id);
+                } else {
+                  navigation.navigate("Paywall");
+                }
+              } else if (
+                e.nativeEvent.name ===
+                t("screens.Home.CreatedTool.Header.delete")
+              ) {
+                Haptics.notificationAsync(
+                  Haptics.NotificationFeedbackType.Warning
+                );
+                Alert.alert(
+                  t("screens.Home.CreatedTool.Header.deleteConfirmTitle"),
+                  t(
+                    "screens.Home.CreatedTool.Header.deleteConfirmMessage",
+                    tool.name
+                  ),
+                  [
+                    {
+                      text: t("screens.Home.CreatedTool.Header.cancel"),
+                      style: "cancel",
+                      onPress: () => null,
+                    },
+                    {
+                      text: t("screens.Home.CreatedTool.Header.delete"),
+                      style: "destructive",
+                      onPress: () => handleDelete(tool.id),
+                    },
+                  ]
+                );
+              }
+            }}
+          >
+            <Card
+              isEditingFavorite={props.isEditingFavorite}
+              handleFavorite={handleFavorite}
+              theme={props.theme}
+              lang={lang}
+              tool={tool}
+              key={tool.id}
+              changeVis={changeVis}
+              navigation={navigation}
+              isEditing={props.isEditing}
+              drag={drag}
+              isActive={isActive}
+              t={t}
+              text={text}
+              moving={props.moving}
+              handleDelete={handleDelete}
+            />
+          </ContextMenu>
         )}
       </ScaleDecorator>
     );
@@ -470,36 +454,25 @@ function Home(props) {
   const renderItemDrag = ({ tool, getIndex, drag, isActive }) => {
     return (
       <ScaleDecorator>
-        <SwipeableRow
+        <Card
           index={getIndex()}
-          isShowedFavorite={props.isShowedFavorite}
+          searchTextLength={props.searchText.length}
           isEditingFavorite={props.isEditingFavorite}
-          isEditing={props.isEditing}
           handleFavorite={handleFavorite}
-          changeVis={changeVis}
+          theme={props.theme}
+          lang={lang}
           tool={tool}
+          key={tool.id}
+          changeVis={changeVis}
+          navigation={navigation}
+          isEditing={props.isEditing}
+          drag={drag}
+          isActive={isActive}
           t={t}
-        >
-          <Card
-            index={getIndex()}
-            searchTextLength={props.searchText.length}
-            isEditingFavorite={props.isEditingFavorite}
-            handleFavorite={handleFavorite}
-            theme={props.theme}
-            lang={lang}
-            tool={tool}
-            key={tool.id}
-            changeVis={changeVis}
-            navigation={navigation}
-            isEditing={props.isEditing}
-            drag={drag}
-            isActive={isActive}
-            t={t}
-            text={text}
-            moving={props.moving}
-            handleDelete={handleDelete}
-          />
-        </SwipeableRow>
+          text={text}
+          moving={props.moving}
+          handleDelete={handleDelete}
+        />
       </ScaleDecorator>
     );
   };

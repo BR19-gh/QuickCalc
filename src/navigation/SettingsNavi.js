@@ -42,7 +42,6 @@ const SettingsNavi = ({
         t(WalkThroughText("contextMenu")),
         t(WalkThroughText("editYourTools")),
         t(WalkThroughText("hiddenTools")),
-        t(WalkThroughText("swipeAction")),
         t(WalkThroughText("settingsPage")),
         t(WalkThroughText("final")),
       ];
