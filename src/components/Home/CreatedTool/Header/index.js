@@ -184,6 +184,7 @@ const Header = ({ currentTool, t, tools, dispatch, theme }) => {
             <MenuOption
               onSelect={() => {
                 Haptics.selectionAsync();
+
                 handleFavorite(currentTool.id);
                 if (currentTool.isFavorite) {
                   Haptics.notificationAsync(
@@ -282,11 +283,15 @@ const Header = ({ currentTool, t, tools, dispatch, theme }) => {
                   ).length <= 1
                 ) {
                   Haptics.selectionAsync();
-                  navigation.navigate("EditTool", {
-                    tool: currentTool,
+
+                  navigation.navigate("Home", {
+                    screen: "EditTool",
+                    params: {
+                      tool: currentTool,
+                    },
                   });
                 } else {
-                  navigation.navigate("Paywall");
+                  navigation.navigate("Home", { screen: "Paywall" });
                 }
               }}
               value={2}
@@ -350,7 +355,7 @@ const Header = ({ currentTool, t, tools, dispatch, theme }) => {
                   Haptics.selectionAsync();
                   changeQuickAccess(currentTool.id);
                 } else {
-                  navigation.navigate("Paywall");
+                  navigation.navigate("Home", { screen: "Paywall" });
                 }
               }}
               value={2}

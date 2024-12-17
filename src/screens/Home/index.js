@@ -911,7 +911,7 @@ function Home(props) {
                   ...currentTools.filter((tool) => tool.isHidden === true),
                 ]);
           }}
-          className={props.isEditing ? "" : " h-full"}
+          className={props.isEditing ? " pb-4" : " h-full pb-4"}
           renderItem={({ item: tool, getIndex, drag, isActive }) => {
             if (props.isEditing) {
               return renderItemDrag({ tool, getIndex, drag, isActive });
@@ -932,7 +932,7 @@ function Home(props) {
           props.isEditing && (
             <View
               className={
-                "bg-slate-300 pb-4" +
+                "bg-slate-300 pb-4 " +
                 (props.theme === "dark" && " bg-slate-950")
               }
             >
@@ -955,8 +955,9 @@ function Home(props) {
                         tool.isHidden === true
                       : tool.isHidden === true
                   )
-                  .map((tool) => (
+                  .map((tool, index) => (
                     <Card
+                      index={index}
                       searchTextLength={props.searchText.length}
                       isEditingFavorite={props.isEditingFavorite}
                       handleFavorite={handleFavorite}

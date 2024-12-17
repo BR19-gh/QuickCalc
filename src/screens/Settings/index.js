@@ -35,6 +35,8 @@ import { useNavigation } from "@react-navigation/native";
 import { lang } from "../../helpers";
 import * as StoreReview from "expo-store-review";
 import { useRevenueCat } from "../../providers/RevenueCatProvider";
+import SettingsIcon from "../../components/Settings/SettingsIcon";
+import { LinearGradient } from "expo-linear-gradient";
 
 const openAppPref = (t, text) => {
   if (Platform.OS === "ios") {
@@ -175,23 +177,11 @@ function Settings({ theme, isThemeChanged, setIsThemeChanged, dispatch }) {
                         {t(t(text("language")))}
                       </Text>
                       <Text>{"   "}</Text>
-                      <View
-                        className="bg-blue-500"
-                        style={{
-                          alignItems: "center",
-                          padding: 6,
-                          width: 30,
-                          height: 30,
-
-                          borderRadius: 5,
-                        }}
-                      >
-                        <SweetSFSymbol
-                          name={"globe"}
-                          size={18}
-                          colors={["white"]}
-                        />
-                      </View>
+                      <SettingsIcon
+                        theme={theme}
+                        name="globe"
+                        bgColor={"#3b82f6"}
+                      />
                     </View>
                   }
                   type="newpage"
@@ -210,23 +200,11 @@ function Settings({ theme, isThemeChanged, setIsThemeChanged, dispatch }) {
                         {t(text("goldenVersion"))}
                       </Text>
                       <Text>{"   "}</Text>
-                      <View
-                        className="bg-yellow-500"
-                        style={{
-                          alignItems: "center",
-                          padding: 6,
-                          width: 30,
-                          height: 30,
-
-                          borderRadius: 5,
-                        }}
-                      >
-                        <SweetSFSymbol
-                          name={"crown.fill"}
-                          size={17}
-                          colors={["white"]}
-                        />
-                      </View>
+                      <SettingsIcon
+                        theme={theme}
+                        name="crown.fill"
+                        bgColor={"#eab308"}
+                      />
                     </View>
                   }
                   type="newpage"
@@ -262,23 +240,29 @@ function Settings({ theme, isThemeChanged, setIsThemeChanged, dispatch }) {
                           {t(text("theme"))}
                         </Text>
                         <Text>{"   "}</Text>
-                        <View
+                        <LinearGradient
+                          colors={
+                            theme === "dark"
+                              ? ["#313131", "#141414"]
+                              : ["#555555", "#555555"]
+                          }
                           style={{
                             marginStart: lang === "ar" ? 0 : 4,
                             alignItems: "center",
                             padding: 6,
                             width: 30,
                             height: 30,
-                            backgroundColor: "#555555",
                             borderRadius: 5,
+                            borderColor: theme === "dark" ? "#626262" : "white",
+                            borderWidth: 0.5,
                           }}
                         >
                           <SweetSFSymbol
                             name={"platter.2.filled.iphone"}
                             size={18}
-                            colors={["white"]}
+                            colors={[theme === "dark" ? "#555555" : "white"]}
                           />
-                        </View>
+                        </LinearGradient>
                       </View>
                     }
                     status={
@@ -422,23 +406,11 @@ function Settings({ theme, isThemeChanged, setIsThemeChanged, dispatch }) {
                           {t(text("appIcon"))}
                         </Text>
                         <Text>{"   "}</Text>
-                        <View
-                          className="bg-violet-500"
-                          style={{
-                            alignItems: "center",
-                            padding: 6,
-                            width: 30,
-                            height: 30,
-
-                            borderRadius: 5,
-                          }}
-                        >
-                          <SweetSFSymbol
-                            name={"questionmark.app.fill"}
-                            size={17}
-                            colors={["white"]}
-                          />
-                        </View>
+                        <SettingsIcon
+                          theme={theme}
+                          name="questionmark.app.fill"
+                          bgColor={"#8b5cf6"}
+                        />
                       </View>
                     }
                     type="newpage"
@@ -465,22 +437,11 @@ function Settings({ theme, isThemeChanged, setIsThemeChanged, dispatch }) {
                         {t(text("email"))}
                       </Text>
                       <Text>{"   "}</Text>
-                      <View
-                        style={{
-                          alignItems: "center",
-                          padding: 6,
-                          width: 30,
-                          height: 30,
-                          backgroundColor: "#8E8E93",
-                          borderRadius: 5,
-                        }}
-                      >
-                        <SweetSFSymbol
-                          name={"envelope.fill"}
-                          size={17}
-                          colors={["white"]}
-                        />
-                      </View>
+                      <SettingsIcon
+                        theme={theme}
+                        name="envelope.fill"
+                        bgColor={"#8E8E93"}
+                      />
                     </View>
                   }
                   type="newpage"
@@ -523,23 +484,11 @@ function Settings({ theme, isThemeChanged, setIsThemeChanged, dispatch }) {
                         {t(text("website"))}
                       </Text>
                       <Text>{"   "}</Text>
-                      <View
-                        className="bg-green-500"
-                        style={{
-                          alignItems: "center",
-                          padding: 6,
-                          width: 30,
-                          height: 30,
-
-                          borderRadius: 5,
-                        }}
-                      >
-                        <SweetSFSymbol
-                          name={"globe.badge.chevron.backward"}
-                          size={17}
-                          colors={["white"]}
-                        />
-                      </View>
+                      <SettingsIcon
+                        theme={theme}
+                        name="globe.badge.chevron.backward"
+                        bgColor={"#22c55e"}
+                      />
                     </View>
                   }
                   type="newpage"
@@ -563,24 +512,11 @@ function Settings({ theme, isThemeChanged, setIsThemeChanged, dispatch }) {
                         {t(text("walkThrough"))}
                       </Text>
                       <Text>{"   "}</Text>
-                      <View
-                        // className="bg-red-500"
-                        style={{
-                          backgroundColor: "#FF453A",
-                          alignItems: "center",
-                          padding: 6,
-                          width: 30,
-                          height: 30,
-
-                          borderRadius: 5,
-                        }}
-                      >
-                        <SweetSFSymbol
-                          name={"info.circle.fill"}
-                          size={17}
-                          colors={["white"]}
-                        />
-                      </View>
+                      <SettingsIcon
+                        theme={theme}
+                        name="info.circle.fill"
+                        bgColor={"#FF453A"}
+                      />
                     </View>
                   }
                   type="newpage"
@@ -661,15 +597,20 @@ function Settings({ theme, isThemeChanged, setIsThemeChanged, dispatch }) {
                         {t(text("notification"))}
                       </Text>
                       <Text>{"   "}</Text>
-                      <View
-                        className="bg-pink-400"
+                      <LinearGradient
+                        colors={
+                          theme === "dark"
+                            ? ["#313131", "#141414"]
+                            : ["#f472b6", "#f472b6"]
+                        }
                         style={{
                           alignItems: "center",
                           padding: 6,
                           width: 30,
                           height: 30,
-
                           borderRadius: 5,
+                          borderColor: theme === "dark" ? "#626262" : "white",
+                          borderWidth: 0.5,
                         }}
                       >
                         {loadingNote ? (
@@ -678,10 +619,10 @@ function Settings({ theme, isThemeChanged, setIsThemeChanged, dispatch }) {
                           <SweetSFSymbol
                             name={"bell.badge.fill"}
                             size={17}
-                            colors={["white"]}
+                            colors={[theme === "dark" ? "#f472b6" : "white"]}
                           />
                         )}
-                      </View>
+                      </LinearGradient>
                     </View>
                   }
                   type="newpage"
@@ -700,24 +641,11 @@ function Settings({ theme, isThemeChanged, setIsThemeChanged, dispatch }) {
                         {t(text("rateApp"))}
                       </Text>
                       <Text>{"   "}</Text>
-                      <View
-                        //  className="bg-pink-400"
-                        style={{
-                          backgroundColor: "#FF9F09",
-                          alignItems: "center",
-                          padding: 6,
-                          width: 30,
-                          height: 30,
-
-                          borderRadius: 5,
-                        }}
-                      >
-                        <SweetSFSymbol
-                          name={"star.leadinghalf.filled"}
-                          size={17}
-                          colors={["white"]}
-                        />
-                      </View>
+                      <SettingsIcon
+                        theme={theme}
+                        bgColor="#FF9F09"
+                        name="star.leadinghalf.filled"
+                      />
                     </View>
                   }
                   type="newpage"
@@ -741,24 +669,11 @@ function Settings({ theme, isThemeChanged, setIsThemeChanged, dispatch }) {
                         {t(text("helpTranslate"))}
                       </Text>
                       <Text>{"   "}</Text>
-                      <View
-                        //  className="bg-pink-400"
-                        style={{
-                          backgroundColor: "#FF375F",
-                          alignItems: "center",
-                          padding: 6,
-                          width: 30,
-                          height: 30,
-
-                          borderRadius: 5,
-                        }}
-                      >
-                        <SweetSFSymbol
-                          name={"bubble.left.and.text.bubble.right.fill"}
-                          size={17}
-                          colors={["white"]}
-                        />
-                      </View>
+                      <SettingsIcon
+                        theme={theme}
+                        name="bubble.left.and.text.bubble.right.fill"
+                        bgColor={"#FF375F"}
+                      />
                     </View>
                   }
                   type="newpage"

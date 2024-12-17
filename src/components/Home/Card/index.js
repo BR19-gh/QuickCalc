@@ -25,23 +25,24 @@ const Card = ({
   searchTextLength,
   moving,
   handleDelete,
+  index,
 }) => {
+  const RANDOMS = [0.004, -0.004];
+  const isEven = (n) => n % 2 === 0;
   return (
     <MotiView
       animate={{
-        rotate: isEditing
-          ? Math.random(0) * 1 === 0
-            ? [
-                `${Math.random(0.02) * 0.02}` + " deg",
-                `${Math.random(-0.02) * -0.02}` + " deg",
-              ]
-            : [
-                `${Math.random(0.02) * 0.02}` + " deg",
-                `${Math.random(-0.02) * -0.02}` + " deg",
-              ]
+        rotate: !isActive
+          ? isEditing
+            ? isEven(index)
+              ? [`${RANDOMS[0]}` + " deg", `${RANDOMS[1]}` + " deg"]
+              : [`${RANDOMS[1]}` + " deg", `${RANDOMS[0]}` + " deg"]
+            : "0 deg"
           : "0 deg",
-        translateY: isEditing
-          ? [Math.random(0.8) * 0.9, Math.random(-0.9) * -0.8]
+        translateY: !isActive
+          ? isEditing
+            ? [Math.random(0) * 1, Math.random(-1) * 0]
+            : 0
           : 0,
       }}
       transition={{
@@ -91,7 +92,13 @@ const Card = ({
                   style={{
                     opacity: tool.isHidden ? 0.45 : 0.7,
                   }}
-                  colors={[theme === "dark" ? "gray" : "#DDDDDD"]}
+                  colors={[
+                    theme === "dark"
+                      ? "gray"
+                      : tool.isHidden
+                      ? "#FFFFFF"
+                      : "#DDDDDD",
+                  ]}
                 />
               </TouchableOpacity>
             </View>
