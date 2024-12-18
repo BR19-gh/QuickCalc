@@ -233,23 +233,25 @@ function Home(props) {
     return (
       <ScaleDecorator>
         {Platform.isPad ? (
-          <Card
-            isEditingFavorite={props.isEditingFavorite}
-            handleFavorite={handleFavorite}
-            theme={props.theme}
-            lang={lang}
-            tool={tool}
-            key={tool.id}
-            changeVis={changeVis}
-            navigation={navigation}
-            isEditing={props.isEditing}
-            drag={drag}
-            isActive={isActive}
-            t={t}
-            text={text}
-            moving={props.moving}
-            handleDelete={handleDelete}
-          />
+          <View>
+            <Card
+              isEditingFavorite={props.isEditingFavorite}
+              handleFavorite={handleFavorite}
+              theme={props.theme}
+              lang={lang}
+              tool={tool}
+              key={tool.id}
+              changeVis={changeVis}
+              navigation={navigation}
+              isEditing={props.isEditing}
+              drag={drag}
+              isActive={isActive}
+              t={t}
+              text={text}
+              moving={props.moving}
+              handleDelete={handleDelete}
+            />
+          </View>
         ) : (
           <ContextMenu
             dropdownMenuMode={false}

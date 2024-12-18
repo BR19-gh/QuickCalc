@@ -4314,10 +4314,10 @@ expo-notifications@~0.29.8:
     expo-application "~6.0.0"
     expo-constants "~17.0.0"
 
-expo-quick-actions@^3.0.0:
-  version "3.0.0"
-  resolved "https://registry.npmjs.org/expo-quick-actions/-/expo-quick-actions-3.0.0.tgz"
-  integrity sha512-iOxJWw4ER/Jext015go9pSwQ7msDVvA/JvCEe8HWuX2WyPQiFoLVWXfwnSMG8u0pbTRaeswEodhUBiVvLw5cOw==
+expo-quick-actions@^3.0.1:
+  version "3.0.1"
+  resolved "https://registry.npmjs.org/expo-quick-actions/-/expo-quick-actions-3.0.1.tgz"
+  integrity sha512-kWFg5rUhJJFyeeg9KKZRp39/nWmIiBP+GBO/hYNbLtDFQ5Wljb43DNGY8zeZxBAAMCNCKwI/gAA5avfjl1XJ0g==
   dependencies:
     "@expo/image-utils" "~0.6.3"
     schema-utils "^4.2.0"

@@ -26,10 +26,8 @@ import { TermsOfUse } from "../screens/Settings/Paywall/TermsOfUse";
 import User from "../components/Settings/User";
 
 import { useNavigation } from "@react-navigation/native";
-import {
-  useQuickActionCallback,
-  useQuickAction,
-} from "expo-quick-actions/hooks";
+
+import * as QuickActions from "expo-quick-actions";
 
 import { getQuickAccessToolId } from "../../_DATA";
 import { Alert, Platform } from "react-native";
@@ -67,7 +65,7 @@ const HomeNavi = ({ isEditing, setIsEditing, theme, tools }) => {
   const [yourToolsDisplayes, setYourToolsDisplayes] = useState(false);
   const [builtinToolsDisplayes, setBuiltinToolsDisplayes] = useState(false);
 
-  useQuickActionCallback(async (action) => {
+  const subscription = QuickActions.addListener(async (action) => {
     navigation.navigate("Home");
     if (action.id === "search") {
       setTimeout(() => {

@@ -80,7 +80,7 @@ const User = ({ theme }) => {
       <View
         className={
           "flex flex-col items-center " +
-          (Dimensions.get("window").width < 376 ? "-mt-5" : "mt-6")
+          (Dimensions.get("window").width < 376 ? "-mt-5" : "mt-4")
         }
       >
         <View
@@ -91,9 +91,9 @@ const User = ({ theme }) => {
           <Image
             source={banner}
             style={{
-              marginTop: 135,
-              width: 190,
-              height: 190,
+              marginTop: 110,
+              width: 160,
+              height: 160,
             }}
           />
           <Text
