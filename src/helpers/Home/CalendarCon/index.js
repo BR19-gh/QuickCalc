@@ -125,11 +125,31 @@ export function calculateTimeSince(dateString) {
 }
 
 export const toHijri = (gy, gm, gd) => {
-  let timeSince = calculateTimeSince(
-    new Date(gy, gm - 1, gd).toISOString().split("T")[0]
+  const hijriYearInDays = 354.367; // Average number of days in an Islamic year
+  const hijriMonthInDays = hijriYearInDays / 12;
+
+  const providedDate = new Date(gy, gm - 1, gd);
+  const currentDate = new Date();
+
+  const differenceInMillis = currentDate - providedDate;
+  const millisecondsInDay = 1000 * 60 * 60 * 24;
+
+  const daysDifference = Math.floor(differenceInMillis / millisecondsInDay);
+  const yearsDifference = Math.floor(daysDifference / hijriYearInDays);
+  const monthsDifference = Math.floor(
+    (daysDifference % hijriYearInDays) / hijriMonthInDays
+  );
+  const remainingDaysDifference = Math.floor(
+    (daysDifference % hijriYearInDays) % hijriMonthInDays
   );
 
-  let hijriDateString = new Date(gy, gm - 1, gd).toLocaleDateString("ar-SA", {
+  const timeSince = {
+    years: yearsDifference,
+    months: monthsDifference,
+    days: remainingDaysDifference,
+  };
+
+  let hijriDateString = providedDate.toLocaleDateString("ar-SA", {
     year: "numeric",
     month: "long",
     day: "numeric",

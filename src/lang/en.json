@@ -1,7 +1,7 @@
 {
   "translation": {
     "screens": {
-      "versionNum": "1.0.76",
+      "versionNum": "1.0.80",
       "QuickAction": {
         "search": "Search",
         "createTool": "Create Tool",
@@ -23,7 +23,7 @@
           "btnText1": "Get Started",
           "btnText2": "Walk Through",
           "homePage": "Home Page",
-          "contextMenu": "Context Menu",
+          "optionsMenu": "Options Menu",
           "editYourTools": "Edit Home Page",
           "hiddenTools": "Hidden Tools",
           "swipeAction": "Swipe Action",
@@ -41,7 +41,8 @@
           "favorite": "Favorite",
           "settings": "Settings",
           "selectToHideOrToMove": "Press to Hide / Move",
-          "edit": "Edit",
+          "edit": "Edit Home Page",
+          "add": "Add New Tool",
           "done": "Done",
           "refreshing": "Refreshing...",
           "refreshComplated": "Refresh complated!",
@@ -292,6 +293,9 @@
             "pleaseShareError": "Please share this error with the developer, contact information in the settings.",
             "copied": "Copied!",
             "elapsed": "Elapsed",
+            "calculationInfoTitle": "How are the number of days calculated?",
+            "calculationInfoDesc": "Number of days (elapsed or remaining) is calculated based on the number of days in the year of the calendar that is converted to.\n\n• Islamic year contains 354.37 days.\n• Gregorian year contains 365.25 days.\n\nTherefore, the results may vary depending on the type of calendar selected for the conversion to.\n\n This applies only to the Islamic and Gregorian calendars. For other calendars, the number of days is calculated based on the Gregorian calendar.",
+            "remaining": "Remaining",
             "days": "days",
             "1day": "day",
             "2days": "days",

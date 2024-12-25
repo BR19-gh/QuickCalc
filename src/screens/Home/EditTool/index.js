@@ -1059,7 +1059,7 @@ function EditTool({ theme, tools, route, dispatch }) {
           />
           <View className="w-full flex-row justify-around mt-5 px-5 flex-wrap">
             <View
-              className={"w-full flex-row items-center justify-evenly m-5 mt-0"}
+              className={"w-full flex-row items-center justify-evenly mb-5"}
             >
               {pageCount.map((pageNumber) => (
                 <TouchableOpacity

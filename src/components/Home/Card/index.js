@@ -1,4 +1,11 @@
-import { Text, View, TouchableOpacity, Alert, Platform } from "react-native";
+import {
+  Text,
+  View,
+  TouchableOpacity,
+  Alert,
+  Platform,
+  Dimensions,
+} from "react-native";
 import styles from "./styles";
 
 import { LinearGradient } from "expo-linear-gradient";
@@ -123,7 +130,12 @@ const Card = ({
                 height: 0,
                 position: "relative",
                 top: -10,
-                left: Platform.isPad ? 25 : 5,
+                left: Platform.isPad
+                  ? Dimensions.get("window").width >
+                    Dimensions.get("window").height
+                    ? 35
+                    : 25
+                  : 5,
                 zIndex: 1,
               }}
               animate={{

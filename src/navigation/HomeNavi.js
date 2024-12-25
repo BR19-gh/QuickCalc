@@ -173,6 +173,7 @@ const HomeNavi = ({ isEditing, setIsEditing, theme, tools }) => {
           headerLargeTitle: true,
           headerRight: () => (
             <HeaderRightHome
+              theme={theme}
               isEditing={isEditing}
               setIsEditing={setIsEditing}
               setMoving={setMoving}

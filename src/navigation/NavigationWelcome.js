@@ -29,25 +29,14 @@ const Navigation = ({
 
   const WalkThroughText = (text) => "screens.Welcome.text." + text;
 
-  let titles = Platform.isPad
-    ? [
-        t(WalkThroughText("welcome")),
-        t(WalkThroughText("homePage")),
-        t(WalkThroughText("editYourTools")),
-        t(WalkThroughText("hiddenTools")),
-        t(WalkThroughText("settingsPage")),
-        t(WalkThroughText("final")),
-      ]
-    : [
-        t(WalkThroughText("welcome")),
-        t(WalkThroughText("homePage")),
-        t(WalkThroughText("contextMenu")),
-        t(WalkThroughText("editYourTools")),
-        t(WalkThroughText("hiddenTools")),
-        t(WalkThroughText("swipeAction")),
-        t(WalkThroughText("settingsPage")),
-        t(WalkThroughText("final")),
-      ];
+  let titles = [
+    t(WalkThroughText("welcome")),
+    t(WalkThroughText("homePage")),
+    t(WalkThroughText("optionsMenu")),
+    t(WalkThroughText("editYourTools")),
+    t(WalkThroughText("hiddenTools")),
+    t(WalkThroughText("final")),
+  ];
 
   useEffect(() => {
     const getTheme = async () => {

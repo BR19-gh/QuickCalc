@@ -1,4 +1,4 @@
-import { TouchableOpacity } from "react-native";
+import { TouchableOpacity, View } from "react-native";
 import SweetSFSymbol from "sweet-sfsymbols";
 import { useNavigation } from "@react-navigation/native";
 import { connect } from "react-redux";
@@ -10,9 +10,8 @@ const Header = ({ isEditing }) => {
   const { user } = useRevenueCat();
 
   return (
-    <>
+    <View>
       <TouchableOpacity
-        className="items-start w-12"
         onPress={() => {
           Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
           if (user.golden) {
@@ -30,19 +29,7 @@ const Header = ({ isEditing }) => {
           />
         }
       </TouchableOpacity>
-      <TouchableOpacity className="items-start w-12 mr-9">
-        {isEditing ? null : (
-          <SweetSFSymbol
-            name={"star"}
-            size={22}
-            colors={[
-              //"#3B82F6"
-              "transparent",
-            ]}
-          />
-        )}
-      </TouchableOpacity>
-    </>
+    </View>
   );
 };
 

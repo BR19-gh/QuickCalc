@@ -27,24 +27,14 @@ const SettingsNavi = ({
 
   const [currentTitles, setCurrentTitles] = useState(0);
 
-  let titles = Platform.isPad
-    ? [
-        t(WalkThroughText("welcome")),
-        t(WalkThroughText("homePage")),
-        t(WalkThroughText("editYourTools")),
-        t(WalkThroughText("hiddenTools")),
-        t(WalkThroughText("settingsPage")),
-        t(WalkThroughText("final")),
-      ]
-    : [
-        t(WalkThroughText("welcome")),
-        t(WalkThroughText("homePage")),
-        t(WalkThroughText("contextMenu")),
-        t(WalkThroughText("editYourTools")),
-        t(WalkThroughText("hiddenTools")),
-        t(WalkThroughText("settingsPage")),
-        t(WalkThroughText("final")),
-      ];
+  let titles = [
+    t(WalkThroughText("welcome")),
+    t(WalkThroughText("homePage")),
+    t(WalkThroughText("optionsMenu")),
+    t(WalkThroughText("editYourTools")),
+    t(WalkThroughText("hiddenTools")),
+    t(WalkThroughText("final")),
+  ];
 
   return (
     <Stack.Navigator

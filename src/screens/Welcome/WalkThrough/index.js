@@ -27,40 +27,82 @@ function WalkThrough(props) {
   const IMGS =
     lang === "ar"
       ? Platform.isPad
+        ? props.theme === "dark"
+          ? [
+              // Dark props.theme Arabic iPad
+              require(`../../../../walkthrough/welcome_ar.png`),
+              require(`../../../../walkthrough/home_ar_dark.jpeg`),
+              require(`../../../../walkthrough/ipad_menu_ar_dark.png`),
+              require(`../../../../walkthrough/edit_ar_dark.png`),
+              require(`../../../../walkthrough/hidden_ar_dark.png`),
+              require(`../../../../walkthrough/final_ar.png`),
+            ]
+          : [
+              // Light props.theme Arabic iPad
+              require(`../../../../walkthrough/welcome_ar.png`),
+              require(`../../../../walkthrough/home_ar.png`),
+              require(`../../../../walkthrough/ipad_menu_ar.png`),
+              require(`../../../../walkthrough/edit_ar.png`),
+              require(`../../../../walkthrough/hidden_ar.png`),
+              require(`../../../../walkthrough/final_ar.png`),
+            ]
+        : props.theme === "dark"
         ? [
-            require(`../../../../walkthro_ar/welcome.png`),
-            require(`../../../../walkthro_ar/home.png`),
-            require(`../../../../walkthro_ar/edit.gif`),
-            require(`../../../../walkthro_ar/hidden.png`),
-            require(`../../../../walkthro_ar/settings.png`),
-            require(`../../../../walkthro_ar/final.png`),
+            // Dark props.theme Arabic iPhone
+            require(`../../../../walkthrough/welcome_ar.png`),
+            require(`../../../../walkthrough/home_ar_dark.jpeg`),
+            require(`../../../../walkthrough/iphone_menu_ar_dark.png`),
+            require(`../../../../walkthrough/edit_ar_dark.png`),
+            require(`../../../../walkthrough/hidden_ar_dark.png`),
+            require(`../../../../walkthrough/final_ar.png`),
           ]
         : [
-            require(`../../../../walkthro_ar/welcome.png`),
-            require(`../../../../walkthro_ar/home.png`),
-            require(`../../../../walkthro_ar/home_menu.png`),
-            require(`../../../../walkthro_ar/edit.gif`),
-            require(`../../../../walkthro_ar/hidden.png`),
-            require(`../../../../walkthro_ar/settings.png`),
-            require(`../../../../walkthro_ar/final.png`),
+            // Light props.theme Arabic iPhone
+            require(`../../../../walkthrough/welcome_ar.png`),
+            require(`../../../../walkthrough/home_ar.png`),
+            require(`../../../../walkthrough/iphone_menu_ar.png`),
+            require(`../../../../walkthrough/edit_ar.png`),
+            require(`../../../../walkthrough/hidden_ar.png`),
+            require(`../../../../walkthrough/final_ar.png`),
           ]
       : Platform.isPad
+      ? props.theme === "dark"
+        ? [
+            // Dark props.theme English iPad
+            require(`../../../../walkthrough/welcome_en.png`),
+            require(`../../../../walkthrough/home_en_dark.png`),
+            require(`../../../../walkthrough/ipad_menu_en_dark.png`),
+            require(`../../../../walkthrough/edit_en_dark.png`),
+            require(`../../../../walkthrough/hidden_en_dark.png`),
+            require(`../../../../walkthrough/final_en.png`),
+          ]
+        : [
+            // Light props.theme English iPad
+            require(`../../../../walkthrough/welcome_en.png`),
+            require(`../../../../walkthrough/home_en.png`),
+            require(`../../../../walkthrough/ipad_menu_en.png`),
+            require(`../../../../walkthrough/edit_en.png`),
+            require(`../../../../walkthrough/hidden_en.png`),
+            require(`../../../../walkthrough/final_en.png`),
+          ]
+      : props.theme === "dark"
       ? [
-          require(`../../../../walkthro_en/welcome.png`),
-          require(`../../../../walkthro_en/home.png`),
-          require(`../../../../walkthro_en/edit.gif`),
-          require(`../../../../walkthro_en/hidden.png`),
-          require(`../../../../walkthro_en/settings.png`),
-          require(`../../../../walkthro_en/final.png`),
+          // Dark props.theme English iPhone
+          require(`../../../../walkthrough/welcome_en.png`),
+          require(`../../../../walkthrough/home_en_dark.png`),
+          require(`../../../../walkthrough/iphone_menu_en_dark.png`),
+          require(`../../../../walkthrough/edit_en_dark.png`),
+          require(`../../../../walkthrough/hidden_en_dark.png`),
+          require(`../../../../walkthrough/final_en.png`),
         ]
       : [
-          require(`../../../../walkthro_en/welcome.png`),
-          require(`../../../../walkthro_en/home.png`),
-          require(`../../../../walkthro_en/home_menu.png`),
-          require(`../../../../walkthro_en/edit.gif`),
-          require(`../../../../walkthro_en/hidden.png`),
-          require(`../../../../walkthro_en/settings.png`),
-          require(`../../../../walkthro_en/final.png`),
+          // Light props.theme English iPhone
+          require(`../../../../walkthrough/welcome_en.png`),
+          require(`../../../../walkthrough/home_en.png`),
+          require(`../../../../walkthrough/iphone_menu_en.png`),
+          require(`../../../../walkthrough/edit_en.png`),
+          require(`../../../../walkthrough/hidden_en.png`),
+          require(`../../../../walkthrough/final_en.png`),
         ];
 
   const selectImg = (dir) => {

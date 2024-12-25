@@ -124,7 +124,7 @@ function ChangeColor({ theme }) {
                   ),
                 }}
               >
-                <View className="items-center flex-row flex-wrap justify-around">
+                <View className="items-center flex-row flex-wrap justify-around -mt-3">
                   <TouchableOpacity
                     onPress={() => {
                       Haptics.selectionAsync();

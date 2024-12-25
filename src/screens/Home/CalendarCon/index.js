@@ -714,7 +714,28 @@ function CalendarCon({ theme }) {
                     "text-xl" + isDark(" text-blue-100", " text-blue-900")
                   }
                 >
-                  {t(text("elapsed")) + ":  "}
+                  {t(text("elapsed")) + ":"}
+                  <TouchableOpacity
+                    onPress={() => {
+                      Haptics.notificationAsync(
+                        Haptics.NotificationFeedbackType.Warning
+                      );
+                      Alert.alert(
+                        t(text("calculationInfoTitle")),
+                        t(text("calculationInfoDesc"))
+                      );
+                    }}
+                  >
+                    <SweetSFSymbol
+                      name="info.circle.fill"
+                      style={{
+                        marginTop: -25,
+                      }}
+                      size={12}
+                      colors={[isDark("#DBEAFE", "#283987")]}
+                    />
+                  </TouchableOpacity>
+                  {"  "}
                 </Text>
                 <Text
                   className={
@@ -813,6 +834,153 @@ function CalendarCon({ theme }) {
                                 toCalendarValue.timeSince.days +
                                 " " +
                                 (toCalendarValue.timeSince.days === 1
+                                  ? t(text("1day"))
+                                  : t(text("days")))
+                              : ""
+                          }`
+                        : ""
+                    )
+                  }
+                >
+                  <SweetSFSymbol
+                    name="doc.on.doc"
+                    size={20}
+                    colors={[isDark("#DBEAFE", "#1E3A8A")]}
+                  />
+                </TouchableOpacity>
+              ) : null}
+            </View>
+            <View className="w-full flex-row p-2 text-left">
+              <>
+                <Text
+                  className={
+                    "text-xl" + isDark(" text-blue-100", " text-blue-900")
+                  }
+                >
+                  {t(text("remaining")) + ":"}
+                  <TouchableOpacity
+                    onPress={() => {
+                      Haptics.notificationAsync(
+                        Haptics.NotificationFeedbackType.Warning
+                      );
+                      Alert.alert(
+                        t(text("calculationInfoTitle")),
+                        t(text("calculationInfoDesc"))
+                      );
+                    }}
+                  >
+                    <SweetSFSymbol
+                      name="info.circle.fill"
+                      style={{
+                        marginTop: -25,
+                        marginRight: lang === "ar" ? "-100%" : "0%",
+                      }}
+                      size={12}
+                      colors={[isDark("#DBEAFE", "#283987")]}
+                    />
+                  </TouchableOpacity>
+                  {"  "}
+                </Text>
+                <Text
+                  className={
+                    "text-xl font-semibold" +
+                    isDark(" text-blue-100", " text-blue-900")
+                  }
+                >
+                  {toCalendarValue.timeSince !== null
+                    ? `${
+                        -toCalendarValue.timeSince.years - 1 > 0
+                          ? -toCalendarValue.timeSince.years -
+                            1 +
+                            " " +
+                            (-toCalendarValue.timeSince.years - 1 === 1
+                              ? t(text("1year"))
+                              : t(text("years")))
+                          : ""
+                      }${
+                        -toCalendarValue.timeSince.months - 1 > 0
+                          ? " " +
+                            (-toCalendarValue.timeSince.months - 1) +
+                            " " +
+                            (-toCalendarValue.timeSince.months - 1 === 1
+                              ? t(text("1month"))
+                              : t(text("months")))
+                          : ""
+                      }${
+                        -toCalendarValue.timeSince.days - 1 > 0
+                          ? " " +
+                            (-toCalendarValue.timeSince.days - 1) +
+                            " " +
+                            (-toCalendarValue.timeSince.days - 1 === 1
+                              ? t(text("1day"))
+                              : t(text("days")))
+                          : ""
+                      }`
+                    : ""}
+                </Text>
+                <Text>{"  "}</Text>
+              </>
+              {(
+                toCalendarValue.timeSince !== null
+                  ? `${
+                      -toCalendarValue.timeSince.years - 1 > 0
+                        ? -toCalendarValue.timeSince.years -
+                          1 +
+                          " " +
+                          (-toCalendarValue.timeSince.years - 1 === 1
+                            ? t(text("1year"))
+                            : t(text("years")))
+                        : ""
+                    }${
+                      -toCalendarValue.timeSince.months - 1 > 0
+                        ? " " +
+                          (-toCalendarValue.timeSince.months - 1) +
+                          " " +
+                          (-toCalendarValue.timeSince.months - 1 === 1
+                            ? t(text("1month"))
+                            : t(text("months")))
+                        : ""
+                    }${
+                      -toCalendarValue.timeSince.days - 1 > 0
+                        ? " " +
+                          (-toCalendarValue.timeSince.days - 1) +
+                          " " +
+                          (-toCalendarValue.timeSince.days - 1 === 1
+                            ? t(text("1day"))
+                            : t(text("days")))
+                        : ""
+                    }`
+                  : ""
+              ) ? (
+                <TouchableOpacity
+                  className="pt-1"
+                  onPress={() =>
+                    copyToClipboard(
+                      toCalendarValue.timeSince !== null
+                        ? `${
+                            -toCalendarValue.timeSince.years - 1 > 0
+                              ? -toCalendarValue.timeSince.years -
+                                1 +
+                                " " +
+                                (-toCalendarValue.timeSince.years - 1 === 1
+                                  ? t(text("1year"))
+                                  : t(text("years")))
+                              : ""
+                          }${
+                            -toCalendarValue.timeSince.months - 1 > 0
+                              ? " " +
+                                (-toCalendarValue.timeSince.months - 1) +
+                                " " +
+                                (-toCalendarValue.timeSince.months - 1 === 1
+                                  ? t(text("1month"))
+                                  : t(text("months")))
+                              : ""
+                          }${
+                            -toCalendarValue.timeSince.days - 1 > 0
+                              ? " " +
+                                (-toCalendarValue.timeSince.days - 1) +
+                                " " +
+                                (-toCalendarValue.timeSince.days - 1 === 1
                                   ? t(text("1day"))
                                   : t(text("days")))
                               : ""
