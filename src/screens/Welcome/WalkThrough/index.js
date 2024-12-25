@@ -30,12 +30,12 @@ function WalkThrough(props) {
         ? props.theme === "dark"
           ? [
               // Dark props.theme Arabic iPad
-              require(`../../../../walkthrough/welcome_ar.png`),
+              require(`../../../../walkthrough/welcome_ar_dark.png`),
               require(`../../../../walkthrough/home_ar_dark.jpeg`),
               require(`../../../../walkthrough/ipad_menu_ar_dark.png`),
               require(`../../../../walkthrough/edit_ar_dark.png`),
               require(`../../../../walkthrough/hidden_ar_dark.png`),
-              require(`../../../../walkthrough/final_ar.png`),
+              require(`../../../../walkthrough/final_ar_dark.png`),
             ]
           : [
               // Light props.theme Arabic iPad
@@ -49,12 +49,12 @@ function WalkThrough(props) {
         : props.theme === "dark"
         ? [
             // Dark props.theme Arabic iPhone
-            require(`../../../../walkthrough/welcome_ar.png`),
+            require(`../../../../walkthrough/welcome_ar_dark.png`),
             require(`../../../../walkthrough/home_ar_dark.jpeg`),
             require(`../../../../walkthrough/iphone_menu_ar_dark.png`),
             require(`../../../../walkthrough/edit_ar_dark.png`),
             require(`../../../../walkthrough/hidden_ar_dark.png`),
-            require(`../../../../walkthrough/final_ar.png`),
+            require(`../../../../walkthrough/final_ar_dark.png`),
           ]
         : [
             // Light props.theme Arabic iPhone
@@ -69,12 +69,12 @@ function WalkThrough(props) {
       ? props.theme === "dark"
         ? [
             // Dark props.theme English iPad
-            require(`../../../../walkthrough/welcome_en.png`),
+            require(`../../../../walkthrough/welcome_en_dark.png`),
             require(`../../../../walkthrough/home_en_dark.png`),
             require(`../../../../walkthrough/ipad_menu_en_dark.png`),
             require(`../../../../walkthrough/edit_en_dark.png`),
             require(`../../../../walkthrough/hidden_en_dark.png`),
-            require(`../../../../walkthrough/final_en.png`),
+            require(`../../../../walkthrough/final_en_dark.png`),
           ]
         : [
             // Light props.theme English iPad
@@ -88,12 +88,12 @@ function WalkThrough(props) {
       : props.theme === "dark"
       ? [
           // Dark props.theme English iPhone
-          require(`../../../../walkthrough/welcome_en.png`),
+          require(`../../../../walkthrough/welcome_en_dark.png`),
           require(`../../../../walkthrough/home_en_dark.png`),
           require(`../../../../walkthrough/iphone_menu_en_dark.png`),
           require(`../../../../walkthrough/edit_en_dark.png`),
           require(`../../../../walkthrough/hidden_en_dark.png`),
-          require(`../../../../walkthrough/final_en.png`),
+          require(`../../../../walkthrough/final_en_dark.png`),
         ]
       : [
           // Light props.theme English iPhone

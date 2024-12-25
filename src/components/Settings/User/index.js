@@ -61,7 +61,11 @@ const User = ({ theme }) => {
 
   const banner =
     lang === "ar"
-      ? require(`../../../../assets/golden_version_ar.png`)
+      ? theme === "dark"
+        ? require(`../../../../assets/golden_version_ar_dark.png`)
+        : require(`../../../../assets/golden_version_ar.png`)
+      : theme === "dark"
+      ? require(`../../../../assets/golden_version_en_dark.png`)
       : require(`../../../../assets/golden_version_en.png`);
 
   return (

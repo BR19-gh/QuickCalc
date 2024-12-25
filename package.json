@@ -38,7 +38,7 @@
     "expo-notifications": "~0.29.8",
     "expo-quick-actions": "^3.0.1",
     "expo-router": "~4.0.6",
-    "expo-splash-screen": "~0.29.11",
+    "expo-splash-screen": "~0.29.18",
     "expo-status-bar": "~2.0.0",
     "expo-store-review": "~8.0.0",
     "expo-system-ui": "~4.0.3",

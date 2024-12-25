@@ -16,7 +16,7 @@ import mobileAds from "react-native-google-mobile-ads";
 import { requestTrackingPermissionsAsync } from "expo-tracking-transparency";
 import { setTrackingStat } from "./_DATA";
 import { RevenueCatProvider } from "./src/providers/RevenueCatProvider";
-import DeviceInfo from "react-native-device-info";
+import * as SplashScreen from "expo-splash-screen";
 
 const App = () => {
   const store = createStore(reducer, middleware);
@@ -27,6 +27,11 @@ const App = () => {
 
   const { t } = useTranslation();
   const text = (text) => "screens.QuickAction." + text;
+
+  SplashScreen.setOptions({
+    duration: 1000,
+    fade: true,
+  });
 
   useEffect(() => {
     (async () => {
