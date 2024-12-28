@@ -59,9 +59,19 @@ const Card = ({
       }}
       style={{
         marginTop: tool.isHidden ? 0 : isEditing ? (isActive ? -10 : 15) : 5,
+        borderRadius: 8,
       }}
     >
       <MotiView
+        style={
+          Platform.isPad
+            ? {
+                width: isEditing ? "%100" : "92%",
+                alignSelf: "center",
+                marginBottom: 5,
+              }
+            : {}
+        }
         animate={{
           opacity: [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1],
         }}
@@ -78,7 +88,7 @@ const Card = ({
                 height: 0,
                 position: "relative",
                 top: -10,
-                left: Platform.isPad ? 25 : 5,
+                left: -8,
                 zIndex: 1,
               }}
             >
@@ -90,6 +100,7 @@ const Card = ({
                   backgroundColor: theme === "dark" ? "black" : "#888888",
                 }}
                 onPress={() => {
+                  Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
                   changeVis(tool.id);
                 }}
               >
@@ -119,7 +130,7 @@ const Card = ({
                 height: 0,
                 position: "relative",
                 top: -10,
-                left: Platform.isPad ? 25 : 5,
+                left: -8,
                 zIndex: 1,
               }}
             />
@@ -130,12 +141,7 @@ const Card = ({
                 height: 0,
                 position: "relative",
                 top: -10,
-                left: Platform.isPad
-                  ? Dimensions.get("window").width >
-                    Dimensions.get("window").height
-                    ? 35
-                    : 25
-                  : 5,
+                left: -8,
                 zIndex: 1,
               }}
               animate={{
@@ -154,6 +160,7 @@ const Card = ({
                   backgroundColor: "black",
                 }}
                 onPress={() => {
+                  Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
                   tool.link === "CreatedTool"
                     ? Alert.alert(
                         t(text("deleteOrHide")),
@@ -195,15 +202,11 @@ const Card = ({
           key={tool.id}
           colors={[...tool.colors]}
           style={{
-            margin: 5,
-            marginTop: 0,
-            marginStart: "4%",
             opacity: isEditing ? (tool.isHidden ? 0.2 : 0.7) : 1,
-            borderWidth: isEditing ? 0 : 0,
             borderColor: theme === "dark" ? "gray" : "black",
-            width: "92%",
+            width: "100%",
           }}
-          className="mb-3 h-32 rounded-lg"
+          className="h-32 rounded-lg"
         >
           <TouchableOpacity
             key={tool.id}

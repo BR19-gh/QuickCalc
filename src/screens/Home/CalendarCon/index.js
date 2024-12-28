@@ -879,7 +879,7 @@ function CalendarCon({ theme }) {
                       colors={[isDark("#DBEAFE", "#283987")]}
                     />
                   </TouchableOpacity>
-                  {"  "}
+                  {lang === "ar" ? "    " : "  "}
                 </Text>
                 <Text
                   className={

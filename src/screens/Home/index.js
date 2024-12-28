@@ -233,27 +233,30 @@ function Home(props) {
     return (
       <ScaleDecorator>
         {Platform.isPad ? (
-          <View>
-            <Card
-              isEditingFavorite={props.isEditingFavorite}
-              handleFavorite={handleFavorite}
-              theme={props.theme}
-              lang={lang}
-              tool={tool}
-              key={tool.id}
-              changeVis={changeVis}
-              navigation={navigation}
-              isEditing={props.isEditing}
-              drag={drag}
-              isActive={isActive}
-              t={t}
-              text={text}
-              moving={props.moving}
-              handleDelete={handleDelete}
-            />
-          </View>
+          <Card
+            isEditingFavorite={props.isEditingFavorite}
+            handleFavorite={handleFavorite}
+            theme={props.theme}
+            lang={lang}
+            tool={tool}
+            key={tool.id}
+            changeVis={changeVis}
+            navigation={navigation}
+            isEditing={props.isEditing}
+            drag={drag}
+            isActive={isActive}
+            t={t}
+            text={text}
+            moving={props.moving}
+            handleDelete={handleDelete}
+          />
         ) : (
           <ContextMenu
+            style={{
+              width: "92%",
+              alignSelf: "center",
+              marginBottom: 5,
+            }}
             dropdownMenuMode={false}
             actions={
               tool.link === "CreatedTool"
@@ -456,25 +459,33 @@ function Home(props) {
   const renderItemDrag = ({ tool, getIndex, drag, isActive }) => {
     return (
       <ScaleDecorator>
-        <Card
-          index={getIndex()}
-          searchTextLength={props.searchText.length}
-          isEditingFavorite={props.isEditingFavorite}
-          handleFavorite={handleFavorite}
-          theme={props.theme}
-          lang={lang}
-          tool={tool}
-          key={tool.id}
-          changeVis={changeVis}
-          navigation={navigation}
-          isEditing={props.isEditing}
-          drag={drag}
-          isActive={isActive}
-          t={t}
-          text={text}
-          moving={props.moving}
-          handleDelete={handleDelete}
-        />
+        <View
+          style={{
+            width: "92%",
+            alignSelf: "center",
+            marginBottom: 5,
+          }}
+        >
+          <Card
+            index={getIndex()}
+            searchTextLength={props.searchText.length}
+            isEditingFavorite={props.isEditingFavorite}
+            handleFavorite={handleFavorite}
+            theme={props.theme}
+            lang={lang}
+            tool={tool}
+            key={tool.id}
+            changeVis={changeVis}
+            navigation={navigation}
+            isEditing={props.isEditing}
+            drag={drag}
+            isActive={isActive}
+            t={t}
+            text={text}
+            moving={props.moving}
+            handleDelete={handleDelete}
+          />
+        </View>
       </ScaleDecorator>
     );
   };
@@ -958,22 +969,30 @@ function Home(props) {
                       : tool.isHidden === true
                   )
                   .map((tool, index) => (
-                    <Card
-                      index={index}
-                      searchTextLength={props.searchText.length}
-                      isEditingFavorite={props.isEditingFavorite}
-                      handleFavorite={handleFavorite}
-                      theme={props.theme}
-                      lang={lang}
-                      tool={tool}
-                      key={tool.id}
-                      changeVis={changeVis}
-                      navigation={navigation}
-                      isEditing={props.isEditing}
-                      t={t}
-                      text={text}
-                      handleDelete={handleDelete}
-                    />
+                    <View
+                      style={{
+                        width: "92%",
+                        alignSelf: "center",
+                        marginBottom: 20,
+                      }}
+                    >
+                      <Card
+                        index={index}
+                        searchTextLength={props.searchText.length}
+                        isEditingFavorite={props.isEditingFavorite}
+                        handleFavorite={handleFavorite}
+                        theme={props.theme}
+                        lang={lang}
+                        tool={tool}
+                        key={tool.id}
+                        changeVis={changeVis}
+                        navigation={navigation}
+                        isEditing={props.isEditing}
+                        t={t}
+                        text={text}
+                        handleDelete={handleDelete}
+                      />
+                    </View>
                   ))
               ) : (
                 <Text
