@@ -282,7 +282,7 @@
             "month": "Month",
             "year": "Year",
             "errorInValidInput": "Invalid Input",
-            "errorInValidInputMsg": "Make sure the input values are not empty and are valid numbers (year not equal zero or less, month between 1-12 and day between 1-31).",
+            "errorInValidInputMsg": "Make sure the input values are not empty and are valid numbers (year between 99-100000, month between 1-12 and day between 1-31).",
             "errorUnacceptableInput": "Unacceptable Input",
             "errorUnacceptableInputMsg": "Make sure gregorian year is a number and is above 99",
             "errorUnacceptableInputMsg2": "Make sure gregorian year is a number and is above 0",

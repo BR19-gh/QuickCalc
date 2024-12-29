@@ -102,6 +102,7 @@ function CalendarCon({ theme }) {
         if (fromCalendar.value === "gregorian") {
           if (
             fromCalendarValue.year < 1 ||
+            fromCalendarValue.year > 100000 ||
             fromCalendarValue.month < 1 ||
             fromCalendarValue.month > 12 ||
             fromCalendarValue.day < 1 ||
@@ -281,6 +282,7 @@ function CalendarCon({ theme }) {
         } else if (fromCalendar.value === "islamicSolar") {
           if (
             fromCalendarValue.year < 1 ||
+            fromCalendarValue.year > 100000 ||
             fromCalendarValue.month < 1 ||
             fromCalendarValue.month > 12 ||
             fromCalendarValue.day < 1 ||
