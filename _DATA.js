@@ -146,6 +146,64 @@ export const getTools = async () => {
   }
 };
 
+export const setCoursesAsync = async (courses) => {
+  if (courses === null) {
+    try {
+      await AsyncStorage.removeItem("courses");
+    } catch (e) {
+      console.error("Error: setCoursesAsync: null: ", e);
+      Alert.alert(
+        "Unable to set courses to null",
+        "Please contact with the developer, you can find developer socials in the Settings tab",
+        [
+          {
+            text: "Will Do",
+            onPress: () => null,
+            style: "Ok",
+          },
+        ]
+      );
+    }
+  } else {
+    try {
+      await AsyncStorage.setItem("courses", courses);
+    } catch (e) {
+      console.error("Error: setCoursesAsync: ", e);
+      Alert.alert(
+        "Unable to set courses",
+        "Please contact with the developer, you can find developer socials in the Settings tab",
+        [
+          {
+            text: "Will Do",
+            onPress: () => null,
+            style: "Ok",
+          },
+        ]
+      );
+    }
+  }
+};
+
+export const getCoursesAsync = async () => {
+  try {
+    const value = await AsyncStorage.getItem("courses");
+    return value ? value : null;
+  } catch (e) {
+    console.error("Error: getCourses: ", e);
+    Alert.alert(
+      "Unable to get courses",
+      "Please contact with the developer, you can find developer socials in the Settings tab",
+      [
+        {
+          text: "Will Do",
+          onPress: () => null,
+          style: "Ok",
+        },
+      ]
+    );
+    return true;
+  }
+};
 export const setNoteId = async (id) => {
   try {
     await AsyncStorage.setItem("noteId", `${id}`);

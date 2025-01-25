@@ -13,7 +13,7 @@ import {
 import styles from "./styles";
 import SweetSFSymbol from "sweet-sfsymbols";
 
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 
 import { connect } from "react-redux";
 
@@ -27,6 +27,7 @@ import * as StoreReview from "expo-store-review";
 
 import InlineAd from "../../../components/InlineAd/InlineAd";
 import { useRevenueCat } from "../../../providers/RevenueCatProvider";
+import { useNavigation } from "@react-navigation/native";
 
 function DiscountCal(props) {
   const { t } = useTranslation();
@@ -51,6 +52,18 @@ function DiscountCal(props) {
   const a2e = (s) => {
     if (s) return s.replace(/[٠-٩]/g, (d) => "٠١٢٣٤٥٦٧٨٩".indexOf(d));
   };
+
+  const navigation = useNavigation();
+
+  const initialRender = useRef(true);
+
+  useEffect(() => {
+    if (initialRender.current) {
+      initialRender.current = false;
+    } else {
+      navigation.goBack();
+    }
+  }, [props.theme]);
 
   const toast = useToast();
 

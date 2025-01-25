@@ -9,6 +9,7 @@ import {
   Alert,
   Clipboard,
   Dimensions,
+  Switch,
 } from "react-native";
 import styles from "./styles";
 import SweetSFSymbol from "sweet-sfsymbols";
@@ -30,6 +31,10 @@ import InlineAd from "../../../components/InlineAd/InlineAd";
 import { useRevenueCat } from "../../../providers/RevenueCatProvider";
 
 import uuid from "react-native-uuid";
+
+import { useNavigation } from "@react-navigation/native";
+
+import { getCoursesAsync, setCoursesAsync } from "../../../../_DATA";
 
 function GPACal(props) {
   const { t } = useTranslation();
@@ -65,6 +70,18 @@ function GPACal(props) {
     if (s) return s.replace(/[٠-٩]/g, (d) => "٠١٢٣٤٥٦٧٨٩".indexOf(d));
   };
 
+  const navigation = useNavigation();
+
+  const initialRender = useRef(true);
+
+  useEffect(() => {
+    if (initialRender.current) {
+      initialRender.current = false;
+    } else {
+      navigation.goBack();
+    }
+  }, [props.theme]);
+
   const toast = useToast();
 
   const copyToClipboard = (str) => {
@@ -98,7 +115,6 @@ function GPACal(props) {
         );
       })
     ) {
-      console.log("yes10");
     } else {
       Haptics.notificationAsync(Haptics.NotificationFeedbackType.Error);
       Alert.alert(
@@ -211,6 +227,59 @@ function GPACal(props) {
     console.log("gpa", gpa);
   }, [courses, scale, isPrevGPA, prevGPA, gpa]);
 
+  const [saveCoursesSwitchValue, setSaveCoursesSwitchValue] = useState(false);
+  const toggleSaveCoursesSwitch = () => {
+    setSaveCoursesSwitchValue((prev) => !prev);
+  };
+
+  useEffect(() => {
+    const fetchCourses = async () => {
+      const fetchedData = await getCoursesAsync();
+
+      const courses = JSON.parse(fetchedData.split("|")[0]);
+      const scale = JSON.parse(fetchedData.split("|")[1]);
+      const isPrevGPA = JSON.parse(fetchedData.split("|")[2]);
+      const prevGPA = JSON.parse(fetchedData.split("|")[3]);
+
+      if (fetchedData === null) {
+        return;
+      }
+
+      if (courses.length > 0) {
+        setCourses(courses);
+        setScale(scale);
+        setIsPrevGPA(isPrevGPA);
+        setPrevGPA(prevGPA);
+        setSaveCoursesSwitchValue(true);
+      } else {
+        setSaveCoursesSwitchValue(false);
+      }
+    };
+
+    fetchCourses();
+  }, []);
+
+  useEffect(() => {
+    const saveCourses = async (value) => {
+      if (value === true) {
+        await setCoursesAsync(
+          `${JSON.stringify(courses)}|${JSON.stringify(scale)}|${JSON.stringify(
+            isPrevGPA
+          )}|${JSON.stringify(prevGPA)}`
+        );
+      } else {
+        await setCoursesAsync(null);
+      }
+    };
+    if (saveCoursesSwitchValue === true) {
+      Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
+      saveCourses(true);
+    } else {
+      Haptics.notificationAsync(Haptics.NotificationFeedbackType.Warning);
+      saveCourses(false);
+    }
+  }, [saveCoursesSwitchValue, courses, scale, isPrevGPA, prevGPA, gpa]);
+
   return (
     <View>
       <ScrollView
@@ -226,11 +295,29 @@ function GPACal(props) {
         <View
           className={
             "w-full " +
-            (Dimensions.get("window").height > 667 ? "mt-28" : "mt-20") +
+            (Dimensions.get("window").height > 667 ? "mt-24" : "mt-16") +
             " items-center"
           }
         >
           <View className="w-full flex-row items-center justify-evenly">
+            <View
+              className={"w-52 flex-row items-center justify-center flex-wrap"}
+            >
+              <Text
+                className={
+                  "text-center p-4 text-2xl font-semibold" +
+                  isDark(" text-blue-100", " text-blue-900")
+                }
+              >
+                {t(text("saveCourses"))}
+              </Text>
+              <Switch
+                onValueChange={toggleSaveCoursesSwitch}
+                value={saveCoursesSwitchValue}
+              />
+            </View>
+          </View>
+          <View className="w-full flex-row justify-center">
             <View
               className={"w-52 flex-row items-center justify-center flex-wrap"}
             >
@@ -273,9 +360,17 @@ function GPACal(props) {
                               textAlign: "center",
                             }}
                           >
-                            {selectedItem
-                              ? selectedItem
-                              : t(text("selectScale"))}
+                            {selectedItem}
+                          </Text>
+                        ) : scale ? (
+                          <Text
+                            style={{
+                              color: isDark("#DBEAFE", "#283987"),
+                              fontSize: 30,
+                              textAlign: "center",
+                            }}
+                          >
+                            {scale}
                           </Text>
                         ) : (
                           <View className="flex-row items-center justify-center">
@@ -378,9 +473,19 @@ function GPACal(props) {
                               textAlign: "center",
                             }}
                           >
-                            {selectedItem
-                              ? selectedItem
-                              : t(text("selectScale"))}
+                            {selectedItem}
+                          </Text>
+                        ) : isPrevGPA ? (
+                          <Text
+                            style={{
+                              color: isDark("#DBEAFE", "#283987"),
+                              fontSize: 25,
+                              textAlign: "center",
+                            }}
+                          >
+                            {isPrevGPA === true
+                              ? t(text("cumulative"))
+                              : t(text("semester"))}
                           </Text>
                         ) : (
                           <View className="flex-row items-center justify-center">
@@ -635,6 +740,16 @@ function GPACal(props) {
                               }}
                             >
                               {selectedItem}
+                            </Text>
+                          ) : course.grade ? (
+                            <Text
+                              style={{
+                                color: isDark("#DBEAFE", "#283987"),
+                                fontSize: 35,
+                                textAlign: "center",
+                              }}
+                            >
+                              {course.grade}
                             </Text>
                           ) : (
                             <View className="flex-row items-center justify-center">

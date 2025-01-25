@@ -29,6 +29,7 @@ import * as StoreReview from "expo-store-review";
 
 import InlineAd from "../../../components/InlineAd/InlineAd";
 import { useRevenueCat } from "../../../providers/RevenueCatProvider";
+import { useNavigation } from "@react-navigation/native";
 
 function CreatedTool({ theme, setCurrentTool, route }) {
   const { t } = useTranslation();
@@ -56,6 +57,18 @@ function CreatedTool({ theme, setCurrentTool, route }) {
   const a2e = (s) => {
     if (s) return s.replace(/[٠-٩]/g, (d) => "٠١٢٣٤٥٦٧٨٩".indexOf(d));
   };
+
+  const navigation = useNavigation();
+
+  const initialRender = useRef(true);
+
+  useEffect(() => {
+    if (initialRender.current) {
+      initialRender.current = false;
+    } else {
+      navigation.goBack();
+    }
+  }, [theme]);
 
   const toast = useToast();
 

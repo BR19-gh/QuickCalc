@@ -175,10 +175,3 @@ export function handleReorderTools(tools, oldTools) {
     }
   };
 }
-
-// export function deleteAccount(id) {
-//   return {
-//     type: DELETE_ACCOUNT,
-//     id,
-//   };
-// }

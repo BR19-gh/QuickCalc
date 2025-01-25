@@ -382,6 +382,7 @@
         "GPACal": {
           "title": "حاسبة المعدل",
           "text": {
+            "saveCourses": "حفظ المواد",
             "course": "المادة",
             "courseName": "الاسم (اختياري)",
             "creditHours": "عدد الساعات",

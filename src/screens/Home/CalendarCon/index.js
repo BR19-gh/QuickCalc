@@ -36,6 +36,7 @@ import { useToast } from "react-native-toast-notifications";
 import * as StoreReview from "expo-store-review";
 import InlineAd from "../../../components/InlineAd/InlineAd";
 import { useRevenueCat } from "../../../providers/RevenueCatProvider";
+import { useNavigation } from "@react-navigation/native";
 
 function CalendarCon({ theme }) {
   const { t } = useTranslation();
@@ -56,6 +57,18 @@ function CalendarCon({ theme }) {
     day: "",
     timeSince: null,
   });
+
+  const navigation = useNavigation();
+
+  const initialRender = useRef(true);
+
+  useEffect(() => {
+    if (initialRender.current) {
+      initialRender.current = false;
+    } else {
+      navigation.goBack();
+    }
+  }, [theme]);
 
   const toast = useToast();
 

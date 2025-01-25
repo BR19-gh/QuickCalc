@@ -382,6 +382,7 @@
         "GPACal": {
           "title": "GPA Calculator",
           "text": {
+            "saveCourses": "Save Courses",
             "course": "Course",
             "courseName": "Name (Optional)",
             "creditHours": "Credit Hours",

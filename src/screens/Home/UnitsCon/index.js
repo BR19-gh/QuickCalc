@@ -86,6 +86,16 @@ function UnitsCon({ theme, dispatch, unitResult }) {
     setMeasurement(temp3);
   };
 
+  const initialRender = useRef(true);
+
+  useEffect(() => {
+    if (initialRender.current) {
+      initialRender.current = false;
+    } else {
+      navigation.goBack();
+    }
+  }, [theme]);
+
   const toast = useToast();
 
   const copyToClipboard = (str) => {

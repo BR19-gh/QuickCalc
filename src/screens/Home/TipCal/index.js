@@ -13,7 +13,7 @@ import {
 import styles from "./styles";
 import SweetSFSymbol from "sweet-sfsymbols";
 
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 
 import { connect } from "react-redux";
 
@@ -27,6 +27,7 @@ import * as StoreReview from "expo-store-review";
 
 import InlineAd from "../../../components/InlineAd/InlineAd";
 import { useRevenueCat } from "../../../providers/RevenueCatProvider";
+import { useNavigation } from "@react-navigation/native";
 
 function TipCal({ theme }) {
   const { t } = useTranslation();
@@ -60,6 +61,18 @@ function TipCal({ theme }) {
     // y since we want to scroll vertically, use x and the width-value if you want to scroll horizontally
     scrollViewRef.current?.scrollTo({ y: height, animated: true });
   }
+
+  const navigation = useNavigation();
+
+  const initialRender = useRef(true);
+
+  useEffect(() => {
+    if (initialRender.current) {
+      initialRender.current = false;
+    } else {
+      navigation.goBack();
+    }
+  }, [theme]);
 
   const toast = useToast();
 

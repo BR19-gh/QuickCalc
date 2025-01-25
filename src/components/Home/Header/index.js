@@ -6,7 +6,7 @@ import {
   StyleSheet,
   Platform,
 } from "react-native";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import SweetSFSymbol from "sweet-sfsymbols";
 import { lang } from "../../../helpers";
 import * as Haptics from "expo-haptics";
@@ -44,11 +44,15 @@ const Header = ({ currentTool, t, tools, theme, dispatch }) => {
         }
       }
     }
-    return null;
+    return false;
   }
 
-  const tool = getToolByName(currentTool);
-  const [isFavorite, setIsFavorite] = useState(tool.isFavorite);
+  const [tool, setTool] = useState(getToolByName(currentTool));
+  const [isFavorite, setIsFavorite] = useState(false);
+  useEffect(() => {
+    setTool(getToolByName(currentTool));
+    setIsFavorite(tool.isFavorite);
+  }, [theme]);
 
   const changeQuickAccess = async (id) => {
     await setQuickAccessToolId(id);
