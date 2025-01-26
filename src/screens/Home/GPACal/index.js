@@ -272,10 +272,8 @@ function GPACal(props) {
       }
     };
     if (saveCoursesSwitchValue === true) {
-      Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
       saveCourses(true);
     } else {
-      Haptics.notificationAsync(Haptics.NotificationFeedbackType.Warning);
       saveCourses(false);
     }
   }, [saveCoursesSwitchValue, courses, scale, isPrevGPA, prevGPA, gpa]);
@@ -312,7 +310,19 @@ function GPACal(props) {
                 {t(text("saveCourses"))}
               </Text>
               <Switch
-                onValueChange={toggleSaveCoursesSwitch}
+                onValueChange={() => {
+                  if (saveCoursesSwitchValue) {
+                    Haptics.notificationAsync(
+                      Haptics.NotificationFeedbackType.Success
+                    );
+                  } else {
+                    Haptics.notificationAsync(
+                      Haptics.NotificationFeedbackType.Warning
+                    );
+                  }
+
+                  toggleSaveCoursesSwitch();
+                }}
                 value={saveCoursesSwitchValue}
               />
             </View>
