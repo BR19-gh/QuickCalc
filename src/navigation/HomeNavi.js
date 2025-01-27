@@ -13,7 +13,7 @@ import EditTool from "../screens/Home/EditTool";
 import Note from "../screens/Home/Note";
 
 import { useTranslation } from "react-i18next";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { connect } from "react-redux";
 
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
@@ -30,15 +30,16 @@ import { useNavigation } from "@react-navigation/native";
 import * as QuickActions from "expo-quick-actions";
 
 import { getQuickAccessToolId } from "../../_DATA";
-import { Alert, Platform } from "react-native";
+import { Alert, Platform, AppState } from "react-native";
 
 import Purchases from "react-native-purchases";
 import { useRevenueCat } from "../providers/RevenueCatProvider";
 import GPACal from "../screens/Home/GPACal";
+import { getTools } from "../../_DATA";
 
 const Stack = createNativeStackNavigator();
 
-const HomeNavi = ({ isEditing, setIsEditing, theme, tools }) => {
+const HomeNavi = ({ isEditing, setIsEditing, theme, tools, dispatch }) => {
   const { t } = useTranslation();
   const text = (text) => "screens.Navi.text." + text;
   const textQA = (text) => "screens.QuickAction." + text;
@@ -64,102 +65,230 @@ const HomeNavi = ({ isEditing, setIsEditing, theme, tools }) => {
 
   const [yourToolsDisplayes, setYourToolsDisplayes] = useState(false);
   const [builtinToolsDisplayes, setBuiltinToolsDisplayes] = useState(false);
+  const appState = useRef(AppState.currentState);
+  const [appStateVisible, setAppStateVisible] = useState(appState.current);
 
-  const subscription = QuickActions.addListener(async (action) => {
+  useEffect(() => {
+    const subscription = AppState.addEventListener("change", (nextAppState) => {
+      if (nextAppState.match(/inactive|background/)) {
+        console.log("App has gone to the background!");
+      } else if (
+        appState.current.match(/inactive|background/) &&
+        nextAppState === "active"
+      ) {
+        console.log("App has come to the foreground!");
+      }
+      appState.current = nextAppState;
+      setAppStateVisible(appState.current);
+      console.log("AppState", appState.current);
+    });
+
+    return () => {
+      subscription.remove();
+    };
+  }, []);
+
+  useEffect(() => {
     navigation.navigate("Home");
-    if (action.id === "search") {
-      setTimeout(() => {
+
+    const initialQuickAction = async () => {
+      if (QuickActions.initial.id === "search") {
+        setTimeout(() => {
+          setIsEditing(false);
+          setIsShowedFavorite(false);
+          setYourToolsDisplayes(false);
+          setBuiltinToolsDisplayes(false);
+          searchBarRef.current.clearText();
+          searchBarRef.current.blur();
+          searchBarRef.current.focus();
+        }, 1000);
+      }
+
+      if (QuickActions.initial.id === "createTool") {
         setIsEditing(false);
+        setIsEditingFavorite(false);
         setIsShowedFavorite(false);
+        const tools = await getTools();
+
+        const textNavi = (text) => "screens.Navi.text." + text;
+
+        if (
+          tools.filter((tool) => tool.link === "CreatedTool").length >= 1 &&
+          user.golden === false
+        ) {
+          Alert.alert(
+            t(textNavi("maxToolsAlertTitle")),
+            t(textNavi("maxToolsAlert")),
+            [
+              {
+                text: t(textNavi("gotIt")),
+                style: "default",
+                onPress: () => {
+                  navigation.navigate("Home", { screen: "Paywall" });
+                },
+              },
+            ]
+          );
+          return;
+        } else {
+          navigation.navigate("Home", { screen: "NewTool" });
+        }
+      }
+
+      if (QuickActions.initial.id === "favorite") {
+        setIsEditing(false);
+        setIsShowedFavorite(true);
         setYourToolsDisplayes(false);
         setBuiltinToolsDisplayes(false);
-        searchBarRef.current.clearText();
-        searchBarRef.current.blur();
-        searchBarRef.current.focus();
-      }, 1000);
-    }
+      }
 
-    if (action.id === "createTool") {
-      setIsEditing(false);
-      setIsEditingFavorite(false);
-      setIsShowedFavorite(false);
-
-      const textNavi = (text) => "screens.Navi.text." + text;
-
-      if (
-        Object.values(tools).filter((tool) => tool.link === "CreatedTool")
-          .length >= 1 &&
-        user.golden === false
-      ) {
-        return Alert.alert(
-          t(textNavi("maxToolsAlertTitle")),
-          t(textNavi("maxToolsAlert")),
-          [
-            {
-              text: t(textNavi("gotIt")),
-              style: "default",
-              onPress: () => {
-                navigation.navigate("Home", { screen: "Paywall" });
+      if (QuickActions.initial.id === "quickAccess") {
+        const customerInfo = await Purchases.getCustomerInfo();
+        if (user.golden === false) {
+          navigation.navigate("Home", { screen: "Paywall" });
+          return;
+        }
+        const toolId = await getQuickAccessToolId();
+        if (toolId === null) {
+          Alert.alert(
+            t(textQA("quickAccessAlertTitle")),
+            Platform.isPad
+              ? t(textQA("quickAccessAlertMsgDisktop"))
+              : t(textQA("quickAccessAlertMsg")),
+            [
+              {
+                text: t(text("gotIt")),
+                style: "cancel",
               },
-            },
-          ]
-        );
-      }
+            ],
+            { cancelable: false }
+          );
+        } else {
+          let tool = {};
+          for (let key in currentTools) {
+            if (currentTools[key].id == toolId) {
+              tool = currentTools[key];
+            }
+          }
 
-      navigation.navigate("Home", { screen: "NewTool" });
-    }
-
-    if (action.id === "favorite") {
-      setIsEditing(false);
-      setIsShowedFavorite(true);
-      setYourToolsDisplayes(false);
-      setBuiltinToolsDisplayes(false);
-    }
-
-    if (action.id === "quickAccess") {
-      const customerInfo = await Purchases.getCustomerInfo();
-      if (user.golden === false) {
-        navigation.navigate("Home", { screen: "Paywall" });
-        return;
-      }
-      const toolId = await getQuickAccessToolId();
-      if (toolId === null) {
-        Alert.alert(
-          t(textQA("quickAccessAlertTitle")),
-          Platform.isPad
-            ? t(textQA("quickAccessAlertMsgDisktop"))
-            : t(textQA("quickAccessAlertMsg")),
-          [
-            {
-              text: t(text("gotIt")),
-              style: "cancel",
-            },
-          ],
-          { cancelable: false }
-        );
-      } else {
-        let tool = {};
-        for (let key in currentTools) {
-          if (currentTools[key].id == toolId) {
-            tool = currentTools[key];
+          if (tool.link === "CreatedTool") {
+            navigation.navigate("Home", {
+              screen: "CreatedTool",
+              params: {
+                tool,
+              },
+            });
+          } else {
+            navigation.navigate("Home", {
+              screen: tool.link,
+            });
           }
         }
+      }
+    };
+    initialQuickAction();
+  }, []);
+  useEffect(() => {
+    const subscription = QuickActions.addListener(async (action) => {
+      navigation.navigate("Home");
+      if (action.id === "search") {
+        setTimeout(() => {
+          setIsEditing(false);
+          setIsShowedFavorite(false);
+          setYourToolsDisplayes(false);
+          setBuiltinToolsDisplayes(false);
+          searchBarRef.current.clearText();
+          searchBarRef.current.blur();
+          searchBarRef.current.focus();
+        }, 1000);
+      }
 
-        if (tool.link === "CreatedTool") {
-          navigation.navigate("Home", {
-            screen: "CreatedTool",
-            params: {
-              tool,
-            },
-          });
+      if (action.id === "createTool") {
+        setIsEditing(false);
+        setIsEditingFavorite(false);
+        setIsShowedFavorite(false);
+        const tools = await getTools();
+
+        const textNavi = (text) => "screens.Navi.text." + text;
+
+        if (
+          tools.filter((tool) => tool.link === "CreatedTool").length >= 1 &&
+          user.golden === false
+        ) {
+          Alert.alert(
+            t(textNavi("maxToolsAlertTitle")),
+            t(textNavi("maxToolsAlert")),
+            [
+              {
+                text: t(textNavi("gotIt")),
+                style: "default",
+                onPress: () => {
+                  navigation.navigate("Home", { screen: "Paywall" });
+                },
+              },
+            ]
+          );
+          return;
         } else {
-          navigation.navigate("Home", {
-            screen: tool.link,
-          });
+          navigation.navigate("Home", { screen: "NewTool" });
         }
       }
-    }
-  });
+
+      if (action.id === "favorite") {
+        setIsEditing(false);
+        setIsShowedFavorite(true);
+        setYourToolsDisplayes(false);
+        setBuiltinToolsDisplayes(false);
+      }
+
+      if (action.id === "quickAccess") {
+        const customerInfo = await Purchases.getCustomerInfo();
+        if (user.golden === false) {
+          navigation.navigate("Home", { screen: "Paywall" });
+          return;
+        }
+        const toolId = await getQuickAccessToolId();
+        if (toolId === null) {
+          Alert.alert(
+            t(textQA("quickAccessAlertTitle")),
+            Platform.isPad
+              ? t(textQA("quickAccessAlertMsgDisktop"))
+              : t(textQA("quickAccessAlertMsg")),
+            [
+              {
+                text: t(text("gotIt")),
+                style: "cancel",
+              },
+            ],
+            { cancelable: false }
+          );
+        } else {
+          let tool = {};
+          for (let key in currentTools) {
+            if (currentTools[key].id == toolId) {
+              tool = currentTools[key];
+            }
+          }
+
+          if (tool.link === "CreatedTool") {
+            navigation.navigate("Home", {
+              screen: "CreatedTool",
+              params: {
+                tool,
+              },
+            });
+          } else {
+            navigation.navigate("Home", {
+              screen: tool.link,
+            });
+          }
+        }
+      }
+    });
+    return () => {
+      subscription.remove();
+    };
+  }, []);
 
   return (
     <Stack.Navigator

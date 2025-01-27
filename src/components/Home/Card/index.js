@@ -215,6 +215,7 @@ const Card = ({
             onPress={() => {
               if (tool.isHidden) {
                 if (isEditing) {
+                  Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
                   changeVis(tool.id);
                 } else {
                   return;
