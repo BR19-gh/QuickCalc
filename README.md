@@ -48,7 +48,7 @@ To install the app in App Store, follow [this link](https://apps.apple.com/app/i
 - `src/store`: Contains Redux configurations,
 - `_DATA.js`: Contains functions which deals with AsyncStorage
 
-## Screenshots
+## App Walkthrough
 <div
    style="display: flex;"
    >
@@ -57,6 +57,7 @@ To install the app in App Store, follow [this link](https://apps.apple.com/app/i
 <img src="https://github.com/BR19-gh/QuickCalc/blob/master/walkthrough/iphone_menu_en.png" width="160.5" hight="347.25" alt="menu">
 <img src="https://github.com/BR19-gh/QuickCalc/blob/master/walkthrough/edit_en.png" width="160.5" hight="347.25" alt="edit page">
 <img src="https://github.com/BR19-gh/QuickCalc/blob/master/walkthrough/hidden_en.png" width="160.5" hight="347.25" alt="hidden list">
+<img src="https://github.com/BR19-gh/QuickCalc/blob/master/walkthrough/final_en.png" width="160.5" hight="347.25" alt="final">
 </div>
 
 
