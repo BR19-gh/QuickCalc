@@ -741,17 +741,7 @@ function GPACal(props) {
                         }}
                       >
                         <View>
-                          {selectedItem ? (
-                            <Text
-                              style={{
-                                color: isDark("#DBEAFE", "#283987"),
-                                fontSize: 35,
-                                textAlign: "center",
-                              }}
-                            >
-                              {selectedItem}
-                            </Text>
-                          ) : course.grade ? (
+                          {course.grade ? (
                             <Text
                               style={{
                                 color: isDark("#DBEAFE", "#283987"),
@@ -760,6 +750,16 @@ function GPACal(props) {
                               }}
                             >
                               {course.grade}
+                            </Text>
+                          ) : selectedItem ? (
+                            <Text
+                              style={{
+                                color: isDark("#DBEAFE", "#283987"),
+                                fontSize: 35,
+                                textAlign: "center",
+                              }}
+                            >
+                              {selectedItem}
                             </Text>
                           ) : (
                             <View className="flex-row items-center justify-center">
