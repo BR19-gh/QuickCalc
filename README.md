@@ -52,13 +52,11 @@ To install the app in App Store, follow [this link](https://apps.apple.com/app/i
 <div
    style="display: flex;"
    >
-<img src="https://github.com/BR19-gh/QuickCalc/blob/master/walkthro_en/welcome.png" width="160.5" hight="347.25" alt="welcome">
-<img src="https://github.com/BR19-gh/QuickCalc/blob/master/walkthro_en/home.png" width="160.5" hight="347.25" alt="home page">
-<img src="https://github.com/BR19-gh/QuickCalc/blob/master/walkthro_en/home_menu.png" width="160.5" hight="347.25" alt="menu">
-<img src="https://github.com/BR19-gh/QuickCalc/blob/master/walkthro_en/edit.gif" width="20%" hight="20%" alt="edit page">
-<img src="https://github.com/BR19-gh/QuickCalc/blob/master/walkthro_en/hidden.png" width="160.5" hight="347.25" alt="hidden list">
-<img src="https://github.com/BR19-gh/QuickCalc/blob/master/walkthro_en/home_swipe.gif" width="20%" hight="20%" alt="swipe action">
-<img src="https://github.com/BR19-gh/QuickCalc/blob/master/walkthro_en/settings.png" width="160.5" hight="347.25" alt="settings page">
+<img src="https://github.com/BR19-gh/QuickCalc/blob/master/walkthrough/welcome_en.png" width="160.5" hight="347.25" alt="welcome">
+<img src="https://github.com/BR19-gh/QuickCalc/blob/master/walkthrough/home_en.png" width="160.5" hight="347.25" alt="home page">
+<img src="https://github.com/BR19-gh/QuickCalc/blob/master/walkthrough/iphone_menu_en.png" width="160.5" hight="347.25" alt="menu">
+<img src="https://github.com/BR19-gh/QuickCalc/blob/master/walkthrough/edit_en.gif" width="160.5" hight="347.25" alt="edit page">
+<img src="https://github.com/BR19-gh/QuickCalc/blob/master/walkthrough/hidden_en.png" width="160.5" hight="347.25" alt="hidden list">
 </div>
 
 
