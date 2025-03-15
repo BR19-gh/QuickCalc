@@ -7,7 +7,7 @@
     "userInterfaceStyle": "automatic",
     "assetBundlePatterns": ["**/*"],
     "ios": {
-      "buildNumber": "1.0.3",
+      "buildNumber": "1.0.4",
       "supportsTablet": true,
       "icon": {
         "light": "./assets/icon.png",
