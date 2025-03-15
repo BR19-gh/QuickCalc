@@ -40,13 +40,17 @@ function Welcome(props) {
   const { t } = useTranslation();
   const text = (text) => "screens.Welcome.text." + text;
   const windowHight = Dimensions.get("window").height;
+  const banner =
+    props.theme === "dark"
+      ? require("../../../assets/dark_symbol.png")
+      : require("../../../assets/symbol.png");
   return (
     <View
       style={{
         marginTop: windowHight > 667 ? (windowHight > 1000 ? 470 : 170) : 85,
       }}
       className={
-        "h-full items-center flex-1" +
+        "h-full flex-1 items-center" +
         (props.theme === "dark" && " bg-black") +
         (windowHight > 667
           ? windowHight > 1000
@@ -56,7 +60,7 @@ function Welcome(props) {
       }
     >
       <Text
-        className={"text-6xl mb-4 font-normal font-sans"}
+        className={"mb-4 font-sans text-6xl font-normal"}
         style={{
           color: "#4844B2",
         }}
@@ -70,7 +74,7 @@ function Welcome(props) {
         }}
       >
         <Image
-          source={require("../../../assets/symbol.png")}
+          source={banner}
           style={{
             width: "100%",
             height: "100%",
@@ -105,7 +109,7 @@ function Welcome(props) {
       >
         <Text className={styles.btnText}>{t(text("btnText2"))}</Text>
       </TouchableOpacity>
-      <Text className="text-center text-gray-500 text-sm mt-5">
+      <Text className="mt-5 text-center text-sm text-gray-500">
         {t("screens.versionNum") + (Platform.isPad ? "(desktop)" : "")}
       </Text>
       <StatusBar style="auto" />
