@@ -7,7 +7,7 @@
     "userInterfaceStyle": "automatic",
     "assetBundlePatterns": ["**/*"],
     "ios": {
-      "buildNumber": "1.0.1",
+      "buildNumber": "1.0.2",
       "supportsTablet": true,
       "icon": {
         "light": "./assets/icon.png",
@@ -99,7 +99,7 @@
             "image": "./assets/dark_symbol.png",
             "backgroundColor": "#000000"
           },
-          "imageWidth": 100
+          "imageWidth": 200
         }
       ],
       [
