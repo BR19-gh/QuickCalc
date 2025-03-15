@@ -36,9 +36,8 @@ const App = () => {
   useEffect(() => {
     (async () => {
       // Google AdMob will show any messages here that you just set up on the AdMob Privacy & Messaging page
-      const {
-        status: trackingStatus,
-      } = await requestTrackingPermissionsAsync();
+      const { status: trackingStatus } =
+        await requestTrackingPermissionsAsync();
       if (trackingStatus !== "granted") {
         await setTrackingStat(false);
       } else {

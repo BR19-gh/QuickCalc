@@ -47,11 +47,11 @@ function Welcome(props) {
   return (
     <View
       style={{
-        marginTop: windowHight > 667 ? (windowHight > 1000 ? 470 : 170) : 85,
+        marginTop: windowHight > 667 ? (windowHight > 1000 ? 370 : 170) : 85,
       }}
       className={
         "h-full flex-1 items-center" +
-        (props.theme === "dark" && " bg-black") +
+        // (props.theme === "dark" && " bg-black ") +
         (windowHight > 667
           ? windowHight > 1000
             ? " scale-150"
@@ -69,8 +69,8 @@ function Welcome(props) {
       </Text>
       <View
         style={{
-          width: 128,
-          height: 128,
+          width: 150,
+          height: 150,
         }}
       >
         <Image
